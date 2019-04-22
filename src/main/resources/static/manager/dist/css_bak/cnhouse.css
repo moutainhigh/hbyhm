@@ -1,0 +1,32 @@
+.admin-tools{ margin-bottom: 15px;}
+.admin-tools .btn{background-color: #fff;}
+.admin-page-top .form-control{ display: inline-block;width: auto;}
+.admin-page-top { text-align: right;}
+.table th{ background-color: #f9f9f9;}
+.top-img { height: 160px; background-size: cover;}
+.table-button i{ width: 20px; text-align: center;}
+.table-button .btn { border:none ; background:none; padding: 4px;}
+.table-button .btn:hover { color: #fff; background-color: #dd4b39;}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{ vertical-align: middle; }
+.table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>th{ font-size:12px;}
+.table p{ font-size: 12px; margin: 3px 0}
+.gray,.gray a, a.gray{ color: #555;}
+/*@media (min-width: 991px) {
+  .form-horizontal {
+      padding-right: 5%;
+  }
+}*/
+.margin-top{ margin-top: 15px;}
+.margin-bottom{ margin-bottom: 15px;}
+.border-top{border-top:1px solid #f4f4f4}
+.row.inline-from .input-group,.row.inline-from input,.row.inline-from select{margin-bottom: 10px;}
+.row.inline-from .input-group input,.row.inline-from .input-group select{margin-bottom: 0;}
+.row.inline-from { margin-bottom: -10px;}
+.form-horizontal .box-body{padding-top: 25px;}
+.modal-body .form-horizontal .box-body{padding-top: 10px;}
+.pic-list .thumbnail { border: none; text-align: center;}
+.pic-list .thumbnail img { border:1px solid #f4f4f4; text-align: center;}
+.customer i{font-size: 16px; border: 1px solid #777; color:#777;display: inline-block;width: 30px; height: 30px; text-align: center;line-height: 28px; border-radius: 100%;}
+.customer i.female{border: 1px solid #efa5e6; color:#efa5e6;}
+.customer h4{font-size: 14px; margin: 3px 0;padding: 0;font-weight: 500;}
+.customer p{font-size: 12px; margin: 0;padding: 0;}
