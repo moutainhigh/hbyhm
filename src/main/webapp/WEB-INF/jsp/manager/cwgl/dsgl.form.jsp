@@ -6,80 +6,225 @@
 <%@ page import="com.tt.tool.DataDic" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    TtMap infodb = (TtMap) request.getAttribute("infodb");
     TtMap minfo = (TtMap) request.getAttribute("minfo");
+    TtMap qy = (TtMap) request.getAttribute("qy");
 %>
-<%--<div class="box-body">
-    <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">已有<font color="green">代收</font>记录(共3)期，
-            创建时间：2018-01-15 11:20:18</h4>
-    </div>
-    <table class="table table-bordered table-hover">
-        <tbody>
-        <tr>
-            <th class="text-center" style="width: 80px">预约日期</th>
-            <th class="text-center" style="width: 80px">分期金额</th>
-            <th class="text-center" style="width: 60px">已执行</th>
-            <th class="text-center" style="width: 100px">执行结果</th>
-            <th class="text-center" style="width: 150px">手动审核状态</th>
-        </tr>
-        <tr>
-            <td class="text-center">2018-02-10</td>
-            <td class="text-center">965000</td>
-            <td class="text-center">是</td>
-            <td class="text-center">1651-0000-0000</td>
-            <td class="text-center">
-                <select id="checkstatus_1651" onchange="" class="form-control">
-                    <option value="0">待审核</option>
-                    <option selected="selected" value="1">代收成功</option>
-                    <option value="2">其他渠道支付成功</option>
-                    <option value="3">失败</option>
+<c:if test="${param.tl eq '1'}">
+    <div class="box-body">
+        <input type="hidden" name="cn" id="cn" value="${cn}">
+        <input type="hidden" name="type" id="type" value="${type}">
+        <input type="hidden" name="id" id="id" value="${empty qy.id?0:qy.id}">
+        <input type="hidden" name="tl" id="tl" value="1">
+        <input type="hidden" name="icbc_id" id="icbc_id" value="${icbc.id}">
+            <%--<input type="hidden" name="gems_id" id="gems_id" value="${minfo.gemsid}">--%>
+            <%--<input type="hidden" name="gems_fs_id" id="gems_fs_id" value="${minfo.icbc_erp_fsid}">--%>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">选择签约银行</label>
+            <div class="col-sm-9">
+                <select class="form-control" name="bank_code" id="bank_code">
+                    <%=Tools.dicopt(DataDic.dic_tlzf_bank_code, qy.get("bank_code"))%>
                 </select>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>--%>
-<div class="box-body">
-    <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">已有<font color="green">代收</font>记录</h4>
-    </div>
-    <div class="modal-body form-horizontal">
-        <ul class="nav nav-pills nav-stacked">
-            <li style="padding-bottom: 10px"><i class="fa fa-circle-o" style="color: green"></i>暂无记录<span class="pull-right">暂无<font color="green">代收</font>记录</span></li>		</ul>
-    </div>
-    <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">新建<font color="green">代收</font></h4>
-    </div>
-    <input type="hidden" name="qryid" value="549"> <input type="hidden" name="type" value="9">
-    <input type="hidden" name="gems_fs_id" value="169">
-    <input type="hidden" name="bank_id" value="102">
-    <input type="hidden" name="ds_type" value="0">
-    <input type="hidden" name="c_name" value="吴丽华">
-    <input type="hidden" name="c_cardno" value="35032219791211055X">
-    <input type="hidden" name="sms_tel" value="18122399382">
-    <div class="form-group" style="padding-top: 25px">
-        <label for="title2" class="col-sm-3 control-label">签约银联卡:</label>
-        <div class="col-sm-9">
-            <input type="text" class="form-control" id="bt" value="吴丽华-6212263602050814094" disabled="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">账号类型</label>
+            <div class="col-sm-9">
+                <select class="form-control" name="account_type" id="account_type">
+                    <%=Tools.dicopt(DataDic.dic_tlzf_account_type, qy.get("account_type"))%>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">cvv2</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="cvv2" value="${qy.cvv2}" placeholder="信用卡时必填">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">有效期</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="vailddate" value="${qy.vailddate}"
+                       placeholder="信用卡时必填,信用卡上的两位月两位年">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">借记卡号/信用卡号</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="account_no" value="${qy.account_no}"
+                       onkeyup="(this.v=function(){this.value=this.value.trim();this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)"
+                       onblur="this.v();">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">持有人姓名</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="account_name" value="${qy.account_name}"
+                       onblur="this.value=this.value.trim();">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">私人/公司</label>
+            <div class="col-sm-9">
+                <select class="form-control" name="account_prop">
+                    <option value="0">私人</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">证件类型</label>
+            <div class="col-sm-9">
+                <select class="form-control" name="cardid_type">
+                    <%=Tools.dicopt(DataDic.dic_tlzf_cardid_type, qy.get("cardid_type"))%>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">证件号码</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="cardid" value="${qy.cardid}"
+                       onblur="this.value=this.value.toUpperCase();this.value=this.value.trim();">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">电话</label>
+            <div class="col-sm-9">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="tel" value="${qy.tel}"
+                           onblur="this.value=this.value.toUpperCase();this.value=this.value.trim();">
+                    <span class="input-group-addon"><a href="tel:">拨打</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">备注</label>
+            <div class="col-sm-9"><textarea style="width: 100%; height: 40px" class="form-control" value="${qy.remark}"
+                                            name="remark"></textarea>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <label for="title2" class="col-sm-3 control-label"><font color="green">代收</font>金额(分):</label>
-        <div class="col-sm-9">
-            <input type="number" class="form-control" name="AMOUNT" id="AMOUNT" placeholder="输入代收金额,单位(分)" value="19000000">
+</c:if>
+<c:if test="${param.tl eq '2'}">
+    <div class="box-body">
+        <div class="modal-header">
+            <h4 class="modal-title" id="">已有<font color="green">代收</font>记录</h4>
         </div>
-    </div>	<div class="form-group">
-    <label for="title2" class="col-sm-3 control-label">备注(可不填)</label>
-    <div class="col-sm-3">
-        <input type="text" class="form-control" name="remark" placeholder="比如:正常代收" value="">
-    </div>
-    <div class="col-sm-6">
-        <div class="input-group">
-            <span class="input-group-addon">短信通知用户</span> <select name="sendsms" class="form-control" id="sendsms">
-            <option value="1">是</option><option selected="selected" value="0">否</option>	                            		</select>
+        <c:if test="${empty dslist}">
+            <div class="modal-body form-horizontal">
+                <ul class="nav nav-pills nav-stacked">
+                    <li style="padding-bottom: 10px"><i class="fa fa-circle-o" style="color: green"></i>暂无记录<span
+                            class="pull-right">暂无<font color="green">代收</font>记录</span></li>
+                </ul>
+            </div>
+        </c:if>
+        <c:if test="${!empty dslist}">
+            <table class="table table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <th class="text-center" style="width: 80px">期数</th>
+                    <th class="text-center" style="width: 80px">服务费(分)</th>
+                    <th class="text-center" style="width: 100px">代收日期</th>
+                    <th class="text-center" style="width: 150px">总代收金额(分)</th>
+                    <th class="text-center" style="width: 150px">执行结果</th>
+                    <th class="text-center" style="width: 150px">手动审核</th>
+                </tr>
+                <%
+                    TtList dslist = (TtList) request.getAttribute("dslist");
+                    if (dslist.size() > 0) {
+                        for (TtMap ds : dslist) {
+                %>
+                <tr>
+                    <td class="text-center" style="width: 80px"><%=ds.get("periods")%>
+                    </td>
+                    <td class="text-center" style="width: 80px"><%=ds.get("fw_price")%>
+                    </td>
+                    <td class="text-center" style="width: 100px"><%=ds.get("ds_date")%>
+                    </td>
+                    <td class="text-center" style="width: 100px"><%=ds.get("amount")%>
+                    </td>
+                    <td class="text-center" style="width: 150px">
+                        <select class="form-control" disabled>
+                            <%=Tools.dicopt(DataDic.dic_tlzf_ds_bc_status, ds.get("bc_status"))%>
+                        </select>
+                    </td>
+                    <td class="text-center" style="width: 150px">
+                        <select id="sd_status" name="sd_status"
+                                onchange="ajax_edit('<%=ds.get("id")%>','sd_status',this.value,'tlzf_dk_details');" n
+                                class="form-control">
+                            <%=Tools.dicopt(DataDic.dic_tlzf_sd_status, ds.get("sd_status"))%>
+                        </select>
+                    </td>
+                </tr>
+                <%
+                        }
+                    }
+                %>
+                </tbody>
+            </table>
+        </c:if>
+        <div class="modal-header">
+            <h4 class="modal-title" id="">新建<font color="green">代收</font></h4>
+        </div>
+        <input type="hidden" name="tl" value="2">
+        <input type="hidden" name="cn" value="${cn}">
+        <input type="hidden" name="type" value="${type}">
+        <input type="hidden" name="id" value="0">
+        <input type="hidden" name="icbc_id" value="${icbc.id}">
+        <div class="form-group" style="padding-top: 25px">
+            <label for="title2" class="col-sm-3 control-label">签约信息:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="bt" value="${qy.account_name}-${qy.account_no}" disabled="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label"><font color="green">服务费</font>金额(分):</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" name="fw_price" id="fw_price" placeholder="输入服务费,单位(分)"
+                       value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label"><font color="green">期数:</font></label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" name="periods" id="periods" placeholder=""
+                       value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label"><font color="green">代收日期:</font></label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="ds_date" id="ds_date" placeholder=""
+                       value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label"><font color="green">代收</font>总金额(分):</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" name="amount" id="amount" placeholder="输入代收金额,单位(分)"
+                       value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">备注(可不填)</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="remark" placeholder="比如:正常代收" value="">
+            </div>
+                <%--<div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">短信通知用户</span>
+                        <select name="sendsms" class="form-control"
+                                id="sendsms">
+                            <option value="1">是</option>
+                            <option value="0">否</option>
+                        </select>
+                    </div>
+                </div>--%>
         </div>
     </div>
-</div>
-</div>
-
+    <script>
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#ds_date', //指定元素
+            type: 'date'
+        });
+    </script>
+</c:if>

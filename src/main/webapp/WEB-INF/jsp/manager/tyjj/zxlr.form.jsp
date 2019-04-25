@@ -36,7 +36,7 @@
         <div class="box-body" id="tab-content">
             <div class="form-group">
                 <div class="col-sm-1">
-                    <a href="<%=Tools.urlKill("toZip")+"&toZip=1"%>" class="btn btn-primary" >一键下载(相关文件)</a>
+                    <a href="<%=Tools.urlKill("toZip")+"&toZip=1"%>" class="btn btn-primary">一键下载(相关文件)</a>
                 </div>
             </div>
             <div class="form-group">
@@ -85,7 +85,7 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">婚姻状况</span>
-                                <select class="form-control" id="c_marriage" name="c_marriage" >
+                                <select class="form-control" id="c_marriage" name="c_marriage">
                                     <%=Tools.dicopt(DataDic.dic_hyzk2, infodb.get("c_marriage"))%>
                                 </select>
                             </div>
@@ -181,17 +181,17 @@
                 <label class="col-sm-2 control-label">贷款产品</label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
-                        <div class="col-sm-4">
-                            <%--<div class="input-group">
-                                <span class="input-group-addon">按揭银行</span>
-                                <select class="form-control" id="bank_id" name="bank_id">
-                                    <option value="0">请选择按揭银行</option>
-                                    <option value="1">工行绍兴分行</option>
-                                    <option value="2">工行武林支行</option>
-                                    <option value="3">工行义乌支行</option>
-                                </select>
-                            </div>--%>
-                        </div>
+                        <%--                        <div class="col-sm-4">
+                                                    &lt;%&ndash;<div class="input-group">
+                                                        <span class="input-group-addon">按揭银行</span>
+                                                        <select class="form-control" id="bank_id" name="bank_id">
+                                                            <option value="0">请选择按揭银行</option>
+                                                            <option value="1">工行绍兴分行</option>
+                                                            <option value="2">工行武林支行</option>
+                                                            <option value="3">工行义乌支行</option>
+                                                        </select>
+                                                    </div>&ndash;%&gt;
+                                                </div>--%>
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">贷款产品</span>
@@ -284,7 +284,7 @@
                                                     sImgs1 = sImgs1 + ssImgs1[i] + "|";
                                                 }
                                             }
-                                            String[] img_Total1=sImgs1.split("\\|");//获取已有图片
+                                            String[] img_Total1 = sImgs1.split("\\|");//获取已有图片
                                         %>
                                         <%-- 可能这里用<%@include file %>模式更适合--%>
                                         <jsp:include page="<%=upFile1%>">
@@ -327,7 +327,7 @@
                                                     sImgs2 = sImgs2 + ssImgs2[i] + "|";
                                                 }
                                             }
-                                            String[] img_Total2=sImgs2.split("\\|");//获取已有图片
+                                            String[] img_Total2 = sImgs2.split("\\|");//获取已有图片
                                         %>
                                         <%-- 可能这里用<%@include file %>模式更适合--%>
                                         <jsp:include page="<%=upFile2%>">
@@ -370,7 +370,7 @@
                                                     sImgs3 = sImgs3 + ssImgs3[i] + "|";
                                                 }
                                             }
-                                            String[] img_Total3=sImgs3.split("\\|");//获取已有图片
+                                            String[] img_Total3 = sImgs3.split("\\|");//获取已有图片
                                         %>
                                         <%-- 可能这里用<%@include file %>模式更适合--%>
                                         <jsp:include page="<%=upFile3%>">
@@ -413,7 +413,7 @@
                                                     sImgs4 = sImgs4 + ssImgs4[i] + "|";
                                                 }
                                             }
-                                            String[] img_Total4=sImgs4.split("\\|");//获取已有图片
+                                            String[] img_Total4 = sImgs4.split("\\|");//获取已有图片
                                         %>
                                         <%-- 可能这里用<%@include file %>模式更适合--%>
                                         <jsp:include page="<%=upFile4%>">
@@ -669,7 +669,8 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">审核状态</span>
-                                <select class="form-control" id="bc_status" name="bc_status" onchange="autoremark(this)">
+                                <select class="form-control" id="bc_status" name="bc_status"
+                                        onchange="autoremark(this)">
                                     <%=Tools.dicopt(DataDic.dic_zx_status, infodb.get("bc_status"))%>
                                 </select>
                             </div>
@@ -785,7 +786,14 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">历史记录</label>
                 <div class="col-sm-10">
-                    <textarea style="width: 80%; height: 200px" class="form-control" disabled><%TtList lslist=(TtList) request.getAttribute("lslist");if(lslist!=null&&lslist.size()>0){ for(TtMap l:lslist){%><%=l.get("dt_add")%>:状态:<%=DataDic.dic_zx_status.get(l.get("status"))%>,留言:<%=l.get("remark").replace("null","")%>&#10;<%}} %></textarea>
+                    <textarea style="width: 80%; height: 200px" class="form-control" disabled><%
+                        TtList lslist = (TtList) request.getAttribute("lslist");
+                        if (lslist != null && lslist.size() > 0) {
+                            for (TtMap l : lslist) {
+                    %><%=l.get("dt_add")%>:状态:<%=DataDic.dic_zx_status.get(l.get("status"))%>,留言:<%=l.get("remark").replace("null", "")%>&#10;<%
+                            }
+                        }
+                    %></textarea>
                 </div>
             </div>
 
@@ -801,15 +809,16 @@
 </script>
 <script>
 
-    function autoremark(){
-        if ($("#bc_status").val()==3){//完成
+    function autoremark() {
+        if ($("#bc_status").val() == 3) {//完成
             $("#remark").val("查询完成，详情请点击订单详情页查看！");
-        }else{
+        } else {
             $("#remark").val("");
         }
     }
-    function setremark(obj){
-        if ($("#cyly").val()!="请选择快速留言"){//完成
+
+    function setremark(obj) {
+        if ($("#cyly").val() != "请选择快速留言") {//完成
             $("#remark").val($("#cyly").val());
         }
     }
@@ -817,54 +826,58 @@
 
 <style>
 
-    ul{
-        margin: 0;
-        padding: 0;
-    }
-    li{
+    ul {
         margin: 0;
         padding: 0;
     }
 
-    #myTab li{
-        width:25%;
-        float:left;
-        height:40px;
+    li {
+        margin: 0;
+        padding: 0;
+    }
+
+    #myTab li {
+        width: 25%;
+        float: left;
+        height: 40px;
         list-style: none;
         margin: 0;
         padding: 0;
     }
 
-    #myTab li img{
-        float:left;
+    #myTab li img {
+        float: left;
         height: 40px;
     }
 
-    #myTab li a{
-        color:white;
+    #myTab li a {
+        color: white;
         text-align: center;
         position: relative;
         display: block;
         padding: 10px 15px;
     }
 
-    .blue{
-        background:#0f9af2;
+    .blue {
+        background: #0f9af2;
     }
-    .gray{
+
+    .gray {
         background: #dfdfdf;
     }
-    .tabPaneUl{
+
+    .tabPaneUl {
         width: 700px;
         margin: 0 auto;
         list-style: none;
     }
 
-    .tabPaneUl li{
+    .tabPaneUl li {
         height: 40px;
         line-height: 40px;
     }
-    .tab-pane{
+
+    .tab-pane {
         margin-top: 50px;
     }
 </style>

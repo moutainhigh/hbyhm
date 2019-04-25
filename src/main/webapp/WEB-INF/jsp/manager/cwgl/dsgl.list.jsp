@@ -27,24 +27,35 @@
                         <thead>
                         <tr role="row">
                             <th class="hidden-xs text-center"><!-- hidden-xs为手机模式时自动隐藏， text-center为居中-->
-                                订单编号
+                                编号
                             </th>
                             <th class="hidden-xs text-center">
-                                客户姓名
+                                渠道
                             </th>
                             <th class="text-center">
-                                业务员
+                                借款人
                             </th>
                             <th class="hidden-xs text-center">
-                                所属公司
+                                期数
                             </th>
                             <th class="text-center">
-                                提交/更新时间
+                                服务费
+                            </th>
+                            <th class="hidden-xs text-center">
+                                代收日期
                             </th>
                             <th class="text-center">
-                                状态
+                                总代收金额
                             </th>
-                            <th class="text-center">操作</th>
+                            <th class="text-center">
+                                API执行
+                            </th>
+                            <th class="text-center">
+                                手动状态
+                            </th>
+<%--                            <th class="text-center">
+                                操作
+                            </th>--%>
                         </tr>
                         </thead>
                         <tbody>
@@ -55,34 +66,50 @@
                         %>
                         <tr role="row" class="odd">
                             <td class="hidden-xs text-center">
-                                <%=m.get("gems_code")%>
+                                <%=m.get("id")%>
                             </td>
                             <td class="hidden-xs text-center">
-                                <%=m.get("c_name")%>
+                                <%=m.get("qd_type")%>
                             </td>
                             <td class="text-center">
-                                <%=m.get("adminname")%>
+                                <%=m.get("account_name")%>
                             </td>
                             <td class="hidden-xs text-center">
-                                <%=m.get("fsname")%>
+                                <%=m.get("periods")%>
+                            </td>
+                            <td class="text-center">
+                                <%=m.get("fw_price")%>
                             </td>
                             <td class="hidden-xs text-center">
-                                <%=m.get("dt_add")%><br><%=m.get("dt_edit")%>
+                                <%=m.get("ds_date")%>
                             </td>
                             <td class="text-center">
-                                <span class="label label-success"><%=DataDic.dic_zx_status.get(m.get("bc_status"))%></span>
+                                <%=m.get("amount")%>
                             </td>
                             <td class="text-center">
+                                <select id="bc_status" name="bc_status" disabled class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_tlzf_ds_bc_status,m.get("bc_status"))%>
+                                </select>
+                            </td>
+                            <td class="text-center">
+                                <select id="sd_status" name="sd_status" onchange="ajax_edit('<%=m.get("id")%>','sd_status',this.value,'tlzf_dk_details');" n class="form-control">
+                                <%=Tools.dicopt(DataDic.dic_tlzf_sd_status,m.get("sd_status"))%>
+                                </select>
+                            </td>
+<%--                            <td class="text-center">
                                 <div class="table-button">
-                                    <a href="<%=url%><%=m.get("id")%>" class="btn btn-default">
-                                        <i class="fa fa-pencil"></i>
+                                    <a id="modal_qy<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
+                                       href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=1&id=<%=m.get("icbc_id")%>&nextUrl=dsgl_cwgl"
+                                       class="btn btn-success">
+                                        <i class="fa fa-credit-card"></i>
                                     </a>
-                                    <a  id="modal<%=m.get("id")%>" href="<%=url_modal%><%=m.get("id")%>" data-toggle="modal" data-target="#modal"
-                                       class="btn btn-success" title="代收">
+                                    <a id="modal_ds<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
+                                       href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=2&id=<%=m.get("icbc_id")%>&nextUrl=dsgl_cwgl"
+                                       class="btn btn-success">
                                         <i class="fa fa-sign-in"></i>
                                     </a>
                                 </div>
-                            </td>
+                            </td>--%>
                         </tr>
                         <%
                                 }

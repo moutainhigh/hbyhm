@@ -107,7 +107,7 @@
                                     <option value="7">临时身份证</option>
                                     <option value="8">外国人居留证</option>
                                     <option value="9">警官证</option>
-                                    <option value="10">其他证件</option>
+                                    <option value="X">其他证件</option>
                                 </select>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon">有效期(信用卡时必填)</span>
                                 <input type="text" class="form-control" id="vailddate" name="vailddate"
-                                       placeholder="MMYY">
+                                       placeholder="">
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -159,7 +159,7 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">验证码</span>
-                                <input type="text" class="form-control" id="smscode" name="smscode" placeholder="">
+                                <input type="text" class="form-control" id="smscode" name="smscode" value="" placeholder="">
                                 <span class="input-group-addon"><a id="yzm" name="yzm"
                                                                    onclick="getsmscode()">获取①</a></span>
                             </div>
@@ -185,6 +185,17 @@
                                 <span class="input-group-addon"><a onclick="findqy_res()">查询验证③</a></span>
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" style="font-size: 14px;">协议状态</span>
+                                <select class="form-control"  id="qy_status" name="qy_status"
+                                        style="font-size: 14px;">
+                                    <%=Tools.dicopt(DataDic.dic_tlzf_xy_status,infodb.get("qy_status"))%>
+                                </select>
+                                <span class="input-group-addon"><a onclick="tljy()">解约④</a></span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -359,6 +370,10 @@
     //查询签约状态
     function findqy_res(){
         var account_no =$("#account_no").val();
+        if (typeof account_no == "undefined" || account_no == null || account_no == "") {
+            alert("账号不能为空");
+            return false;
+        }
         var data = {
             ACCOUNT_NO: account_no
         };
@@ -366,19 +381,52 @@
             var res = eval('(' + result + ')');
             if (res.INFO != null && res.INFO != "" && res.INFO != "undefined") {
                 if (res.INFO.RET_CODE == "0000") {
-                    alert(res.INFO.ERR_MSG);
+                    if(res.QAGRRSP[0].STATUS=='2'){
+                        alert(res.INFO.ERR_MSG);
+                    }else{
+                        alert("已失效,请重新签约");
+                    }
                     $("#agrmno").val(res.QAGRRSP[0].AGRMNO);
+                    document.getElementById("qy_status").value=res.QAGRRSP[0].STATUS;
                 }
             } else {
                 alert(res[0].ERR_MSG);
             }
         });
     }
-
-
-
-
-
+    //解约
+    function  tljy() {
+        var account_no =$("#account_no").val();
+        var agrmno =$("#agrmno").val();
+        if (typeof account_no == "undefined" || account_no == null || account_no == "") {
+            alert("账号不能为空");
+            return false;
+        }
+        if (typeof agrmno == "undefined" || agrmno == null || agrmno == "") {
+            alert("协议号不能为空");
+            return false;
+        }
+        var data = {
+            ACCOUNT_NO: account_no,
+            AGRMNO: agrmno
+        };
+        var msg="";
+        $.post("/kcdhttp?query=2&type=310003", data, function (result) {
+            var res = eval('(' + result + ')');
+            if (res.INFO != null && res.INFO != "" && res.INFO != "undefined") {
+                if(res.INFO.RET_CODE == "0000"){
+                    msg=res.FAGRCNLRET.ERR_MSG;
+                if (res.FAGRCNLRET.RET_CODE == "0000") {
+                    //$("#agrmno").val(res.QAGRRSP[0].AGRMNO);
+                    document.getElementById("qy_status").value="1";
+                }
+                }else{
+                    msg=res.INFO.ERR_MSG;
+                }
+                alert(msg);
+            }
+        });
+    }
     function autoremark() {
         if ($("#bc_status").val() == 3) {//完成
             $("#remark1").val("查询完成，详情请点击订单详情页查看！");

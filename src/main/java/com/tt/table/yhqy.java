@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletRequest;
  * 银行签约
  */
 public class yhqy extends DbCtrl {
-    private final String title = "银行签约";
+    private final String title = "通联绑卡审核";
     private String orderString = "ORDER BY t.dt_edit DESC"; // 默认排序
     private boolean canDel = false;
     private boolean canAdd = true;
-    private final String classAgpId = "55"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
+    private final String classAgpId = "56"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
     public yhqy() {
         super("tlzf_qy");
@@ -124,14 +124,24 @@ public class yhqy extends DbCtrl {
     }
 
     public void doPost(TtMap post, long id, TtMap result2) {
+        TtMap newpost=new TtMap();
+        newpost.putAll(post);
         TtMap mmap=Tools.minfo();
         if (id > 0) { // id为0时，新增
             edit(post, id);
         } else {
+            post.put("qd_type","2");
             post.put("gems_id",mmap.get("gemsid"));
             post.put("gems_fs_id",mmap.get("icbc_erp_fsid"));
             add(post);
         }
+        //添加记录
+        TtMap resmap=new TtMap();
+        resmap.put("qryid",String.valueOf(id));
+        resmap.put("status",newpost.get("bc_status"));
+        resmap.put("remark",newpost.get("remark1"));
+        Tools.recAdd(resmap,"tlzf_qy_result");
+
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
         boolean bSuccess = errorCode == 0;
         Tools.formatResult(result2, bSuccess, errorCode, bSuccess ? "编辑成功！" : errorMsg, bSuccess ? nextUrl : "");// 失败时停留在当前页面,nextUrl为空
@@ -147,13 +157,8 @@ public class yhqy extends DbCtrl {
     public void succ(TtMap array, long id, int sqltp) {
         System.out.println("新增后的数据展示："+array);
         TtMap ttMap=new TtMap();
-        ttMap.put("gems_code",orderutil.getOrderId("TLQYJJ123", 8, id));
+        ttMap.put("gems_code",orderutil.getOrderId("TLQYKJY", 8, id));
         Tools.recEdit(ttMap,"tlzf_qy",id);
-        //添加记录
-        TtMap resmap=new TtMap();
-        resmap.put("qryid",String.valueOf(id));
-        resmap.put("status",array.get("bc_status"));
-        resmap.put("remark",array.get("remark1"));
-        Tools.recAdd(resmap,"tlzf_qy_result");
+
     }
 }

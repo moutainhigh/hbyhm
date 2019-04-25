@@ -179,7 +179,7 @@
                             <video class="video-js vjs-default-skin"
                                    controls width="420" height="200"
                                    poster="/manager/images/logo.png">
-                                <source src="http://hbyhm.kcway.net/<%=imgs[i]%>" type="video/mp4">
+                                <source src="<%=imgs[i]%>" type="video/mp4">
                             </video>
                         </div>
                         <%

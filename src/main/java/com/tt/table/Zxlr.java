@@ -15,8 +15,8 @@ import java.io.IOException;
 public class Zxlr extends DbCtrl {
     private final String title = "征信录入";
     private String orderString = "ORDER BY t.dt_edit DESC"; // 默认排序
-    private boolean canDel = true;
-    private boolean canAdd = true;
+    private boolean canDel = false;
+    private boolean canAdd = false;
     private final String classAgpId = "28"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
@@ -56,7 +56,13 @@ public class Zxlr extends DbCtrl {
         }
         String whereString = "t.app="+appid;
         String tmpWhere = "";
-        String fieldsString = "t.*,f.name as fsname,a.name as adminname,dy.id as dy_id,";
+        String fieldsString = "t.*" +
+                ",f.name as fsname" +
+                ",a.name as adminname" +
+                ",dy.id as dy_id" +
+                ",dy.bc_status as dy_bc_status" +
+                ",qy.bc_status as qy_bc_status" +
+                ",qy.qy_status as qy_qy_status";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
 
@@ -103,7 +109,8 @@ public class Zxlr extends DbCtrl {
         showall = true; // 忽略deltag和showtag
         leftsql = " LEFT JOIN assess_fs f ON f.id=t.gems_fs_id " +
                 " LEFT JOIN assess_gems a ON a.id=t.gems_id" +
-                " LEFT JOIN hbyh_dygd dy ON dy.icbc_id=t.id";
+                " LEFT JOIN hbyh_dygd dy ON dy.icbc_id=t.id" +
+                " LEFT JOIN tlzf_qy qy ON qy.icbc_id=t.id";
         list = lists(whereString, fieldsString);
 
         if (!Tools.myIsNull(kw)) { // 搜索关键字高亮
@@ -181,6 +188,7 @@ public class Zxlr extends DbCtrl {
             request.setAttribute("info", jsonInfo);//info为json后的info
             request.setAttribute("infodb", info);//infodb为TtMap的info
             request.setAttribute("id", nid);
+            //request.setAttribute("tl", post.get("tl"));
         }
     }
 

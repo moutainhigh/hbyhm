@@ -79,6 +79,7 @@ public class Tranx310011 {
 				System.out.println(ret.getSETTLE_DAY());
 				
 			}
+
 		}catch(AIPGException e){
 			e.printStackTrace();
 		}

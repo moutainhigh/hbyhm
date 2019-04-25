@@ -18,7 +18,8 @@ import com.tt.tool.Config;
  **/
 public class DemoConfig {
 
-	public static String merchantid = "200604000006429";
+	public static String BUSINESS_CODE="19900";
+	public static String merchantid = "200604000006429";//商户号
 
 	public static String username = merchantid + "04"; //用户名
 	public static String userpass = "111111"; //用户密码

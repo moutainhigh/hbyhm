@@ -40,7 +40,10 @@
                                 提交/更新时间
                             </th>
                             <th class="text-center">
-                                状态
+                                审核状态
+                            </th>
+                            <th class="text-center">
+                                协议状态
                             </th>
                             <th class="text-center">操作</th>
                         </tr>
@@ -68,7 +71,14 @@
                                 <%=m.get("dt_add")%><br><%=m.get("dt_edit")%>
                             </td>
                             <td class="text-center">
-                                <span class="label label-success"><%=DataDic.dic_tlzf_qystatus.get(m.get("bc_status"))%></span>
+                                <span class="label label-success">
+                                    <%=DataDic.dic_tlzf_qystatus.get(m.get("bc_status"))%>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span class="label label-success">
+                                    <%=DataDic.dic_tlzf_xy_status.get(m.get("qy_status"))%>
+                                </span>
                             </td>
                             <td class="text-center">
                                 <div class="table-button">

@@ -71,6 +71,18 @@ public class Tranx310001 {
 			}*/
 		    String s=	XmlExercise.xml2json(respText);
 			System.out.println(s);
+			JSONObject res=JSONObject.fromObject(s);
+			System.out.println("INFO:"+res.get("INFO"));
+			if(res.get("INFO")!=null&&!res.get("INFO").equals("")){
+				JSONObject INFO=JSONObject.fromObject(res.get("INFO"));
+				System.out.println("ERR_MSG:"+INFO.get("ERR_MSG"));
+			}
+			System.out.println("FAGRARET:"+res.get("FAGRARET"));
+			if(res.get("FAGRARET")!=null&&!res.get("FAGRARET").equals("")){
+				JSONObject FAGRARET=JSONObject.fromObject(res.get("FAGRARET"));
+				System.out.println("ERR_MSG:"+FAGRARET.get("ERR_MSG"));
+			}
+
 		}catch(AIPGException e){
 			e.printStackTrace();
 		}

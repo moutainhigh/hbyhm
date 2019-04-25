@@ -300,6 +300,7 @@ public class tlzfhttp_v1 {
             System.out.println("====================================================>验签成功");
             //step5 xml转对象
             String json = XmlExercise.xml2json(respText);
+            System.out.println(json);
             return json;
         }catch(AIPGException e){
             e.printStackTrace();

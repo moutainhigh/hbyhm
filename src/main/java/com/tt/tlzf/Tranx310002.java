@@ -50,7 +50,7 @@ public class Tranx310002 {
 			}
 			System.out.println("====================================================>验签成功");
 			//step5 xml转对象
-			AipgRsp rsp = XmlParser.parseRsp(respText);
+			AipgRsp rsp = XmlParser.xmlToObject(respText,AipgRsp.class);
 			InfoRsp infoRsp = rsp.getINFO();
 			System.out.println(infoRsp.getRET_CODE());
 			System.out.println(infoRsp.getERR_MSG());

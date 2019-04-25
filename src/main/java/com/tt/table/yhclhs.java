@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 public class yhclhs extends DbCtrl {
     private final String title = "征信授权书回收";
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
-    private boolean canDel = true;
-    private boolean canAdd = true;
+    private boolean canDel = false;
+    private boolean canAdd = false;
     private final String classAgpId = "51"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
     public yhclhs() {

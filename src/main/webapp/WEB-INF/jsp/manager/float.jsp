@@ -46,7 +46,6 @@ var float_submit=function (res){
 			}
 }
 $('#float_form').submit(function (){
-
 	if(typeof(float_form_check)=='function'){
 		if(!float_form_check()){
 			return false;

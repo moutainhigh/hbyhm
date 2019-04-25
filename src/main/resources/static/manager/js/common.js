@@ -15,18 +15,18 @@ var my_loaded=function (obj_area){
 			},10);
 		}).keyup();//.keypress();
 	})
-	
+
 	//$('textarea.html:not(.all)',obj_area).xheditor({tools:'simple',skin:'nostyle'});
 	//$('textarea.html.all',obj_area).xheditor({forcePtag:true,upLinkUrl:"../js/xheditor/upload.php?immediate=1",upLinkExt:"zip,rar,txt",upImgUrl:"../js/xheditor/upload.php?immediate=1",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"../js/xheditor/upload.php?immediate=1",upFlashExt:"swf",upMediaUrl:"../js/xheditor/upload.php?immediate=1",upMediaExt:"avi",skin:'nostyle'});
 	//$('input.color').color_select();
-	
+
 	$('textarea.html',obj_area).each(function(){
 		var myid = $(this).attr("id");
 		if(myid){
 			UE.getEditor(myid);
 		}
 	});
-	
+
 	$(':input',obj_area).keydown(function (e){
 		try{
 			if ($.browser.msie) {  // 判断浏览器
@@ -57,21 +57,21 @@ var my_loaded=function (obj_area){
 		}
 		var codes=[8,9,13,37,39,110,190];
 		if ( (code>47 && code<58) || (code>95 && code<106) || in_array(code,codes) || code==noie ) {
-			return true; 
-		} else { 
-			return false; 
+			return true;
+		} else {
+			return false;
 		}
 	}).focus(function() {
 		this.style.imeMode='disabled';   // 禁用输入法,禁止输入中文字符
 	}).bind("paste",function(){ return false; });
-	
+
 	try{
 		$(':input.daterange').daterangepicker();
 		$(':input.date',obj_area).datepicker();
 		$(':input.datetime',obj_area).datetimepicker({format:"yyyy-mm-dd hh:ii:ss"});
 		$(".select2").select2();
 		$(".select2-tags").select2({
-		    tags: true
+			tags: true
 		});
 		//$(':input.Wdate',obj_area).click(function(){WdatePicker();});
 	}catch (e){
@@ -114,15 +114,15 @@ function ajaxmsg(msg,note,icon,url,width,height){
 $(function (){
 	var fixHelper = function(e, ui) {
 		ui.children().each(function() {
-					$(this).width($(this).width());
-				});
+			$(this).width($(this).width());
+		});
 		return ui;
-	}; 
+	};
 	var sortable_stop=function (oldobj,newobj){
 		if(sort_cn){
 			jQuery.post('command.php?cn='+sort_cn+'&do=sort',{'oids[]':oldobj,'nids[]':newobj},function (){ });
 		}
-	} 
+	}
 	if($('body').sortable){
 		$('table.sortable tbody').sortable({
 			handle : 'img.move',
@@ -144,7 +144,7 @@ $(function (){
 					sortable_stop(OldSortIds, NewSortIds);
 			}
 		}).disableSelection();
-	
+
 		$('ul.sortable').sortable({
 			handle : 'img.move',
 			placeholder : 'ui-state-highlight',
@@ -165,7 +165,7 @@ $(function (){
 			}
 		});
 	}
-	
+
 	try{
 		$.datepicker.setDefaults({
 			dateFormat: 'yy-mm-dd',
@@ -199,37 +199,37 @@ function check_all(id,obj){
  * ajax效果
  */
 function ajax_begin() {
-    //IE6位置
-    if (!window.XMLHttpRequest) {
-        $("#targetFixed").css("top", $(document).scrollTop() + 2);	
-    }
-    //创建半透明遮罩层
-    if(!$('#targetFixed').length){
-        $('<span id="targetFixed" style="height:25px; padding:1px; position:fixed; _position:absolute; top:0; right:0;"></span>').prependTo($("body"));
-    }
-    if (!$("#overLay").size()) {
-        $('<div id="overLay"></div>').prependTo($("body"));
-        $("#overLay").css({
-            width: "100%",
-            backgroundColor: "#000",
-            opacity: 0.2,
-            position: "absolute",
-            left: 0,
-            top: 0,
-            zIndex: 99
-        }).height($(document).height());
-    }
-    //显示操作提示，最关键核心代码
-    $("#targetFixed").powerFloat({
-        eventType: null,
-        targetMode: "doing",	
-        target: "正在处理中...",
-        position: "1-2"
-    });
+	//IE6位置
+	if (!window.XMLHttpRequest) {
+		$("#targetFixed").css("top", $(document).scrollTop() + 2);
+	}
+	//创建半透明遮罩层
+	if(!$('#targetFixed').length){
+		$('<span id="targetFixed" style="height:25px; padding:1px; position:fixed; _position:absolute; top:0; right:0;"></span>').prependTo($("body"));
+	}
+	if (!$("#overLay").size()) {
+		$('<div id="overLay"></div>').prependTo($("body"));
+		$("#overLay").css({
+			width: "100%",
+			backgroundColor: "#000",
+			opacity: 0.2,
+			position: "absolute",
+			left: 0,
+			top: 0,
+			zIndex: 99
+		}).height($(document).height());
+	}
+	//显示操作提示，最关键核心代码
+	$("#targetFixed").powerFloat({
+		eventType: null,
+		targetMode: "doing",
+		target: "正在处理中...",
+		position: "1-2"
+	});
 }
 function ajax_end(){
-    $("#overLay").remove();
-    $.powerFloat.hide();
+	$("#overLay").remove();
+	$.powerFloat.hide();
 }
 /**
  * 文件上传
@@ -237,7 +237,7 @@ function ajax_end(){
 function fileup(id,succfun){
 	if(arguments[2]) errfun=arguments[2];
 	else errfun=false;
-	
+
 	jQuery.ajaxFileUpload({
 		url:'ajax.php?do=fileup&cn=',
 		secureuri:false,
@@ -303,15 +303,15 @@ function editFun(obj) {
 		}
 		if (fieldName && obj[fieldName]) {
 			switch ($(this).attr('type')) {
-			case 'radio':
-				$('input:radio[name="'+fieldName+'"][value="'+obj[fieldName]+'"]',fo).attr('checked', 'checked');
-				break;
-			case 'checkbox':
-			case 'file':
-			case 'hidden':
-				break;
-			default:
-				$(this).val(obj[fieldName]);
+				case 'radio':
+					$('input:radio[name="'+fieldName+'"][value="'+obj[fieldName]+'"]',fo).attr('checked', 'checked');
+					break;
+				case 'checkbox':
+				case 'file':
+				case 'hidden':
+					break;
+				default:
+					$(this).val(obj[fieldName]);
 			}
 		}
 	});
@@ -366,14 +366,14 @@ function objacl(obj1,obj2,url,def1,def2){
 		if(obj1.val()){
 			jQuery.get(url+obj1.val(),function (opt){
 				//if(opt){
-					obj2.find('option[value!="0"]:not([value=""])').remove();	//必须再清空一次,否则一个select绑定两次的时候,第一个会重复
-					obj2.append(jQuery(opt));
-					if(def2) obj2.val(def2);
-					try{
-						obj2.msDropDown()
-					}catch(e){
-					}
-					obj2.change();
+				obj2.find('option[value!="0"]:not([value=""])').remove();	//必须再清空一次,否则一个select绑定两次的时候,第一个会重复
+				obj2.append(jQuery(opt));
+				if(def2) obj2.val(def2);
+				try{
+					obj2.msDropDown()
+				}catch(e){
+				}
+				obj2.change();
 				//}
 			})
 		}

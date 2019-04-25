@@ -24,7 +24,7 @@ public class KcdTlzfHttp {
         TtMap post = Tools.getPostMap(request);
         apiutil apiutil = new apiutil();
         //入库
-        if (post.get("query").equals("1")) {
+/*        if (post.get("query").equals("1")) {
             if (post.get("type").equals("310001")) {
                 return new tlzfhttp().kcd310001(request, response);
             } else if (post.get("type").equals("310002")) {
@@ -38,13 +38,15 @@ public class KcdTlzfHttp {
             } else {
                 return "你好";
             }
-        }
+        }*/
         //未入库
         if (post.get("query").equals("2")) {
             if (post.get("type").equals("310001")) {
                 return new tlzfhttp_v1().kcd310001(request, response);
             } else if (post.get("type").equals("310002")) {
                 return new tlzfhttp_v1().kcd310002(request, response);
+            } else if (post.get("type").equals("310003")) {
+                return new tlzfhttp_v1().kcd310003(request, response);
             } else if (post.get("type").equals("310011")) {
                 return new tlzfhttp_v1().kcd310011(request, response);
             } else if (post.get("type").equals("340009")) {

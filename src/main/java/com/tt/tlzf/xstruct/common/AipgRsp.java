@@ -1,5 +1,7 @@
 package com.tt.tlzf.xstruct.common;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

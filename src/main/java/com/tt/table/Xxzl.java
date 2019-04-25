@@ -13,8 +13,8 @@ import java.io.IOException;
 public class Xxzl extends DbCtrl {
     private final String title = "贷款材料";
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
-    private boolean canDel = true;
-    private boolean canAdd = true;
+    private boolean canDel = false;
+    private boolean canAdd = false;
     private final String classAgpId = "29"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
@@ -223,4 +223,36 @@ public class Xxzl extends DbCtrl {
         // request.setAttribute("showmsg", "测试弹出消息提示哈！"); //如果有showmsg字段，在载入列表前会提示
     }
 
+    @Override
+    public boolean chk(TtMap array, long id) {
+        if (!agpOK) {// 演示在需要权限检查的地方插入权限标志判断
+            return false;
+        }
+        if (!Tools.myIsNull(array.get("fromcommand"))) { // 从ManagerCmd来的。不用过滤参数
+        } else {
+            String myErroMsg = "";
+
+            if(Tools.myIsNull(array.get("cardt1"))){
+                myErroMsg += "登记日期不能为空！\n";
+            }
+/*            if(Tools.myIsNull(array.get("c_buycar_bd"))){
+                myErroMsg += "出生日期不能为空！\n";
+            }*/
+            if(Tools.myIsNull(array.get("c_work_intime"))){
+                myErroMsg += "入职时间不能为空！\n";
+            }
+            if(Tools.myIsNull(array.get("carindate"))){
+                myErroMsg += "登记日期不能为空！\n";
+            }
+            if(Tools.myIsNull(array.get("carl"))){
+                myErroMsg += "汽车排量不能为空！\n";
+            }
+            super.errorMsg = super.chkMsg = myErroMsg;
+            if (!Tools.myIsNull(myErroMsg)) {
+                super.errorCode = 888;
+            }
+            System.out.println("表单验证end");
+        }
+        return super.errorCode == 0;
+    }
 }

@@ -58,13 +58,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <%--<div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">年龄</span>
                                 <input type="text" class="form-control" id="c_buycar_age" name="c_buycar_age"
                                        placeholder="">
                             </div>
-                        </div>
+                        </div>--%>
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">学历</span>
@@ -80,13 +80,13 @@
                                        name="c_buycar_id_cardno" placeholder="">
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">身份证归属地</span>
-                                <input type="text" class="form-control" id="c_buycar_cardno_local"
-                                       name="c_buycar_cardno_local" placeholder="">
-                            </div>
-                        </div>
+                        <%--                        <div class="col-sm-4">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">身份证归属地</span>
+                                                        <input type="text" class="form-control" id="c_buycar_cardno_local"
+                                                               name="c_buycar_cardno_local" placeholder="">
+                                                    </div>
+                                                </div>--%>
                         <%
                             //dicopt功能演示，指定表里面的name和id，并用name组成<option></option>
                             String hjs = Tools.dicopt("comm_states", 0);//省会，
@@ -131,7 +131,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">归属地</span>
+                                <span class="input-group-addon">手机号归属地</span>
                                 <input type="text" class="form-control" id="c_buycar_tel_local"
                                        name="c_buycar_tel_local" placeholder="">
                             </div>
@@ -146,9 +146,16 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">驾龄</span>
-                                <input type="text" class="form-control" id="c_buycar_de" name="c_buycar_de"
-                                       placeholder="">
+                                <span class="input-group-addon">居住状况</span>
+                                <select id="c_buycar_jzzk" name="c_buycar_jzzk" class="form-control">
+                                    <option value="0">请选择居住状况</option>
+                                    <option value="1">自有无贷款住房</option>
+                                    <option value="2">自有贷款购房</option>
+                                    <option value="3">租房</option>
+                                    <option value="4">与亲属合住</option>
+                                    <option value="5">集体宿舍</option>
+                                    <option value="6">其他</option>
+                                </select>
                             </div>
                         </div>
                         <%
@@ -196,18 +203,26 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
+                                <span class="input-group-addon">驾龄</span>
+                                <input type="text" class="form-control" id="c_buycar_de" name="c_buycar_de"
+                                       placeholder="">
+                                <span class="input-group-addon">年</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
                                 <span class="input-group-addon">银行卡号</span>
                                 <input type="text" class="form-control" id="c_buycar_bank_id" name="c_buycar_bank_id"
                                        placeholder="">
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <%--<div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">出生日期</span>
                                 <input type="text" class="form-control" id="c_buycar_bd" name="c_buycar_bd"
                                        placeholder="">
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
             </div>
@@ -231,20 +246,13 @@
                                        placeholder="">
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">单位邮编</span>
-                                <input type="text" class="form-control" id="c_work_zipcode" name="c_work_zipcode"
-                                       placeholder="">
-                            </div>
-                        </div>
                         <%
                             //dicopt功能演示，指定表里面的name和id，并用name组成<option></option>
                             String dws = Tools.dicopt("comm_states", 0);//省会，
                         %>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">单位省</span>
+                                <span class="input-group-addon">所在省</span>
                                 <select id="c_work_state_id" name="c_work_state_id" class="form-control">
                                     <option value="0">请选择</option>
                                     <%=dws%>
@@ -253,7 +261,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">单位市</span>
+                                <span class="input-group-addon">所在市</span>
                                 <select id="c_work_city_id" name="c_work_city_id" class="form-control">
                                     <option value="0">请选择</option>
                                 </select>
@@ -268,8 +276,15 @@
                         </script>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">单位具体地址</span>
+                                <span class="input-group-addon">单位地址</span>
                                 <input type="text" class="form-control" id="c_work_address" name="c_work_address"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">邮政邮编</span>
+                                <input type="text" class="form-control" id="c_work_zipcode" name="c_work_zipcode"
                                        placeholder="">
                             </div>
                         </div>
@@ -323,6 +338,7 @@
                                 <span class="input-group-addon">工龄</span>
                                 <input type="text" class="form-control" id="c_work_age" name="c_work_age"
                                        placeholder="">
+                                <span class="input-group-addon">年</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -330,6 +346,7 @@
                                 <span class="input-group-addon">月收入</span>
                                 <input type="text" class="form-control" id="c_work_income_month"
                                        name="c_work_income_month" placeholder="">
+                                <span class="input-group-addon">元</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -359,18 +376,79 @@
                     </div>
                 </div>
             </div>
+            <%--            <div class="form-group">
+                            <label class="col-sm-2 control-label">抵押人信息</label>
+                            <div class="col-sm-10">
+                                <div class="row inline-from">
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">抵押人姓名</span>
+                                            <input type="text" class="form-control" id="c_mg_name" name="c_mg_name"
+                                                   placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">与借款人关系</span>
+                                            <select id="c_mg_rsforloan" name="c_mg_rsforloan" class="form-control">
+                                                <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, infodb.get("c_mg_rsforloan"))%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">抵押人身份证号</span>
+                                            <input type="text" class="form-control" id="c_mg_cardno" name="c_mg_cardno"
+                                                   placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>--%>
+            <%
+                for (int i = 1; i <= 3; i++) {
+            %>
             <div class="form-group">
-                <label class="col-sm-2 control-label">配偶信息</label>
+                <label class="col-sm-2 control-label">紧急联系人<%=i%>信息</label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">与借款人关系</span>
-                                <select id="c_workpo_rsforloan" name="c_workpo_rsforloan" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, infodb.get("c_work_havepa"))%>
+                                <select id="c_ec<%=i%>_rsforloan" name="c_ec<%=i%>_rsforloan" class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, infodb.get("c_mg_rsforloan"))%>
                                 </select>
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">姓名</span>
+                                <input type="text" class="form-control" id="c_ec<%=i%>_name" name="c_ec<%=i%>_name"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">手机号</span>
+                                <input type="text" class="form-control" id="c_ec<%=i%>_mobile" name="c_ec<%=i%>_mobile"
+                                       placeholder="">
+                            </div>
+                        </div>
+<%--                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">电话</span>
+                                <input type="text" class="form-control" id="c_ec<%=i%>_tel" name="c_ec<%=i%>_tel"
+                                       placeholder="">
+                            </div>
+                        </div>--%>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">配偶信息</label>
+                <div class="col-sm-10">
+                    <div class="row inline-from">
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">姓名</span>
@@ -383,15 +461,6 @@
                                 <span class="input-group-addon">性别</span>
                                 <select id="c_po_sex" name="c_po_sex" class="form-control">
                                     <%=Tools.dicopt(DataDic.dicSex, infodb.get("c_po_sex"))%>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">学历</span>
-                                <select id="c_po_eb" name="c_po_eb" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_xl, infodb.get("c_po_eb"))%>
                                 </select>
                             </div>
                         </div>
@@ -411,14 +480,22 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">归属地</span>
+                                <span class="input-group-addon">手机号归属地</span>
                                 <input type="text" class="form-control" id="c_po_tel_local" name="c_po_tel_local"
                                        placeholder="">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">居住地址</span>
+                                <span class="input-group-addon">学历</span>
+                                <select id="c_po_eb" name="c_po_eb" class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_xl, infodb.get("c_po_eb"))%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">现住地址</span>
                                 <input type="text" class="form-control" id="c_po_live_address" name="c_po_live_address"
                                        placeholder="">
                             </div>
@@ -440,15 +517,8 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">单位具体地址</span>
+                                <span class="input-group-addon">单位地址</span>
                                 <input type="text" class="form-control" id="c_workpo_address" name="c_workpo_address"
-                                       placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">单位电话</span>
-                                <input type="text" class="form-control" id="c_workpo_tel" name="c_workpo_tel"
                                        placeholder="">
                             </div>
                         </div>
@@ -458,6 +528,13 @@
                                 <select id="c_workpo_unittype" name="c_workpo_unittype" class="form-control">
                                     <%=Tools.dicopt(DataDic.dic_zzcl_dwxz, infodb.get("c_workpo_unittype"))%>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">单位电话</span>
+                                <input type="text" class="form-control" id="c_workpo_tel" name="c_workpo_tel"
+                                       placeholder="">
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -472,6 +549,7 @@
                                 <span class="input-group-addon">工龄</span>
                                 <input type="text" class="form-control" id="c_workpo_age" name="c_workpo_age"
                                        placeholder="">
+                                <span class="input-group-addon">年</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -480,6 +558,7 @@
                                 <input type="text" class="form-control" id="c_workpo_income_month"
                                        name="c_workpo_income_month"
                                        placeholder="">
+                                <span class="input-group-addon">元</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -493,6 +572,7 @@
                     </div>
                 </div>
             </div>
+            <%--共还人--%>
             <div class="form-group">
                 <label class="col-sm-2 control-label">共还人信息</label>
                 <div class="col-sm-10">
@@ -522,14 +602,6 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">学历</span>
-                                <select id="c_ghr_eb" name="c_ghr_eb" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_xl, infodb.get("c_ghr_eb"))%>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
                                 <span class="input-group-addon">身份证号码</span>
                                 <input type="text" class="form-control" id="c_ghr_id_cardno" name="c_ghr_id_cardno"
                                        placeholder="">
@@ -544,14 +616,22 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">归属地</span>
+                                <span class="input-group-addon">手机号归属地</span>
                                 <input type="text" class="form-control" id="c_ghr_tel_local" name="c_ghr_tel_local"
                                        placeholder="">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">居住地址</span>
+                                <span class="input-group-addon">学历</span>
+                                <select id="c_ghr_eb" name="c_ghr_eb" class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_xl, infodb.get("c_ghr_eb"))%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">现住地址</span>
                                 <input type="text" class="form-control" id="c_ghr_live_address"
                                        name="c_ghr_live_address"
                                        placeholder="">
@@ -574,15 +654,8 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">单位具体地址</span>
+                                <span class="input-group-addon">单位地址</span>
                                 <input type="text" class="form-control" id="c_workghr_address" name="c_workghr_address"
-                                       placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">单位电话</span>
-                                <input type="text" class="form-control" id="c_workghr_tel" name="c_workghr_tel"
                                        placeholder="">
                             </div>
                         </div>
@@ -592,6 +665,13 @@
                                 <select id="c_workghr_unittype" name="c_workghr_unittype" class="form-control">
                                     <%=Tools.dicopt(DataDic.dic_zzcl_dwxz, infodb.get("c_workghr_unittype"))%>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">单位电话</span>
+                                <input type="text" class="form-control" id="c_workghr_tel" name="c_workghr_tel"
+                                       placeholder="">
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -606,6 +686,7 @@
                                 <span class="input-group-addon">工龄</span>
                                 <input type="text" class="form-control" id="c_workghr_age" name="c_workghr_age"
                                        placeholder="">
+                                <span class="input-group-addon">年</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -614,6 +695,7 @@
                                 <input type="text" class="form-control" id="c_workghr_income_month"
                                        name="c_workghr_income_month"
                                        placeholder="">
+                                <span class="input-group-addon">元</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -627,95 +709,19 @@
                     </div>
                 </div>
             </div>
+            <%--汽车材料--%>
             <div class="form-group">
-                <label class="col-sm-2 control-label">抵押人信息</label>
+                <label class="col-sm-2 control-label">汽车材料</label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">抵押人姓名</span>
-                                <input type="text" class="form-control" id="c_mg_name" name="c_mg_name"
-                                       placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">与借款人关系</span>
-                                <select id="c_mg_rsforloan" name="c_mg_rsforloan" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, infodb.get("c_mg_rsforloan"))%>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">抵押人身份证号</span>
-                                <input type="text" class="form-control" id="c_mg_cardno" name="c_mg_cardno"
-                                       placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <%
-                for (int i = 1; i <= 4; i++) {
-            %>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">紧急联系人<%=i%>信息</label>
-                <div class="col-sm-10">
-                    <div class="row inline-from">
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">姓名</span>
-                                <input type="text" class="form-control" id="c_ec<%=i%>_name" name="c_ec<%=i%>_name"
-                                       placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">与借款人关系</span>
-                                <input type="text" class="form-control" id="c_ec<%=i%>_rsforloan"
-                                       name="c_ec<%=i%>_rsforloan"
-                                       placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">手机号</span>
-                                <input type="text" class="form-control" id="c_ec<%=i%>_mobile" name="c_ec<%=i%>_mobile"
-                                       placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">电话</span>
-                                <input type="text" class="form-control" id="c_ec<%=i%>_tel" name="c_ec<%=i%>_tel"
-                                       placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <%}%>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">融资信息</label>
-                <div class="col-sm-10">
-                    <div class="row inline-from">
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">车辆类型</span>
-                                <select id="c_loaninfo_car_type" name="c_loaninfo_car_type" class="form-control">
+                                <span class="input-group-addon">国产/进口</span>
+                                <select class="form-control" id="c_loaninfo_car_type" name="c_loaninfo_car_type">
                                     <%=Tools.dicopt(DataDic.dic_zzcl_cllx, infodb.get("c_loaninfo_car_type"))%>
                                 </select>
                             </div>
                         </div>
-                        <%--<div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">是否公牌</span>
-                                <select id="c_loaninfo_car_isp" name="c_loaninfo_car_isp" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_gp, infodb.get("c_loaninfo_car_isp"))%>
-                                </select>
-                            </div>
-                        </div>--%>
                         <%
 
                             int brid = 0;
@@ -754,131 +760,29 @@
                             objacl('#brid_v2', '#seid_v2', '/ttAjax?do=opt&cn=car_series_v2&id=0&brand_id=', '${infodb.brid_v2}', '${infodb.seid_v2}');
                             objacl('#seid_v2', '#carid_v2', '/ttAjax?do=opt&cn=car_model_v2&id=0&series_id=', '${infodb.seid_v2}', '${infodb.carid_v2}');
                         </script>
-                        <%--                        <div class="col-sm-4">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">上牌地址</span>
-                                                        <input type="text" class="form-control" id="c_loaninfo_car_pcaddress"
-                                                               name="c_loaninfo_car_pcaddress" placeholder="">
-                                                    </div>
-                                                </div>--%>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">行驶证车主名</span>
-                                <input type="text" class="form-control" id="c_loaninfo_car_owner"
-                                       name="c_loaninfo_car_owner" placeholder="">
+                                <span class="input-group-addon">行驶里程</span>
+                                <input id="carkm" name="carkm" class="form-control" value=""
+                                       placeholder=""/>
+                                <span class="input-group-addon">公里</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">抵押权人</span>
-                                <input type="text" class="form-control" id="c_loaninfo_car_mg" name="c_loaninfo_car_mg"
-                                       placeholder="">
+                                <span class="input-group-addon">出厂日期</span>
+                                <input id="cardt1" name="cardt1" class="form-control" value="<%=infodb.get("cardt1")%>"
+                                       placeholder=""/>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">购车用途</span>
-                                <select id="c_loaninfo_car_use" name="c_loaninfo_car_use" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_gcyt, infodb.get("c_loaninfo_car_use"))%>
-                                </select>
+                                <span class="input-group-addon">登记日期</span>
+                                <input id="carindate" name="carindate" class="form-control"
+                                       value="<%=infodb.get("cardt1")%>"
+                                       placeholder=""/>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">评估价格</span>
-                                <input type="text" class="form-control" id="c_loaninfo_car_priceresult"
-                                       name="c_loaninfo_car_priceresult" placeholder="">
-                                <span class="input-group-addon">元</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">车贷本金</span>
-                                <input type="text" class="form-control" id="c_loaninfo_car_pcpprice"
-                                       name="c_loaninfo_car_pcpprice" placeholder="">
-                                <span class="input-group-addon">元</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">利率（%）</span>
-                                <input type="text" class="form-control" id="c_loaninfo_car_loanrate"
-                                       name="c_loaninfo_car_loanrate" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">开票价（元）</span>
-                                <input type="text" class="form-control" id="c_loaninfo_kpj"
-                                       name="c_loaninfo_kpj" placeholder="">
-                                <span class="input-group-addon">元</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">贷款总额（元）</span>
-                                <input type="text" class="form-control" id="c_loaninfo_dkze"
-                                       name="c_loaninfo_dkze" placeholder="">
-                                <span class="input-group-addon">元</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">合同金额（元）</span>
-                                <input type="text" class="form-control" id="c_loaninfo_htje"
-                                       name="c_loaninfo_htje" placeholder="">
-                                <span class="input-group-addon">元</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">服务费（元）</span>
-                                <input type="text" class="form-control" id="c_loaninfo_fee"
-                                       name="c_loaninfo_fee" placeholder="">
-                                <span class="input-group-addon">元</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">首付金额（元）</span>
-                                <input type="text" class="form-control" id="c_loaninfo_sfje"
-                                       name="c_loaninfo_sfje" placeholder="">
-                                <span class="input-group-addon">元</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">贷款期数（月）</span>
-                                <select id="c_loaninfo_periods" name="c_loaninfo_periods" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_dkqs, infodb.get("c_loaninfo_periods"))%>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">服务费是否分期</span>
-                                <select id="c_loaninfo_feeisin" name="c_loaninfo_feeisin" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_fq, infodb.get("c_loaninfo_feeisin"))%>
-                                </select>
-                            </div>
-                        </div>
-                        <%--<div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">垫资类型</span>
-                                <select id="c_loaninfo_dzlx" name="c_loaninfo_dzlx" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_dzlx, infodb.get("c_loaninfo_dzlx"))%>
-                                </select>
-                            </div>
-                        </div>--%>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">汽车材料</label>
-                <div class="col-sm-10">
-                    <div class="row inline-from">
-
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">颜色</span>
@@ -889,9 +793,9 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon">出厂日期</span>
-                                <input id="cardt1" name="cardt1" class="form-control" value="<%=infodb.get("cardt1")%>"
-                                       placeholder=""/>
+                                <span class="input-group-addon">车牌号码</span>
+                                <input id="carno" name="carno" class="form-control"
+                                       value="<%=infodb.get("carno")%>" placeholder=""/>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -913,6 +817,21 @@
                                 <span class="input-group-addon">发动机号</span>
                                 <input id="motorcode" name="motorcode" class="form-control"
                                        value="<%=infodb.get("motorcode")%>" placeholder=""/>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">车辆归属地</span>
+                                <input id="carnoaddress" name="carnoaddress" class="form-control"
+                                       value="<%=infodb.get("carnoaddress")%>" placeholder=""/>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">汽车排量</span>
+                                <input id="carl" name="carl" class="form-control"
+                                       value="<%=infodb.get("carl")%>" placeholder=""/>
+                                <span class="input-group-addon">L</span>
                             </div>
                         </div>
                     </div>
@@ -1003,7 +922,159 @@
                     </div>
                 </div>
             </div>
-
+            <%--融资信息--%>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">融资信息</label>
+                <div class="col-sm-10">
+                    <div class="row inline-from">
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">评估价格</span>
+                                <input type="text" class="form-control" id="c_loaninfo_car_priceresult"
+                                       name="c_loaninfo_car_priceresult" placeholder="">
+                                <span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">车贷本金</span>
+                                <input type="text" class="form-control" id="c_loaninfo_car_pcpprice"
+                                       name="c_loaninfo_car_pcpprice" placeholder="">
+                                <span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">利率（%）</span>
+                                <input type="text" class="form-control" id="c_loaninfo_car_loanrate"
+                                       name="c_loaninfo_car_loanrate" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">合同金额</span>
+                                <input type="text" class="form-control" id="c_loaninfo_htje"
+                                       name="c_loaninfo_htje" placeholder="">
+                                <span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">服务费</span>
+                                <input type="text" class="form-control" id="c_loaninfo_fee"
+                                       name="c_loaninfo_fee" placeholder="">
+                                <span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">贷款期数</span>
+                                <select id="c_loaninfo_periods" name="c_loaninfo_periods" class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_dkqs, infodb.get("c_loaninfo_periods"))%>
+                                </select>
+                                <span class="input-group-addon">个月</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">服务费是否分期</span>
+                                <select id="c_loaninfo_feeisin" name="c_loaninfo_feeisin" class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_fq, infodb.get("c_loaninfo_feeisin"))%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">抵押权人</span>
+                                <input id="c_loaninfo_car_mg" name="c_loaninfo_car_mg" type="text" value=""
+                                       class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">家访材料</label>
+                <div class="col-sm-10">
+                    <div class="row inline-from">
+                        <%
+                            String imgPreName3 = "imgstep10_1ss";
+                            String[] ssImgs3 = { //设置已有值
+                                    !Tools.myIsNull(infodb.get(imgPreName3)) ? infodb.get(imgPreName3) : ""
+                            };
+                            ssImgs3 = ssImgs3[0].split("\u0005");
+                            String sImgs3 = "";
+                            for (int i = 0; i < ssImgs3.length; i++) {
+                                if (ssImgs3[i] != null && !ssImgs3[i].equals("")) {
+                                    sImgs3 = sImgs3 + ssImgs3[i] + "|";
+                                }
+                            }
+                            String[] ssImgs_3 = sImgs3.split("\\|");//获取已有图片
+                        %>
+                        <%-- 可能这里用<%@include file %>模式更适合--%>
+                        <jsp:include page="<%=upFile1%>">
+                            <jsp:param name="img_MarginImgSrc" value=""/>
+                            <jsp:param name="img_MarginImgClass" value=""/>
+                            <jsp:param name="img_Total" value="<%=ssImgs_3.length%>"/>
+                            <jsp:param name="img_NamePre" value="<%=imgPreName3%>"/>
+                            <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
+                            <jsp:param name="l1div_Style"
+                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                            <jsp:param name="img_Style" value="width: 100%;height:100px;border-radius:10px;"/>
+                            <jsp:param name="img_FileStyle"
+                                       value="position: absolute;left: 0;top: 0;height: 100%;width: 100%;background: transparent;border: 0;margin: 0;padding: 0;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>
+                            <jsp:param name="img_Class" value="imgclass"/>
+                            <jsp:param name="img_FileClass" value="uploadfileclass"/>
+                            <jsp:param name="img_SmallWidth" value="100"/>
+                            <jsp:param name="img_SmallHeight" value="100"/>
+                            <jsp:param name="sImgs" value="<%=sImgs3%>"/>
+                        </jsp:include>
+                        <input id="imgstep9_1ss_num" name="imgstep9_1ss_num" type="hidden"
+                               value="<%=ssImgs_3.length%>"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">证明材料</label>
+                <div class="col-sm-10">
+                    <div class="row inline-from">
+                        <%
+                            String imgPreName4 = "imgstep11_1ss";
+                            String[] ssImgs4 = { //设置已有值
+                                    !Tools.myIsNull(infodb.get(imgPreName4)) ? infodb.get(imgPreName4) : ""
+                            };
+                            ssImgs4 = ssImgs4[0].split("\u0005");
+                            String sImgs4 = "";
+                            for (int i = 0; i < ssImgs4.length; i++) {
+                                if (ssImgs4[i] != null && !ssImgs4[i].equals("")) {
+                                    sImgs4 = sImgs4 + ssImgs4[i] + "|";
+                                }
+                            }
+                            String[] ssImgs_4 = sImgs4.split("\\|");//获取已有图片
+                        %>
+                        <%-- 可能这里用<%@include file %>模式更适合--%>
+                        <jsp:include page="<%=upFile1%>">
+                            <jsp:param name="img_MarginImgSrc" value=""/>
+                            <jsp:param name="img_MarginImgClass" value=""/>
+                            <jsp:param name="img_Total" value="<%=ssImgs_4.length%>"/>
+                            <jsp:param name="img_NamePre" value="<%=imgPreName4%>"/>
+                            <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
+                            <jsp:param name="l1div_Style"
+                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                            <jsp:param name="img_Style" value="width: 100%;height:100px;border-radius:10px;"/>
+                            <jsp:param name="img_FileStyle"
+                                       value="position: absolute;left: 0;top: 0;height: 100%;width: 100%;background: transparent;border: 0;margin: 0;padding: 0;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>
+                            <jsp:param name="img_Class" value="imgclass"/>
+                            <jsp:param name="img_FileClass" value="uploadfileclass"/>
+                            <jsp:param name="img_SmallWidth" value="100"/>
+                            <jsp:param name="img_SmallHeight" value="100"/>
+                            <jsp:param name="sImgs" value="<%=sImgs4%>"/>
+                        </jsp:include>
+                        <input id="imgstep9_1ss_num" name="imgstep9_1ss_num" type="hidden"
+                               value="<%=ssImgs_4.length%>"/>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">审核和数据填充处理</label>
                 <div class="col-sm-10">
@@ -1090,24 +1161,29 @@
     }
 </script>
 <script>
-    //执行一个laydate实例
+/*    //执行一个laydate实例
     laydate.render({
         elem: '#app_date', //指定元素
         type: 'datetime'
-    });
+    });*/
     //执行一个laydate实例
     laydate.render({
         elem: '#c_work_intime', //指定元素
         type: 'datetime'
     });
-    //执行一个laydate实例
+/*    //执行一个laydate实例
     laydate.render({
         elem: '#c_buycar_bd', //指定元素
-        type: 'date'
-    });
+        type: 'datetime'
+    });*/
     //执行一个laydate实例
     laydate.render({
         elem: '#cardt1', //指定元素
+        type: 'datetime'
+    });
+    //执行一个laydate实例
+    laydate.render({
+        elem: '#carindate', //指定元素
         type: 'datetime'
     });
 </script>
