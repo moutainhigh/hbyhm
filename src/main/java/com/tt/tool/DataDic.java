@@ -70,10 +70,17 @@ public class DataDic {
     public static TtMap dic_tlzf_ds_bc_status = new TtMap();
     public static TtMap dic_tlzf_sd_status = new TtMap();
     public static TtMap dic_tlzf_xy_status = new TtMap();
+    public static TtMap dic_app = new TtMap();
     public static synchronized void initDic() {
         if (dicYesOrNo.size() > 0) { // 已经初始化过了
             return;
         }
+        /*类型*/
+        dic_app.put("0","工行贷");
+        dic_app.put("1","通用进件");
+        dic_app.put("2","河北银行");
+        dic_app.put("3","厦门国际");
+        dic_app.put("4","华夏银行");
         /*通联支付协议状态*/
         dic_tlzf_xy_status.put("0","");
         dic_tlzf_xy_status.put("1","失效");

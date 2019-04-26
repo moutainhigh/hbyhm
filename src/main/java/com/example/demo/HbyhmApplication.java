@@ -13,7 +13,8 @@ import org.springframework.web.WebApplicationInitializer;
 @ComponentScan(basePackages = { "com.example.demo",
         "com.tt.tool",
         "com.tt.manager",
-        "com.tt.tlzf.servlet"}) // 映射
+        "com.tt.tlzf.servlet",
+        "com.example.wx"}) // 映射
 @SpringBootApplication
 // @EnableAutoConfiguration
 // ServletComponentScan只扫描启动类所在文件夹下的Servlet，故Druid的Servlet只能放到启动类的文件夹下
