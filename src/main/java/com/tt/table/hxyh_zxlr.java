@@ -12,7 +12,7 @@ import com.tt.tool.Zip;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-public class Zxlr extends DbCtrl {
+public class hxyh_zxlr extends DbCtrl {
     private final String title = "征信录入";
     private String orderString = "ORDER BY t.dt_edit DESC"; // 默认排序
     private boolean canDel = true;
@@ -20,7 +20,7 @@ public class Zxlr extends DbCtrl {
     private final String classAgpId = "28"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
-    public Zxlr() {
+    public hxyh_zxlr() {
         super("kj_icbc");
         AdminAgp adminAgp = new AdminAgp();
         try {
@@ -56,7 +56,7 @@ public class Zxlr extends DbCtrl {
         }
         String whereString = "t.app="+appid;
         String tmpWhere = "";
-        String fieldsString = "t.*,f.name as fsname,a.name as adminname,dy.id as dy_id,";
+        String fieldsString = "t.*,f.name as fsname,a.name as adminname,dy.id as dy_id";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
 
@@ -103,7 +103,7 @@ public class Zxlr extends DbCtrl {
         showall = true; // 忽略deltag和showtag
         leftsql = " LEFT JOIN assess_fs f ON f.id=t.gems_fs_id " +
                 " LEFT JOIN assess_gems a ON a.id=t.gems_id" +
-                " LEFT JOIN hbyh_dygd dy ON dy.icbc_id=t.id";
+                " LEFT JOIN hxyh_dygd dy ON dy.icbc_id=t.id";
         list = lists(whereString, fieldsString);
 
         if (!Tools.myIsNull(kw)) { // 搜索关键字高亮
@@ -228,7 +228,7 @@ public class Zxlr extends DbCtrl {
             post.put("query_type","0");
             icbc_id= add(post);
             TtMap ordermap=new TtMap();
-            ordermap.put("gems_code",orderutil.getOrderId("HBYHKCD", 7, icbc_id));
+            ordermap.put("gems_code",orderutil.getOrderId("HXYHKCD", 7, icbc_id));
             //更新订单字段
             Tools.recEdit(ordermap,"kj_icbc",icbc_id);
         }

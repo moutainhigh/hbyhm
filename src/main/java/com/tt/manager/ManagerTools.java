@@ -103,6 +103,42 @@ public class ManagerTools {
                 return "sys_modal_hbyh";
             case "sys_error":
                 return "sys_error";
+            case "hxyh_zxlr":
+                return "hxyh_zxlr";
+            case "hxyh_xxzl":
+                return "hxyh_xxzl";
+            case "hxyh_yhht":
+                return "hxyh_yhht";
+            case "hxyh_gsht":
+                return "hxyh_gsht";
+            case "hxyh_gps":
+                return "hxyh_gps";
+            case "hxyh_dy":
+                return "hxyh_dy";
+            case "hxyh_yhclhs":
+                return "hxyh_yhclhs";
+            case "hxyh_gsclhs":
+                return "hxyh_gsclhs";
+            case "hxyh_dyclhs":
+                return "hxyh_dyclhs";
+            case "xmgj_zxlr":
+                return "xmgj_zxlr";
+            case "xmgj_xxzl":
+                return "xmgj_xxzl";
+            case "xmgj_yhht":
+                return "xmgj_yhht";
+            case "xmgj_gsht":
+                return "xmgj_gsht";
+            case "xmgj_gpsgd":
+                return "xmgj_gpsgd";
+            case "xmgj_dygd":
+                return "xmgj_dygd";
+            case "xmgj_yhclhs":
+                return "xmgj_yhclhs";
+            case "xmgj_gsclhs":
+                return "xmgj_gsclhs";
+            case "xmgj_dyclhs":
+                return "xmgj_dyclhs";
             // 不需要使用数据库的CN
             case "home":
             case "button":
