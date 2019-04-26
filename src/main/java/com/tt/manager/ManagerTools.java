@@ -111,10 +111,10 @@ public class ManagerTools {
                 return "hxyh_yhht";
             case "hxyh_gsht":
                 return "hxyh_gsht";
-            case "hxyh_gps":
-                return "hxyh_gps";
-            case "hxyh_dy":
-                return "hxyh_dy";
+            case "hxyh_gpsgd":
+                return "hxyh_gpsgd";
+            case "hxyh_dygd":
+                return "hxyh_dygd";
             case "hxyh_yhclhs":
                 return "hxyh_yhclhs";
             case "hxyh_gsclhs":

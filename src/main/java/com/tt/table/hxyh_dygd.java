@@ -10,15 +10,15 @@ import com.tt.tool.Zip;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-public class hxyh_gps extends DbCtrl {
-    private final String title = "GPS归档";
+public class hxyh_dygd extends DbCtrl {
+    private final String title = "抵押归档";
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
     private boolean canDel = true;
     private boolean canAdd = true;
-    private final String classAgpId = "34"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
+    private final String classAgpId = "40"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
-    public hxyh_gps() {
-        super("hxyh_gpsgd");
+    public hxyh_dygd() {
+        super("hxyh_dygd");
         AdminAgp adminAgp = new AdminAgp();
         try {
             if (adminAgp.checkAgp(classAgpId)) { // 如果有权限
@@ -63,14 +63,8 @@ public class hxyh_gps extends DbCtrl {
         if(!Tools.myIsNull(post.get("toZip"))&& post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
             //征信录入资料
-            TtMap imgstep14_1ss=tozip(info.get("imgstep14_1ss"),"车身照片车身照片（定位水印）");
-            TtMap imgstep14_2ss=tozip(info.get("imgstep14_2ss"),"车身照片车身（影像上传）");
-            TtMap imgstep14_3ss=tozip(info.get("imgstep14_3ss"),"设备与VIN码合影照片（定位水印）");
-            TtMap imgstep14_4ss=tozip(info.get("imgstep14_4ss"),"设备与VIN码合影（影像上传）");
-            imginfo.putAll(imgstep14_1ss);
-            imginfo.putAll(imgstep14_2ss);
-            imginfo.putAll(imgstep14_3ss);
-            imginfo.putAll(imgstep14_4ss);
+            TtMap imgstep16_1ss=tozip(info.get("imgstep16_1ss"),"抵押相关归档视频");
+            imginfo.putAll(imgstep16_1ss);
             if(!imginfo.isEmpty()) {
                 try {
                     closeConn();
@@ -93,13 +87,10 @@ public class hxyh_gps extends DbCtrl {
         }else {
             //历史操作查询
             if (nid > 0) {
-                TtList lslist = Tools.reclist("select * from hxyh_gpsgd_result where qryid=" + nid);
+                TtList lslist = Tools.reclist("select * from hxyh_dygd_result where qryid=" + nid);
                 request.setAttribute("lslist", lslist);//
-                //查询车辆信息
-                TtMap cars = Tools.recinfo("select vincode from tyjj_qccl where icbc_id=" + nid);
-                request.setAttribute("cars", cars);
             }
-            long app = 2;
+            long app = 4;
             if (post.get("app") != null && !post.get("app").isEmpty()) {
                 app = Integer.valueOf(post.get("app"));
             }
@@ -144,7 +135,7 @@ public class hxyh_gps extends DbCtrl {
             icbc_id = add(post);
             TtMap map=new TtMap();
             //订单编号更新操作
-            map.put("gems_code",orderutil.getOrderId("ZZKCD", 7, icbc_id));
+            map.put("gems_code",orderutil.getOrderId("GDJJ123", 7, icbc_id));
             edit(map,icbc_id);
         }
         //历史添加
@@ -152,7 +143,7 @@ public class hxyh_gps extends DbCtrl {
         res.put("qryid", String.valueOf(icbc_id));
         res.put("status", post.get("bc_status"));
         res.put("remark", newpost.get("remark1"));
-        Tools.recAdd(res, "hxyh_gpsgd_result");
+        Tools.recAdd(res, "hxyh_dygd_result");
 
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
         boolean bSuccess = errorCode == 0;

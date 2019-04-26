@@ -56,7 +56,7 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">车架号</span>
-                                <input id="vin" name="vin" type="text" value="${cars.vincode}" class="form-control"/>
+                                <input id="vin" name="vin" type="text"  readonly  unselectable="on" value="${infodb.vincode}" class="form-control"/>
                             </div>
                         </div>
                         <div class="col-sm-4">

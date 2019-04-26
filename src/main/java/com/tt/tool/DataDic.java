@@ -77,10 +77,11 @@ public class DataDic {
             return;
         }
         /*资质材料-子女状况*/
-        dic_zzcl_zvzk.put("0","无");
-        dic_zzcl_zvzk.put("1","一个");
-        dic_zzcl_zvzk.put("2","两个");
-        dic_zzcl_zvzk.put("3","两个以上");
+        dic_zzcl_zvzk.put("0","请选择");
+        dic_zzcl_zvzk.put("1","无");
+        dic_zzcl_zvzk.put("2","一个");
+        dic_zzcl_zvzk.put("3","两个");
+        dic_zzcl_zvzk.put("4","两个以上");
         /*类型*/
         dic_app.put("0","工行贷");
         dic_app.put("1","通用进件");

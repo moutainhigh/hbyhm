@@ -10,15 +10,15 @@ import com.tt.tool.Zip;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-public class hxyh_dy extends DbCtrl {
-    private final String title = "抵押归档";
+public class hxyh_gpsgd extends DbCtrl {
+    private final String title = "GPS归档";
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
     private boolean canDel = true;
     private boolean canAdd = true;
-    private final String classAgpId = "40"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
+    private final String classAgpId = "34"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
-    public hxyh_dy() {
-        super("hxyh_dygd");
+    public hxyh_gpsgd() {
+        super("hxyh_gpsgd");
         AdminAgp adminAgp = new AdminAgp();
         try {
             if (adminAgp.checkAgp(classAgpId)) { // 如果有权限
@@ -53,9 +53,10 @@ public class hxyh_dy extends DbCtrl {
      * @return: 返回
      */
     public void doGetForm(HttpServletRequest request, TtMap post) {
-        String f = "t.*,a.name as admin_name,fs.name as fs_name,i.c_name as c_name";
+        String f = "t.*,a.name as admin_name,fs.name as fs_name,i.c_name as c_name,xx.vincode as vincode";
         leftsql = " LEFT JOIN assess_gems a ON a.id=t.gems_id" +
                 " LEFT JOIN assess_fs fs ON fs.id=t.gems_fs_id" +
+                " LEFT JOIN hxyh_xxzl xx ON xx.icbc_id=t.icbc_id" +
                 " LEFT JOIN kj_icbc i ON i.id=t.icbc_id";
         long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
         TtMap info = info(nid, f);
@@ -63,8 +64,14 @@ public class hxyh_dy extends DbCtrl {
         if(!Tools.myIsNull(post.get("toZip"))&& post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
             //征信录入资料
-            TtMap imgstep16_1ss=tozip(info.get("imgstep16_1ss"),"抵押相关归档视频");
-            imginfo.putAll(imgstep16_1ss);
+            TtMap imgstep14_1ss=tozip(info.get("imgstep14_1ss"),"车身照片车身照片（定位水印）");
+            TtMap imgstep14_2ss=tozip(info.get("imgstep14_2ss"),"车身照片车身（影像上传）");
+            TtMap imgstep14_3ss=tozip(info.get("imgstep14_3ss"),"设备与VIN码合影照片（定位水印）");
+            TtMap imgstep14_4ss=tozip(info.get("imgstep14_4ss"),"设备与VIN码合影（影像上传）");
+            imginfo.putAll(imgstep14_1ss);
+            imginfo.putAll(imgstep14_2ss);
+            imginfo.putAll(imgstep14_3ss);
+            imginfo.putAll(imgstep14_4ss);
             if(!imginfo.isEmpty()) {
                 try {
                     closeConn();
@@ -87,10 +94,13 @@ public class hxyh_dy extends DbCtrl {
         }else {
             //历史操作查询
             if (nid > 0) {
-                TtList lslist = Tools.reclist("select * from hxyh_dygd_result where qryid=" + nid);
+                TtList lslist = Tools.reclist("select * from hxyh_gpsgd_result where qryid=" + nid);
                 request.setAttribute("lslist", lslist);//
+                //查询车辆信息
+                TtMap cars = Tools.recinfo("select vincode from tyjj_qccl where icbc_id=" + nid);
+                request.setAttribute("cars", cars);
             }
-            long app = 2;
+            long app = 4;
             if (post.get("app") != null && !post.get("app").isEmpty()) {
                 app = Integer.valueOf(post.get("app"));
             }
@@ -135,7 +145,7 @@ public class hxyh_dy extends DbCtrl {
             icbc_id = add(post);
             TtMap map=new TtMap();
             //订单编号更新操作
-            map.put("gems_code",orderutil.getOrderId("GDJJ123", 7, icbc_id));
+            map.put("gems_code",orderutil.getOrderId("ZZKCD", 7, icbc_id));
             edit(map,icbc_id);
         }
         //历史添加
@@ -143,7 +153,7 @@ public class hxyh_dy extends DbCtrl {
         res.put("qryid", String.valueOf(icbc_id));
         res.put("status", post.get("bc_status"));
         res.put("remark", newpost.get("remark1"));
-        Tools.recAdd(res, "hxyh_dygd_result");
+        Tools.recAdd(res, "hxyh_gpsgd_result");
 
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
         boolean bSuccess = errorCode == 0;

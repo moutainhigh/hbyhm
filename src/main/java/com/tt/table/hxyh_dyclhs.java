@@ -52,7 +52,7 @@ public class hxyh_dyclhs extends DbCtrl {
             TtList lslist = Tools.reclist("select * from hxyh_dyclhs_result where qryid=" + nid);
             request.setAttribute("lslist", lslist);//
         }
-        long app=2;
+        long app=4;
         if(post.get("app")!=null&&!post.get("app").isEmpty()){
             app=Integer.valueOf(post.get("app"));
         }

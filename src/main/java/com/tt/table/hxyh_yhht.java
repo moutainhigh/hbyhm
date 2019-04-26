@@ -66,8 +66,10 @@ public class hxyh_yhht extends DbCtrl {
         if (!Tools.myIsNull(post.get("toZip")) && post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
             //征信录入资料
-            TtMap imgstep12_1ss = tozip(info.get("imgstep12_1ss"), "签约材料");
+            TtMap imgstep12_1ss = tozip(info.get("imgstep12_1ss"), "签约图片材料");
+            TtMap imgstep12_2ss = tozip(info.get("imgstep12_2ss"), "签约视频材料");
             imginfo.putAll(imgstep12_1ss);
+            imginfo.putAll(imgstep12_2ss);
 
             if (!imginfo.isEmpty()) {
                 try {
@@ -94,7 +96,7 @@ public class hxyh_yhht extends DbCtrl {
                 TtList lslist = Tools.reclist("select * from hxyh_yhht_result where qryid=" + nid);
                 request.setAttribute("lslist", lslist);//
             }
-            long app = 2;
+            long app = 4;
             if (post.get("app") != null && !post.get("app").isEmpty()) {
                 app = Integer.valueOf(post.get("app"));
             }

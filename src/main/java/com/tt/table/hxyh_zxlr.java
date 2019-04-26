@@ -50,7 +50,7 @@ public class hxyh_zxlr extends DbCtrl {
         int pageInt = Integer.valueOf(Tools.myIsNull(post.get("p")) == false ? post.get("p") : "1"); // 当前页
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
 
-        int appid=2;
+        int appid=4;
         if(post.get("appid")!=null&&!post.get("appid").isEmpty()){
             appid=Integer.parseInt(post.get("appid")) ;
         }
@@ -221,7 +221,7 @@ public class hxyh_zxlr extends DbCtrl {
             edit(post, id);
             icbc_id=id;
         } else {
-            post.put("app","2");
+            post.put("app","4");
             post.put("gems_id",minfo.get("id"));
             post.put("gems_fs_id",minfo.get("icbc_erp_fsid"));
             post.put("gems_code","0");
