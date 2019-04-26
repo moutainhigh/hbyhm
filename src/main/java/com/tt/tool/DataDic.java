@@ -71,10 +71,16 @@ public class DataDic {
     public static TtMap dic_tlzf_sd_status = new TtMap();
     public static TtMap dic_tlzf_xy_status = new TtMap();
     public static TtMap dic_app = new TtMap();
+    public static TtMap dic_zzcl_zvzk = new TtMap();
     public static synchronized void initDic() {
         if (dicYesOrNo.size() > 0) { // 已经初始化过了
             return;
         }
+        /*资质材料-子女状况*/
+        dic_zzcl_zvzk.put("0","无");
+        dic_zzcl_zvzk.put("1","一个");
+        dic_zzcl_zvzk.put("2","两个");
+        dic_zzcl_zvzk.put("3","两个以上");
         /*类型*/
         dic_app.put("0","工行贷");
         dic_app.put("1","通用进件");
