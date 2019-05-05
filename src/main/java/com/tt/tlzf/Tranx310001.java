@@ -21,15 +21,14 @@ public class Tranx310001 {
 
 	//200604000006429-1555381739566
 	public static void main(String args[]){
-		System.out.println("11111111111"+System.currentTimeMillis());
 		InfoReq inforeq = DemoUtil.makeReq("310001");
 		//http://tyjjm.kcway.net/kcdhttp?query=2&type=310001&ACCOUNT_NAME=%E5%B5%87%E7%AB%B9%E4%B8%AD&BANK_CODE=&ACCOUNT_TYPE=&ACCOUNT_NO=6222004000493013989&ID_TYPE=&ID=620528197501116230&TEL=15601257600&CVV2=&VAILDDATE=&MERREM=%E6%B5%8B%E8%AF%95&REMARK=%E6%88%91%E8%A6%81%E7%AD%BE%E7%BA%A6
 		FAGRA fagra = new FAGRA();
-		fagra.setACCOUNT_NAME("嵇竹中");//
-		fagra.setACCOUNT_NO("6222004000493013989");//
+		fagra.setACCOUNT_NAME("游振鑫");//
+		fagra.setACCOUNT_NO("6236681820008004310");//
 		fagra.setACCOUNT_PROP("0");
-		fagra.setTEL("15601257600");//
-		fagra.setID("620528197501116230");//
+		fagra.setTEL("13559130130");//
+		fagra.setID("350721198501300017");//
 		fagra.setID_TYPE("0");
 		fagra.setMERCHANT_ID(DemoConfig.merchantid);
 		fagra.setACCOUNT_TYPE("00");
@@ -47,7 +46,8 @@ public class Tranx310001 {
 			//step2 加签
 			String signedXml = DemoUtil.buildSignedXml(xml);
 			//step3 发往通联
-			String url = "https://test.allinpaygd.com/aipg/ProcessServlet";
+			String url = DemoConfig.TXZF_URL;
+			System.out.println("请求地址："+url);
 			System.out.println("============================请求报文============================");
 			System.out.println(signedXml);
 			String respText = HttpUtil.post(signedXml, url);

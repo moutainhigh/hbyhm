@@ -18,19 +18,34 @@ import com.tt.tool.Config;
  **/
 public class DemoConfig {
 
-	public static String BUSINESS_CODE="19900";
-	public static String merchantid = "200604000006429";//商户号
+    public static  String TXZF_URL = Config.TESTMODE
+            ? "https://test.allinpaygd.com/aipg/ProcessServlet" //测试环境
+            : "https://tlt.allinpay.com/aipg/ProcessServlet";//正式环境
+    public static String BUSINESS_CODE = Config.TESTMODE
+            ? "19900"
+            : "10702";
+    public static String merchantid = Config.TESTMODE
+            ? "200604000006429"
+            : "200393000010128";//商户号
 
-	public static String username = merchantid + "04"; //用户名
-	public static String userpass = "111111"; //用户密码
+    public static String username = Config.TESTMODE
+            ? merchantid + "04"
+            : merchantid + "04"; //用户名
+    public static String userpass = Config.TESTMODE
+            ? "111111"
+            : "111111"; //用户密码
 
-	public static String pathpfx = Config.TESTMODE
-			? "config/" + merchantid + "02.p12"
-			: "/home/tomcat/cert/" + merchantid + "02.p12"; //商户私钥路径
-	public static String pfxpass = "111111"; //私钥密码
+    public static String pathpfx = Config.TESTMODE
+            ? "config/test/" + merchantid + "02.p12"
+            : "/home/tomcat/cert/shqzl/" + merchantid + "04.p12"; //商户私钥路径
+    public static String pfxpass = Config.TESTMODE
+            ? "111111"
+            : "111111"; //私钥密码
 
-	public static String pathcer = Config.TESTMODE
-			? "config/allinpay-pds.cer"
-			: "/home/tomcat/cert/allinpay-pds.cer"; //通联公钥
+    public static String pathcer = Config.TESTMODE
+            ? "config/test/allinpay-pds.cer"
+            : "/home/tomcat/cert/shqzl/allinpay-pds.cer"; //通联公钥
+    // ? "/home/tomcat/cert/allinpay-pds.cer"
+    //"/home/tomcat/cert/shqzl/allinpay-pds.cer"; //通联公钥
 
 }

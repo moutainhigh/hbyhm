@@ -20,11 +20,15 @@ import com.tt.tlzf.xstruct.trans.LedgerDtl;
 import com.tt.tlzf.xstruct.trans.Ledgers;
 import com.tt.tool.DbCtrl;
 import com.tt.tool.Tools;
+import com.tt.tool.addDate;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * 代收
@@ -67,7 +71,7 @@ public class dsgl extends DbCtrl {
         int pageInt = Integer.valueOf(Tools.myIsNull(post.get("p")) == false ? post.get("p") : "1"); // 当前页
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
 
-        String whereString = "true";
+        String whereString = "true ";
         ;
         String tmpWhere = "";
         String fieldsString = "t.*,i.c_name as c_name";
@@ -75,22 +79,29 @@ public class dsgl extends DbCtrl {
         TtList list = null;
 
         /* 开始处理搜索过来的字段 */
+        if(Tools.myIsNull(post.get("api_type")) == false){
+            whereString += "AND t.api_type="+post.get("api_type");
+        }
         kw = post.get("kw");
         dtbe = post.get("dtbe");
+
+        System.out.println("dtbe:"+dtbe);
         if (Tools.myIsNull(kw) == false) {
-            whereString += "AND c_name like '%" + kw + "%'";
+            whereString += " AND t.account_name like '%" + kw + "%'";
         }
         if (Tools.myIsNull(dtbe) == false) {
-            dtbe = dtbe.replace("%2f", "-").replace("+", "");
-            String[] dtArr = dtbe.split("-");
+           // dtbe = dtbe.replace("%2f", "-").replace("+", "");
+            String[] dtArr = dtbe.split(" - ");
             dtArr[0] = dtArr[0].trim();
             dtArr[1] = dtArr[1].trim();
             System.out.println("DTBE开始日期:" + dtArr[0] + "结束日期:" + dtArr[1]);
             // todo处理选择时间段
+            whereString += " AND t.ds_date >= '"+dtArr[0]+"' and t.ds_date <='"+dtArr[1]+"'";
+        }
+        if(Tools.myIsNull(post.get("dt")) == false){
+            whereString += " AND t.ds_date = '"+post.get("dt")+"'";
         }
         /* 搜索过来的字段处理完成 */
-
-
         whereString += tmpWhere; // 过滤
         orders = orderString;// 排序
         p = pageInt; // 显示页
@@ -100,10 +111,26 @@ public class dsgl extends DbCtrl {
         list = lists(whereString, fieldsString);
         if (!Tools.myIsNull(kw)) { // 搜索关键字高亮
             for (TtMap info : list) {
-                info.put("c_name",
-                        info.get("c_name").replace(kw, "<font style='color:red;background:#FFCC33;'>" + kw + "</font>"));
+                info.put("account_name",
+                        info.get("account_name").replace(kw, "<font style='color:red;background:#FFCC33;'>" + kw + "</font>"));
             }
         }
+        //计算总金额 并转换单位
+        int total=0;
+        double totals = 0;
+        if(list.size()>0){
+        for(TtMap ttMap:list){
+            if(!Tools.myIsNull(ttMap.get("fw_price"))){
+                total=total+Integer.parseInt(ttMap.get("fw_price"));
+            }
+        }
+            System.out.println("total:"+total);
+            BigDecimal bigDecimal1 = new BigDecimal(total);
+            BigDecimal bigDecimal2 = new BigDecimal(100);
+            BigDecimal bigDecimalDivide = bigDecimal1.divide(bigDecimal2, 4, BigDecimal.ROUND_HALF_UP);
+            totals = bigDecimalDivide.doubleValue();
+        }
+        request.setAttribute("totals", totals);
         request.setAttribute("list", list);// 列表list数据
         request.setAttribute("recs", recs); // 总记录数
         String htmlpages = getPage("", 0, false); // 分页html代码,
@@ -131,7 +158,7 @@ public class dsgl extends DbCtrl {
             request.setAttribute("cn", cn);
             request.setAttribute("type", type);
         }
-
+        TtList dslist=new TtList();
         //tl入口  1签约  2 分期代收  3代收
         switch (post.get("tl")) {
             case "1":
@@ -143,7 +170,11 @@ public class dsgl extends DbCtrl {
                 }
                 break;
             case "2":
-                TtList dslist = Tools.reclist("select * from tlzf_dk_details where icbc_id=" + post.get("id"));
+                dslist = Tools.reclist("select * from tlzf_dk_details where api_type=0 and icbc_id=" + post.get("id"));
+                request.setAttribute("dslist", dslist);
+                break;
+            case "3":
+                dslist = Tools.reclist("select * from tlzf_dk_details where api_type=1 and icbc_id=" + post.get("id"));
                 request.setAttribute("dslist", dslist);
                 break;
         }
@@ -186,7 +217,97 @@ public class dsgl extends DbCtrl {
                     break;
                 case "2":
                     TtMap qy = Tools.recinfo("select * from tlzf_qy where icbc_id=" + post.get("icbc_id"));
-                    if (!qy.isEmpty()) {
+                    if (qy.isEmpty()) {
+                        errorCode = 2;
+                        errorMsg = "暂无签约,请先签约";
+                    } else {
+                        TtList dklist = Tools.reclist("select * from tlzf_dk_details where api_type=0 and icbc_id=" + post.get("icbc_id"));
+                        if (dklist.size() > 0) {
+                            errorCode = 3;
+                            errorMsg = "已创建代收列表";
+                        }else{
+                            int qs=Integer.parseInt(post.get("periods"));
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            String first_date=post.get("ds_date");
+                            String[] dates = first_date.split("-");//获取年
+                            int year=Integer.parseInt(dates[0]);
+                            int month=Integer.parseInt(dates[1]);
+                            int day=Integer.parseInt(dates[2]);
+                            int first_days=Integer.parseInt(addDate.getMonthMaxDay(first_date));
+                            for(int i=1;i<=qs;i++) {
+                                TtMap ttMap = new TtMap();
+                                if(i==1){
+                                    ttMap.put("ds_date",first_date);
+                                }else {
+                                    String days = "";
+                                    int pm = month % 12;
+
+                                    if (pm > 0) {
+                                        month = month + 1;
+                                    } else {
+                                        month = 1;
+                                        year = year + 1;
+                                    }
+                                    if (month < 10) {
+                                        days = year + "-0" + month;
+                                    } else {
+                                        days = year + "-" + month;
+                                    }
+                                    int ym_days = Integer.parseInt(addDate.getMonthMaxDay(days));
+                                    try {
+                                        boolean is = addDate.isMonthEnd(sdf.parse(first_date));
+                                        if (is) {
+                                            System.out.println("日期1：" + days + "-" + ym_days);
+                                            ttMap.put("ds_date", days + "-" + day);
+                                        } else {
+                                            if (day >= ym_days) {
+                                                System.out.println("日期2：" + days + "-" + ym_days);
+                                                ttMap.put("ds_date", days + "-" + day);
+                                            } else {
+                                                System.out.println("日期3：" + days + "-" + day);
+                                                ttMap.put("ds_date", days + "-" + day);
+                                            }
+                                        }
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                ttMap.put("qd_type", "0");
+                                ttMap.put("req_sn", "");
+                                ttMap.put("business_code", "");
+                                ttMap.put("submit_time", Tools.getDatetoaa());
+                                ttMap.put("agrmno", qy.get("agrmno"));
+                                ttMap.put("account_no", qy.get("account_no"));
+                                ttMap.put("bank_code", qy.get("bank_code"));
+                                ttMap.put("account_name", qy.get("account_name"));
+                                ttMap.put("amount", post.get("amount"));
+                                ttMap.put("cardid_type", qy.get("cardid_type"));
+                                ttMap.put("cardid", qy.get("cardid"));
+                                ttMap.put("tel", qy.get("tel"));
+                                ttMap.put("cvv2", qy.get("cvv2"));
+                                ttMap.put("vailddate", qy.get("vailddate"));
+                                ttMap.put("cust_userid", post.get("remark"));
+                                ttMap.put("summary", "");
+                                ttMap.put("currency","CNY");
+                                ttMap.put("remark", post.get("remark"));
+                                ttMap.put("icbc_id", post.get("icbc_id"));
+                                ttMap.put("bc_status", "1");
+                                ttMap.put("gems_id", minfo.get("gemsid"));
+                                ttMap.put("gems_fs_id", minfo.get("icbc_erp_fsid"));
+                                ttMap.put("periods",String.valueOf(i));
+                                ttMap.put("fw_price", post.get("fw_price"));
+                                ttMap.put("sd_status", "1");
+                                ttMap.put("api_type", "0");
+                                long dk_id = Tools.recAdd(ttMap, "tlzf_dk_details");
+                                TtMap result = new TtMap();
+                                result.put("qryid", String.valueOf(dk_id));
+                                result.put("status", ttMap.get("bc_status"));
+                                result.put("remark",post.get("remark"));
+                                Tools.recAdd(result, "tlzf_dk_details_result");
+                            }
+                        }
+                    }
+                    /*if (!qy.isEmpty()) {
                         TtMap ttMap = new TtMap();
                         InfoReq infoReq = DemoUtil.makeReq("310011");
                         FASTTRX ft = new FASTTRX();
@@ -207,11 +328,11 @@ public class dsgl extends DbCtrl {
                         //ft.setCUST_USERID("哈哈哈哈");
                         ft.setREMARK(post.get("remark"));
                         //ft.setSUMMARY("asjdfasdfkasdf");
-/*                    LedgerDtl dtl1 = new LedgerDtl();
+*//*                    LedgerDtl dtl1 = new LedgerDtl();
                     dtl1.setAMOUNT(post.get("acount"));
                     dtl1.setMERCHANT_ID(DemoConfig.merchantid);
                     dtl1.setSN("0");
-                    dtl1.setTYPE("0");*/
+                    dtl1.setTYPE("0");*//*
                         //Ledgers ledgers = new Ledgers();
                         //ledgers.addTrx(dtl1);
                         AipgReq req = new AipgReq();
@@ -231,6 +352,7 @@ public class dsgl extends DbCtrl {
                                 System.out.println("ERR_MSG:" + INFO.get("ERR_MSG"));
                                 ttMap.put("result_code", INFO.get("RET_CODE").toString());
                                 ttMap.put("result_msg", INFO.get("ERR_MSG").toString());
+                                errorCode=Integer.parseInt(INFO.get("RET_CODE").toString());
                                 errorMsg = INFO.get("ERR_MSG").toString();
                             }
                             ttMap.put("bc_status", "2");
@@ -243,6 +365,7 @@ public class dsgl extends DbCtrl {
                                 System.out.println("ERR_MSG:" + INFO.get("ERR_MSG"));
                                 ttMap.put("result_code", INFO.get("RET_CODE").toString());
                                 ttMap.put("result_msg", INFO.get("ERR_MSG").toString());
+                                errorCode=Integer.parseInt(INFO.get("RET_CODE").toString());
                                 errorMsg = INFO.get("ERR_MSG").toString();
                                 if ("0000".equals(INFO.get("RET_CODE"))) {
                                     ttMap.put("bc_status", "3");
@@ -291,12 +414,100 @@ public class dsgl extends DbCtrl {
                         ttMap.put("icbc_id", post.get("icbc_id"));
                         ttMap.put("gems_id", minfo.get("gemsid"));
                         ttMap.put("gems_fs_id", minfo.get("icbc_erp_fsid"));
+                        System.out.println("存储数据:"+ttMap);
                         long dk_id = Tools.recAdd(ttMap, "tlzf_dk_details");
                         TtMap result = new TtMap();
                         result.put("qryid", String.valueOf(dk_id));
                         result.put("status", ttMap.get("bc_status"));
                         result.put("remark", ft.getREMARK());
                         Tools.recAdd(result, "tlzf_dk_details_result");
+                    }*/
+                    break;
+                case "3":
+                    TtList dklist = Tools.reclist("select * from tlzf_dk_details where api_type=1 and icbc_id=" + post.get("icbc_id"));
+                    if (dklist.size() > 0) {
+                        errorCode = 3;
+                        errorMsg = "已创建代付列表";
+                    }else{
+                        int qs=Integer.parseInt(post.get("periods"));
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        String first_date=post.get("ds_date");
+                        String[] dates = first_date.split("-");//获取年
+                        int year=Integer.parseInt(dates[0]);
+                        int month=Integer.parseInt(dates[1]);
+                        int day=Integer.parseInt(dates[2]);
+                        int first_days=Integer.parseInt(addDate.getMonthMaxDay(first_date));
+                        for(int i=1;i<=qs;i++) {
+                            TtMap ttMap = new TtMap();
+                            if(i==1){
+                                ttMap.put("ds_date",first_date);
+                            }else {
+                                String days = "";
+                                int pm = month % 12;
+
+                                if (pm > 0) {
+                                    month = month + 1;
+                                } else {
+                                    month = 1;
+                                    year = year + 1;
+                                }
+                                if (month < 10) {
+                                    days = year + "-0" + month;
+                                } else {
+                                    days = year + "-" + month;
+                                }
+                                int ym_days = Integer.parseInt(addDate.getMonthMaxDay(days));
+                                try {
+                                    boolean is = addDate.isMonthEnd(sdf.parse(first_date));
+                                    if (is) {
+                                        System.out.println("日期1：" + days + "-" + ym_days);
+                                        ttMap.put("ds_date", days + "-" + day);
+                                    } else {
+                                        if (day >= ym_days) {
+                                            System.out.println("日期2：" + days + "-" + ym_days);
+                                            ttMap.put("ds_date", days + "-" + day);
+                                        } else {
+                                            System.out.println("日期3：" + days + "-" + day);
+                                            ttMap.put("ds_date", days + "-" + day);
+                                        }
+                                    }
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            ttMap.put("qd_type", "0");
+                            ttMap.put("req_sn", "");
+                            ttMap.put("business_code", "");
+                            ttMap.put("submit_time", Tools.getDatetoaa());
+                            ttMap.put("agrmno","");
+                            ttMap.put("account_no", post.get("account_no"));
+                            ttMap.put("bank_code", post.get("bank_code"));
+                            ttMap.put("account_name", post.get("account_name"));
+                            ttMap.put("amount", post.get("amount"));
+                            ttMap.put("cardid_type", post.get("cardid_type"));
+                            ttMap.put("cardid", post.get("cardid"));
+                            ttMap.put("tel", post.get("tel"));
+                            ttMap.put("cvv2", post.get("cvv2"));
+                            ttMap.put("vailddate", post.get("vailddate"));
+                            ttMap.put("cust_userid", post.get("remark"));
+                            ttMap.put("summary", "");
+                            ttMap.put("currency",post.get("currency"));
+                            ttMap.put("remark", post.get("remark"));
+                            ttMap.put("icbc_id", post.get("icbc_id"));
+                            ttMap.put("bc_status", "1");
+                            ttMap.put("gems_id", minfo.get("gemsid"));
+                            ttMap.put("gems_fs_id", minfo.get("icbc_erp_fsid"));
+                            ttMap.put("periods",String.valueOf(i));
+                            ttMap.put("fw_price", post.get("fw_price"));
+                            ttMap.put("sd_status", "1");
+                            ttMap.put("api_type", "1");
+                            long dk_id = Tools.recAdd(ttMap, "tlzf_dk_details");
+                            TtMap result = new TtMap();
+                            result.put("qryid", String.valueOf(dk_id));
+                            result.put("status", ttMap.get("bc_status"));
+                            result.put("remark",post.get("remark"));
+                            Tools.recAdd(result, "tlzf_dk_details_result");
+                        }
                     }
                     break;
             }
@@ -320,18 +531,26 @@ public class dsgl extends DbCtrl {
             return false;
         }
         if (!Tools.myIsNull(array.get("fromcommand"))) { // 从ManagerCmd来的。不用过滤参数
+
         } else {
             System.out.println("表单验证star");
             String myErroMsg = "";
-
-            if (Tools.myIsNull(array.get("periods"))) {
-                myErroMsg += "期数不能为空！\n";
-            }
-            if (Tools.myIsNull(array.get("ds_date"))) {
-                myErroMsg += "代收日期不能为空！\n";
-            }
-            if (Tools.myIsNull(array.get("amount"))) {
-                myErroMsg += "代收总金额不能为空！\n";
+                if (Tools.myIsNull(array.get("periods"))) {
+                    myErroMsg += "期数不能为空！\n";
+                }
+                if (Tools.myIsNull(array.get("ds_date"))) {
+                    myErroMsg += "代收日期不能为空！\n";
+                }
+                if (Tools.myIsNull(array.get("amount"))) {
+                    myErroMsg += "代收总金额不能为空！\n";
+                }
+            if(array.get("tl").equals("3")){
+                if (Tools.myIsNull(array.get("account_name"))) {
+                    myErroMsg += "账户名不能为空！\n";
+                }
+                if (Tools.myIsNull(array.get("account_no"))) {
+                    myErroMsg += "银行卡号不能为空！\n";
+                }
             }
             super.errorMsg = super.chkMsg = myErroMsg;
             if (!Tools.myIsNull(myErroMsg)) {

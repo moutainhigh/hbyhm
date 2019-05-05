@@ -223,6 +223,17 @@ public class Tools {
 	}
 
 	/**
+	 * 将长时间格式字符串转换为时间 yyyyMMddHHmmss
+	 *
+	 * @param strDate
+	 * @return
+	 */
+	public static String getDatetoaa() {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		String dateString = formatter.format(new Date());
+		return dateString;
+	}
+	/**
 	 * 将长时间格式字符串转换为时间 yyyy-MM-dd HH:mm:ss
 	 *
 	 * @param strDate
@@ -234,7 +245,6 @@ public class Tools {
 		Date strtodate = formatter.parse(strDate, pos);
 		return strtodate;
 	}
-
 	/**
 	 * @description 计算时间戳
 	 * @param 无
@@ -1573,4 +1583,6 @@ public class Tools {
 		String timestamp = String.valueOf(date.getTime()/1000);
 		return Integer.valueOf(timestamp);
 	}
+
+
 }

@@ -72,10 +72,15 @@ public class DataDic {
     public static TtMap dic_tlzf_xy_status = new TtMap();
     public static TtMap dic_app = new TtMap();
     public static TtMap dic_zzcl_zvzk = new TtMap();
+    public static TtMap dic_tlzf_currency = new TtMap();
     public static synchronized void initDic() {
         if (dicYesOrNo.size() > 0) { // 已经初始化过了
             return;
         }
+        /*通联支付货币类型*/
+        dic_tlzf_currency.put("CNY","人民币");
+        dic_tlzf_currency.put("HKD","港元");
+        dic_tlzf_currency.put("USD","美元");
         /*资质材料-子女状况*/
         dic_zzcl_zvzk.put("0","请选择");
         dic_zzcl_zvzk.put("1","无");
@@ -97,9 +102,10 @@ public class DataDic {
         dic_tlzf_sd_status.put("2","代收成功");
         dic_tlzf_sd_status.put("3","代收失败");
         /*通联支付交易状态*/
-        dic_tlzf_ds_bc_status.put("1", "提交待查询");
+        dic_tlzf_ds_bc_status.put("1", "提交待交易");
         dic_tlzf_ds_bc_status.put("2", "交易失败");
         dic_tlzf_ds_bc_status.put("3", "交易成功");
+        dic_tlzf_ds_bc_status.put("4", "交易待查询");
         /*证件类型*/
         dic_tlzf_cardid_type.put("0", "身份证");
         dic_tlzf_cardid_type.put("1", "户口簿");

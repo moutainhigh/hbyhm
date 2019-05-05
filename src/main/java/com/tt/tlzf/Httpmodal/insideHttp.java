@@ -1,6 +1,7 @@
 package com.tt.tlzf.Httpmodal;
 
 import com.tt.tlzf.AIPGException;
+import com.tt.tlzf.DemoConfig;
 import com.tt.tlzf.util.DemoUtil;
 import com.tt.tlzf.util.HttpUtil;
 import com.tt.tlzf.util.XmlExercise;
@@ -13,13 +14,10 @@ import com.tt.tool.Config;
 
 public class insideHttp {
 
-    private final String TXZF_URL = Config.TESTMODE
-            ? "https://test.allinpaygd.com/aipg/ProcessServlet" //测试环境
-            : "https://test.allinpaygd.com/aipg/ProcessServlet";//正式环境
     /*
       内部接口类
      */
-    public String kjyTranx310011(AipgReq req){
+    public static String kjyTranx310011(AipgReq req){
         String json="";
         try{
             //step1 对象转xml
@@ -27,7 +25,7 @@ public class insideHttp {
             //step2 加签
             String signedXml = DemoUtil.buildSignedXml(xml);
             //step3 发往通联
-            String url = TXZF_URL;
+            String url = DemoConfig.TXZF_URL;
             System.out.println("============================请求报文============================");
             System.out.println(signedXml);
             String respText = HttpUtil.post(signedXml, url);

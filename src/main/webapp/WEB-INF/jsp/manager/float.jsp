@@ -36,6 +36,7 @@
 <%if (!Tools.myIsNull(info)){%>
   editFun(${info});
 <% } %>
+var isCommitted = false;//表单是否已经提交标识，默认为false
 var float_submit=function (res){
   eval("var res=" + res);
 			if (res.msg){
@@ -51,9 +52,14 @@ $('#float_form').submit(function (){
 			return false;
 		}
 	}
-	
-	$('#float_form').ajaxSubmit(float_submit); 
+	if (isCommitted == false) {
+		isCommitted = true;//提交表单后，将表单是否已经提交标识设置为true
+		$('#float_form').ajaxSubmit(float_submit);
+	} else {
+		return false;//返回false那么表单将不提交
+	}
 	return false;
+
 });
 my_loaded($('#float_form'));
 html_load_succ($('#float_form'));

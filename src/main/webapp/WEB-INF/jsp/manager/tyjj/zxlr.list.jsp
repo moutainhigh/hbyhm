@@ -103,6 +103,11 @@
                                    class="btn btn-success">
                                     <i class="fa fa-sign-in"></i>
                                 </a>
+                                <a id="modal_df<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
+                                   href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=3&id=<%=m.get("id")%>&nextUrl=zxlr_tyjj"
+                                   class="btn btn-warning">
+                                    <i class="fa fa-sign-in"></i>
+                                </a>
                                 <%}else {%>
                                 <a id="modal_qy<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
                                    href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=1&id=<%=m.get("id")%>&nextUrl=zxlr_tyjj"
@@ -112,6 +117,11 @@
                                 <a id="modal_ds<%=m.get("id")%>"
                                    href="javascript:alert('暂未签约,清先签约')"
                                    class="btn btn-default">
+                                    <i class="fa fa-sign-in"></i>
+                                </a>
+                                <a id="modal_df<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
+                                   href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=3&id=<%=m.get("id")%>&nextUrl=zxlr_tyjj"
+                                   class="btn btn-warning">
                                     <i class="fa fa-sign-in"></i>
                                 </a>
                                 <%}%>
@@ -124,6 +134,11 @@
                                     <i class="fa fa-credit-card"></i>
                                 </a>
                                 <a id="modal_ds<%=m.get("id")%>"
+                                   href="javascript:alert('暂未签约,清先签约')"
+                                   class="btn btn-default">
+                                    <i class="fa fa-sign-in"></i>
+                                </a>
+                                <a id="modal_df<%=m.get("id")%>"
                                    href="javascript:alert('暂未签约,清先签约')"
                                    class="btn btn-default">
                                     <i class="fa fa-sign-in"></i>

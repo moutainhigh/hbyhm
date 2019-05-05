@@ -7,10 +7,14 @@ import com.tt.tlzf.util.HttpUtil;
 import com.tt.tlzf.util.XmlExercise;
 import com.tt.tlzf.xml.XmlParser;
 import com.tt.tlzf.xstruct.common.AipgReq;
+import com.tt.tlzf.xstruct.common.AipgRsp;
 import com.tt.tlzf.xstruct.common.InfoReq;
+import com.tt.tlzf.xstruct.common.InfoRsp;
 import com.tt.tlzf.xstruct.quickpay.*;
 import com.tt.tlzf.xstruct.trans.LedgerDtl;
 import com.tt.tlzf.xstruct.trans.Ledgers;
+import com.tt.tlzf.xstruct.trans.TransExt;
+import com.tt.tlzf.xstruct.trans.TransRet;
 import com.tt.tlzf.xstruct.trans.qry.TransQueryReq;
 import com.tt.data.TtMap;
 import com.tt.tool.Config;
@@ -21,9 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class tlzfhttp_v1 {
 
-    private final String TXZF_URL = Config.TESTMODE
-            ? "https://test.allinpaygd.com/aipg/ProcessServlet" //测试环境
-            : "https://test.allinpaygd.com/aipg/ProcessServlet";//正式环境
 
     /**
      * 协议支付签约短信触发(310001)
@@ -58,7 +59,7 @@ public class tlzfhttp_v1 {
             //step2 加签
             String signedXml = DemoUtil.buildSignedXml(xml);
             //step3 发往通联
-            String url = TXZF_URL;
+            String url = DemoConfig.TXZF_URL;
             System.out.println("============================请求报文============================");
             System.out.println(signedXml);
             String respText = HttpUtil.post(signedXml, url);
@@ -112,7 +113,7 @@ public class tlzfhttp_v1 {
             //step2 加签
             String signedXml = DemoUtil.buildSignedXml(xml);
             //step3 发往通联
-            String url = TXZF_URL;
+            String url = DemoConfig.TXZF_URL;
             System.out.println("============================请求报文============================");
             System.out.println(signedXml);
             String respText = HttpUtil.post(signedXml, url);
@@ -151,7 +152,7 @@ public class tlzfhttp_v1 {
 
         FASTTRX ft = new FASTTRX();
         ft.setMERCHANT_ID(DemoConfig.merchantid);
-        ft.setBUSINESS_CODE("19900");//必须使用业务人员提供的业务代码，否则返回“未开通业务类型”
+        ft.setBUSINESS_CODE(DemoConfig.BUSINESS_CODE);//必须使用业务人员提供的业务代码，否则返回“未开通业务类型”
         ft.setSUBMIT_TIME(DemoUtil.getNow());
         ft.setAGRMNO(post.get("AGRMNO"));
         ft.setACCOUNT_NAME(post.get("ACCOUNT_NAME"));
@@ -188,7 +189,7 @@ public class tlzfhttp_v1 {
             //step2 加签
             String signedXml = DemoUtil.buildSignedXml(xml);
             //step3 发往通联
-            String url = TXZF_URL;
+            String url = DemoConfig.TXZF_URL;
             System.out.println("============================请求报文============================");
             System.out.println(signedXml);
             String respText = HttpUtil.post(signedXml, url);
@@ -244,7 +245,7 @@ public class tlzfhttp_v1 {
             //step2 加签
             String signedXml = DemoUtil.buildSignedXml(xml);
             //step3 发往通联
-            String url = TXZF_URL;
+            String url = DemoConfig.TXZF_URL;
             System.out.println("============================请求报文============================");
             System.out.println(signedXml);
             String respText = HttpUtil.post(signedXml, url);
@@ -286,7 +287,7 @@ public class tlzfhttp_v1 {
             //step2 加签
             String signedXml = DemoUtil.buildSignedXml(xml);
             //step3 发往通联
-            String url = TXZF_URL;
+            String url = DemoConfig.TXZF_URL;
             System.out.println("============================请求报文============================");
             System.out.println(signedXml);
             String respText = HttpUtil.post(signedXml, url);
@@ -329,7 +330,7 @@ public class tlzfhttp_v1 {
             //step2 加签
             String signedXml = DemoUtil.buildSignedXml(xml);
             //step3 发往通联
-            String url = TXZF_URL;
+            String url = DemoConfig.TXZF_URL;
             System.out.println("============================请求报文============================");
             System.out.println(signedXml);
             String respText = HttpUtil.post(signedXml, url);
@@ -349,5 +350,64 @@ public class tlzfhttp_v1 {
         }
         return "";
     }
+    /**
+     * 3.4.2单笔实时代付(100014)
+     * @param request
+     * @param response
+     * @return
+     */
+    public String kcd100014(HttpServletRequest request, HttpServletResponse response){
+        TtMap post = Tools.getPostMap(request);
+        InfoReq infoReq = DemoUtil.makeReq("100014");
+        TransExt trans = new TransExt();
+        trans.setBUSINESS_CODE("09900");//必须使用业务人员提供的业务代码，否则返回“未开通业务类型”
+        trans.setMERCHANT_ID(DemoConfig.merchantid);
+        trans.setSUBMIT_TIME(DemoUtil.getNow());
+        trans.setACCOUNT_NAME(post.get("ACCOUNT_NAME"));
+        trans.setACCOUNT_NO(post.get("ACCOUNT_NO"));
+        trans.setACCOUNT_PROP(post.get("ACCOUNT_PROP"));
+        trans.setAMOUNT(post.get("AMOUNT"));
+        trans.setBANK_CODE(post.get("BANK_CODE"));
+        trans.setCURRENCY(post.get("CURRENCY"));
+        trans.setTEL(post.get("TEL"));
+        trans.setCUST_USERID(post.get("CUST_USERID"));
 
+        AipgReq req = new AipgReq();
+        req.setINFO(infoReq);
+        req.addTrx(trans);
+        try{
+            //step1 对象转xml
+            String xml = XmlParser.toXml(req);
+            //step2 加签
+            String signedXml = DemoUtil.buildSignedXml(xml);
+            //step3 发往通联
+            String url = DemoConfig.TXZF_URL;
+            System.out.println("============================请求报文============================");
+            System.out.println(signedXml);
+            String respText = HttpUtil.post(signedXml, url);
+            System.out.println("============================响应报文============================");
+            System.out.println(respText);
+            //step4 验签
+            if(!DemoUtil.verifyXml(respText)){
+                System.out.println("====================================================>验签失败");
+                return "";
+            }
+            System.out.println("====================================================>验签成功");
+            //step5 xml转对象
+            AipgRsp rsp = XmlParser.parseRsp(respText);
+            InfoRsp infoRsp = rsp.getINFO();
+            System.out.println(infoRsp.getRET_CODE());
+            System.out.println(infoRsp.getERR_MSG());
+            if("0000".equals(infoRsp.getRET_CODE())){
+                TransRet ret = (TransRet) rsp.trxObj();
+                System.out.println(ret.getRET_CODE());
+                System.out.println(ret.getERR_MSG());
+                System.out.println(ret.getSETTLE_DAY());
+
+            }
+        }catch(AIPGException e){
+            e.printStackTrace();
+        }
+        return "";
+    }
 }

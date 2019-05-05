@@ -28,7 +28,7 @@ public class ManagerTools {
         if (Tools.myIsNull(sdo)) {
             return false;
         }
-        String[] allowDoList = {"form", "list", "login", "logout", "edit", "float", "sysconfig"}; // 允许的sdo，过滤不安全的url和参数
+        String[] allowDoList = {"form", "list", "login", "logout", "edit", "float", "sysconfig","tlzf_ds"}; // 允许的sdo，过滤不安全的url和参数
         return Tools.arrayIndexOf(allowDoList, sdo);
     }
 
@@ -141,6 +141,7 @@ public class ManagerTools {
                 return "xmgj_dyclhs";
             // 不需要使用数据库的CN
             case "home":
+            case "tlzf_ds":
             case "button":
             case "admin2":
             case "demo_upfile":

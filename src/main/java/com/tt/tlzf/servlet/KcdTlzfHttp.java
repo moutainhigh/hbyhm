@@ -53,6 +53,8 @@ public class KcdTlzfHttp {
                 return new tlzfhttp_v1().kcd340009(request, response);
             } else if (post.get("type").equals("200004")) {
                 return new tlzfhttp_v1().kcd200004(request, response);
+            }else if (post.get("type").equals("100014")) {
+                return new tlzfhttp_v1().kcd100014(request, response);
             } else {
                 return "你好";
             }

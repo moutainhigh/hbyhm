@@ -123,7 +123,141 @@
                     <th class="text-center" style="width: 80px">期数</th>
                     <th class="text-center" style="width: 80px">服务费(分)</th>
                     <th class="text-center" style="width: 100px">代收日期</th>
-                    <th class="text-center" style="width: 150px">总代收金额(分)</th>
+                    <th class="text-center" style="width: 150px">代收总金额(分)</th>
+                    <th class="text-center" style="width: 150px">执行结果</th>
+                    <th class="text-center" style="width: 150px">手动审核</th>
+                </tr>
+                <%
+                    TtList dslist = (TtList) request.getAttribute("dslist");
+                    if (dslist.size() > 0) {
+                        for (TtMap ds : dslist) {
+                %>
+                <tr>
+                    <td class="text-center" style="width: 80px"><%=ds.get("periods")%>
+                    </td>
+                    <td class="text-center" style="width: 80px"><%=ds.get("fw_price")%>
+                    </td>
+                    <td class="text-center" style="width: 100px"><%=ds.get("ds_date")%>
+                    </td>
+                    <td class="text-center" style="width: 100px"><%=ds.get("amount")%>
+                    </td>
+                    <td class="text-center" style="width: 150px">
+                        <select class="form-control" disabled>
+                            <%=Tools.dicopt(DataDic.dic_tlzf_ds_bc_status, ds.get("bc_status"))%>
+                        </select>
+                    </td>
+                    <td class="text-center" style="width: 150px">
+                        <select id="sd_status" name="sd_status"
+                                onchange="ajax_edit('<%=ds.get("id")%>','sd_status',this.value,'tlzf_dk_details');" n
+                                class="form-control">
+                            <%=Tools.dicopt(DataDic.dic_tlzf_sd_status, ds.get("sd_status"))%>
+                        </select>
+                    </td>
+                </tr>
+                <%
+                        }
+                    }
+                %>
+                </tbody>
+            </table>
+
+        </c:if>
+        <div class="modal-header">
+            <h4 class="modal-title" id="">新建<font color="green">代收</font></h4>
+        </div>
+        <input type="hidden" name="tl" value="2">
+        <input type="hidden" name="cn" value="${cn}">
+        <input type="hidden" name="type" value="${type}">
+        <input type="hidden" name="id" value="0">
+        <input type="hidden" name="icbc_id" value="${icbc.id}">
+        <div class="form-group" style="padding-top: 25px">
+            <label for="title2" class="col-sm-3 control-label">签约信息:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="bt" value="${qy.account_name}-${qy.account_no}" disabled="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label"><font color="green">服务费</font>金额(分):</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" name="fw_price" id="fw_price" placeholder="输入服务费,单位(分)"
+                       onblur="getTotlePrice()" value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label"><font color="green">期数:</font></label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" name="periods" id="periods" placeholder=""
+                       onblur="getTotlePrice()"
+                       value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label"><font color="green">代收日期:</font></label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="ds_date" id="ds_date" placeholder=""
+                       value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label"><font color="green">代收</font>总金额(分):</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" name="amount" id="amount" placeholder="输入代收金额,单位(分)"
+                       value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">备注(可不填)</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="remark" placeholder="比如:正常代收" value="">
+            </div>
+                <%--<div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">短信通知用户</span>
+                        <select name="sendsms" class="form-control"
+                                id="sendsms">
+                            <option value="1">是</option>
+                            <option value="0">否</option>
+                        </select>
+                    </div>
+                </div>--%>
+        </div>
+    </div>
+    <script>
+        function getTotlePrice() {
+            var fw_price = $("#fw_price").val();
+            var periods = $("#periods").val();
+            var amount = fw_price * periods;
+            $("#amount").val(amount);
+        }
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#ds_date', //指定元素
+            type: 'date'
+        });
+    </script>
+</c:if>
+<c:if test="${param.tl eq '3'}">
+    <div class="box-body">
+        <div class="modal-header">
+            <h4 class="modal-title" id="">已有<font color="green">代付</font>记录</h4>
+        </div>
+        <c:if test="${empty dslist}">
+            <div class="modal-body form-horizontal">
+                <ul class="nav nav-pills nav-stacked">
+                    <li style="padding-bottom: 10px"><i class="fa fa-circle-o" style="color: green"></i>暂无记录<span
+                            class="pull-right">暂无<font color="green">代付</font>记录</span></li>
+                </ul>
+            </div>
+        </c:if>
+        <c:if test="${!empty dslist}">
+            <table class="table table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <th class="text-center" style="width: 80px">期数</th>
+                    <th class="text-center" style="width: 80px">服务费(分)</th>
+                    <th class="text-center" style="width: 100px">代付日期</th>
+                    <th class="text-center" style="width: 150px">总代付金额(分)</th>
                     <th class="text-center" style="width: 150px">执行结果</th>
                     <th class="text-center" style="width: 150px">手动审核</th>
                 </tr>
@@ -162,23 +296,80 @@
             </table>
         </c:if>
         <div class="modal-header">
-            <h4 class="modal-title" id="">新建<font color="green">代收</font></h4>
+            <h4 class="modal-title" id="">新建<font color="green">代付</font></h4>
         </div>
-        <input type="hidden" name="tl" value="2">
+        <input type="hidden" name="tl" value="3">
         <input type="hidden" name="cn" value="${cn}">
         <input type="hidden" name="type" value="${type}">
         <input type="hidden" name="id" value="0">
         <input type="hidden" name="icbc_id" value="${icbc.id}">
-        <div class="form-group" style="padding-top: 25px">
-            <label for="title2" class="col-sm-3 control-label">签约信息:</label>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">账户名:</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="bt" value="${qy.account_name}-${qy.account_no}" disabled="">
+                <input type="text" class="form-control" id="account_name" name="account_name" value=""/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">证件类型:</label>
+            <div class="col-sm-9">
+                <select id="cardid_type" name="cardid_type" class="form-control">
+                    <%=Tools.dicopt(DataDic.dic_tlzf_cardid_type, "0")%>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">证件号:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="cardid" name="cardid" value=""/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">银行卡号:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="account_no" name="account_no" value=""/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">银行代码:</label>
+            <div class="col-sm-9">
+                <select id="bank_code" name="bank_code" class="form-control">
+                    <%=Tools.dicopt(DataDic.dic_tlzf_bank_code, "0102")%>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">手机号:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="tel" name="tel" value=""/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">信用卡CVV2:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="cvv2" id="cvv2" placeholder="仅用于信用卡"
+                       value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">有效期:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="vailddate" id="vailddate" placeholder="MMYY，用于信用卡"
+                       value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title2" class="col-sm-3 control-label">货币类型:</label>
+            <div class="col-sm-9">
+                <select id="currency" name="currency" class="form-control">
+                    <%=Tools.dicopt(DataDic.dic_tlzf_currency, "CNY")%>
+                </select>
             </div>
         </div>
         <div class="form-group">
             <label for="title2" class="col-sm-3 control-label"><font color="green">服务费</font>金额(分):</label>
             <div class="col-sm-9">
                 <input type="number" class="form-control" name="fw_price" id="fw_price" placeholder="输入服务费,单位(分)"
+                       onblur="getTotlePrice()"
                        value="">
             </div>
         </div>
@@ -186,27 +377,28 @@
             <label for="title2" class="col-sm-3 control-label"><font color="green">期数:</font></label>
             <div class="col-sm-9">
                 <input type="number" class="form-control" name="periods" id="periods" placeholder=""
+                       onblur="getTotlePrice()"
                        value="">
             </div>
         </div>
         <div class="form-group">
-            <label for="title2" class="col-sm-3 control-label"><font color="green">代收日期:</font></label>
+            <label for="title2" class="col-sm-3 control-label"><font color="green">代付日期:</font></label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="ds_date" id="ds_date" placeholder=""
                        value="">
             </div>
         </div>
         <div class="form-group">
-            <label for="title2" class="col-sm-3 control-label"><font color="green">代收</font>总金额(分):</label>
+            <label for="title2" class="col-sm-3 control-label"><font color="green">代付</font>总金额(分):</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" name="amount" id="amount" placeholder="输入代收金额,单位(分)"
+                <input type="number" class="form-control" name="amount" id="amount" placeholder="输入代付金额,单位(分)"
                        value="">
             </div>
         </div>
         <div class="form-group">
             <label for="title2" class="col-sm-3 control-label">备注(可不填)</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" name="remark" placeholder="比如:正常代收" value="">
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="remark" placeholder="比如:正常代付" value="">
             </div>
                 <%--<div class="col-sm-6">
                     <div class="input-group">
@@ -221,6 +413,13 @@
         </div>
     </div>
     <script>
+        function getTotlePrice() {
+            var fw_price = $("#fw_price").val();
+            var periods = $("#periods").val();
+            var amount = fw_price * periods;
+            $("#amount").val(amount);
+        }
+
         //执行一个laydate实例
         laydate.render({
             elem: '#ds_date', //指定元素

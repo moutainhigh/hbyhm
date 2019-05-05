@@ -1,0 +1,2 @@
+[16:37:51] Config - Tools.logError:For input string: "AIP3989190423000002717"
+[17:47:51] Config - Tools.logError:sql injection violation, syntax error: syntax error, error in :'eAND t.api_type=1 ORDER BY t.dt_edi', expect IDENTIFIER, actual IDENTIFIER pos 130, line 1, column 131, token IDENTIFIER t : select SQL_CALC_FOUND_ROWS t.*,i.c_name as c_name from tlzf_dk_details t  LEFT JOIN kj_icbc i ON i.id=t.icbc_id    where trueAND t.api_type=1 ORDER BY t.dt_edit DESC   limit 0,10 

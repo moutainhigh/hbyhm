@@ -29,11 +29,11 @@
                             <th class="hidden-xs text-center"><!-- hidden-xs为手机模式时自动隐藏， text-center为居中-->
                                 编号
                             </th>
-                            <th class="hidden-xs text-center">
-                                渠道
+                            <th class="hidden-xs text-center"><!-- hidden-xs为手机模式时自动隐藏， text-center为居中-->
+                                类型
                             </th>
                             <th class="text-center">
-                                借款人
+                                客户名
                             </th>
                             <th class="hidden-xs text-center">
                                 期数
@@ -42,20 +42,26 @@
                                 服务费
                             </th>
                             <th class="hidden-xs text-center">
-                                代收日期
+                                日期
                             </th>
                             <th class="text-center">
-                                总代收金额
+                                总金额
                             </th>
-                            <th class="text-center">
+                            <th class="hidden-xs text-center">
+                                更新时间
+                            </th>
+                            <th class="hidden-xs text-center">
+                                完成时间
+                            </th>
+                            <th class="text-center" style="width: 200px">
                                 API执行
                             </th>
                             <th class="text-center">
                                 手动状态
                             </th>
-<%--                            <th class="text-center">
-                                操作
-                            </th>--%>
+                            <%--                            <th class="text-center">
+                                                            操作
+                                                        </th>--%>
                         </tr>
                         </thead>
                         <tbody>
@@ -68,8 +74,14 @@
                             <td class="hidden-xs text-center">
                                 <%=m.get("id")%>
                             </td>
-                            <td class="hidden-xs text-center">
-                                <%=m.get("qd_type")%>
+                            <td class="hidden-xs text-center"><!-- hidden-xs为手机模式时自动隐藏， text-center为居中-->
+                                <%
+                                 if(m.get("api_type").equals("0")){
+                                %>
+                                <span class="label label-success">代收</span>
+                                <%}else{%>
+                                <span class="label label-warning">代付</span>
+                                <%}%>
                             </td>
                             <td class="text-center">
                                 <%=m.get("account_name")%>
@@ -86,30 +98,55 @@
                             <td class="text-center">
                                 <%=m.get("amount")%>
                             </td>
-                            <td class="text-center">
+                            <td class="hidden-xs text-center">
+                                <%=m.get("dt_edit")%>
+                            </td>
+                            <td class="hidden-xs text-center">
+                                <%=m.get("settle_day")%>
+                            </td>
+                            <td class="text-center" style="width: 200px">
                                 <select id="bc_status" name="bc_status" disabled class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_tlzf_ds_bc_status,m.get("bc_status"))%>
+                                    <%=Tools.dicopt(DataDic.dic_tlzf_ds_bc_status, m.get("bc_status"))%>
                                 </select>
+                                <%
+                                    if (m.get("bc_status").equals("1")||m.get("bc_status").equals("2")) {
+                                %>
+                                <a href="javascript:ds('<%=m.get("id")%>')" target="blank">
+					            <span class="label pull-right label-success">
+                                <i class="fa fa-refresh"></i>
+                                    手动交易
+					            </span>
+                                </a>
+                                <%} else {%>
+                                <a href="javascript:findds_result('<%=m.get("req_sn")%>','<%=m.get("id")%>')" target="blank">
+					            <span class="label pull-right label-success">
+                                <i class="fa fa-refresh"></i>
+                                    查询结果
+					            </span>
+                                </a>
+                                <%}%>
                             </td>
                             <td class="text-center">
-                                <select id="sd_status" name="sd_status" onchange="ajax_edit('<%=m.get("id")%>','sd_status',this.value,'tlzf_dk_details');" n class="form-control">
-                                <%=Tools.dicopt(DataDic.dic_tlzf_sd_status,m.get("sd_status"))%>
+                                <select id="sd_status" name="sd_status"
+                                        onchange="ajax_edit('<%=m.get("id")%>','sd_status',this.value,'tlzf_dk_details');"
+                                        n class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_tlzf_sd_status, m.get("sd_status"))%>
                                 </select>
                             </td>
-<%--                            <td class="text-center">
-                                <div class="table-button">
-                                    <a id="modal_qy<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
-                                       href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=1&id=<%=m.get("icbc_id")%>&nextUrl=dsgl_cwgl"
-                                       class="btn btn-success">
-                                        <i class="fa fa-credit-card"></i>
-                                    </a>
-                                    <a id="modal_ds<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
-                                       href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=2&id=<%=m.get("icbc_id")%>&nextUrl=dsgl_cwgl"
-                                       class="btn btn-success">
-                                        <i class="fa fa-sign-in"></i>
-                                    </a>
-                                </div>
-                            </td>--%>
+                            <%--                            <td class="text-center">
+                                                            <div class="table-button">
+                                                                <a id="modal_qy<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
+                                                                   href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=1&id=<%=m.get("icbc_id")%>&nextUrl=dsgl_cwgl"
+                                                                   class="btn btn-success">
+                                                                    <i class="fa fa-credit-card"></i>
+                                                                </a>
+                                                                <a id="modal_ds<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
+                                                                   href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=2&id=<%=m.get("icbc_id")%>&nextUrl=dsgl_cwgl"
+                                                                   class="btn btn-success">
+                                                                    <i class="fa fa-sign-in"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>--%>
                         </tr>
                         <%
                                 }
@@ -126,3 +163,35 @@
 
 </body>
 </html>
+<script>
+
+    function ds(id) {
+        $.post("/manager/command?sdo=tlzf_ds&id=" + id, {},
+            function (res) {
+                eval("var res=" + res);
+                alert(res.msg);
+                window.location.href = "";
+            });
+    }
+
+    function findds_result(QUERY_SN,id) {
+        var data = {
+            QUERY_SN: QUERY_SN
+        };
+        $.post("/kcdhttp?query=2&type=200004", data,
+            function (result) {
+                var res = eval('(' + result + ')');
+                if (res.INFO != null && res.INFO != "" && res.INFO != "undefined") {
+                    alert(res.INFO.ERR_MSG);
+                    if(res.QTRANSRSP != null && res.QTRANSRSP != "" && res.QTRANSRSP != "undefined"){
+                    if(res.QTRANSRSP[0].RET_CODE=="0000"){
+                        ajax_edit(id,'bc_status','3','tlzf_dk_details');
+                    }
+                    }
+                }else {
+                    alert(res[0].ERR_MSG);
+                }
+                window.location.href = "";
+            });
+    }
+</script>
