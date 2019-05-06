@@ -1,7 +1,6 @@
 package com.tt.table;
 
 
-
 import com.tt.data.TtList;
 import com.tt.data.TtMap;
 import com.tt.tool.Config;
@@ -50,11 +49,11 @@ public class Zxlr extends DbCtrl {
         int pageInt = Integer.valueOf(Tools.myIsNull(post.get("p")) == false ? post.get("p") : "1"); // 当前页
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
 
-        int appid=2;
-        if(post.get("appid")!=null&&!post.get("appid").isEmpty()){
-            appid=Integer.parseInt(post.get("appid")) ;
+        int appid = 2;
+        if (post.get("appid") != null && !post.get("appid").isEmpty()) {
+            appid = Integer.parseInt(post.get("appid"));
         }
-        String whereString = "t.app="+appid;
+        String whereString = "t.app=" + appid;
         String tmpWhere = "";
         String fieldsString = "t.*" +
                 ",f.name as fsname" +
@@ -68,19 +67,19 @@ public class Zxlr extends DbCtrl {
 
         if (Tools.isSuperAdmin(minfo) || Tools.isCcAdmin(minfo)) {
             TtList fslist = Tools.reclist("select id,up_id from assess_fs where id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"));
-            String sql="";
+            String sql = "";
             //whereString += " AND ("; // 显示自己和下级公司的
             if (fslist.size() > 0) {
-                for (int l=0;l<fslist.size();l++) {
-                    TtMap fs=fslist.get(l);
-                    if(l==fslist.size()-1) {
+                for (int l = 0; l < fslist.size(); l++) {
+                    TtMap fs = fslist.get(l);
+                    if (l == fslist.size() - 1) {
                         sql = sql + fs.get("id");
-                    }else{
-                        sql = sql + fs.get("id")+",";
+                    } else {
+                        sql = sql + fs.get("id") + ",";
                     }
                 }
             }
-            whereString += " and t.gems_fs_id in ("+sql+")";
+            whereString += " and t.gems_fs_id in (" + sql + ")";
         } else {
             whereString += " AND t.gems_fs_id=" + minfo.get("icbc_erp_fsid"); // 只显示自己公司的
         }
@@ -134,13 +133,13 @@ public class Zxlr extends DbCtrl {
     }
 
     //图片处理
-    public TtMap tozip(String imgs,String imgsname){
+    public TtMap tozip(String imgs, String imgsname) {
         TtMap imginfo = new TtMap();
-        if(!Tools.myIsNull(imgs)){
-            String[] imgstep2_1ss=imgs.split("\u0005");
-            for(int i=0;i<imgstep2_1ss.length;i++){
-                if(!Tools.myIsNull(imgstep2_1ss[i])){
-                    imginfo.put(imgsname+(i+1),imgstep2_1ss[i]);
+        if (!Tools.myIsNull(imgs)) {
+            String[] imgstep2_1ss = imgs.split("\u0005");
+            for (int i = 0; i < imgstep2_1ss.length; i++) {
+                if (!Tools.myIsNull(imgstep2_1ss[i])) {
+                    imginfo.put(imgsname + (i + 1), imgstep2_1ss[i]);
                 }
             }
         }
@@ -152,16 +151,16 @@ public class Zxlr extends DbCtrl {
         String f = "t.*,a.name as admin_name,fs.name as fs_name";
         leftsql = " LEFT JOIN assess_gems a ON a.id=t.gems_id" +
                 " LEFT JOIN assess_fs fs ON fs.id=t.gems_fs_id";
-        long nid = Tools.myIsNull(post.get("id"))?0:Tools.strToLong(post.get("id"));
-        TtMap info = info(nid,f);
+        long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
+        TtMap info = info(nid, f);
         String jsonInfo = Tools.jsonEncode(info);
-        if(!Tools.myIsNull(post.get("toZip"))&& post.get("toZip").equals("1")) {
+        if (!Tools.myIsNull(post.get("toZip")) && post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
             //征信录入资料
-            TtMap imginfo1=tozip(info.get("imgstep2_1ss"),"主贷人照片");
-            TtMap imginfo2=tozip(info.get("imgstep2_2ss"),"主贷人配偶照片");
-            TtMap imginfo3=tozip(info.get("imgstep2_3ss"),"共还人1照片");
-            TtMap imginfo4=tozip(info.get("imgstep2_4ss"),"共还人2照片");
+            TtMap imginfo1 = tozip(info.get("imgstep2_1ss"), "主贷人照片");
+            TtMap imginfo2 = tozip(info.get("imgstep2_2ss"), "主贷人配偶照片");
+            TtMap imginfo3 = tozip(info.get("imgstep2_3ss"), "共还人1照片");
+            TtMap imginfo4 = tozip(info.get("imgstep2_4ss"), "共还人2照片");
             imginfo.putAll(imginfo1);
             imginfo.putAll(imginfo2);
             imginfo.putAll(imginfo3);
@@ -179,9 +178,9 @@ public class Zxlr extends DbCtrl {
                     e.printStackTrace();
                 }
             }
-        }else{
+        } else {
             //历史操作查询
-            if(nid>0) {
+            if (nid > 0) {
                 TtList lslist = Tools.reclist("select * from kj_icbc_result where qryid=" + nid);
                 request.setAttribute("lslist", lslist);//
             }
@@ -220,36 +219,65 @@ public class Zxlr extends DbCtrl {
 
     @Override
     public void doPost(TtMap post, long id, TtMap result2) {
-        TtMap newpost=  new TtMap();
+        TtMap newpost = new TtMap();
         newpost.putAll(post);
         TtMap minfo = Tools.minfo();
         //addicbc_erp_zx(post);
-        long icbc_id=0;
+        long icbc_id = 0;
         if (id > 0) { // id为0时，新增
             edit(post, id);
-            icbc_id=id;
+            icbc_id = id;
         } else {
-            post.put("app","2");
-            post.put("gems_id",minfo.get("id"));
-            post.put("gems_fs_id",minfo.get("icbc_erp_fsid"));
-            post.put("gems_code","0");
-            post.put("query_type","0");
-            icbc_id= add(post);
-            TtMap ordermap=new TtMap();
-            ordermap.put("gems_code",orderutil.getOrderId("HBYHKCD", 7, icbc_id));
+            post.put("app", "2");
+            post.put("gems_id", minfo.get("id"));
+            post.put("gems_fs_id", minfo.get("icbc_erp_fsid"));
+            post.put("gems_code", "0");
+            post.put("query_type", "0");
+            icbc_id = add(post);
+            TtMap ordermap = new TtMap();
+            ordermap.put("gems_code", orderutil.getOrderId("HBYHKCD", 7, icbc_id));
             //更新订单字段
-            Tools.recEdit(ordermap,"kj_icbc",icbc_id);
+            Tools.recEdit(ordermap, "kj_icbc", icbc_id);
         }
-        //历史添加
-        TtMap res=new TtMap();
-        res.put("qryid",String.valueOf(icbc_id));
-        res.put("status",post.get("bc_status"));
-        res.put("remark",newpost.get("remark"));
-        Tools.recAdd(res,"kj_icbc_result");
-
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
         boolean bSuccess = errorCode == 0;
-        Tools.formatResult(result2, bSuccess, errorCode, bSuccess ? "编辑"+title+"成功！" : errorMsg,
+        Tools.formatResult(result2, bSuccess, errorCode, bSuccess ? "编辑" + title + "成功！" : errorMsg,
                 bSuccess ? nextUrl : "");//失败时停留在当前页面,nextUrl为空
+    }
+
+    @Override
+    public void succ(TtMap array, long id, int sqltp) {
+        //历史添加
+        TtMap res = new TtMap();
+        res.put("qryid", String.valueOf(id));
+        res.put("status", array.get("bc_status"));
+        res.put("remark", array.get("remark"));
+        Tools.recAdd(res, "kj_icbc_result");
+    }
+
+    @Override
+    public boolean chk(TtMap array, long id) {
+        if (!agpOK) {// 演示在需要权限检查的地方插入权限标志判断
+            return false;
+        }
+        if (!Tools.myIsNull(array.get("fromcommand"))) { // 从ManagerCmd来的。不用过滤参数
+
+        } else {
+            System.out.println("表单验证star");
+
+            String myErroMsg = "";
+
+
+
+            super.errorMsg = super.chkMsg = myErroMsg;
+            if (!Tools.myIsNull(myErroMsg)) {
+                super.errorCode = 888;
+            }
+
+            System.out.println("表单验证end");
+        }
+        return super.errorCode == 0;
+
+
     }
 }

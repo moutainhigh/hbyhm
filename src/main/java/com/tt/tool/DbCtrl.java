@@ -539,20 +539,21 @@ public class DbCtrl {
 	 * @param id    需更新數據的主鍵的值
 	 */
 	public int edit(TtMap ary, long id) {
-		TtMap tmpAry = (TtMap) ary.clone();
+		TtMap tmpAry =new TtMap();
 		// todo oldrec=info(id);
-		if (chk(tmpAry, id)) {
-			if (Tools.myIsNull(tmpAry.get("dt_edit"))) {
-				tmpAry.put("dt_edit", Tools.dateToStrLong(null));
+		if (chk(ary, id)) {
+			if (Tools.myIsNull(ary.get("dt_edit"))) {
+				ary.put("dt_edit", Tools.dateToStrLong(null));
 			}
 			if (Tools.mid() != 0) {
-				tmpAry.put("mid_edit", String.valueOf(Tools.mid()));
+				ary.put("mid_edit", String.valueOf(Tools.mid()));
 			}
-			tmpAry = param(tmpAry, id);
-			if (tmpAry == null) {
+			ary = param(ary, id);
+			if (ary == null) {
 				return 0;
 			} else {
-				int re = editData(tmpAry, id);
+				tmpAry.putAll(ary);
+				int re = editData(ary, id);
 				succ(tmpAry, id, 1);
 				tmpAry.clear();
 				tmpAry = null;
@@ -599,32 +600,28 @@ public class DbCtrl {
 		if (ary == null || ary.size() == 0) {
 			return 0;
 		}
-		TtMap tmpArray = null;
-		try {
-			tmpArray = (TtMap) CloneUtils.clone(ary);
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		if (chk(tmpArray, 0)) {
+		TtMap tmpArray = new TtMap();
+		if (chk(ary, 0)) {
 			String dt = Tools.dateToStrLong(null);
-			if (Tools.myIsNull(tmpArray.get("dt_edit"))) {
-				tmpArray.put("dt_edit", dt);
+			if (Tools.myIsNull(ary.get("dt_edit"))) {
+				ary.put("dt_edit", dt);
 			}
-			if (Tools.myIsNull(tmpArray.get("dt_add"))) {
-				tmpArray.put("dt_add", dt);
+			if (Tools.myIsNull(ary.get("dt_add"))) {
+				ary.put("dt_add", dt);
 			}
-			if (Tools.myIsNull(tmpArray.get("mid_add")) && Tools.mid() != 0) {
-				tmpArray.put("mid_edit", String.valueOf(Tools.mid()));
-				tmpArray.put("mid_add", String.valueOf(Tools.mid()));
+			if (Tools.myIsNull(ary.get("mid_add")) && Tools.mid() != 0) {
+				ary.put("mid_edit", String.valueOf(Tools.mid()));
+				ary.put("mid_add", String.valueOf(Tools.mid()));
 			}
-			if (Tools.myIsNull(tmpArray.get("sort"))) {
-				tmpArray.put("sort", "100");
+			if (Tools.myIsNull(ary.get("sort"))) {
+				ary.put("sort", "100");
 			}
-			if (Tools.myIsNull(tmpArray.get("showtag"))) {
-				tmpArray.put("showtag", "0");
+			if (Tools.myIsNull(ary.get("showtag"))) {
+				ary.put("showtag", "0");
 			}
-			tmpArray = param(tmpArray, 0);
-			id = addData(tmpArray);
+			ary = param(ary, 0);
+			tmpArray.putAll(ary);
+			id = addData(ary);
 			succ(tmpArray, id, 0);
 			/*
 			 * todo 写数据库日志

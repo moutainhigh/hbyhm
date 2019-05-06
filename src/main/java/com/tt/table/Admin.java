@@ -279,32 +279,46 @@ public class Admin extends DbCtrl {
 
   @Override
   public void doPost(TtMap post, long id, TtMap result2) {
-    TtMap gems = new TtMap();
-    gems.put("name", post.get("name"));
-    gems.put("fsid", post.get("icbc_erp_fsid"));
-    gems.put("update_time", String.valueOf(Tools.getSecondTimestampTwo(new Date())));
-    gems.put("showtag", post.get("showtag"));
-    gems.put("mobile", post.get("tel"));
-    gems.put("cp", post.get("cp"));
-    gems.put("username", post.get("username"));
-    gems.put("idcard", post.get("idcard"));
-    gems.put("upac_id", post.get("upac_id"));
     if (post.get("imgurl").equals("images/mgcaraddimg.jpg")) {
-      gems.put("imgurl", "");
-      post.put("imgurl", "");
-    } else {
-      gems.put("imgurl", post.get("imgurl"));
+        post.put("imgurl", "");
     }
     if (id > 0) { // id为0时，新增
       edit(post, id);
-      Tools.recEdit(gems, "assess_gems", Long.valueOf(post.get("gemsid")));
     } else {
       post.put("icbc_erp_tag", "1");
       post.put("loginip", "0");
       post.put("fs_type", "2");
       post.put("gemsid", "0");
       post.put("isadmin", "1");
+      long adminid = add(post);
+    }
+    String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
+    boolean bSuccess = errorCode == 0;
+    Tools.formatResult(result2, bSuccess, errorCode, bSuccess ? "编辑成功！" : errorMsg, bSuccess ? nextUrl : "");// 失败时停留在当前页面,nextUrl为空
+  }
 
+  // 操作成功会执行这个方法
+  @Override
+  public void succ(TtMap array, long id, int sqltp) {
+    TtMap gems = new TtMap();
+    gems.put("name", array.get("name"));
+    gems.put("fsid", array.get("icbc_erp_fsid"));
+    gems.put("update_time", String.valueOf(Tools.getSecondTimestampTwo(new Date())));
+    gems.put("showtag", array.get("showtag"));
+    gems.put("mobile", array.get("tel"));
+    gems.put("cp", array.get("cp"));
+    gems.put("username", array.get("username"));
+    gems.put("idcard", array.get("idcard"));
+    gems.put("upac_id", array.get("upac_id"));
+    if (array.get("imgurl").equals("images/mgcaraddimg.jpg")) {
+      gems.put("imgurl", "");
+      array.put("imgurl", "");
+    } else {
+      gems.put("imgurl", array.get("imgurl"));
+    }
+    if(id>0){
+      Tools.recEdit(gems, "assess_gems", Long.valueOf(array.get("gemsid")));
+    }else{
       gems.put("deltag", "0");
       gems.put("aid_ssm", "0");
       gems.put("hometag", "0");
@@ -316,26 +330,12 @@ public class Admin extends DbCtrl {
       gems.put("aid", "0");
       gems.put("fs_type", "2");
       gems.put("create_time", String.valueOf(Tools.getSecondTimestampTwo(new Date())));
-      long adminid = add(post);
-      gems.put("mem_id", String.valueOf(adminid));
+      gems.put("mem_id", String.valueOf(id));
       long gemsid = Tools.recAdd(gems, "assess_gems");
       TtMap map = new TtMap();
       map.put("gemsid", String.valueOf(gemsid));
-      Tools.recEdit(map, "assess_admin", adminid);
+      Tools.recEdit(map, "assess_admin", id);
     }
-    String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
-    boolean bSuccess = errorCode == 0;
-    Tools.formatResult(result2, bSuccess, errorCode, bSuccess ? "编辑成功！" : errorMsg, bSuccess ? nextUrl : "");// 失败时停留在当前页面,nextUrl为空
-  }
-
-  // 操作成功会执行这个方法
-  @Override
-  public void succ(TtMap array, long id, int sqltp) {
-    /*
-     * if (id > 0 && sqltp==0) { String sCode = "XXXXXXXX" + id;
-     * Tools.recexec("update " + table + " set gems_code='" + sCode + "' where id="
-     * + id); // todo }
-     */
   }
 
   /**
