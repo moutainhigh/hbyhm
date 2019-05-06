@@ -87,4 +87,7 @@
 	<!-- 视频插件video.js-->
 	<%-- <script src="vide7.4.1/js/video.min.js"></script>
 	<link href="vide7.4.1/css/video-js.min.css" rel="stylesheet" type="text/css"/>	 --%>
+
+
+
 </head>

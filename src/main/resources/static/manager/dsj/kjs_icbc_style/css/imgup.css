@@ -1,0 +1,68 @@
+.uploadBox
+{
+    width: 100%;
+    height: 362px;
+    background-color: #fff;
+    border: 1px solid #777;
+    border-radius: 4px;
+    margin: auto;
+    text-align: center;
+    line-height: 362px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #444;
+}
+
+.uploadBox ul li
+{
+    float: left;
+    position: relative;
+    margin-left: 5px;
+    margin-top: 5px;
+    list-style: none;
+}
+
+.uploadBox  li img
+{
+    border: 1px solid #D1D1D1;
+    width: 188px;
+    height: 141px;
+    vertical-align: middle;
+}
+
+.uploadBox  li  .percentage
+{
+    width: 69px;
+    height: 69px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -34.5px;
+    margin-top: -34.5px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 69px;
+    color: #fff;
+    border-radius: 34.5px;
+    background: rgba(0, 0, 0, .8);
+}
+
+.uploadBox  li.done .percentage
+{
+    background: url("images/done.png") no-repeat 0 0;
+}
+
+.uploadBox li .progress
+{
+    position: absolute;
+    bottom: 0px;
+    width: 187px;
+    background: #000;
+    opacity: .5;
+    left: 0;
+}
+
+.uploadBox  li.done .progress
+{
+    display: none;
+}

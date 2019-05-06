@@ -459,15 +459,13 @@
                                         <div class="row inline-from">
                                             <div class="input-group">
                                                 <span class="input-group-addon">大数据编码</span>
-                                                <input class="form-control" name="dsj_report_id" id="dsj_report_id"
-                                                       value="" type="text">
+                                                <input class="form-control" name="dsj_report_id" id="dsj_report_id" value="${infodb.dsj_report_id}" type="text">
                                                 <span class="input-group-addon">
-						<a style="color: #72afd2;"
-                           href="">获取编码</a>
-						</span>
+                                                    <a style="color: #72afd2;" href="javascript:queryid('${infodb.id }','1','${infodb.c_name }','${infodb.c_tel }','${infodb.c_cardno }','dsj_report_id')">获取编码</a>
+                                                </span>
                                                 <span class="input-group-addon">
-						<a style="color: #72afd2;" href="">查看报告</a>
-						</span>
+                                                    <a style="color: #72afd2;" href="javascript:dsj_bg('${infodb.id }','1','dsj_report_id');">查看报告</a>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -481,14 +479,13 @@
                                         <div class="row inline-from">
                                             <div class="input-group">
                                                 <span class="input-group-addon">大数据编码</span>
-                                                <input class="form-control" name="po_dsj_report_id"
-                                                       id="po_dsj_report_id" value="" type="text">
+                                                <input class="form-control" name="po_dsj_report_id" id="po_dsj_report_id" value="" type="text">
                                                 <span class="input-group-addon">
-						<a style="color: #72afd2;" href="javascript:">获取编码</a>
-						</span>
+                                                    <a style="color: #72afd2;" href="javascript:queryid('${infodb.id }','2','${infodb.c_name_mt }','${infodb.c_tel_mt }','${infodb.c_cardno_mt }','po_dsj_report_id')">获取编码</a>
+                                                </span>
                                                 <span class="input-group-addon">
-						<a style="color: #72afd2;" href="javascript:">查看报告</a>
-						</span>
+                                                    <a style="color: #72afd2;" href="javascript:dsj_bg('${infodb.id }','2','po_dsj_report_id');">查看报告</a>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -502,14 +499,13 @@
                                         <div class="row inline-from">
                                             <div class="input-group">
                                                 <span class="input-group-addon">大数据编码</span>
-                                                <input class="form-control" name="gjr_dsj_report_id1"
-                                                       id="gjr_dsj_report_id1" value="" type="text">
+                                                <input class="form-control" name="gjr_dsj_report_id1" id="gjr_dsj_report_id1" value="" type="text">
                                                 <span class="input-group-addon">
-						<a style="color: #72afd2;" href="javascript:">获取编码</a>
-						</span>
+                                                    <a style="color: #72afd2;" href="javascript:queryid('${infodb.id }','3','${infodb.c_name_gj1 }','${infodb.c_tel_gj1 }','${infodb.c_cardno_gj1 }','gjr_dsj_report_id1')">获取编码</a>
+                                                </span>
                                                 <span class="input-group-addon">
-						<a style="color: #72afd2;" href="javascript:">查看报告</a>
-						</span>
+                                                    <a style="color: #72afd2;" href="javascript:dsj_bg('${infodb.id }','3','gjr_dsj_report_id1');">查看报告</a>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -523,14 +519,13 @@
                                         <div class="row inline-from">
                                             <div class="input-group">
                                                 <span class="input-group-addon">大数据编码</span>
-                                                <input class="form-control" name="gjr_dsj_report_id2"
-                                                       id="gjr_dsj_report_id2" value="" type="text">
+                                                <input class="form-control" name="gjr_dsj_report_id2" id="gjr_dsj_report_id2" value="" type="text">
                                                 <span class="input-group-addon">
-						<a style="color: #72afd2;" href="javascript:">获取编码</a>
-						</span>
+                                                    <a style="color: #72afd2;" href="javascript:queryid('${infodb.id }','4','${infodb.c_name_gj2 }','${infodb.c_tel_gj2 }','${infodb.c_cardno_gj2 }','gjr_dsj_report_id2')">获取编码</a>
+                                                </span>
                                                 <span class="input-group-addon">
-						<a style="color: #72afd2;" href="javascript:">查看报告</a>
-						</span>
+                                                    <a style="color: #72afd2;" href="javascript:dsj_bg('${infodb.id }','4','gjr_dsj_report_id2');">查看报告</a>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -797,6 +792,29 @@
                 </div>
             </div>
 
+            <div class="modal fade" id="dsjModal" tabindex="-1" role="dialog"
+                 aria-labelledby="dsjModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" align="center" id="dsjModalLabel">大数据报告</h4>
+                        </div>
+                        <div class="modal-body" style="height: 750px;">
+                            <iframe id="NoPermissioniframe" width="100%" height="100%"
+                                    frameborder="0"></iframe>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal -->
+            </div>
+
         </div>
     </div>
 </div>
@@ -881,3 +899,80 @@
         margin-top: 50px;
     }
 </style>
+<script>
+    //大数据查询
+
+    //查询编码
+    function queryid(id, dsj_type, name, mobileNo, idCardNo, dsjname) {
+        $.ajax({
+            type : "post",
+            dataType : "json",
+            url : "/manager/getxdfx_dsjzx",
+            data : {
+                id : id,
+                dsj_type : dsj_type,
+                name : name,
+                idCardNo : idCardNo,
+                mobileNo : mobileNo
+            },
+            success : function(msg) {
+                alert(msg.status.responseMessage);
+                if (msg.status.responseCode == '0000') {
+                    document.getElementById(dsjname).value = msg.status.requestId;
+                }
+
+                /* if(msg.success==true){
+                    alert("获取成功!");
+                    document.getElementById(dsjname).value=msg.report_id;
+                }else{
+                    alert("获取失败，请重试...");
+                } */
+            },
+            error : function() {
+                alert("系统错误，请稍后重试...");
+            }
+
+        });
+    }
+
+    //获取报告
+    function dsj_bg(id, dsjtype, report_id) {
+        var dsj_code = document.getElementById(report_id).value;
+        if (dsj_code != null && dsj_code != "") {
+
+            // $.ajax({
+            //     type : "post",
+            //     dataType : "json",
+            //     url : "/manager/getxdfx_dsjzx_result",
+            //     data : {
+            //         id : id,
+            //         dsj_type : dsjtype
+            //     },
+            //     success : function(msg) {
+            //         $('#dsjModal').modal({
+            //             show : true,
+            //             backdrop : 'static'
+            //         });
+            //     },
+            //     error : function() {
+            //         alert("系统错误，请稍后重试...");
+            //     }
+            //
+            // });
+
+            var frameSrc = "/manager/getxdfx_dsjzx_result?id=" + id + "&dsjtype=" + dsjtype;
+            //给iframe加上src路径
+            $("#NoPermissioniframe").attr("src", frameSrc);
+            //显示模态框  只有在选择编辑的行   然后根据回调函数成功后才会显示模态框
+            $('#dsjModal').modal({
+                show : true,
+                backdrop : 'static'
+            });
+
+        } else {
+            alert("大数据编码不能为空!");
+        }
+
+    }
+
+</script>
