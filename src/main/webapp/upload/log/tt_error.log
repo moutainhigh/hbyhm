@@ -1,25 +1,89 @@
-2019-04-30 11:23:48  [ http-nio-8098-exec-1:487017 ] - [ ERROR ]  {conn-310002, stmt-320232} execute error. insert into tlzf_dk_details set `cvv2`='', `dt_add`='2019-04-30 11:23:48', `vailddate`='', `agrmno`='AIP3989190423000002717', `gems_id`='4517', `ds_date`='2020-02-30', `business_code`='', `remark`='', `mid_add`='4793', `account_no`='6222004000493013989', `icbc_id`='841', `qd_type`='0', `req_sn`='', `sd_status`='1', `dt_edit`='2019-04-30 11:23:48', `api_type`='0', `account_name`='嵇竹中', `cardid`='620528197501116230', `periods`='11', `tel`='15601257600', `currency`='CNY', `gems_fs_id`='1708', `summary`='', `bank_code`='0102', `amount`='12', `fw_price`='1', `submit_time`='20190430112348', `cust_userid`='', `bc_status`='1', `cardid_type`='0', `mid_edit`='4793'
-com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Incorrect date value: '2020-02-30' for column 'ds_date' at row 1
+2019-05-06 10:35:51  [ http-nio-8098-exec-7:770418 ] - [ ERROR ]  Tools.logError:http%3A%2F%2Flocalhost%3A8098%2FWEB-INF%2Fjsp%2Fmanager%2Findex_b.jsp%7C%2FWEB-INF%2Fjsp%2Fmanager%2Findex_b.jsp%7Ccn%3Dhxyh_zxlr%26sdo%3Dlist%26type%3Dhxyh:An exception occurred processing [/WEB-INF/jsp/manager/hxyh/hxyh_zxlr.list.jsp] at line [87]
+
+84:                                     </div>
+85:                                 </td>
+86:                                 <td class="hidden-xs text-center" style="width: 200px">
+87:                                     <%if (m.get("dy_bc_status").equals("3")) {%>
+88: 
+89:                                     <%
+90:                                         if(m.get("qy_bc_status").equals("3")){
+
+
+Stacktrace:
+2019-05-06 10:58:58  [ http-nio-8098-exec-2:2157450 ] - [ ERROR ]  Tools.logError:http%3A%2F%2Flocalhost%3A8098%2FWEB-INF%2Fjsp%2Fmanager%2Findex_b.jsp%7C%2FWEB-INF%2Fjsp%2Fmanager%2Findex_b.jsp%7Ccn%3Dyhqy%26type%3Dcwgl%26sdo%3Dform%26id%3D6:Unable to compile class for JSP: 
+
+An error occurred at line: [18] in the generated java file: [C:\Users\86176\AppData\Local\Temp\tomcat.6265385403817184122.8098\work\Tomcat\localhost\ROOT\org\apache\jsp\WEB_002dINF\jsp\manager\cwgl\yhqy_form_jsp.java]
+Only a type can be imported. com.tt.tool.DataDic resolves to a package
+
+An error occurred at line: [193] in the jsp file: [/WEB-INF/jsp/manager/cwgl/yhqy.form.jsp]
+DataDic.dic_tlzf_xy_status cannot be resolved to a type
+190:                                 <span class="input-group-addon" style="font-size: 14px;">协议状态</span>
+191:                                 <select class="form-control"  id="qy_status" name="qy_status"
+192:                                         style="font-size: 14px;">
+193:                                     <%=Tools.dicopt(DataDic.dic_tlzf_xy_status,infodb.get("qy_status"))%>
+194:                                 </select>
+195:                                 <span class="input-group-addon"><a onclick="tljy()">解约④</a></span>
+196:                             </div>
+
+
+An error occurred at line: [253] in the jsp file: [/WEB-INF/jsp/manager/cwgl/yhqy.form.jsp]
+DataDic.dic_tlzf_qystatus cannot be resolved to a type
+250:                                 <select class="form-control" id="bc_status" name="bc_status" onchange="autoremark(this)"
+251:                                         style="font-size: 14px;">
+252:                                     <option value="0">请选择</option>
+253:                                     <%=Tools.dicopt(DataDic.dic_tlzf_qystatus,infodb.get("bc_status"))%>
+254:                                 </select>
+255:                             </div>
+256:                         </div>
+
+
+An error occurred at line: [303] in the jsp file: [/WEB-INF/jsp/manager/cwgl/yhqy.form.jsp]
+DataDic.dic_zx_status cannot be resolved to a type
+300:             <div class="form-group">
+301:                 <label class="col-sm-2 control-label">历史记录</label>
+302:                 <div class="col-sm-10">
+303:                     <textarea style="width: 80%; height: 200px" class="form-control" disabled=""><%TtList lslist=(TtList) request.getAttribute("resultlist");if(lslist!=null&&lslist.size()>0){ for(TtMap l:lslist){%><%=l.get("dt_add")%>:状态:<%=DataDic.dic_zx_status.get(l.get("status"))%>,留言:<%=l.get("remark").replace("null","")%>&#10;<%}} %></textarea>
+304:                 </div>
+305:             </div>
+306:             <input id="merchant_id" name="merchant_id" value="" type="hidden" />
+
+
+Stacktrace:
+2019-05-06 11:20:31  [ http-nio-8098-exec-5:3450318 ] - [ ERROR ]  {conn-910001, stmt-920011} execute error. update tlzf_qy set `cvv2`='', `imgstep17_1ss`='images/mgcaraddimg.jpg', `account_type`='00', `vailddate`='', `merrem`='', `agrmno`='AIP3989190423000002717', `qy_status`='2', `remark`='', `merchant_id`='', `account_no`='6222004000493013989', `icbc_id`='852', `req_sn`='200604000006429-1557112720454', `dt_edit`='2019-05-06 11:20:31', `account_name`='嵇竹中', `cardid`='620528197501116230', `tel`='15601257600', `result_content`='{
+ "INFO":  {
+  "TRX_CODE": "310002",
+  "VERSION": "04",
+  "DATA_TYPE": "2",
+  "REQ_SN": "200604000006429-1557112755265",
+  "RET_CODE": "0000",
+  "ERR_MSG": "提交成功",
+  "SIGNED_MSG": "51aa7e87d0cda96bb058048b44771bd83d276f42ef08c0ff6040d7ff83750789a974c3426b405c8588d17bb2dbe79e953bdf32ac37906393b0b6a15d5bd53f967af33d8ad5808ba248e2ea99618b0110625fefaddce0150e8eeb70945d4d27abc44e3168d16221e7c8c14534baa95fcfc248ce1205e8575266d38022f2996f7868ba6121597bd82f010b508b0f2fecc21af0bfa6d35c6f763200f996a919d9fc3a6c96dfcccf19f900eb5799f7e59c1b20b88206aa4e3b66349c226fad2b2020524d38068aeadd35eb6f9c2438ee471c4685278a8ba7f1d2fee184ba250daee6ec4edd0f042cd8e35d7735315a0df9911cb9b2c8cc688a26d52120938f066897"
+ },
+ "FAGRCRET":  {
+  "AGRMNO": "AIP3989190423000002717",
+  "RET_CODE": "0000",
+  "ERR_MSG": "处理成功"
+ }
+}', `bank_code`='0102', `result_msg`='处理成功', `bc_status`='3', `cardid_type`='0', `smscode`='111111', `account_prop`='0', `result_code`='0000', `mid_edit`='4793' where id='6'
+com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long for column 'result_content' at row 1
 	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:104)
-	at com.mysql.cj.jdbc.StatementImpl.executeUpdateInternal(StatementImpl.java:1354)
-	at com.mysql.cj.jdbc.StatementImpl.executeLargeUpdate(StatementImpl.java:2132)
-	at com.mysql.cj.jdbc.StatementImpl.executeUpdate(StatementImpl.java:1359)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3104)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeUpdate(FilterAdapter.java:2514)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeUpdate(FilterEventAdapter.java:350)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3102)
-	at com.alibaba.druid.wall.WallFilter.statement_executeUpdate(WallFilter.java:561)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3102)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeUpdate(FilterAdapter.java:2514)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeUpdate(FilterEventAdapter.java:350)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3102)
-	at com.alibaba.druid.proxy.jdbc.StatementProxyImpl.executeUpdate(StatementProxyImpl.java:249)
-	at com.alibaba.druid.pool.DruidPooledStatement.executeUpdate(DruidPooledStatement.java:370)
-	at com.tt.tool.DbTools.recinsert(DbTools.java:230)
-	at com.tt.tool.DbCtrl.addData(DbCtrl.java:587)
-	at com.tt.tool.DbCtrl.add(DbCtrl.java:627)
-	at com.tt.tool.Tools.recAdd(Tools.java:694)
-	at com.tt.table.dsgl.doPost(dsgl.java:280)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:781)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at com.alibaba.druid.filter.FilterChainImpl.statement_execute(FilterChainImpl.java:2958)
+	at com.alibaba.druid.filter.FilterAdapter.statement_execute(FilterAdapter.java:2473)
+	at com.alibaba.druid.filter.FilterEventAdapter.statement_execute(FilterEventAdapter.java:188)
+	at com.alibaba.druid.filter.FilterChainImpl.statement_execute(FilterChainImpl.java:2956)
+	at com.alibaba.druid.wall.WallFilter.statement_execute(WallFilter.java:415)
+	at com.alibaba.druid.filter.FilterChainImpl.statement_execute(FilterChainImpl.java:2956)
+	at com.alibaba.druid.filter.FilterAdapter.statement_execute(FilterAdapter.java:2473)
+	at com.alibaba.druid.filter.FilterEventAdapter.statement_execute(FilterEventAdapter.java:188)
+	at com.alibaba.druid.filter.FilterChainImpl.statement_execute(FilterChainImpl.java:2956)
+	at com.alibaba.druid.proxy.jdbc.StatementProxyImpl.execute(StatementProxyImpl.java:147)
+	at com.alibaba.druid.pool.DruidPooledStatement.execute(DruidPooledStatement.java:619)
+	at com.tt.tool.DbTools.recupdate(DbTools.java:210)
+	at com.tt.tool.DbCtrl.editData(DbCtrl.java:479)
+	at com.tt.tool.DbCtrl.edit(DbCtrl.java:555)
+	at com.tt.table.yhqy.doPost(yhqy.java:145)
 	at com.tt.manager.ManagerPost.doPost(ManagerPost.java:66)
 	at com.tt.manager.Manager.indexpost(Manager.java:65)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -79,32 +143,4 @@ com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Incorrect dat
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
-2019-04-30 11:23:48  [ http-nio-8098-exec-1:487028 ] - [ ERROR ]  Tools.logError:Data truncation: Incorrect date value: '2020-02-30' for column 'ds_date' at row 1
-2019-04-30 14:09:26  [ http-nio-8098-exec-3:1030549 ] - [ ERROR ]  Tools.logError:com.tt.table.sys_modal_hbyh
-2019-04-30 14:19:38  [ http-nio-8098-exec-7:1642138 ] - [ ERROR ]  Tools.logError:null
-2019-04-30 14:19:38  [ http-nio-8098-exec-7:1642469 ] - [ ERROR ]  Tools.logError:http%3A%2F%2Flocalhost%3A8098%2Fmanager%2Findex%7C%2Fmanager%2Findex%7Csdo%3Dlist%26cn%3Ddsgl%26type%3Dcwgl%26dtbe%3D%26kw%3D%25E7%25AB%25B9:An exception occurred processing [/WEB-INF/jsp/manager/list.jsp] at line [21]
-
-18: 		JspTools.alert(errorMsg,out);
-19: 	}
-20: 	String sPlUrl = Tools.urlKill("l|p");
-21: 	int pages =(int) request.getAttribute("pages");
-22: 	boolean canDel = request.getAttribute("canDel")==null?false:(boolean)request.getAttribute("canDel"); //是否显示删除按钮
-23: 	boolean canAdd = request.getAttribute("canAdd")==null?true:(boolean)request.getAttribute("canAdd"); //是否显示新增按钮
-24: 	String type = request.getParameter("type");
-
-
-Stacktrace:
-2019-04-30 14:20:14  [ http-nio-8098-exec-4:1678918 ] - [ ERROR ]  Tools.logError:null
-2019-04-30 14:20:14  [ http-nio-8098-exec-4:1679020 ] - [ ERROR ]  Tools.logError:http%3A%2F%2Flocalhost%3A8098%2Fmanager%2Findex%7C%2Fmanager%2Findex%7Csdo%3Dlist%26cn%3Ddsgl%26type%3Dcwgl%26dtbe%3D%26kw%3D%25E7%25AB%25B9:An exception occurred processing [/WEB-INF/jsp/manager/list.jsp] at line [21]
-
-18: 		JspTools.alert(errorMsg,out);
-19: 	}
-20: 	String sPlUrl = Tools.urlKill("l|p");
-21: 	int pages =(int) request.getAttribute("pages");
-22: 	boolean canDel = request.getAttribute("canDel")==null?false:(boolean)request.getAttribute("canDel"); //是否显示删除按钮
-23: 	boolean canAdd = request.getAttribute("canAdd")==null?true:(boolean)request.getAttribute("canAdd"); //是否显示新增按钮
-24: 	String type = request.getParameter("type");
-
-
-Stacktrace:
-2019-04-30 14:39:53  [ http-nio-8098-exec-1:271896 ] - [ ERROR ]  Tools.logError:sql injection violation, syntax error: error : pos 57, line 1, column 57, token RPAREN : select SQL_CALC_FOUND_ROWS t.*,i.c_name as c_name,SUM(t.) from tlzf_dk_details t  LEFT JOIN kj_icbc i ON i.id=t.icbc_id    where true  AND t.ds_date >= '2019-04-30' and t.ds_date <='2019-08-31' ORDER BY t.dt_edit DESC   limit 0,10 
+2019-05-06 11:20:31  [ http-nio-8098-exec-5:3450321 ] - [ ERROR ]  Tools.logError:Data truncation: Data too long for column 'result_content' at row 1

@@ -1,0 +1,16 @@
+[15:31:33] Config - Tools.logError:com.tt.table.sys_modal_hbyh
+[16:21:46] Config - Tools.logError:com.tt.table.sys_modal_hbyh
+[16:24:48] Config - Tools.logError:com.tt.table.sys_modal_hbyh
+[16:27:12] Config - Tools.logError:null
+[16:27:12] Config - Tools.logError:http%3A%2F%2Flocalhost%3A8098%2Fmanager%2Findex%7C%2Fmanager%2Findex%7Ccn%3Ddsgl%26sdo%3Dlist%26type%3Dcwgl%26dt%3D2019-05-05:An exception occurred processing [/WEB-INF/jsp/manager/list.jsp] at line [21]
+
+18: 		JspTools.alert(errorMsg,out);
+19: 	}
+20: 	String sPlUrl = Tools.urlKill("l|p");
+21: 	int pages =(int) request.getAttribute("pages");
+22: 	boolean canDel = request.getAttribute("canDel")==null?false:(boolean)request.getAttribute("canDel"); //是否显示删除按钮
+23: 	boolean canAdd = request.getAttribute("canAdd")==null?true:(boolean)request.getAttribute("canAdd"); //是否显示新增按钮
+24: 	String type = request.getParameter("type");
+
+
+Stacktrace:

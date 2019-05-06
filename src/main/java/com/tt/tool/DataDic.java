@@ -94,7 +94,7 @@ public class DataDic {
         dic_app.put("3","厦门国际");
         dic_app.put("4","华夏银行");
         /*通联支付协议状态*/
-        dic_tlzf_xy_status.put("0","");
+        dic_tlzf_xy_status.put("0","无");
         dic_tlzf_xy_status.put("1","失效");
         dic_tlzf_xy_status.put("2","有效");
         /*通联支付手动状态*/

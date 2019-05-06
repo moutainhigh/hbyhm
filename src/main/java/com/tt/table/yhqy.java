@@ -107,8 +107,22 @@ public class yhqy extends DbCtrl {
             request.setAttribute("errorMsg", "权限访问错误！");
             return;
         }
+        String wsql="";
+        if(!Tools.myIsNull(post.get("app"))){
+            switch (post.get("app")) {
+                case "2":
+                    wsql=" and app=2";
+                    break;
+                case "3":
+                    wsql=" and app=3";
+                    break;
+                case "4":
+                    wsql=" and app=4";
+                    break;
+            }
+        }
         //查询主订单客户
-        TtList icbclist = Tools.reclist("select * from kj_icbc where app=2");
+        TtList icbclist = Tools.reclist("select * from kj_icbc where true "+wsql);
         request.setAttribute("icbclist", icbclist);
         long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
         TtMap info = info(nid);

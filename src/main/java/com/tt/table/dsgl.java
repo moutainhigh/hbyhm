@@ -34,7 +34,7 @@ import java.text.SimpleDateFormat;
  * 代收
  */
 public class dsgl extends DbCtrl {
-    private final String title = "通联代收列表";
+    private String title = "通联代收列表";
     private String orderString = "ORDER BY t.dt_edit DESC"; // 默认排序
     private boolean canDel = false;
     private boolean canAdd = false;
@@ -78,28 +78,33 @@ public class dsgl extends DbCtrl {
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
 
+
         /* 开始处理搜索过来的字段 */
-        if(Tools.myIsNull(post.get("api_type")) == false){
-            whereString += "AND t.api_type="+post.get("api_type");
+        if (Tools.myIsNull(post.get("api_type")) == false) {
+            whereString += "AND t.api_type=" + post.get("api_type");
+            request.setAttribute("api_type", post.get("api_type"));
+        }
+        if (post.get("api_type").equals("1")) {
+            title = "通联代付列表";
         }
         kw = post.get("kw");
         dtbe = post.get("dtbe");
 
-        System.out.println("dtbe:"+dtbe);
+        System.out.println("dtbe:" + dtbe);
         if (Tools.myIsNull(kw) == false) {
             whereString += " AND t.account_name like '%" + kw + "%'";
         }
         if (Tools.myIsNull(dtbe) == false) {
-           // dtbe = dtbe.replace("%2f", "-").replace("+", "");
+            // dtbe = dtbe.replace("%2f", "-").replace("+", "");
             String[] dtArr = dtbe.split(" - ");
             dtArr[0] = dtArr[0].trim();
             dtArr[1] = dtArr[1].trim();
             System.out.println("DTBE开始日期:" + dtArr[0] + "结束日期:" + dtArr[1]);
             // todo处理选择时间段
-            whereString += " AND t.ds_date >= '"+dtArr[0]+"' and t.ds_date <='"+dtArr[1]+"'";
+            whereString += " AND t.ds_date >= '" + dtArr[0] + "' and t.ds_date <='" + dtArr[1] + "'";
         }
-        if(Tools.myIsNull(post.get("dt")) == false){
-            whereString += " AND t.ds_date = '"+post.get("dt")+"'";
+        if (Tools.myIsNull(post.get("dt")) == false) {
+            whereString += " AND t.ds_date = '" + post.get("dt") + "'";
         }
         /* 搜索过来的字段处理完成 */
         whereString += tmpWhere; // 过滤
@@ -116,21 +121,20 @@ public class dsgl extends DbCtrl {
             }
         }
         //计算总金额 并转换单位
-        int total=0;
+        int total = 0;
         double totals = 0;
-        if(list.size()>0){
-        for(TtMap ttMap:list){
-            if(!Tools.myIsNull(ttMap.get("fw_price"))){
-                total=total+Integer.parseInt(ttMap.get("fw_price"));
+        if (list.size() > 0) {
+            for (TtMap ttMap : list) {
+                if (!Tools.myIsNull(ttMap.get("fw_price"))) {
+                    total = total + Integer.parseInt(ttMap.get("fw_price"));
+                }
             }
-        }
-            System.out.println("total:"+total);
+            System.out.println("total:" + total);
             BigDecimal bigDecimal1 = new BigDecimal(total);
             BigDecimal bigDecimal2 = new BigDecimal(100);
-            BigDecimal bigDecimalDivide = bigDecimal1.divide(bigDecimal2, 4, BigDecimal.ROUND_HALF_UP);
-            totals = bigDecimalDivide.doubleValue();
+            BigDecimal bigDecimalDivide = bigDecimal1.divide(bigDecimal2, 2, BigDecimal.ROUND_HALF_UP);
+            request.setAttribute("totals", bigDecimalDivide);
         }
-        request.setAttribute("totals", totals);
         request.setAttribute("list", list);// 列表list数据
         request.setAttribute("recs", recs); // 总记录数
         String htmlpages = getPage("", 0, false); // 分页html代码,
@@ -158,7 +162,7 @@ public class dsgl extends DbCtrl {
             request.setAttribute("cn", cn);
             request.setAttribute("type", type);
         }
-        TtList dslist=new TtList();
+        TtList dslist = new TtList();
         //tl入口  1签约  2 分期代收  3代收
         switch (post.get("tl")) {
             case "1":
@@ -225,20 +229,20 @@ public class dsgl extends DbCtrl {
                         if (dklist.size() > 0) {
                             errorCode = 3;
                             errorMsg = "已创建代收列表";
-                        }else{
-                            int qs=Integer.parseInt(post.get("periods"));
+                        } else {
+                            int qs = Integer.parseInt(post.get("periods"));
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                            String first_date=post.get("ds_date");
+                            String first_date = post.get("ds_date");
                             String[] dates = first_date.split("-");//获取年
-                            int year=Integer.parseInt(dates[0]);
-                            int month=Integer.parseInt(dates[1]);
-                            int day=Integer.parseInt(dates[2]);
-                            int first_days=Integer.parseInt(addDate.getMonthMaxDay(first_date));
-                            for(int i=1;i<=qs;i++) {
+                            int year = Integer.parseInt(dates[0]);
+                            int month = Integer.parseInt(dates[1]);
+                            int day = Integer.parseInt(dates[2]);
+                            int first_days = Integer.parseInt(addDate.getMonthMaxDay(first_date));
+                            for (int i = 1; i <= qs; i++) {
                                 TtMap ttMap = new TtMap();
-                                if(i==1){
-                                    ttMap.put("ds_date",first_date);
-                                }else {
+                                if (i == 1) {
+                                    ttMap.put("ds_date", first_date);
+                                } else {
                                     String days = "";
                                     int pm = month % 12;
 
@@ -288,13 +292,13 @@ public class dsgl extends DbCtrl {
                                 ttMap.put("vailddate", qy.get("vailddate"));
                                 ttMap.put("cust_userid", post.get("remark"));
                                 ttMap.put("summary", "");
-                                ttMap.put("currency","CNY");
+                                ttMap.put("currency", "CNY");
                                 ttMap.put("remark", post.get("remark"));
                                 ttMap.put("icbc_id", post.get("icbc_id"));
                                 ttMap.put("bc_status", "1");
                                 ttMap.put("gems_id", minfo.get("gemsid"));
                                 ttMap.put("gems_fs_id", minfo.get("icbc_erp_fsid"));
-                                ttMap.put("periods",String.valueOf(i));
+                                ttMap.put("periods", String.valueOf(i));
                                 ttMap.put("fw_price", post.get("fw_price"));
                                 ttMap.put("sd_status", "1");
                                 ttMap.put("api_type", "0");
@@ -302,7 +306,7 @@ public class dsgl extends DbCtrl {
                                 TtMap result = new TtMap();
                                 result.put("qryid", String.valueOf(dk_id));
                                 result.put("status", ttMap.get("bc_status"));
-                                result.put("remark",post.get("remark"));
+                                result.put("remark", post.get("remark"));
                                 Tools.recAdd(result, "tlzf_dk_details_result");
                             }
                         }
@@ -428,20 +432,20 @@ public class dsgl extends DbCtrl {
                     if (dklist.size() > 0) {
                         errorCode = 3;
                         errorMsg = "已创建代付列表";
-                    }else{
-                        int qs=Integer.parseInt(post.get("periods"));
+                    } else {
+                        int qs = Integer.parseInt(post.get("periods"));
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        String first_date=post.get("ds_date");
+                        String first_date = post.get("ds_date");
                         String[] dates = first_date.split("-");//获取年
-                        int year=Integer.parseInt(dates[0]);
-                        int month=Integer.parseInt(dates[1]);
-                        int day=Integer.parseInt(dates[2]);
-                        int first_days=Integer.parseInt(addDate.getMonthMaxDay(first_date));
-                        for(int i=1;i<=qs;i++) {
+                        int year = Integer.parseInt(dates[0]);
+                        int month = Integer.parseInt(dates[1]);
+                        int day = Integer.parseInt(dates[2]);
+                        int first_days = Integer.parseInt(addDate.getMonthMaxDay(first_date));
+                        for (int i = 1; i <= qs; i++) {
                             TtMap ttMap = new TtMap();
-                            if(i==1){
-                                ttMap.put("ds_date",first_date);
-                            }else {
+                            if (i == 1) {
+                                ttMap.put("ds_date", first_date);
+                            } else {
                                 String days = "";
                                 int pm = month % 12;
 
@@ -479,7 +483,7 @@ public class dsgl extends DbCtrl {
                             ttMap.put("req_sn", "");
                             ttMap.put("business_code", "");
                             ttMap.put("submit_time", Tools.getDatetoaa());
-                            ttMap.put("agrmno","");
+                            ttMap.put("agrmno", "");
                             ttMap.put("account_no", post.get("account_no"));
                             ttMap.put("bank_code", post.get("bank_code"));
                             ttMap.put("account_name", post.get("account_name"));
@@ -491,13 +495,13 @@ public class dsgl extends DbCtrl {
                             ttMap.put("vailddate", post.get("vailddate"));
                             ttMap.put("cust_userid", post.get("remark"));
                             ttMap.put("summary", "");
-                            ttMap.put("currency",post.get("currency"));
+                            ttMap.put("currency", post.get("currency"));
                             ttMap.put("remark", post.get("remark"));
                             ttMap.put("icbc_id", post.get("icbc_id"));
                             ttMap.put("bc_status", "1");
                             ttMap.put("gems_id", minfo.get("gemsid"));
                             ttMap.put("gems_fs_id", minfo.get("icbc_erp_fsid"));
-                            ttMap.put("periods",String.valueOf(i));
+                            ttMap.put("periods", String.valueOf(i));
                             ttMap.put("fw_price", post.get("fw_price"));
                             ttMap.put("sd_status", "1");
                             ttMap.put("api_type", "1");
@@ -505,7 +509,7 @@ public class dsgl extends DbCtrl {
                             TtMap result = new TtMap();
                             result.put("qryid", String.valueOf(dk_id));
                             result.put("status", ttMap.get("bc_status"));
-                            result.put("remark",post.get("remark"));
+                            result.put("remark", post.get("remark"));
                             Tools.recAdd(result, "tlzf_dk_details_result");
                         }
                     }
@@ -535,6 +539,14 @@ public class dsgl extends DbCtrl {
         } else {
             System.out.println("表单验证star");
             String myErroMsg = "";
+            if (array.get("tl").equals("1")) {
+                if (Tools.myIsNull(array.get("account_no"))) {
+                    myErroMsg += "借记卡号/信用卡号不能为空！\n";
+                }
+            } else if (array.get("tl").equals("2")) {
+                if (Tools.myIsNull(array.get("fw_price"))) {
+                    myErroMsg += "服务费不能为空！\n";
+                }
                 if (Tools.myIsNull(array.get("periods"))) {
                     myErroMsg += "期数不能为空！\n";
                 }
@@ -544,13 +556,33 @@ public class dsgl extends DbCtrl {
                 if (Tools.myIsNull(array.get("amount"))) {
                     myErroMsg += "代收总金额不能为空！\n";
                 }
-            if(array.get("tl").equals("3")){
                 if (Tools.myIsNull(array.get("account_name"))) {
                     myErroMsg += "账户名不能为空！\n";
                 }
                 if (Tools.myIsNull(array.get("account_no"))) {
                     myErroMsg += "银行卡号不能为空！\n";
                 }
+            } else if (array.get("tl").equals("3")) {
+                if (Tools.myIsNull(array.get("fw_price"))) {
+                    myErroMsg += "服务费不能为空！\n";
+                }
+                if (Tools.myIsNull(array.get("periods"))) {
+                    myErroMsg += "期数不能为空！\n";
+                }
+                if (Tools.myIsNull(array.get("ds_date"))) {
+                    myErroMsg += "代收日期不能为空！\n";
+                }
+                if (Tools.myIsNull(array.get("amount"))) {
+                    myErroMsg += "代收总金额不能为空！\n";
+                }
+                if (Tools.myIsNull(array.get("account_name"))) {
+                    myErroMsg += "账户名不能为空！\n";
+                }
+                if (Tools.myIsNull(array.get("account_no"))) {
+                    myErroMsg += "银行卡号不能为空！\n";
+                }
+            }else{
+
             }
             super.errorMsg = super.chkMsg = myErroMsg;
             if (!Tools.myIsNull(myErroMsg)) {

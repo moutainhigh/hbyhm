@@ -20,6 +20,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.channels.FileChannel;
@@ -1584,5 +1585,15 @@ public class Tools {
 		return Integer.valueOf(timestamp);
 	}
 
+	/**
+	 * 金额转换
+	 * @return
+	 */
+	public static BigDecimal getprice(int price,int num){
+		BigDecimal bigDecimal1 = new BigDecimal(price);
+		BigDecimal bigDecimal2 = new BigDecimal(num);
+		BigDecimal bigDecimalDivide = bigDecimal1.divide(bigDecimal2, 2, BigDecimal.ROUND_HALF_UP);
+		return bigDecimalDivide;
+	}
 
 }

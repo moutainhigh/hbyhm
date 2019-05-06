@@ -43,6 +43,9 @@
                                 状态
                             </th>
                             <th class="text-center">操作</th>
+                            <th class="hidden-xs text-center" style="width: 200px">
+                                通联签约代收
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -80,6 +83,65 @@
                                         </a>
                                     </div>
                                 </td>
+                                <td class="hidden-xs text-center" style="width: 200px">
+                                    <%if (m.get("dy_bc_status").equals("3")) {%>
+
+                                    <%
+                                        if(m.get("qy_bc_status").equals("3")){
+                                    %>
+                                    <a id="modal_qy<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
+                                       href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=1&id=<%=m.get("id")%>&nextUrl=zxlr_tyjj"
+                                       class="btn btn-success">
+                                        <i class="fa fa-credit-card"></i>
+                                    </a>
+                                    <a id="modal_ds<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
+                                       href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=2&id=<%=m.get("id")%>&nextUrl=zxlr_tyjj"
+                                       class="btn btn-success">
+                                        <i class="fa fa-sign-in"></i>
+                                    </a>
+                                    <a id="modal_df<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
+                                       href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=3&id=<%=m.get("id")%>&nextUrl=zxlr_tyjj"
+                                       class="btn btn-warning">
+                                        <i class="fa fa-sign-in"></i>
+                                    </a>
+                                    <%}else {%>
+                                    <a id="modal_qy<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
+                                       href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=1&id=<%=m.get("id")%>&nextUrl=zxlr_tyjj"
+                                       class="btn btn-default">
+                                        <i class="fa fa-credit-card"></i>
+                                    </a>
+                                    <a id="modal_ds<%=m.get("id")%>"
+                                       href="javascript:alert('暂未签约,清先签约')"
+                                       class="btn btn-default">
+                                        <i class="fa fa-sign-in"></i>
+                                    </a>
+                                    <a id="modal_df<%=m.get("id")%>" data-toggle="modal" style="" data-target="#modal"
+                                       href="/manager/index?cn=dsgl&type=cwgl&sdo=float&tl=3&id=<%=m.get("id")%>&nextUrl=zxlr_tyjj"
+                                       class="btn btn-warning">
+                                        <i class="fa fa-sign-in"></i>
+                                    </a>
+                                    <%}%>
+                                    <%
+                                    } else {
+                                    %>
+                                    <a id="modal_ds<%=m.get("id")%>"
+                                       href="javascript:alert('抵押未通过,不能签约')"
+                                       class="btn btn-default">
+                                        <i class="fa fa-credit-card"></i>
+                                    </a>
+                                    <a id="modal_ds<%=m.get("id")%>"
+                                       href="javascript:alert('暂未签约,清先签约')"
+                                       class="btn btn-default">
+                                        <i class="fa fa-sign-in"></i>
+                                    </a>
+                                    <a id="modal_df<%=m.get("id")%>"
+                                       href="javascript:alert('暂未签约,清先签约')"
+                                       class="btn btn-default">
+                                        <i class="fa fa-sign-in"></i>
+                                    </a>
+                                    <%}%>
+                                </td>
+
                             </tr>
                             <%}}%>
                         </tbody>

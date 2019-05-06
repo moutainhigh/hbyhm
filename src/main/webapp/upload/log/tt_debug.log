@@ -1,61 +1,136 @@
-2019-04-30 09:47:23  [ http-nio-8098-exec-4:1 ] - [ INFO ]  权限检查成功！
-2019-04-30 09:47:25  [ http-nio-8098-exec-5:1866 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 09:47:31  [ http-nio-8098-exec-8:8253 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 09:47:33  [ http-nio-8098-exec-9:10376 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-04-30 09:47:35  [ http-nio-8098-exec-7:12294 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 09:47:37  [ http-nio-8098-exec-1:14185 ] - [ INFO ]  权限检查成功！
-2019-04-30 09:47:39  [ http-nio-8098-exec-3:15860 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 09:54:25  [ http-nio-8098-exec-6:421699 ] - [ INFO ]  权限检查成功！
-2019-04-30 09:54:26  [ http-nio-8098-exec-8:423351 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 09:55:20  [ http-nio-8098-exec-1:477124 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 09:55:48  [ http-nio-8098-exec-2:504994 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 10:01:12  [ http-nio-8098-exec-1:828923 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 10:04:06  [ http-nio-8098-exec-1:1003203 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 10:04:09  [ http-nio-8098-exec-3:1005697 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 10:04:19  [ http-nio-8098-exec-6:1015971 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 10:04:25  [ http-nio-8098-exec-8:1022440 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 10:53:34  [ http-nio-8098-exec-2:3971070 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 10:53:35  [ http-nio-8098-exec-5:3972444 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:08:54  [ http-nio-8098-exec-8:4891202 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:08:55  [ http-nio-8098-exec-3:4892413 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:08:58  [ http-nio-8098-exec-10:4894932 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:11:51  [ http-nio-8098-exec-2:5067737 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:11:54  [ http-nio-8098-exec-1:5070740 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:13:05  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-04-30 11:13:07  [ http-nio-8098-exec-4:2243 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:15:41  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-04-30 11:15:43  [ http-nio-8098-exec-6:1941 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:17:13  [ http-nio-8098-exec-1:91405 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:20:26  [ http-nio-8098-exec-1:284972 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:20:41  [ http-nio-8098-exec-4:299829 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:20:48  [ http-nio-8098-exec-7:306408 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:22:10  [ http-nio-8098-exec-1:388728 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:22:25  [ http-nio-8098-exec-4:403518 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:23:37  [ http-nio-8098-exec-7:476012 ] - [ INFO ]  权限检查成功！
-2019-04-30 11:23:39  [ http-nio-8098-exec-8:477466 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:23:48  [ http-nio-8098-exec-1:486863 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:23:48  [ http-nio-8098-exec-1:487017 ] - [ ERROR ]  {conn-310002, stmt-320232} execute error. insert into tlzf_dk_details set `cvv2`='', `dt_add`='2019-04-30 11:23:48', `vailddate`='', `agrmno`='AIP3989190423000002717', `gems_id`='4517', `ds_date`='2020-02-30', `business_code`='', `remark`='', `mid_add`='4793', `account_no`='6222004000493013989', `icbc_id`='841', `qd_type`='0', `req_sn`='', `sd_status`='1', `dt_edit`='2019-04-30 11:23:48', `api_type`='0', `account_name`='嵇竹中', `cardid`='620528197501116230', `periods`='11', `tel`='15601257600', `currency`='CNY', `gems_fs_id`='1708', `summary`='', `bank_code`='0102', `amount`='12', `fw_price`='1', `submit_time`='20190430112348', `cust_userid`='', `bc_status`='1', `cardid_type`='0', `mid_edit`='4793'
-com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Incorrect date value: '2020-02-30' for column 'ds_date' at row 1
+2019-05-06 10:23:01  [ http-nio-8098-exec-1:0 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:23:04  [ http-nio-8098-exec-2:3429 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:23:06  [ http-nio-8098-exec-3:5178 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:31:21  [ http-nio-8098-exec-7:500655 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:31:23  [ http-nio-8098-exec-8:502092 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:31:24  [ http-nio-8098-exec-9:503367 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:31:29  [ http-nio-8098-exec-3:508220 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:35:24  [ http-nio-8098-exec-5:743014 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:35:45  [ http-nio-8098-exec-10:764385 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:35:48  [ http-nio-8098-exec-3:767387 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:35:51  [ http-nio-8098-exec-7:770137 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:35:51  [ http-nio-8098-exec-7:770418 ] - [ ERROR ]  Tools.logError:http%3A%2F%2Flocalhost%3A8098%2FWEB-INF%2Fjsp%2Fmanager%2Findex_b.jsp%7C%2FWEB-INF%2Fjsp%2Fmanager%2Findex_b.jsp%7Ccn%3Dhxyh_zxlr%26sdo%3Dlist%26type%3Dhxyh:An exception occurred processing [/WEB-INF/jsp/manager/hxyh/hxyh_zxlr.list.jsp] at line [87]
+
+84:                                     </div>
+85:                                 </td>
+86:                                 <td class="hidden-xs text-center" style="width: 200px">
+87:                                     <%if (m.get("dy_bc_status").equals("3")) {%>
+88: 
+89:                                     <%
+90:                                         if(m.get("qy_bc_status").equals("3")){
+
+
+Stacktrace:
+2019-05-06 10:42:55  [ http-nio-8098-exec-1:1194342 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:42:59  [ http-nio-8098-exec-3:1197905 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:51:10  [ http-nio-8098-exec-2:1688961 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:51:13  [ http-nio-8098-exec-1:1692564 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:51:15  [ http-nio-8098-exec-3:1694521 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:51:20  [ http-nio-8098-exec-5:1698976 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:51:22  [ http-nio-8098-exec-6:1700683 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:51:28  [ http-nio-8098-exec-9:1707117 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:51:33  [ http-nio-8098-exec-7:1712269 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:51:35  [ http-nio-8098-exec-10:1714139 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:51:37  [ http-nio-8098-exec-2:1716041 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:51:40  [ http-nio-8098-exec-1:1719068 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:51:42  [ http-nio-8098-exec-3:1721001 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-06 10:51:45  [ http-nio-8098-exec-6:1724591 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-06 10:52:13  [ http-nio-8098-exec-8:1752144 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-06 10:52:21  [ http-nio-8098-exec-7:1760376 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-06 10:52:27  [ http-nio-8098-exec-2:1765867 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-06 10:53:21  [ http-nio-8098-exec-1:1820374 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-06 10:54:27  [ http-nio-8098-exec-1:1885718 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-06 10:56:38  [ http-nio-8098-exec-1:2016788 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-06 10:57:35  [ http-nio-8098-exec-1:2074255 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:57:37  [ http-nio-8098-exec-2:2076395 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-06 10:57:52  [ http-nio-8098-exec-5:2091118 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-06 10:57:53  [ http-nio-8098-exec-6:2092655 ] - [ INFO ]  权限检查成功！
+2019-05-06 10:57:57  [ http-nio-8098-exec-8:2096251 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 10:58:01  [ http-nio-8098-exec-7:2100108 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 10:58:55  [ http-nio-8098-exec-1:2154199 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 10:58:58  [ http-nio-8098-exec-2:2157110 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 10:58:58  [ http-nio-8098-exec-2:2157450 ] - [ ERROR ]  Tools.logError:http%3A%2F%2Flocalhost%3A8098%2FWEB-INF%2Fjsp%2Fmanager%2Findex_b.jsp%7C%2FWEB-INF%2Fjsp%2Fmanager%2Findex_b.jsp%7Ccn%3Dyhqy%26type%3Dcwgl%26sdo%3Dform%26id%3D6:Unable to compile class for JSP: 
+
+An error occurred at line: [18] in the generated java file: [C:\Users\86176\AppData\Local\Temp\tomcat.6265385403817184122.8098\work\Tomcat\localhost\ROOT\org\apache\jsp\WEB_002dINF\jsp\manager\cwgl\yhqy_form_jsp.java]
+Only a type can be imported. com.tt.tool.DataDic resolves to a package
+
+An error occurred at line: [193] in the jsp file: [/WEB-INF/jsp/manager/cwgl/yhqy.form.jsp]
+DataDic.dic_tlzf_xy_status cannot be resolved to a type
+190:                                 <span class="input-group-addon" style="font-size: 14px;">协议状态</span>
+191:                                 <select class="form-control"  id="qy_status" name="qy_status"
+192:                                         style="font-size: 14px;">
+193:                                     <%=Tools.dicopt(DataDic.dic_tlzf_xy_status,infodb.get("qy_status"))%>
+194:                                 </select>
+195:                                 <span class="input-group-addon"><a onclick="tljy()">解约④</a></span>
+196:                             </div>
+
+
+An error occurred at line: [253] in the jsp file: [/WEB-INF/jsp/manager/cwgl/yhqy.form.jsp]
+DataDic.dic_tlzf_qystatus cannot be resolved to a type
+250:                                 <select class="form-control" id="bc_status" name="bc_status" onchange="autoremark(this)"
+251:                                         style="font-size: 14px;">
+252:                                     <option value="0">请选择</option>
+253:                                     <%=Tools.dicopt(DataDic.dic_tlzf_qystatus,infodb.get("bc_status"))%>
+254:                                 </select>
+255:                             </div>
+256:                         </div>
+
+
+An error occurred at line: [303] in the jsp file: [/WEB-INF/jsp/manager/cwgl/yhqy.form.jsp]
+DataDic.dic_zx_status cannot be resolved to a type
+300:             <div class="form-group">
+301:                 <label class="col-sm-2 control-label">历史记录</label>
+302:                 <div class="col-sm-10">
+303:                     <textarea style="width: 80%; height: 200px" class="form-control" disabled=""><%TtList lslist=(TtList) request.getAttribute("resultlist");if(lslist!=null&&lslist.size()>0){ for(TtMap l:lslist){%><%=l.get("dt_add")%>:状态:<%=DataDic.dic_zx_status.get(l.get("status"))%>,留言:<%=l.get("remark").replace("null","")%>&#10;<%}} %></textarea>
+304:                 </div>
+305:             </div>
+306:             <input id="merchant_id" name="merchant_id" value="" type="hidden" />
+
+
+Stacktrace:
+2019-05-06 10:59:00  [ http-nio-8098-exec-3:2159563 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 10:59:04  [ http-nio-8098-exec-1:2163213 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 10:59:12  [ http-nio-8098-exec-2:2171155 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 10:59:45  [ http-nio-8098-exec-4:2204515 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 10:59:49  [ http-nio-8098-exec-5:2208463 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 10:59:50  [ http-nio-8098-exec-6:2209605 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 11:18:08  [ http-nio-8098-exec-1:3307280 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 11:20:31  [ http-nio-8098-exec-5:3450305 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 11:20:31  [ http-nio-8098-exec-5:3450318 ] - [ ERROR ]  {conn-910001, stmt-920011} execute error. update tlzf_qy set `cvv2`='', `imgstep17_1ss`='images/mgcaraddimg.jpg', `account_type`='00', `vailddate`='', `merrem`='', `agrmno`='AIP3989190423000002717', `qy_status`='2', `remark`='', `merchant_id`='', `account_no`='6222004000493013989', `icbc_id`='852', `req_sn`='200604000006429-1557112720454', `dt_edit`='2019-05-06 11:20:31', `account_name`='嵇竹中', `cardid`='620528197501116230', `tel`='15601257600', `result_content`='{
+ "INFO":  {
+  "TRX_CODE": "310002",
+  "VERSION": "04",
+  "DATA_TYPE": "2",
+  "REQ_SN": "200604000006429-1557112755265",
+  "RET_CODE": "0000",
+  "ERR_MSG": "提交成功",
+  "SIGNED_MSG": "51aa7e87d0cda96bb058048b44771bd83d276f42ef08c0ff6040d7ff83750789a974c3426b405c8588d17bb2dbe79e953bdf32ac37906393b0b6a15d5bd53f967af33d8ad5808ba248e2ea99618b0110625fefaddce0150e8eeb70945d4d27abc44e3168d16221e7c8c14534baa95fcfc248ce1205e8575266d38022f2996f7868ba6121597bd82f010b508b0f2fecc21af0bfa6d35c6f763200f996a919d9fc3a6c96dfcccf19f900eb5799f7e59c1b20b88206aa4e3b66349c226fad2b2020524d38068aeadd35eb6f9c2438ee471c4685278a8ba7f1d2fee184ba250daee6ec4edd0f042cd8e35d7735315a0df9911cb9b2c8cc688a26d52120938f066897"
+ },
+ "FAGRCRET":  {
+  "AGRMNO": "AIP3989190423000002717",
+  "RET_CODE": "0000",
+  "ERR_MSG": "处理成功"
+ }
+}', `bank_code`='0102', `result_msg`='处理成功', `bc_status`='3', `cardid_type`='0', `smscode`='111111', `account_prop`='0', `result_code`='0000', `mid_edit`='4793' where id='6'
+com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long for column 'result_content' at row 1
 	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:104)
-	at com.mysql.cj.jdbc.StatementImpl.executeUpdateInternal(StatementImpl.java:1354)
-	at com.mysql.cj.jdbc.StatementImpl.executeLargeUpdate(StatementImpl.java:2132)
-	at com.mysql.cj.jdbc.StatementImpl.executeUpdate(StatementImpl.java:1359)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3104)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeUpdate(FilterAdapter.java:2514)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeUpdate(FilterEventAdapter.java:350)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3102)
-	at com.alibaba.druid.wall.WallFilter.statement_executeUpdate(WallFilter.java:561)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3102)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeUpdate(FilterAdapter.java:2514)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeUpdate(FilterEventAdapter.java:350)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3102)
-	at com.alibaba.druid.proxy.jdbc.StatementProxyImpl.executeUpdate(StatementProxyImpl.java:249)
-	at com.alibaba.druid.pool.DruidPooledStatement.executeUpdate(DruidPooledStatement.java:370)
-	at com.tt.tool.DbTools.recinsert(DbTools.java:230)
-	at com.tt.tool.DbCtrl.addData(DbCtrl.java:587)
-	at com.tt.tool.DbCtrl.add(DbCtrl.java:627)
-	at com.tt.tool.Tools.recAdd(Tools.java:694)
-	at com.tt.table.dsgl.doPost(dsgl.java:280)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:781)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at com.alibaba.druid.filter.FilterChainImpl.statement_execute(FilterChainImpl.java:2958)
+	at com.alibaba.druid.filter.FilterAdapter.statement_execute(FilterAdapter.java:2473)
+	at com.alibaba.druid.filter.FilterEventAdapter.statement_execute(FilterEventAdapter.java:188)
+	at com.alibaba.druid.filter.FilterChainImpl.statement_execute(FilterChainImpl.java:2956)
+	at com.alibaba.druid.wall.WallFilter.statement_execute(WallFilter.java:415)
+	at com.alibaba.druid.filter.FilterChainImpl.statement_execute(FilterChainImpl.java:2956)
+	at com.alibaba.druid.filter.FilterAdapter.statement_execute(FilterAdapter.java:2473)
+	at com.alibaba.druid.filter.FilterEventAdapter.statement_execute(FilterEventAdapter.java:188)
+	at com.alibaba.druid.filter.FilterChainImpl.statement_execute(FilterChainImpl.java:2956)
+	at com.alibaba.druid.proxy.jdbc.StatementProxyImpl.execute(StatementProxyImpl.java:147)
+	at com.alibaba.druid.pool.DruidPooledStatement.execute(DruidPooledStatement.java:619)
+	at com.tt.tool.DbTools.recupdate(DbTools.java:210)
+	at com.tt.tool.DbCtrl.editData(DbCtrl.java:479)
+	at com.tt.tool.DbCtrl.edit(DbCtrl.java:555)
+	at com.tt.table.yhqy.doPost(yhqy.java:145)
 	at com.tt.manager.ManagerPost.doPost(ManagerPost.java:66)
 	at com.tt.manager.Manager.indexpost(Manager.java:65)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -115,181 +190,14 @@ com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Incorrect dat
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
-2019-04-30 11:23:48  [ http-nio-8098-exec-1:487028 ] - [ ERROR ]  Tools.logError:Data truncation: Incorrect date value: '2020-02-30' for column 'ds_date' at row 1
-2019-04-30 11:23:49  [ http-nio-8098-exec-2:488186 ] - [ INFO ]  权限检查成功！
-2019-04-30 11:23:51  [ http-nio-8098-exec-3:489484 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:23:56  [ http-nio-8098-exec-5:495221 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:24:19  [ http-nio-8098-exec-7:517876 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:24:58  [ http-nio-8098-exec-10:556481 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:25:06  [ http-nio-8098-exec-1:565133 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:25:13  [ http-nio-8098-exec-2:571832 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:25:24  [ http-nio-8098-exec-5:583054 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:41:30  [ http-nio-8098-exec-1:1548822 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:41:35  [ http-nio-8098-exec-4:1553611 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:45:10  [ http-nio-8098-exec-10:1768621 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:49:30  [ http-nio-8098-exec-7:2028541 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:51:45  [ http-nio-8098-exec-2:2163705 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:51:59  [ http-nio-8098-exec-6:2177627 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:52:17  [ http-nio-8098-exec-10:2195425 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:57:33  [ http-nio-8098-exec-5:2511413 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:58:04  [ http-nio-8098-exec-10:2542922 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:58:42  [ http-nio-8098-exec-3:2580398 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 11:58:58  [ http-nio-8098-exec-8:2596792 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 12:02:25  [ http-nio-8098-exec-4:2803652 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 12:02:38  [ http-nio-8098-exec-8:2816458 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 12:02:38  [ http-nio-8098-exec-9:2816498 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 12:10:12  [ http-nio-8098-exec-2:3271014 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-04-30 12:10:15  [ http-nio-8098-exec-3:3273812 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-04-30 12:10:16  [ http-nio-8098-exec-5:3275235 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-04-30 13:52:15  [ http-nio-8098-exec-1:0 ] - [ INFO ]  权限检查成功！
-2019-04-30 13:52:19  [ http-nio-8098-exec-2:3904 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 13:56:32  [ http-nio-8098-exec-1:256825 ] - [ INFO ]  权限检查成功！
-2019-04-30 13:56:34  [ http-nio-8098-exec-3:258906 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 13:57:58  [ http-nio-8098-exec-7:342711 ] - [ INFO ]  权限检查成功！
-2019-04-30 13:58:00  [ http-nio-8098-exec-2:344416 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 13:58:47  [ http-nio-8098-exec-3:391183 ] - [ INFO ]  权限检查成功！
-2019-04-30 13:58:51  [ http-nio-8098-exec-7:395177 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 13:59:28  [ http-nio-8098-exec-8:432149 ] - [ INFO ]  权限检查成功！
-2019-04-30 13:59:29  [ http-nio-8098-exec-1:433880 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 13:59:43  [ http-nio-8098-exec-6:447673 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-04-30 13:59:44  [ http-nio-8098-exec-10:448407 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 13:59:46  [ http-nio-8098-exec-4:451039 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 13:59:48  [ http-nio-8098-exec-1:452626 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 13:59:50  [ http-nio-8098-exec-9:454536 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:00:19  [ http-nio-8098-exec-10:483540 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:00:36  [ http-nio-8098-exec-5:500699 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:03:56  [ http-nio-8098-exec-1:700996 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:04:31  [ http-nio-8098-exec-10:735864 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:04:40  [ http-nio-8098-exec-7:744596 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:04:44  [ http-nio-8098-exec-8:748637 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:04:46  [ http-nio-8098-exec-2:750444 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:06:56  [ http-nio-8098-exec-10:880680 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:07:07  [ http-nio-8098-exec-5:891606 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:07:50  [ http-nio-8098-exec-8:934088 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:07:54  [ http-nio-8098-exec-10:938467 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:08:09  [ http-nio-8098-exec-5:953179 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:08:12  [ http-nio-8098-exec-7:956939 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:08:33  [ http-nio-8098-exec-3:977490 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:08:37  [ http-nio-8098-exec-2:981069 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:08:44  [ http-nio-8098-exec-2:988836 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:08:46  [ http-nio-8098-exec-9:990620 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:08:48  [ http-nio-8098-exec-9:992622 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:08:50  [ http-nio-8098-exec-2:994433 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:09:26  [ http-nio-8098-exec-3:1030549 ] - [ ERROR ]  Tools.logError:com.tt.table.sys_modal_hbyh
-2019-04-30 14:09:32  [ http-nio-8098-exec-2:1036895 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:09:45  [ http-nio-8098-exec-5:1049167 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:13:22  [ http-nio-8098-exec-1:1266643 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:15:03  [ http-nio-8098-exec-7:1367987 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:15:20  [ http-nio-8098-exec-9:1384898 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:15:28  [ http-nio-8098-exec-6:1392913 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:15:31  [ http-nio-8098-exec-7:1395513 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:17:03  [ http-nio-8098-exec-3:1487141 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-04-30 14:17:09  [ http-nio-8098-exec-3:1493902 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-04-30 14:17:34  [ http-nio-8098-exec-9:1518618 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-04-30 14:18:20  [ http-nio-8098-exec-3:1564392 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:19:15  [ http-nio-8098-exec-1:1619187 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:19:17  [ http-nio-8098-exec-9:1621991 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:19:23  [ http-nio-8098-exec-1:1627553 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:19:38  [ http-nio-8098-exec-7:1642130 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:19:38  [ http-nio-8098-exec-7:1642138 ] - [ ERROR ]  Tools.logError:null
-2019-04-30 14:19:38  [ http-nio-8098-exec-7:1642469 ] - [ ERROR ]  Tools.logError:http%3A%2F%2Flocalhost%3A8098%2Fmanager%2Findex%7C%2Fmanager%2Findex%7Csdo%3Dlist%26cn%3Ddsgl%26type%3Dcwgl%26dtbe%3D%26kw%3D%25E7%25AB%25B9:An exception occurred processing [/WEB-INF/jsp/manager/list.jsp] at line [21]
-
-18: 		JspTools.alert(errorMsg,out);
-19: 	}
-20: 	String sPlUrl = Tools.urlKill("l|p");
-21: 	int pages =(int) request.getAttribute("pages");
-22: 	boolean canDel = request.getAttribute("canDel")==null?false:(boolean)request.getAttribute("canDel"); //是否显示删除按钮
-23: 	boolean canAdd = request.getAttribute("canAdd")==null?true:(boolean)request.getAttribute("canAdd"); //是否显示新增按钮
-24: 	String type = request.getParameter("type");
-
-
-Stacktrace:
-2019-04-30 14:20:07  [ http-nio-8098-exec-8:1671950 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:20:14  [ http-nio-8098-exec-4:1678912 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:20:14  [ http-nio-8098-exec-4:1678918 ] - [ ERROR ]  Tools.logError:null
-2019-04-30 14:20:14  [ http-nio-8098-exec-4:1679020 ] - [ ERROR ]  Tools.logError:http%3A%2F%2Flocalhost%3A8098%2Fmanager%2Findex%7C%2Fmanager%2Findex%7Csdo%3Dlist%26cn%3Ddsgl%26type%3Dcwgl%26dtbe%3D%26kw%3D%25E7%25AB%25B9:An exception occurred processing [/WEB-INF/jsp/manager/list.jsp] at line [21]
-
-18: 		JspTools.alert(errorMsg,out);
-19: 	}
-20: 	String sPlUrl = Tools.urlKill("l|p");
-21: 	int pages =(int) request.getAttribute("pages");
-22: 	boolean canDel = request.getAttribute("canDel")==null?false:(boolean)request.getAttribute("canDel"); //是否显示删除按钮
-23: 	boolean canAdd = request.getAttribute("canAdd")==null?true:(boolean)request.getAttribute("canAdd"); //是否显示新增按钮
-24: 	String type = request.getParameter("type");
-
-
-Stacktrace:
-2019-04-30 14:21:29  [ http-nio-8098-exec-6:1753747 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:21:37  [ http-nio-8098-exec-9:1761868 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:22:33  [ http-nio-8098-exec-2:1817542 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:22:53  [ http-nio-8098-exec-1:1837455 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:23:13  [ http-nio-8098-exec-2:1857888 ] - [ INFO ]  权限检查成功！
-2019-04-30 14:23:26  [ http-nio-8098-exec-9:1870609 ] - [ INFO ]  权限检查成功！
-2019-04-30 14:24:26  [ http-nio-8098-exec-1:1930262 ] - [ INFO ]  权限检查成功！
-2019-04-30 14:24:31  [ http-nio-8098-exec-3:1935417 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:24:38  [ http-nio-8098-exec-5:1942456 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:27:16  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-04-30 14:27:23  [ http-nio-8098-exec-2:6921 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-04-30 14:27:25  [ http-nio-8098-exec-7:8981 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:27:33  [ http-nio-8098-exec-3:17071 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:30:52  [ http-nio-8098-exec-1:216639 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:30:57  [ http-nio-8098-exec-3:221216 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:31:09  [ http-nio-8098-exec-3:233500 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:31:37  [ http-nio-8098-exec-4:261316 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:31:39  [ http-nio-8098-exec-1:263357 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:31:41  [ http-nio-8098-exec-5:265312 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:31:43  [ http-nio-8098-exec-2:266996 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:31:56  [ http-nio-8098-exec-4:280058 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:32:05  [ http-nio-8098-exec-6:289444 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:33:43  [ http-nio-8098-exec-8:387491 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:33:56  [ http-nio-8098-exec-1:400369 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:33:59  [ http-nio-8098-exec-9:403628 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:35:21  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-04-30 14:35:23  [ http-nio-8098-exec-2:2529 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:35:27  [ http-nio-8098-exec-6:5541 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:35:28  [ http-nio-8098-exec-7:7202 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:35:36  [ http-nio-8098-exec-2:14801 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:35:45  [ http-nio-8098-exec-10:23975 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:39:53  [ http-nio-8098-exec-1:271885 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:39:53  [ http-nio-8098-exec-1:271896 ] - [ ERROR ]  Tools.logError:sql injection violation, syntax error: error : pos 57, line 1, column 57, token RPAREN : select SQL_CALC_FOUND_ROWS t.*,i.c_name as c_name,SUM(t.) from tlzf_dk_details t  LEFT JOIN kj_icbc i ON i.id=t.icbc_id    where true  AND t.ds_date >= '2019-04-30' and t.ds_date <='2019-08-31' ORDER BY t.dt_edit DESC   limit 0,10 
-2019-04-30 14:40:24  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-04-30 14:40:27  [ http-nio-8098-exec-3:2855 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:40:40  [ http-nio-8098-exec-4:15942 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:40:42  [ http-nio-8098-exec-5:17346 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:40:48  [ http-nio-8098-exec-10:23397 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:40:59  [ http-nio-8098-exec-3:34892 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:41:09  [ http-nio-8098-exec-2:44756 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:50:12  [ http-nio-8098-exec-1:587602 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:51:07  [ http-nio-8098-exec-2:642634 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:51:14  [ http-nio-8098-exec-1:649499 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:55:00  [ http-nio-8098-exec-1:875916 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:56:24  [ http-nio-8098-exec-1:959722 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:58:31  [ http-nio-8098-exec-1:1086627 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:58:34  [ http-nio-8098-exec-6:1089638 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 14:59:50  [ http-nio-8098-exec-2:1165598 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:00:02  [ http-nio-8098-exec-1:1177814 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:00:04  [ http-nio-8098-exec-3:1179593 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:00:36  [ http-nio-8098-exec-4:1211556 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:00:57  [ http-nio-8098-exec-1:1232665 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:01:09  [ http-nio-8098-exec-4:1244724 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:10:35  [ http-nio-8098-exec-2:1810525 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:10:40  [ http-nio-8098-exec-7:1815463 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:10:50  [ http-nio-8098-exec-7:1825568 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:10:58  [ http-nio-8098-exec-8:1833776 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:12:01  [ http-nio-8098-exec-8:1896436 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:12:04  [ http-nio-8098-exec-5:1900238 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:12:06  [ http-nio-8098-exec-10:1902292 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:12:10  [ http-nio-8098-exec-6:1906034 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:12:12  [ http-nio-8098-exec-10:1907819 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:12:15  [ http-nio-8098-exec-4:1910812 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:12:21  [ http-nio-8098-exec-6:1917178 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:12:41  [ http-nio-8098-exec-5:1937007 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:12:45  [ http-nio-8098-exec-7:1941186 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:12:48  [ http-nio-8098-exec-2:1943716 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:12:49  [ http-nio-8098-exec-5:1945102 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-04-30 15:12:51  [ http-nio-8098-exec-5:1946609 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:12:52  [ http-nio-8098-exec-7:1948097 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:12:54  [ http-nio-8098-exec-8:1949942 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-04-30 15:12:57  [ http-nio-8098-exec-6:1952365 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-04-30 15:13:17  [ http-nio-8098-exec-4:1972802 ] - [ INFO ]  权限检查成功！
-2019-04-30 15:13:22  [ http-nio-8098-exec-7:1977623 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-06 11:20:31  [ http-nio-8098-exec-5:3450321 ] - [ ERROR ]  Tools.logError:Data truncation: Data too long for column 'result_content' at row 1
+2019-05-06 11:20:33  [ http-nio-8098-exec-1:3451692 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 11:20:38  [ http-nio-8098-exec-6:3457584 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 11:29:24  [ http-nio-8098-exec-9:3983218 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 13:35:06  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
+2019-05-06 13:36:12  [ http-nio-8098-exec-6:65800 ] - [ INFO ]  权限检查成功！
+2019-05-06 13:36:18  [ http-nio-8098-exec-3:72313 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 13:36:21  [ http-nio-8098-exec-8:75477 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 13:39:47  [ http-nio-8098-exec-4:280795 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 13:39:48  [ http-nio-8098-exec-9:282118 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-06 13:41:21  [ http-nio-8098-exec-8:374945 ] - [ INFO ]  权限检查成功！

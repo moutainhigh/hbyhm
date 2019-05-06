@@ -281,8 +281,8 @@
                         </option>
                         <%}%>
                         <%
-                            TtList agplist = Tools.reclist("select * from icbc_admin_agp where showtag=1 and systag=0 AND fsid=" + minfo.get("icbc_erp_fsid"));
-                            if (agplist.size() > 0) {
+                        TtList agplist = Tools.reclist("select * from icbc_admin_agp where showtag=1 and systag=0 AND fsid=" + minfo.get("icbc_erp_fsid"));
+                        if (agplist.size() > 0) {
                         %>
                         <%=Tools.dicopt("icbc_admin_agp", Tools.myIsNull(infodb.get("agpid")) ? 0 : Long.valueOf(infodb.get("agpid")), "systag=0 AND fsid=" + minfo.get("icbc_erp_fsid"), "")%>
                         <%

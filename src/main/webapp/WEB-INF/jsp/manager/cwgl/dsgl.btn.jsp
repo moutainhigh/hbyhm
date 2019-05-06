@@ -21,21 +21,21 @@
     String nd1 = sdf.format(date1);
 %>
 
-<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&dt=<%=nd%>" class="btn btn-default">
+<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}&dt=<%=nd%>" class="btn btn-default">
     <i class="fa fa-plus"></i>今天的
 </a>
-<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&dtbe=<%=nd%> - <%=nd7%>" class="btn btn-default">
+<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}&dtbe=<%=nd%> - <%=nd7%>" class="btn btn-default">
     <i class="fa fa-plus"></i>7天的
 </a>
-<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&dtbe=<%=nd%> - <%=nd30%>" class="btn btn-default">
+<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}&dtbe=<%=nd%> - <%=nd30%>" class="btn btn-default">
     <i class="fa fa-plus"></i>30天的
 </a>
-<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&dtbe=<%=nd%> - <%=nd365%>" class="btn btn-default">
+<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}&dtbe=<%=nd%> - <%=nd365%>" class="btn btn-default">
     <i class="fa fa-plus"></i>365天的
 </a>
-<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&dt=<%=nd1%>" class="btn btn-default">
+<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}&dt=<%=nd1%>" class="btn btn-default">
     <i class="fa fa-plus"></i>明天的
 </a>
-<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl" class="btn btn-default" style="background: #800000;color:white;">
+<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}" class="btn btn-default" style="background: #800000;color:white;">
     <i class="fa fa-plus"></i>总额：${totals}元
 </a>

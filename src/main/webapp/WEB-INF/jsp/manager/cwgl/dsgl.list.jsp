@@ -39,13 +39,13 @@
                                 期数
                             </th>
                             <th class="text-center">
-                                服务费
+                                服务费(分)
                             </th>
                             <th class="hidden-xs text-center">
                                 日期
                             </th>
                             <th class="text-center">
-                                总金额
+                                总金额(分)
                             </th>
                             <th class="hidden-xs text-center">
                                 更新时间
@@ -55,6 +55,9 @@
                             </th>
                             <th class="text-center" style="width: 200px">
                                 API执行
+                            </th>
+                            <th class="hidden-xs text-center" style="width: 200px">
+                                API返回
                             </th>
                             <th class="text-center">
                                 手动状态
@@ -108,23 +111,48 @@
                                 <select id="bc_status" name="bc_status" disabled class="form-control">
                                     <%=Tools.dicopt(DataDic.dic_tlzf_ds_bc_status, m.get("bc_status"))%>
                                 </select>
+
                                 <%
+                                    if(m.get("api_type").equals("0")){
                                     if (m.get("bc_status").equals("1")||m.get("bc_status").equals("2")) {
                                 %>
-                                <a href="javascript:ds('<%=m.get("id")%>')" target="blank">
+                                <a href="javascript:ds('<%=m.get("id")%>')">
 					            <span class="label pull-right label-success">
                                 <i class="fa fa-refresh"></i>
                                     手动交易
 					            </span>
                                 </a>
                                 <%} else {%>
-                                <a href="javascript:findds_result('<%=m.get("req_sn")%>','<%=m.get("id")%>')" target="blank">
+                                <a href="javascript:findds_result('<%=m.get("req_sn")%>','<%=m.get("id")%>')">
 					            <span class="label pull-right label-success">
                                 <i class="fa fa-refresh"></i>
                                     查询结果
 					            </span>
                                 </a>
-                                <%}%>
+                                <%
+                                    }
+                                }else{
+                                    if (m.get("bc_status").equals("1")||m.get("bc_status").equals("2")) {
+                                %>
+                                <a href="javascript:df('<%=m.get("id")%>')">
+					            <span class="label pull-right label-success">
+                                <i class="fa fa-refresh"></i>
+                                    手动交易
+					            </span>
+                                </a>
+                                <%} else {%>
+                                <a href="javascript:findds_result('<%=m.get("req_sn")%>','<%=m.get("id")%>')" >
+					            <span class="label pull-right label-success">
+                                <i class="fa fa-refresh"></i>
+                                    查询结果
+					            </span>
+                                </a>
+
+                                <%}
+                                    }%>
+                            </td>
+                            <td class="hidden-xs text-center" style="width: 200px">
+                               <%=m.get("result_msg")%>
                             </td>
                             <td class="text-center">
                                 <select id="sd_status" name="sd_status"
@@ -173,7 +201,14 @@
                 window.location.href = "";
             });
     }
-
+    function df(id) {
+        $.post("/manager/command?sdo=tlzf_df&id=" + id, {},
+            function (res) {
+                eval("var res=" + res);
+                alert(res.msg);
+                window.location.href = "";
+            });
+    }
     function findds_result(QUERY_SN,id) {
         var data = {
             QUERY_SN: QUERY_SN

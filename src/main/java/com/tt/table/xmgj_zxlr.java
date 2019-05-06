@@ -56,7 +56,13 @@ public class xmgj_zxlr extends DbCtrl {
         }
         String whereString = "t.app="+appid;
         String tmpWhere = "";
-        String fieldsString = "t.*,f.name as fsname,a.name as adminname,dy.id as dy_id";
+        String fieldsString = "t.*" +
+                ",f.name as fsname" +
+                ",a.name as adminname" +
+                ",dy.id as dy_id" +
+                ",dy.bc_status as dy_bc_status" +
+                ",qy.bc_status as qy_bc_status" +
+                ",qy.qy_status as qy_qy_status";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
 
@@ -103,7 +109,8 @@ public class xmgj_zxlr extends DbCtrl {
         showall = true; // 忽略deltag和showtag
         leftsql = " LEFT JOIN assess_fs f ON f.id=t.gems_fs_id " +
                 " LEFT JOIN assess_gems a ON a.id=t.gems_id" +
-                " LEFT JOIN xmgj_dygd dy ON dy.icbc_id=t.id";
+                " LEFT JOIN xmgj_dygd dy ON dy.icbc_id=t.id" +
+                " LEFT JOIN tlzf_qy qy ON qy.icbc_id=t.id";
         list = lists(whereString, fieldsString);
 
         if (!Tools.myIsNull(kw)) { // 搜索关键字高亮

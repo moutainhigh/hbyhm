@@ -18,6 +18,7 @@ import com.tt.tlzf.xstruct.common.InfoReq;
 import com.tt.tlzf.xstruct.quickpay.FASTTRX;
 import com.tt.tlzf.xstruct.trans.LedgerDtl;
 import com.tt.tlzf.xstruct.trans.Ledgers;
+import com.tt.tlzf.xstruct.trans.TransExt;
 import com.tt.tlzf.xstruct.trans.qry.TransQueryReq;
 import com.tt.tool.CookieTools;
 import com.tt.tool.Tools;
@@ -150,7 +151,6 @@ public class ManagerCmd {
                             errorCode=Integer.parseInt(INFO.get("RET_CODE").toString());
                             errorMsg = INFO.get("ERR_MSG").toString();
                         }
-                        ttMap.put("bc_status", "2");
                     } else {
                         System.out.println("第二种情况");
                         JSONObject ress = JSONObject.fromObject(res);
@@ -158,30 +158,40 @@ public class ManagerCmd {
                         if (ress.get("INFO") != null && !ress.get("INFO").equals("")) {
                             JSONObject INFO = JSONObject.fromObject(ress.get("INFO"));
                             System.out.println("ERR_MSG:" + INFO.get("ERR_MSG"));
-                            ttMap.put("result_code", INFO.get("RET_CODE").toString());
-                            ttMap.put("result_msg", INFO.get("ERR_MSG").toString());
                             errorCode=Integer.parseInt(INFO.get("RET_CODE").toString());
                             errorMsg = INFO.get("ERR_MSG").toString();
-                            if ("0000".equals(INFO.get("RET_CODE"))) {
-                                ttMap.put("bc_status", "3");
-                            } else if (
+                            if (
                                     "2000".equals(INFO.get("RET_CODE")) ||
                                             "2001".equals(INFO.get("RET_CODE")) ||
                                             "2003".equals(INFO.get("RET_CODE")) ||
                                             "2005".equals(INFO.get("RET_CODE")) ||
                                             "2007".equals(INFO.get("RET_CODE")) ||
-                                            "2008".equals(INFO.get("RET_CODE"))
+                                            "2008".equals(INFO.get("RET_CODE")) ||
+                                            "1108".equals(INFO.get("RET_CODE"))
                             ) {
                                 ttMap.put("bc_status", "4");
-                            } else {
-                                ttMap.put("bc_status", "2");
                             }
                         }
                         System.out.println("FASTTRXRET:" + ress.get("FASTTRXRET"));
                         if (ress.get("FASTTRXRET") != null && !ress.get("FASTTRXRET").equals("")) {
                             JSONObject FASTTRXRET = JSONObject.fromObject(ress.get("FASTTRXRET"));
                             System.out.println("ERR_MSG:" + FASTTRXRET.get("ERR_MSG"));
-                            ttMap.put("settle_day", FASTTRXRET.get("SETTLE_DAY").toString());
+                            ttMap.put("result_code", FASTTRXRET.get("RET_CODE").toString());
+                            ttMap.put("result_msg", FASTTRXRET.get("ERR_MSG").toString());
+                            if("0000".equals(FASTTRXRET.get("RET_CODE"))) {
+                                ttMap.put("bc_status", "3");
+                                ttMap.put("settle_day", FASTTRXRET.get("SETTLE_DAY").toString());
+                            }else if (
+                                    "2000".equals(FASTTRXRET.get("RET_CODE")) ||
+                                            "2001".equals(FASTTRXRET.get("RET_CODE")) ||
+                                            "2003".equals(FASTTRXRET.get("RET_CODE")) ||
+                                            "2005".equals(FASTTRXRET.get("RET_CODE")) ||
+                                            "2007".equals(FASTTRXRET.get("RET_CODE")) ||
+                                            "2008".equals(FASTTRXRET.get("RET_CODE")) ||
+                                            "1108".equals(FASTTRXRET.get("RET_CODE"))
+                            ) {
+                                ttMap.put("bc_status", "4");
+                            }
                         }
                     }
                     ttMap.put("result_content", res);
@@ -189,6 +199,92 @@ public class ManagerCmd {
                 }
                 boolean success = errorCode == 0 && Tools.myIsNull(errorMsg);
                 Tools.formatResult(result2, success,errorCode, errorMsg, "");
+                break;
+            case "tlzf_df":
+                int errorCode2=0;
+                String errorMsg2="";
+                TtMap df = Tools.recinfo("select * from tlzf_dk_details where id="+postUrl.get("id"));
+                if(!df.isEmpty()) {
+                    InfoReq infoReq = DemoUtil.makeReq("100014");
+                    TransExt trans = new TransExt();
+                    trans.setBUSINESS_CODE("09900");//必须使用业务人员提供的业务代码，否则返回“未开通业务类型”
+                    trans.setMERCHANT_ID(DemoConfig.merchantid);
+                    trans.setSUBMIT_TIME(DemoUtil.getNow());
+                    trans.setACCOUNT_NAME(df.get("account_name"));
+                    trans.setACCOUNT_NO("account_no");
+                    trans.setACCOUNT_PROP("0");
+                    trans.setAMOUNT(df.get("fw_price"));
+                    trans.setBANK_CODE(df.get("bank_code"));
+                    trans.setCURRENCY(df.get("currency"));
+                    trans.setTEL(df.get("tel"));
+                    trans.setCUST_USERID(df.get("cust_userid"));
+                    AipgReq req = new AipgReq();
+                    req.setINFO(infoReq);
+                    req.addTrx(trans);
+                    String res = insideHttp.kjyTranx310011(req);
+                    TtMap ttMap=new TtMap();
+                    ttMap.put("req_sn", infoReq.getREQ_SN());
+                    ttMap.put("business_code",trans.getBUSINESS_CODE());
+                    if (res.substring(0, 1).equals("[")) {
+                        System.out.println("第一种情况");
+                        JSONArray ary = JSONArray.fromObject(res);
+                        System.out.println(ary.get(0));
+                        if (!ary.get(0).equals("")) {
+                            JSONObject INFO = JSONObject.fromObject(ary.get(0));
+                            System.out.println("ERR_MSG:" + INFO.get("ERR_MSG"));
+                            ttMap.put("result_code", INFO.get("RET_CODE").toString());
+                            ttMap.put("result_msg", INFO.get("ERR_MSG").toString());
+                            errorCode2=Integer.parseInt(INFO.get("RET_CODE").toString());
+                            errorMsg2 = INFO.get("ERR_MSG").toString();
+                        }
+                    } else {
+                        System.out.println("第二种情况");
+                        JSONObject ress = JSONObject.fromObject(res);
+                        System.out.println("INFO:" + ress.get("INFO"));
+                        if (ress.get("INFO") != null && !ress.get("INFO").equals("")) {
+                            JSONObject INFO = JSONObject.fromObject(ress.get("INFO"));
+                            System.out.println("ERR_MSG:" + INFO.get("ERR_MSG"));
+                            errorCode2=Integer.parseInt(INFO.get("RET_CODE").toString());
+                            errorMsg2 = INFO.get("ERR_MSG").toString();
+                            if (
+                                    "2000".equals(INFO.get("RET_CODE")) ||
+                                            "2001".equals(INFO.get("RET_CODE")) ||
+                                            "2003".equals(INFO.get("RET_CODE")) ||
+                                            "2005".equals(INFO.get("RET_CODE")) ||
+                                            "2007".equals(INFO.get("RET_CODE")) ||
+                                            "2008".equals(INFO.get("RET_CODE")) ||
+                                            "1108".equals(INFO.get("RET_CODE"))
+                            ) {
+                                ttMap.put("bc_status", "4");
+                            }
+                        }
+                        System.out.println("TRANSRET:" + ress.get("TRANSRET"));
+                        if (ress.get("TRANSRET") != null && !ress.get("TRANSRET").equals("")) {
+                            JSONObject TRANSRET = JSONObject.fromObject(ress.get("TRANSRET"));
+                            System.out.println("ERR_MSG:" + TRANSRET.get("ERR_MSG"));
+                            ttMap.put("result_code", TRANSRET.get("RET_CODE").toString());
+                            ttMap.put("result_msg", TRANSRET.get("ERR_MSG").toString());
+                            if("0000".equals(TRANSRET.get("RET_CODE"))) {
+                                ttMap.put("bc_status", "3");
+                                ttMap.put("settle_day", TRANSRET.get("SETTLE_DAY").toString());
+                            }else if (
+                                    "2000".equals(TRANSRET.get("RET_CODE")) ||
+                                            "2001".equals(TRANSRET.get("RET_CODE")) ||
+                                            "2003".equals(TRANSRET.get("RET_CODE")) ||
+                                            "2005".equals(TRANSRET.get("RET_CODE")) ||
+                                            "2007".equals(TRANSRET.get("RET_CODE")) ||
+                                            "2008".equals(TRANSRET.get("RET_CODE")) ||
+                                            "1108".equals(TRANSRET.get("RET_CODE"))
+                            ) {
+                                ttMap.put("bc_status", "4");
+                            }
+                        }
+                    }
+                    ttMap.put("result_content", res);
+                    Tools.recEdit(ttMap,"tlzf_dk_details",Integer.parseInt(postUrl.get("id")));
+                }
+                boolean success2 = errorCode2 == 0 && Tools.myIsNull(errorMsg2);
+                Tools.formatResult(result2, success2,errorCode2, errorMsg2, "");
                 break;
             default:
                 break;
