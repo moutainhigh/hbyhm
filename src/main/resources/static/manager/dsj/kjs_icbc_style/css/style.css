@@ -1,0 +1,109 @@
+.login-page{
+    background: url(../img/bg.jpg) no-repeat center;
+    background-size: cover;
+}
+.admin-tools{ margin-bottom: 15px;}
+.admin-tools .btn{background-color: #fff;}
+.admin-page-top .form-control{ display: inline-block;width: auto;}
+.admin-page-top { text-align: right;}
+.table th{ background-color: #f9f9f9;}
+.top-img { height: 160px; background-size: cover;}
+.table-button i{ width: 20px; text-align: center;}
+.table-button .btn { border:none ; background:none; padding: 4px;}
+.table td.hide-button{position: relative;}
+.table td.hide-button .btn{display: none; position:absolute; top:50%; margin-top: -15px; right: 10px;}
+.table td.hide-button:hover .btn{display: block;}
+.table-button .btn:hover { color: #fff; background-color: #1FC2AC;}
+.table-button .btn-success { border:none ; background:#1FC2AC;  padding: 4px;}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{ vertical-align: middle; }
+.table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>th{ font-size:12px;}
+.table p{ font-size: 12px; margin: 3px 0}
+.gray,.gray a, a.gray{ color: #555;}
+.page-num{padding: 7px 0;}
+.foot-page .pagination{float: right;}
+.user-face-pic img {display: inline-block; border: 1px solid #ccc; border-radius: 50%;}
+@media (max-width: 767px) {
+  .foot-page .pagination {
+      float: none;
+  }
+}
+.user-table-info h2 { font-size: 14px; margin: 5px 0; font-weight: bold;}
+.user-table-info i{ width: 20px; text-align: center;display: inline-block;color: #777;}
+/*@media (min-width: 991px) {
+  .form-horizontal {
+      padding-right: 5%;
+  }
+}*/
+.margin-top{ margin-top: 15px;}
+.margin-bottom{ margin-bottom: 15px;}
+.border-top{border-top:1px solid #f4f4f4}
+.row.inline-from .input-group,.row.inline-from input,.row.inline-from select{margin-bottom: 10px;}
+.row.inline-from .input-group input,.row.inline-from .input-group select{margin-bottom: 0;}
+.row.inline-from { margin-bottom: -10px; margin-left: -7px;margin-right: -7px; }
+.row.inline-from > div { padding:0 7px;}
+.form-horizontal .box-body{padding-top: 25px;}
+.modal .form-horizontal .box-body{padding-top: 10px;}
+.pic-list .thumbnail { border: none; text-align: center; padding: 0;}
+.pic-list .thumbnail img { border:1px solid #f4f4f4; text-align: center;}
+.customer i{font-size: 16px; border: 1px solid #777; color:#777;display: inline-block;width: 30px; height: 30px; text-align: center;line-height: 28px; border-radius: 100%;}
+.customer i.female{border: 1px solid #efa5e6; color:#efa5e6;}
+.customer h4{font-size: 14px; margin: 3px 0;padding: 0;font-weight: 500;}
+.customer p{font-size: 12px; margin: 0;padding: 0;}
+.fixed-footer{padding-bottom: 40px;}
+.fixed-footer .footer-wrap{ position: fixed;width: 100%; bottom: 0;z-index: 1000;}
+.fixed-footer .footer-wrap .box-footer{margin-right: 200px; border-top-color: #d2d6de;}
+@media (max-width: 767px) {
+  .fixed-footer .footer-wrap .box-footer {
+      margin-right: 0;
+  }
+}
+.upload-img{padding: 0;}
+.upload-img li{list-style: none;position: relative;margin-bottom: 30px;}
+.upload-img li img{width: 100%;}
+.upload-img li .edit-button{display: none; position: absolute;right: 20px;bottom: 5px;}
+.upload-img li:hover .edit-button{display: block;}
+.webuploader-container input{
+    filter: alpha(opacity=0);
+    -ms-filter: alpha(opacity=0);
+    opacity: 0;
+    -webkit-opacity: 0; 
+}
+.admin-tools .form-control{
+    display: inline-block;
+    width: auto;
+}
+.modal.fixed .modal-dialog {
+    height: 96%;
+    overflow: hidden;
+    margin: 15px auto;
+}
+
+.modal.fixed .modal-content {
+    height: 100%;
+    overflow: hidden;
+}
+
+.modal.fixed .modal-header {
+    position: absolute;
+    width: 100%;
+    top:0;
+}
+.modal.fixed .modal-body {
+    position:absolute;
+    width:100%;
+    top:56px;
+    bottom:65px;
+    overflow:auto;
+}
+.modal.fixed.body-bg .modal-body{
+    background-color: #ecf0f5;
+}
+.modal.fixed .modal-footer{
+    position:absolute;
+    width:100%;
+    bottom:0;
+    backgroud-color:#fff;
+}
+.info-box a{
+    color: #444;
+}
