@@ -3,10 +3,7 @@ package com.tt.table;
 
 import com.tt.data.TtList;
 import com.tt.data.TtMap;
-import com.tt.tool.Config;
-import com.tt.tool.DbCtrl;
-import com.tt.tool.Tools;
-import com.tt.tool.Zip;
+import com.tt.tool.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -239,6 +236,9 @@ public class Zxlr extends DbCtrl {
             //更新订单字段
             Tools.recEdit(ordermap, "kj_icbc", icbc_id);
         }
+
+        Addadmin_msg.addmsg(minfo.get("gemsid"), post.get("bc_status"), newpost.get("remark"));
+
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
         boolean bSuccess = errorCode == 0;
         Tools.formatResult(result2, bSuccess, errorCode, bSuccess ? "编辑" + title + "成功！" : errorMsg,

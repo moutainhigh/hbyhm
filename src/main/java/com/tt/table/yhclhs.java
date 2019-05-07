@@ -2,6 +2,7 @@ package com.tt.table;
 
 import com.tt.data.TtList;
 import com.tt.data.TtMap;
+import com.tt.tool.Addadmin_msg;
 import com.tt.tool.Config;
 import com.tt.tool.DbCtrl;
 import com.tt.tool.Tools;
@@ -105,6 +106,9 @@ public class yhclhs extends DbCtrl {
         res.put("status", post.get("bc_status"));
         res.put("remark", newpost.get("remark1"));
         Tools.recAdd(res, "hbyh_yhclhs_result");
+
+        TtMap minfo = Tools.minfo();
+        Addadmin_msg.addmsg(minfo.get("gemsid"), post.get("bc_status"), newpost.get("remark1"));
 
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
         boolean bSuccess = errorCode == 0;
