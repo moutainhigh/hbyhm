@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 public class Gsht extends DbCtrl {
-    private final String title = "公司合同材料";
+    private final String title = "投保材料";
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
     private boolean canDel = false;
     private boolean canAdd = false;

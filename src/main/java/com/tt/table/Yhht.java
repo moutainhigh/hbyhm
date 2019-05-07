@@ -193,22 +193,6 @@ public class Yhht extends DbCtrl {
         } else {
             whereString += " AND t.gems_fs_id=" + minfo.get("icbc_erp_fsid"); // 只显示自己公司的
         }
-        /* 开始处理搜索过来的字段 */
-        kw = post.get("kw");
-        dtbe = post.get("dtbe");
-        if (Tools.myIsNull(kw) == false) {
-            whereString += "AND c_name like '%" + kw + "%'";
-        }
-        if (Tools.myIsNull(dtbe) == false) {
-            dtbe = dtbe.replace("%2f", "-").replace("+", "");
-            String[] dtArr = dtbe.split("-");
-            dtArr[0] = dtArr[0].trim();
-            dtArr[1] = dtArr[1].trim();
-            System.out.println("DTBE开始日期:" + dtArr[0] + "结束日期:" + dtArr[1]);
-            // todo处理选择时间段
-        }
-        /* 搜索过来的字段处理完成 */
-
 
         whereString += tmpWhere; // 过滤
         orders = orderString;// 排序
@@ -220,12 +204,6 @@ public class Yhht extends DbCtrl {
                 "LEFT JOIN kj_icbc i ON i.id=t.icbc_id";
         list = lists(whereString, fieldsString);
 
-        if (!Tools.myIsNull(kw)) { // 搜索关键字高亮
-            for (TtMap info : list) {
-                info.put("c_name",
-                        info.get("c_name").replace(kw, "<font style='color:red;background:#FFCC33;'>" + kw + "</font>"));
-            }
-        }
         request.setAttribute("list", list);// 列表list数据
         request.setAttribute("recs", recs); // 总记录数
         String htmlpages = getPage("", 0, false); // 分页html代码,
