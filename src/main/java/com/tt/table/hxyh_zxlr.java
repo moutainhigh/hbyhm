@@ -17,7 +17,7 @@ public class hxyh_zxlr extends DbCtrl {
     private String orderString = "ORDER BY t.dt_edit DESC"; // 默认排序
     private boolean canDel = true;
     private boolean canAdd = true;
-    private final String classAgpId = "28"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
+    private final String classAgpId = "58"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
     public hxyh_zxlr() {
