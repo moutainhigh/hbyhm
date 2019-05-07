@@ -708,108 +708,7 @@
                 </div>
             </div>
             <%}%>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">融资信息</label>
-                <div class="col-sm-10">
-                    <div class="row inline-from">
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">评估价格</span>
-                                <input type="text" class="form-control" id="c_loaninfo_car_priceresult"
-                                       name="c_loaninfo_car_priceresult" placeholder="">
-                                <span class="input-group-addon">元</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">车贷本金</span>
-                                <input type="text" class="form-control" id="c_loaninfo_car_pcpprice"
-                                       name="c_loaninfo_car_pcpprice" placeholder="">
-                                <span class="input-group-addon">元</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">利率（%）</span>
-                                <input type="text" class="form-control" id="c_loaninfo_car_loanrate"
-                                       name="c_loaninfo_car_loanrate" placeholder="">
-                            </div>
-                        </div>
 
-                        <%--<div class="col-sm-4">--%>
-                        <%--<div class="input-group">--%>
-                        <%--<span class="input-group-addon">开票价（元）</span>--%>
-                        <%--<input type="text" class="form-control" id="c_loaninfo_kpj"--%>
-                        <%--name="c_loaninfo_kpj" placeholder="">--%>
-                        <%--<span class="input-group-addon">元</span>--%>
-                        <%--</div>--%>
-                        <%--</div>--%>
-                        <%--<div class="col-sm-4">--%>
-                        <%--<div class="input-group">--%>
-                        <%--<span class="input-group-addon">贷款总额（元）</span>--%>
-                        <%--<input type="text" class="form-control" id="c_loaninfo_dkze"--%>
-                        <%--name="c_loaninfo_dkze" placeholder="">--%>
-                        <%--<span class="input-group-addon">元</span>--%>
-                        <%--</div>--%>
-                        <%--</div>--%>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">合同金额（元）</span>
-                                <input type="text" class="form-control" id="c_loaninfo_htje"
-                                       name="c_loaninfo_htje" placeholder="">
-                                <span class="input-group-addon">元</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">服务费（元）</span>
-                                <input type="text" class="form-control" id="c_loaninfo_fee"
-                                       name="c_loaninfo_fee" placeholder="">
-                                <span class="input-group-addon">元</span>
-                            </div>
-                        </div>
-                        <%--<div class="col-sm-4">--%>
-                        <%--<div class="input-group">--%>
-                        <%--<span class="input-group-addon">首付金额（元）</span>--%>
-                        <%--<input type="text" class="form-control" id="c_loaninfo_sfje"--%>
-                        <%--name="c_loaninfo_sfje" placeholder="">--%>
-                        <%--<span class="input-group-addon">元</span>--%>
-                        <%--</div>--%>
-                        <%--</div>--%>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">贷款期数（月）</span>
-                                <select id="c_loaninfo_periods" name="c_loaninfo_periods" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_dkqs, infodb.get("c_loaninfo_periods"))%>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">服务费是否分期</span>
-                                <select id="c_loaninfo_feeisin" name="c_loaninfo_feeisin" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_fq, infodb.get("c_loaninfo_feeisin"))%>
-                                </select>
-                            </div>
-                        </div>
-                        <%--<div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">垫资类型</span>
-                                <select id="c_loaninfo_dzlx" name="c_loaninfo_dzlx" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_dzlx, infodb.get("c_loaninfo_dzlx"))%>
-                                </select>
-                            </div>
-                        </div>--%>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">抵押权人</span>
-                                <input type="text" class="form-control" id="c_loaninfo_car_mg" name="c_loaninfo_car_mg"
-                                       placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">汽车材料</label>
                 <div class="col-sm-10">
@@ -1046,6 +945,191 @@
                         </jsp:include>
                         <input id="imgstep9_2ss_num" name="imgstep9_2ss_num" type="hidden"
                                value="<%=ssImgs_2.length%>"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">融资信息</label>
+                <div class="col-sm-10">
+                    <div class="row inline-from">
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">评估价格</span>
+                                <input type="text" class="form-control" id="c_loaninfo_car_priceresult"
+                                       name="c_loaninfo_car_priceresult" placeholder="">
+                                <span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">车贷本金</span>
+                                <input type="text" class="form-control" id="c_loaninfo_car_pcpprice"
+                                       name="c_loaninfo_car_pcpprice" placeholder="">
+                                <span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">利率（%）</span>
+                                <input type="text" class="form-control" id="c_loaninfo_car_loanrate"
+                                       name="c_loaninfo_car_loanrate" placeholder="">
+                            </div>
+                        </div>
+
+                        <%--<div class="col-sm-4">--%>
+                        <%--<div class="input-group">--%>
+                        <%--<span class="input-group-addon">开票价（元）</span>--%>
+                        <%--<input type="text" class="form-control" id="c_loaninfo_kpj"--%>
+                        <%--name="c_loaninfo_kpj" placeholder="">--%>
+                        <%--<span class="input-group-addon">元</span>--%>
+                        <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-sm-4">--%>
+                        <%--<div class="input-group">--%>
+                        <%--<span class="input-group-addon">贷款总额（元）</span>--%>
+                        <%--<input type="text" class="form-control" id="c_loaninfo_dkze"--%>
+                        <%--name="c_loaninfo_dkze" placeholder="">--%>
+                        <%--<span class="input-group-addon">元</span>--%>
+                        <%--</div>--%>
+                        <%--</div>--%>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">合同金额（元）</span>
+                                <input type="text" class="form-control" id="c_loaninfo_htje"
+                                       name="c_loaninfo_htje" placeholder="">
+                                <span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">服务费（元）</span>
+                                <input type="text" class="form-control" id="c_loaninfo_fee"
+                                       name="c_loaninfo_fee" placeholder="">
+                                <span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+                        <%--<div class="col-sm-4">--%>
+                        <%--<div class="input-group">--%>
+                        <%--<span class="input-group-addon">首付金额（元）</span>--%>
+                        <%--<input type="text" class="form-control" id="c_loaninfo_sfje"--%>
+                        <%--name="c_loaninfo_sfje" placeholder="">--%>
+                        <%--<span class="input-group-addon">元</span>--%>
+                        <%--</div>--%>
+                        <%--</div>--%>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">贷款期数（月）</span>
+                                <select id="c_loaninfo_periods" name="c_loaninfo_periods" class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_dkqs, infodb.get("c_loaninfo_periods"))%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">服务费是否分期</span>
+                                <select id="c_loaninfo_feeisin" name="c_loaninfo_feeisin" class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_fq, infodb.get("c_loaninfo_feeisin"))%>
+                                </select>
+                            </div>
+                        </div>
+                        <%--<div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">垫资类型</span>
+                                <select id="c_loaninfo_dzlx" name="c_loaninfo_dzlx" class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_dzlx, infodb.get("c_loaninfo_dzlx"))%>
+                                </select>
+                            </div>
+                        </div>--%>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">抵押权人</span>
+                                <input type="text" class="form-control" id="c_loaninfo_car_mg" name="c_loaninfo_car_mg"
+                                       placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">家访材料</label>
+                <div class="col-sm-10">
+                    <div class="row inline-from">
+                        <%
+                            String imgPreName3 = "imgstep10_1ss";
+                            String[] ssImgs3 = { //设置已有值
+                                    !Tools.myIsNull(infodb.get(imgPreName3)) ? infodb.get(imgPreName3) : ""
+                            };
+                            ssImgs3 = ssImgs3[0].split("\u0005");
+                            String sImgs3 = "";
+                            for (int i = 0; i < ssImgs3.length; i++) {
+                                if (ssImgs3[i] != null && !ssImgs3[i].equals("")) {
+                                    sImgs3 = sImgs3 + ssImgs3[i] + "|";
+                                }
+                            }
+                            String[] ssImgs_3 = sImgs3.split("\\|");//获取已有图片
+                        %>
+                        <%-- 可能这里用<%@include file %>模式更适合--%>
+                        <jsp:include page="<%=upFile1%>">
+                            <jsp:param name="img_MarginImgSrc" value=""/>
+                            <jsp:param name="img_MarginImgClass" value=""/>
+                            <jsp:param name="img_Total" value="<%=ssImgs_3.length%>"/>
+                            <jsp:param name="img_NamePre" value="<%=imgPreName3%>"/>
+                            <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
+                            <jsp:param name="l1div_Style"
+                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                            <jsp:param name="img_Style" value="width: 100%;height:100px;border-radius:10px;"/>
+                            <jsp:param name="img_FileStyle"
+                                       value="position: absolute;left: 0;top: 0;height: 100%;width: 100%;background: transparent;border: 0;margin: 0;padding: 0;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>
+                            <jsp:param name="img_Class" value="imgclass"/>
+                            <jsp:param name="img_FileClass" value="uploadfileclass"/>
+                            <jsp:param name="img_SmallWidth" value="100"/>
+                            <jsp:param name="img_SmallHeight" value="100"/>
+                            <jsp:param name="sImgs" value="<%=sImgs3%>"/>
+                        </jsp:include>
+                        <input id="imgstep9_1ss_num" name="imgstep9_1ss_num" type="hidden"
+                               value="<%=ssImgs_3.length%>"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">证明材料</label>
+                <div class="col-sm-10">
+                    <div class="row inline-from">
+                        <%
+                            String imgPreName4 = "imgstep11_1ss";
+                            String[] ssImgs4 = { //设置已有值
+                                    !Tools.myIsNull(infodb.get(imgPreName4)) ? infodb.get(imgPreName4) : ""
+                            };
+                            ssImgs4 = ssImgs4[0].split("\u0005");
+                            String sImgs4 = "";
+                            for (int i = 0; i < ssImgs4.length; i++) {
+                                if (ssImgs4[i] != null && !ssImgs4[i].equals("")) {
+                                    sImgs4 = sImgs4 + ssImgs4[i] + "|";
+                                }
+                            }
+                            String[] ssImgs_4 = sImgs4.split("\\|");//获取已有图片
+                        %>
+                        <%-- 可能这里用<%@include file %>模式更适合--%>
+                        <jsp:include page="<%=upFile1%>">
+                            <jsp:param name="img_MarginImgSrc" value=""/>
+                            <jsp:param name="img_MarginImgClass" value=""/>
+                            <jsp:param name="img_Total" value="<%=ssImgs_4.length%>"/>
+                            <jsp:param name="img_NamePre" value="<%=imgPreName4%>"/>
+                            <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
+                            <jsp:param name="l1div_Style"
+                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                            <jsp:param name="img_Style" value="width: 100%;height:100px;border-radius:10px;"/>
+                            <jsp:param name="img_FileStyle"
+                                       value="position: absolute;left: 0;top: 0;height: 100%;width: 100%;background: transparent;border: 0;margin: 0;padding: 0;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>
+                            <jsp:param name="img_Class" value="imgclass"/>
+                            <jsp:param name="img_FileClass" value="uploadfileclass"/>
+                            <jsp:param name="img_SmallWidth" value="100"/>
+                            <jsp:param name="img_SmallHeight" value="100"/>
+                            <jsp:param name="sImgs" value="<%=sImgs4%>"/>
+                        </jsp:include>
+                        <input id="imgstep9_1ss_num" name="imgstep9_1ss_num" type="hidden"
+                               value="<%=ssImgs_4.length%>"/>
                     </div>
                 </div>
             </div>

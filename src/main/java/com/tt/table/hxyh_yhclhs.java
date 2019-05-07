@@ -13,7 +13,7 @@ public class hxyh_yhclhs extends DbCtrl {
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
     private boolean canDel = true;
     private boolean canAdd = true;
-    private final String classAgpId = "51"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
+    private final String classAgpId = "64"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
     public hxyh_yhclhs() {
         super("hxyh_yhclhs");
