@@ -1,9 +1,11 @@
 package com.tt.manager;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.tt.data.TtMap;
 import com.tt.tlzf.util.DemoUtil;
+import com.tt.tool.Config;
 import com.tt.tool.HttpTools;
 import com.tt.tool.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,9 @@ public class icbczx_dsjController {
     public final static String loginId = "kuaichedao";
     public final static String accessKey = "5D883646019F232F9E528D21C0E4C353";
     public final static String shopNumber = "QDS04477";
-    public final static String url = "https://www.qhrtcb.com/hbservice/risk/bodyguard";
+    public final static String url = Config.TESTMODE
+            ? "https://www.qhrtcb.com/hbservice/risk/bodyguard"
+            : "http://www.hibdata.com:7070/hbservice/risk/bodyguard";
 
 
     public static String getdsjzxhttp(Map<String, Object> map)
@@ -161,17 +165,17 @@ public class icbczx_dsjController {
                 result = (String) dsj.get("result1");
                 break;
             case "2":
-                result = (String) dsj.get("result1");
+                result = (String) dsj.get("result2");
                 break;
             case "3":
-                result = (String) dsj.get("result1");
+                result = (String) dsj.get("result3");
                 break;
             case "4":
-                result = (String) dsj.get("result1");
+                result = (String) dsj.get("result4");
                 break;
         }
         if (result != null) {
-            JSONObject res = JSONObject.parseObject(result);
+            JSONObject res =JSONObject.parseObject(Tools.jsonDeCode(result.replace(":\"{", ":{").replace("}\"", "}")).toString()) ;
             if (res.get("detail") != null && !res.get("detail").equals("")) {
                 JSONObject detail = JSONObject.parseObject(res
                         .getString("detail"));
@@ -204,4 +208,11 @@ public class icbczx_dsjController {
         return "jsp/manager/AppraisalReport";
     }
 
+
+    public static void main(String[] args) {
+        String s="{\"detail\":{\"success\":1,\"id\":\"WF2019050617215212669706\",\"reasonDesc\":null,\"reasonCode\":null,\"resultDesc\":\"{\"ANTIFRAUD\":{\"risk_items\":[{\"risk_id\":1,\"rule_id\":\"30415014\",\"score\":1,\"rule_uuid\":\"08e7a359b530492bbf27f993a47bbff0\",\"risk_name\":\"6个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"}],\"cross_partner_count\":1,\"type\":\"cross_partner\"}},{\"risk_id\":2,\"rule_id\":\"30415024\",\"score\":0,\"rule_uuid\":\"d65fd878700c45918c74a5cc8057f159\",\"risk_name\":\"12个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"},{\"count\":1,\"industryDisplayName\":\"小额贷款公司\"}],\"cross_partner_count\":2,\"type\":\"cross_partner\"}},{\"risk_id\":3,\"rule_id\":\"30415034\",\"score\":0,\"rule_uuid\":\"92ce3f80062945219c650a0ef0890746\",\"risk_name\":\"24个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"},{\"count\":1,\"industryDisplayName\":\"小额贷款公司\"}],\"cross_partner_count\":2,\"type\":\"cross_partner\"}}],\"score\":1,\"decision\":\"PASS\"}}\"},\"status\":{\"isSuccess\":true,\"requestId\":\"78582c07a7e046bf919ea3ba935c9a47\",\"responseCode\":\"0000\",\"responseMessage\":\"查询成功!\",\"warningMessage\":null}}";
+
+        Object obj = Tools.jsonDeCode(s.replace(":\"{", ":{").replace("}\"", "}"));
+
+    }
 }

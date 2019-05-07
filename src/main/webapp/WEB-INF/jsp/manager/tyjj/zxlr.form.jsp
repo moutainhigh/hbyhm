@@ -939,7 +939,6 @@
     function dsj_bg(id, dsjtype, report_id) {
         var dsj_code = document.getElementById(report_id).value;
         if (dsj_code != null && dsj_code != "") {
-
             // $.ajax({
             //     type : "post",
             //     dataType : "json",
@@ -959,7 +958,6 @@
             //     }
             //
             // });
-
             var frameSrc = "/manager/getxdfx_dsjzx_result?id=" + id + "&dsjtype=" + dsjtype;
             //给iframe加上src路径
             $("#NoPermissioniframe").attr("src", frameSrc);

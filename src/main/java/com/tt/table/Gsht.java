@@ -15,7 +15,7 @@ public class Gsht extends DbCtrl {
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
     private boolean canDel = false;
     private boolean canAdd = false;
-    private final String classAgpId = "32"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
+    private final String classAgpId = "50"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
     public Gsht() {
         super("hbyh_gsht");

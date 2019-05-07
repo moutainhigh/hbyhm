@@ -1,136 +1,84 @@
-2019-05-06 10:23:01  [ http-nio-8098-exec-1:0 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:23:04  [ http-nio-8098-exec-2:3429 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:23:06  [ http-nio-8098-exec-3:5178 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:31:21  [ http-nio-8098-exec-7:500655 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:31:23  [ http-nio-8098-exec-8:502092 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:31:24  [ http-nio-8098-exec-9:503367 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:31:29  [ http-nio-8098-exec-3:508220 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:35:24  [ http-nio-8098-exec-5:743014 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:35:45  [ http-nio-8098-exec-10:764385 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:35:48  [ http-nio-8098-exec-3:767387 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:35:51  [ http-nio-8098-exec-7:770137 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:35:51  [ http-nio-8098-exec-7:770418 ] - [ ERROR ]  Tools.logError:http%3A%2F%2Flocalhost%3A8098%2FWEB-INF%2Fjsp%2Fmanager%2Findex_b.jsp%7C%2FWEB-INF%2Fjsp%2Fmanager%2Findex_b.jsp%7Ccn%3Dhxyh_zxlr%26sdo%3Dlist%26type%3Dhxyh:An exception occurred processing [/WEB-INF/jsp/manager/hxyh/hxyh_zxlr.list.jsp] at line [87]
-
-84:                                     </div>
-85:                                 </td>
-86:                                 <td class="hidden-xs text-center" style="width: 200px">
-87:                                     <%if (m.get("dy_bc_status").equals("3")) {%>
-88: 
-89:                                     <%
-90:                                         if(m.get("qy_bc_status").equals("3")){
-
-
-Stacktrace:
-2019-05-06 10:42:55  [ http-nio-8098-exec-1:1194342 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:42:59  [ http-nio-8098-exec-3:1197905 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:51:10  [ http-nio-8098-exec-2:1688961 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:51:13  [ http-nio-8098-exec-1:1692564 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:51:15  [ http-nio-8098-exec-3:1694521 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:51:20  [ http-nio-8098-exec-5:1698976 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:51:22  [ http-nio-8098-exec-6:1700683 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:51:28  [ http-nio-8098-exec-9:1707117 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:51:33  [ http-nio-8098-exec-7:1712269 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:51:35  [ http-nio-8098-exec-10:1714139 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:51:37  [ http-nio-8098-exec-2:1716041 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:51:40  [ http-nio-8098-exec-1:1719068 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:51:42  [ http-nio-8098-exec-3:1721001 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-05-06 10:51:45  [ http-nio-8098-exec-6:1724591 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-05-06 10:52:13  [ http-nio-8098-exec-8:1752144 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-05-06 10:52:21  [ http-nio-8098-exec-7:1760376 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-05-06 10:52:27  [ http-nio-8098-exec-2:1765867 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-05-06 10:53:21  [ http-nio-8098-exec-1:1820374 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-05-06 10:54:27  [ http-nio-8098-exec-1:1885718 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-05-06 10:56:38  [ http-nio-8098-exec-1:2016788 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-05-06 10:57:35  [ http-nio-8098-exec-1:2074255 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:57:37  [ http-nio-8098-exec-2:2076395 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-05-06 10:57:52  [ http-nio-8098-exec-5:2091118 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-05-06 10:57:53  [ http-nio-8098-exec-6:2092655 ] - [ INFO ]  权限检查成功！
-2019-05-06 10:57:57  [ http-nio-8098-exec-8:2096251 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 10:58:01  [ http-nio-8098-exec-7:2100108 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 10:58:55  [ http-nio-8098-exec-1:2154199 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 10:58:58  [ http-nio-8098-exec-2:2157110 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 10:58:58  [ http-nio-8098-exec-2:2157450 ] - [ ERROR ]  Tools.logError:http%3A%2F%2Flocalhost%3A8098%2FWEB-INF%2Fjsp%2Fmanager%2Findex_b.jsp%7C%2FWEB-INF%2Fjsp%2Fmanager%2Findex_b.jsp%7Ccn%3Dyhqy%26type%3Dcwgl%26sdo%3Dform%26id%3D6:Unable to compile class for JSP: 
-
-An error occurred at line: [18] in the generated java file: [C:\Users\86176\AppData\Local\Temp\tomcat.6265385403817184122.8098\work\Tomcat\localhost\ROOT\org\apache\jsp\WEB_002dINF\jsp\manager\cwgl\yhqy_form_jsp.java]
-Only a type can be imported. com.tt.tool.DataDic resolves to a package
-
-An error occurred at line: [193] in the jsp file: [/WEB-INF/jsp/manager/cwgl/yhqy.form.jsp]
-DataDic.dic_tlzf_xy_status cannot be resolved to a type
-190:                                 <span class="input-group-addon" style="font-size: 14px;">协议状态</span>
-191:                                 <select class="form-control"  id="qy_status" name="qy_status"
-192:                                         style="font-size: 14px;">
-193:                                     <%=Tools.dicopt(DataDic.dic_tlzf_xy_status,infodb.get("qy_status"))%>
-194:                                 </select>
-195:                                 <span class="input-group-addon"><a onclick="tljy()">解约④</a></span>
-196:                             </div>
-
-
-An error occurred at line: [253] in the jsp file: [/WEB-INF/jsp/manager/cwgl/yhqy.form.jsp]
-DataDic.dic_tlzf_qystatus cannot be resolved to a type
-250:                                 <select class="form-control" id="bc_status" name="bc_status" onchange="autoremark(this)"
-251:                                         style="font-size: 14px;">
-252:                                     <option value="0">请选择</option>
-253:                                     <%=Tools.dicopt(DataDic.dic_tlzf_qystatus,infodb.get("bc_status"))%>
-254:                                 </select>
-255:                             </div>
-256:                         </div>
-
-
-An error occurred at line: [303] in the jsp file: [/WEB-INF/jsp/manager/cwgl/yhqy.form.jsp]
-DataDic.dic_zx_status cannot be resolved to a type
-300:             <div class="form-group">
-301:                 <label class="col-sm-2 control-label">历史记录</label>
-302:                 <div class="col-sm-10">
-303:                     <textarea style="width: 80%; height: 200px" class="form-control" disabled=""><%TtList lslist=(TtList) request.getAttribute("resultlist");if(lslist!=null&&lslist.size()>0){ for(TtMap l:lslist){%><%=l.get("dt_add")%>:状态:<%=DataDic.dic_zx_status.get(l.get("status"))%>,留言:<%=l.get("remark").replace("null","")%>&#10;<%}} %></textarea>
-304:                 </div>
-305:             </div>
-306:             <input id="merchant_id" name="merchant_id" value="" type="hidden" />
-
-
-Stacktrace:
-2019-05-06 10:59:00  [ http-nio-8098-exec-3:2159563 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 10:59:04  [ http-nio-8098-exec-1:2163213 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 10:59:12  [ http-nio-8098-exec-2:2171155 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 10:59:45  [ http-nio-8098-exec-4:2204515 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 10:59:49  [ http-nio-8098-exec-5:2208463 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 10:59:50  [ http-nio-8098-exec-6:2209605 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 11:18:08  [ http-nio-8098-exec-1:3307280 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 11:20:31  [ http-nio-8098-exec-5:3450305 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 11:20:31  [ http-nio-8098-exec-5:3450318 ] - [ ERROR ]  {conn-910001, stmt-920011} execute error. update tlzf_qy set `cvv2`='', `imgstep17_1ss`='images/mgcaraddimg.jpg', `account_type`='00', `vailddate`='', `merrem`='', `agrmno`='AIP3989190423000002717', `qy_status`='2', `remark`='', `merchant_id`='', `account_no`='6222004000493013989', `icbc_id`='852', `req_sn`='200604000006429-1557112720454', `dt_edit`='2019-05-06 11:20:31', `account_name`='嵇竹中', `cardid`='620528197501116230', `tel`='15601257600', `result_content`='{
- "INFO":  {
-  "TRX_CODE": "310002",
-  "VERSION": "04",
-  "DATA_TYPE": "2",
-  "REQ_SN": "200604000006429-1557112755265",
-  "RET_CODE": "0000",
-  "ERR_MSG": "提交成功",
-  "SIGNED_MSG": "51aa7e87d0cda96bb058048b44771bd83d276f42ef08c0ff6040d7ff83750789a974c3426b405c8588d17bb2dbe79e953bdf32ac37906393b0b6a15d5bd53f967af33d8ad5808ba248e2ea99618b0110625fefaddce0150e8eeb70945d4d27abc44e3168d16221e7c8c14534baa95fcfc248ce1205e8575266d38022f2996f7868ba6121597bd82f010b508b0f2fecc21af0bfa6d35c6f763200f996a919d9fc3a6c96dfcccf19f900eb5799f7e59c1b20b88206aa4e3b66349c226fad2b2020524d38068aeadd35eb6f9c2438ee471c4685278a8ba7f1d2fee184ba250daee6ec4edd0f042cd8e35d7735315a0df9911cb9b2c8cc688a26d52120938f066897"
- },
- "FAGRCRET":  {
-  "AGRMNO": "AIP3989190423000002717",
-  "RET_CODE": "0000",
-  "ERR_MSG": "处理成功"
- }
-}', `bank_code`='0102', `result_msg`='处理成功', `bc_status`='3', `cardid_type`='0', `smscode`='111111', `account_prop`='0', `result_code`='0000', `mid_edit`='4793' where id='6'
-com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long for column 'result_content' at row 1
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:104)
-	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:781)
-	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_execute(FilterChainImpl.java:2958)
-	at com.alibaba.druid.filter.FilterAdapter.statement_execute(FilterAdapter.java:2473)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_execute(FilterEventAdapter.java:188)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_execute(FilterChainImpl.java:2956)
-	at com.alibaba.druid.wall.WallFilter.statement_execute(WallFilter.java:415)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_execute(FilterChainImpl.java:2956)
-	at com.alibaba.druid.filter.FilterAdapter.statement_execute(FilterAdapter.java:2473)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_execute(FilterEventAdapter.java:188)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_execute(FilterChainImpl.java:2956)
-	at com.alibaba.druid.proxy.jdbc.StatementProxyImpl.execute(StatementProxyImpl.java:147)
-	at com.alibaba.druid.pool.DruidPooledStatement.execute(DruidPooledStatement.java:619)
-	at com.tt.tool.DbTools.recupdate(DbTools.java:210)
-	at com.tt.tool.DbCtrl.editData(DbCtrl.java:479)
-	at com.tt.tool.DbCtrl.edit(DbCtrl.java:555)
-	at com.tt.table.yhqy.doPost(yhqy.java:145)
+2019-05-07 09:25:09  [ http-nio-8098-exec-4:0 ] - [ INFO ]  权限检查成功！
+2019-05-07 09:25:12  [ http-nio-8098-exec-7:2259 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
+2019-05-07 09:25:14  [ http-nio-8098-exec-8:4926 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-07 09:25:17  [ http-nio-8098-exec-10:7106 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-07 09:25:18  [ http-nio-8098-exec-9:8306 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-07 09:25:22  [ http-nio-8098-exec-1:12300 ] - [ INFO ]  权限检查成功！
+2019-05-07 09:25:23  [ http-nio-8098-exec-3:13836 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-07 09:25:26  [ http-nio-8098-exec-5:16323 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-07 09:26:45  [ http-nio-8098-exec-7:95390 ] - [ INFO ]  权限检查成功！
+2019-05-07 09:26:47  [ http-nio-8098-exec-10:97744 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-07 09:26:49  [ http-nio-8098-exec-1:99689 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-07 09:26:53  [ http-nio-8098-exec-2:103753 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-07 09:26:55  [ http-nio-8098-exec-4:106071 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
+2019-05-07 09:26:58  [ http-nio-8098-exec-5:108906 ] - [ INFO ]  权限检查成功！
+2019-05-07 09:50:32  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
+2019-05-07 09:50:34  [ http-nio-8098-exec-4:1941 ] - [ INFO ]  权限检查成功！
+2019-05-07 09:50:36  [ http-nio-8098-exec-5:3754 ] - [ INFO ]  权限检查成功！
+2019-05-07 09:50:43  [ http-nio-8098-exec-7:10606 ] - [ INFO ]  权限检查成功！
+2019-05-07 09:59:30  [ http-nio-8098-exec-1:537678 ] - [ INFO ]  权限检查成功！
+2019-05-07 09:59:35  [ http-nio-8098-exec-5:542635 ] - [ INFO ]  权限检查成功！
+2019-05-07 09:59:37  [ http-nio-8098-exec-3:544911 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:35:26  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
+2019-05-07 10:35:29  [ http-nio-8098-exec-5:3393 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:36:34  [ http-nio-8098-exec-10:68268 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:36:36  [ http-nio-8098-exec-7:70527 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:37:42  [ http-nio-8098-exec-9:135604 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:37:43  [ http-nio-8098-exec-6:136596 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:37:46  [ http-nio-8098-exec-1:139878 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:41:45  [ http-nio-8098-exec-4:379147 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:41:47  [ http-nio-8098-exec-7:380579 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:43:09  [ http-nio-8098-exec-1:462856 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
+2019-05-07 10:43:11  [ http-nio-8098-exec-2:464769 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
+2019-05-07 10:43:14  [ http-nio-8098-exec-3:467893 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:43:16  [ http-nio-8098-exec-5:469836 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:43:20  [ http-nio-8098-exec-2:473634 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-07 10:43:22  [ http-nio-8098-exec-4:475826 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-07 10:50:20  [ http-nio-8098-exec-1:893892 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
+2019-05-07 10:50:23  [ http-nio-8098-exec-6:897218 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:50:26  [ http-nio-8098-exec-2:899598 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:51:16  [ http-nio-8098-exec-2:950270 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:51:19  [ http-nio-8098-exec-1:952892 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:51:22  [ http-nio-8098-exec-1:955950 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:51:24  [ http-nio-8098-exec-7:958260 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:51:27  [ http-nio-8098-exec-3:960938 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:53:43  [ http-nio-8098-exec-7:1097355 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:53:47  [ http-nio-8098-exec-3:1101139 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:53:51  [ http-nio-8098-exec-3:1105173 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:53:53  [ http-nio-8098-exec-1:1107273 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:53:55  [ http-nio-8098-exec-6:1109396 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:53:57  [ http-nio-8098-exec-8:1110910 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:53:59  [ http-nio-8098-exec-5:1112708 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:54:00  [ http-nio-8098-exec-3:1114264 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:54:10  [ http-nio-8098-exec-2:1124396 ] - [ INFO ]  权限检查成功！
+2019-05-07 10:54:13  [ http-nio-8098-exec-2:1127001 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:03:17  [ http-nio-8098-exec-1:1670957 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:03:22  [ http-nio-8098-exec-6:1676410 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:03:28  [ http-nio-8098-exec-5:1682029 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:03:32  [ http-nio-8098-exec-8:1686021 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:03:38  [ http-nio-8098-exec-8:1691688 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:03:38  [ http-nio-8098-exec-8:1691700 ] - [ ERROR ]  {conn-510002, stmt-520243} execute error. select * from assess_fs where name=快加云
+java.sql.SQLSyntaxErrorException: Unknown column '快加云' in 'where clause'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1218)
+	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2831)
+	at com.alibaba.druid.filter.FilterAdapter.statement_executeQuery(FilterAdapter.java:2503)
+	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeQuery(FilterEventAdapter.java:302)
+	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2828)
+	at com.alibaba.druid.wall.WallFilter.statement_executeQuery(WallFilter.java:528)
+	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2828)
+	at com.alibaba.druid.filter.FilterAdapter.statement_executeQuery(FilterAdapter.java:2503)
+	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeQuery(FilterEventAdapter.java:302)
+	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2828)
+	at com.alibaba.druid.proxy.jdbc.StatementProxyImpl.executeQuery(StatementProxyImpl.java:221)
+	at com.alibaba.druid.pool.DruidPooledStatement.executeQuery(DruidPooledStatement.java:291)
+	at com.tt.tool.DbTools.reclist(DbTools.java:87)
+	at com.tt.tool.Tools.reclist(Tools.java:735)
+	at com.tt.table.assess_fs.chk(assess_fs.java:227)
+	at com.tt.tool.DbCtrl.add(DbCtrl.java:604)
+	at com.tt.table.assess_fs.doPost(assess_fs.java:133)
 	at com.tt.manager.ManagerPost.doPost(ManagerPost.java:66)
 	at com.tt.manager.Manager.indexpost(Manager.java:65)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -190,655 +138,38 @@ com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
-2019-05-06 11:20:31  [ http-nio-8098-exec-5:3450321 ] - [ ERROR ]  Tools.logError:Data truncation: Data too long for column 'result_content' at row 1
-2019-05-06 11:20:33  [ http-nio-8098-exec-1:3451692 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 11:20:38  [ http-nio-8098-exec-6:3457584 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 11:29:24  [ http-nio-8098-exec-9:3983218 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 13:35:06  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 13:36:12  [ http-nio-8098-exec-6:65800 ] - [ INFO ]  权限检查成功！
-2019-05-06 13:36:18  [ http-nio-8098-exec-3:72313 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 13:36:21  [ http-nio-8098-exec-8:75477 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 13:39:47  [ http-nio-8098-exec-4:280795 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 13:39:48  [ http-nio-8098-exec-9:282118 ] - [ DEBUG ]  com.tt.table.yhqy:权限检查成功！
-2019-05-06 13:41:21  [ http-nio-8098-exec-8:374945 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:52:26  [ http-nio-8098-exec-2:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 14:52:28  [ http-nio-8098-exec-4:1857 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:52:34  [ http-nio-8098-exec-5:8431 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:52:38  [ http-nio-8098-exec-4:11901 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:53:13  [ http-nio-8098-exec-10:47392 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:53:21  [ http-nio-8098-exec-3:55550 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:53:24  [ http-nio-8098-exec-6:58262 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:53:27  [ http-nio-8098-exec-7:61364 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:55:57  [ http-nio-8098-exec-1:210910 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:56:00  [ http-nio-8098-exec-2:214391 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:56:04  [ http-nio-8098-exec-9:217853 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:56:35  [ http-nio-8098-exec-8:248839 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:56:38  [ http-nio-8098-exec-10:252314 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:56:40  [ http-nio-8098-exec-8:253957 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:56:52  [ http-nio-8098-exec-9:266129 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:57:15  [ http-nio-8098-exec-4:289384 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:58:29  [ http-nio-8098-exec-2:363545 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:58:35  [ http-nio-8098-exec-7:369081 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:58:37  [ http-nio-8098-exec-6:371005 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:58:39  [ http-nio-8098-exec-8:373465 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:00:21  [ http-nio-8098-exec-1:475229 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:00:23  [ http-nio-8098-exec-4:477284 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:00:28  [ http-nio-8098-exec-8:482364 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:04:42  [ http-nio-8098-exec-9:736730 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:04:46  [ http-nio-8098-exec-4:739946 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:05:05  [ http-nio-8098-exec-8:759005 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:05:09  [ http-nio-8098-exec-8:763236 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:05:10  [ http-nio-8098-exec-7:764590 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:05:12  [ http-nio-8098-exec-4:766366 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:07:52  [ http-nio-8098-exec-2:925981 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:09:47  [ http-nio-8098-exec-7:1041291 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:09:52  [ http-nio-8098-exec-4:1046058 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:16:16  [ http-nio-8098-exec-1:1430368 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:16:20  [ http-nio-8098-exec-8:1434656 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:16:26  [ http-nio-8098-exec-8:1440355 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:16:27  [ http-nio-8098-exec-4:1441644 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:16:29  [ http-nio-8098-exec-2:1443048 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:18:25  [ http-nio-8098-exec-1:1558989 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:18:28  [ http-nio-8098-exec-1:1562209 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:18:34  [ http-nio-8098-exec-1:1567833 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:18:36  [ http-nio-8098-exec-6:1570017 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:18:38  [ http-nio-8098-exec-6:1572577 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:21:36  [ http-nio-8098-exec-1:1749802 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:21:38  [ http-nio-8098-exec-10:1751879 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:21:41  [ http-nio-8098-exec-10:1754821 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:21:41  [ http-nio-8098-exec-10:1754836 ] - [ ERROR ]  {conn-610002, stmt-620079} execute error. insert into kj_icbc_result set `remark`='', `qryid`='848', `status`='3'
-java.sql.SQLException: Field 'mid_add' doesn't have a default value
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.StatementImpl.executeUpdateInternal(StatementImpl.java:1354)
-	at com.mysql.cj.jdbc.StatementImpl.executeLargeUpdate(StatementImpl.java:2132)
-	at com.mysql.cj.jdbc.StatementImpl.executeUpdate(StatementImpl.java:1359)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3104)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeUpdate(FilterAdapter.java:2514)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeUpdate(FilterEventAdapter.java:350)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3102)
-	at com.alibaba.druid.wall.WallFilter.statement_executeUpdate(WallFilter.java:561)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3102)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeUpdate(FilterAdapter.java:2514)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeUpdate(FilterEventAdapter.java:350)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3102)
-	at com.alibaba.druid.proxy.jdbc.StatementProxyImpl.executeUpdate(StatementProxyImpl.java:249)
-	at com.alibaba.druid.pool.DruidPooledStatement.executeUpdate(DruidPooledStatement.java:370)
-	at com.tt.tool.DbTools.recinsert(DbTools.java:230)
-	at com.tt.tool.DbCtrl.addData(DbCtrl.java:588)
-	at com.tt.tool.DbCtrl.add(DbCtrl.java:624)
-	at com.tt.tool.Tools.recAdd(Tools.java:695)
-	at com.tt.table.Zxlr.succ(Zxlr.java:256)
-	at com.tt.tool.DbCtrl.edit(DbCtrl.java:557)
-	at com.tt.table.Zxlr.doPost(Zxlr.java:229)
-	at com.tt.manager.ManagerPost.doPost(ManagerPost.java:66)
-	at com.tt.manager.Manager.indexpost(Manager.java:65)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:665)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:750)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.lang.Thread.run(Thread.java:748)
-2019-05-06 15:21:41  [ http-nio-8098-exec-10:1754839 ] - [ ERROR ]  Tools.logError:Field 'mid_add' doesn't have a default value
-2019-05-06 15:22:24  [ http-nio-8098-exec-5:1798735 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:22:32  [ http-nio-8098-exec-1:1806051 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:22:33  [ http-nio-8098-exec-9:1807755 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:22:37  [ http-nio-8098-exec-9:1811382 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:22:37  [ http-nio-8098-exec-9:1811390 ] - [ ERROR ]  {conn-710002, stmt-720079} execute error. insert into kj_icbc_result set `remark`='', `qryid`='848', `status`='3'
-java.sql.SQLException: Field 'mid_add' doesn't have a default value
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.StatementImpl.executeUpdateInternal(StatementImpl.java:1354)
-	at com.mysql.cj.jdbc.StatementImpl.executeLargeUpdate(StatementImpl.java:2132)
-	at com.mysql.cj.jdbc.StatementImpl.executeUpdate(StatementImpl.java:1359)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3104)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeUpdate(FilterAdapter.java:2514)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeUpdate(FilterEventAdapter.java:350)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3102)
-	at com.alibaba.druid.wall.WallFilter.statement_executeUpdate(WallFilter.java:561)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3102)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeUpdate(FilterAdapter.java:2514)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeUpdate(FilterEventAdapter.java:350)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeUpdate(FilterChainImpl.java:3102)
-	at com.alibaba.druid.proxy.jdbc.StatementProxyImpl.executeUpdate(StatementProxyImpl.java:249)
-	at com.alibaba.druid.pool.DruidPooledStatement.executeUpdate(DruidPooledStatement.java:370)
-	at com.tt.tool.DbTools.recinsert(DbTools.java:230)
-	at com.tt.tool.DbCtrl.addData(DbCtrl.java:588)
-	at com.tt.tool.DbCtrl.add(DbCtrl.java:624)
-	at com.tt.tool.Tools.recAdd(Tools.java:695)
-	at com.tt.table.Zxlr.succ(Zxlr.java:255)
-	at com.tt.tool.DbCtrl.edit(DbCtrl.java:557)
-	at com.tt.table.Zxlr.doPost(Zxlr.java:228)
-	at com.tt.manager.ManagerPost.doPost(ManagerPost.java:66)
-	at com.tt.manager.Manager.indexpost(Manager.java:65)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:665)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:750)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.lang.Thread.run(Thread.java:748)
-2019-05-06 15:22:37  [ http-nio-8098-exec-9:1811392 ] - [ ERROR ]  Tools.logError:Field 'mid_add' doesn't have a default value
-2019-05-06 15:25:01  [ http-nio-8098-exec-1:1955548 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:25:07  [ http-nio-8098-exec-10:1961238 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:25:09  [ http-nio-8098-exec-9:1963402 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:25:17  [ http-nio-8098-exec-3:1971243 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:25:20  [ http-nio-8098-exec-5:1974628 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:25:24  [ http-nio-8098-exec-2:1977943 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:25:57  [ http-nio-8098-exec-1:2011027 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:26:05  [ http-nio-8098-exec-2:2019083 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:26:06  [ http-nio-8098-exec-1:2020682 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:26:08  [ http-nio-8098-exec-2:2022759 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:38:42  [ http-nio-8098-exec-1:2775961 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:38:44  [ http-nio-8098-exec-3:2778087 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:38:48  [ http-nio-8098-exec-1:2782023 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:38:59  [ http-nio-8098-exec-3:2793482 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:39:01  [ http-nio-8098-exec-2:2795284 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:39:06  [ http-nio-8098-exec-6:2800746 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:39:08  [ http-nio-8098-exec-4:2802002 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:39:10  [ http-nio-8098-exec-8:2803910 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:38  [ http-nio-8098-exec-1:2891853 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:40  [ http-nio-8098-exec-2:2893900 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:42  [ http-nio-8098-exec-1:2896555 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:41:59  [ http-nio-8098-exec-1:2973775 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:42:06  [ http-nio-8098-exec-1:2980474 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:42:08  [ http-nio-8098-exec-8:2981865 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:42:10  [ http-nio-8098-exec-5:2983850 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:42:41  [ http-nio-8098-exec-2:3015768 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:42:45  [ http-nio-8098-exec-9:3019021 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:02:38  [ http-nio-8098-exec-1:4212706 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:02:44  [ http-nio-8098-exec-2:4218101 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:02:50  [ http-nio-8098-exec-1:4224602 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:02:52  [ http-nio-8098-exec-3:4226145 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-05-06 16:02:57  [ http-nio-8098-exec-5:4231017 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-05-06 16:02:59  [ http-nio-8098-exec-8:4233512 ] - [ DEBUG ]  com.tt.table.dsgl:权限检查成功！
-2019-05-06 16:03:11  [ http-nio-8098-exec-1:4245182 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:06:18  [ http-nio-8098-exec-7:4432289 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:06:20  [ http-nio-8098-exec-7:4434151 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:06:22  [ http-nio-8098-exec-3:4436173 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:15:03  [ http-nio-8098-exec-2:4957119 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:15:12  [ http-nio-8098-exec-7:4966555 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:15:14  [ http-nio-8098-exec-9:4968497 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:15:20  [ http-nio-8098-exec-5:4974607 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:16:51  [ http-nio-8098-exec-7:5065340 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:16:53  [ http-nio-8098-exec-9:5067054 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:16:57  [ http-nio-8098-exec-4:5071208 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:17:14  [ http-nio-8098-exec-2:5088756 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:17:17  [ http-nio-8098-exec-2:5091174 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:17:20  [ http-nio-8098-exec-8:5093815 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:19:50  [ http-nio-8098-exec-7:5243848 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:21:38  [ http-nio-8098-exec-2:5352251 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:21:42  [ http-nio-8098-exec-7:5356054 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:21:44  [ http-nio-8098-exec-4:5358481 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:21:46  [ http-nio-8098-exec-8:5360305 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:21:48  [ http-nio-8098-exec-9:5362182 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:30:02  [ http-nio-8098-exec-3:5856399 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:30:06  [ http-nio-8098-exec-10:5860444 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:30:11  [ http-nio-8098-exec-7:5865322 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 16:30:12  [ http-nio-8098-exec-3:5866701 ] - [ DEBUG ]  com.tt.table.Admin:权限检查成功！
-2019-05-06 14:17:40  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 14:17:47  [ http-nio-8098-exec-3:7208 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:17:47  [ http-nio-8098-exec-3:7231 ] - [ ERROR ]  {conn-10001, stmt-20032} execute error. select SQL_CALC_FOUND_ROWS t.*,f.name as fsname,a.name as adminname,dy.id as dy_id,dy.bc_status as dy_bc_status,qy.bc_status as qy_bc_status,qy.qy_status as qy_qy_status from kj_icbc t  LEFT JOIN assess_fs f ON f.id=t.gems_fs_id  LEFT JOIN assess_gems a ON a.id=t.gems_id LEFT JOIN hxyh_dygd dy ON dy.icbc_id=t.id LEFT JOIN tlzf_qy qy ON qy.icbc_id=t.id    where t.app=4 and t.gems_fs_id in (1708,1709,1712,1713,1714,1727,1728,1729,1730,1731,1733,1734,1735,1736,1738,1739,1740,1741,1742,1743,1744) ORDER BY t.dt_edit DESC   limit 0,10
-java.sql.SQLSyntaxErrorException: Table 'kcway2.tlzf_qy' doesn't exist
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1218)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2831)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeQuery(FilterAdapter.java:2503)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeQuery(FilterEventAdapter.java:302)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2828)
-	at com.alibaba.druid.wall.WallFilter.statement_executeQuery(WallFilter.java:528)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2828)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeQuery(FilterAdapter.java:2503)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeQuery(FilterEventAdapter.java:302)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2828)
-	at com.alibaba.druid.proxy.jdbc.StatementProxyImpl.executeQuery(StatementProxyImpl.java:221)
-	at com.alibaba.druid.pool.DruidPooledStatement.executeQuery(DruidPooledStatement.java:291)
-	at com.tt.tool.DbTools.reclist(DbTools.java:87)
-	at com.tt.tool.DbCtrl.lists(DbCtrl.java:682)
-	at com.tt.table.hxyh_zxlr.doGetList(hxyh_zxlr.java:114)
-	at com.tt.manager.ManagerGet.doGet(ManagerGet.java:124)
-	at com.tt.manager.Manager.index(Manager.java:47)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:645)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:750)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.lang.Thread.run(Thread.java:748)
-2019-05-06 14:17:47  [ http-nio-8098-exec-3:7234 ] - [ ERROR ]  Tools.logError:Table 'kcway2.tlzf_qy' doesn't exist
-2019-05-06 14:17:49  [ http-nio-8098-exec-5:9492 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:17:49  [ http-nio-8098-exec-5:9497 ] - [ ERROR ]  {conn-10001, stmt-20063} execute error. select SQL_CALC_FOUND_ROWS t.*,f.name as fsname,a.name as adminname,dy.id as dy_id,dy.bc_status as dy_bc_status,qy.bc_status as qy_bc_status,qy.qy_status as qy_qy_status from kj_icbc t  LEFT JOIN assess_fs f ON f.id=t.gems_fs_id  LEFT JOIN assess_gems a ON a.id=t.gems_id LEFT JOIN hxyh_dygd dy ON dy.icbc_id=t.id LEFT JOIN tlzf_qy qy ON qy.icbc_id=t.id    where t.app=4 and t.gems_fs_id in (1708,1709,1712,1713,1714,1727,1728,1729,1730,1731,1733,1734,1735,1736,1738,1739,1740,1741,1742,1743,1744) ORDER BY t.dt_edit DESC   limit 0,10
-java.sql.SQLSyntaxErrorException: Table 'kcway2.tlzf_qy' doesn't exist
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1218)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2831)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeQuery(FilterAdapter.java:2503)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeQuery(FilterEventAdapter.java:302)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2828)
-	at com.alibaba.druid.wall.WallFilter.statement_executeQuery(WallFilter.java:528)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2828)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeQuery(FilterAdapter.java:2503)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeQuery(FilterEventAdapter.java:302)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2828)
-	at com.alibaba.druid.proxy.jdbc.StatementProxyImpl.executeQuery(StatementProxyImpl.java:221)
-	at com.alibaba.druid.pool.DruidPooledStatement.executeQuery(DruidPooledStatement.java:291)
-	at com.tt.tool.DbTools.reclist(DbTools.java:87)
-	at com.tt.tool.DbCtrl.lists(DbCtrl.java:682)
-	at com.tt.table.hxyh_zxlr.doGetList(hxyh_zxlr.java:114)
-	at com.tt.manager.ManagerGet.doGet(ManagerGet.java:124)
-	at com.tt.manager.Manager.index(Manager.java:47)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:645)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:750)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.lang.Thread.run(Thread.java:748)
-2019-05-06 14:17:49  [ http-nio-8098-exec-5:9499 ] - [ ERROR ]  Tools.logError:Table 'kcway2.tlzf_qy' doesn't exist
-2019-05-06 14:37:38  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 14:37:40  [ http-nio-8098-exec-7:1643 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:37:47  [ http-nio-8098-exec-5:9462 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:41:04  [ http-nio-8098-exec-4:205938 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:41:06  [ http-nio-8098-exec-8:207860 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:41:07  [ http-nio-8098-exec-1:209243 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:42:20  [ http-nio-8098-exec-7:281769 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:42:21  [ http-nio-8098-exec-3:282644 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:42:49  [ http-nio-8098-exec-8:311175 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:42:55  [ http-nio-8098-exec-2:317566 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:43:28  [ http-nio-8098-exec-5:349930 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:43:32  [ http-nio-8098-exec-6:353987 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:43:38  [ http-nio-8098-exec-10:360363 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:43:41  [ http-nio-8098-exec-2:362987 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:44:28  [ http-nio-8098-exec-9:410095 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:44:31  [ http-nio-8098-exec-1:412825 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:46:28  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 14:46:29  [ http-nio-8098-exec-4:1490 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:48:39  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 14:48:41  [ http-nio-8098-exec-3:1856 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:51:19  [ http-nio-8098-exec-7:160166 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:51:21  [ http-nio-8098-exec-8:162037 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:51:51  [ http-nio-8098-exec-2:192186 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:52:04  [ http-nio-8098-exec-6:204967 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:53:08  [ http-nio-8098-exec-9:269093 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:54:03  [ http-nio-8098-exec-8:324267 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:54:35  [ http-nio-8098-exec-7:355730 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:55:44  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 14:55:46  [ http-nio-8098-exec-4:2186 ] - [ INFO ]  权限检查成功！
-2019-05-06 14:56:55  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 14:56:56  [ http-nio-8098-exec-4:1698 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:00:47  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 15:00:48  [ http-nio-8098-exec-2:1562 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:00:51  [ http-nio-8098-exec-5:4468 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:01:28  [ http-nio-8098-exec-4:41688 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:04:18  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 15:04:20  [ http-nio-8098-exec-3:2078 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:05:13  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 15:05:15  [ http-nio-8098-exec-8:1765 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:05:50  [ http-nio-8098-exec-6:37096 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:05:52  [ http-nio-8098-exec-8:38571 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:06:31  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 15:06:33  [ http-nio-8098-exec-4:1955 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:08:59  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 15:09:01  [ http-nio-8098-exec-7:1574 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:10:16  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 15:10:17  [ http-nio-8098-exec-9:1871 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:11:21  [ http-nio-8098-exec-2:65709 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:11:23  [ http-nio-8098-exec-8:67423 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:12:02  [ http-nio-8098-exec-8:106242 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:20:22  [ http-nio-8098-exec-6:606319 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:20:24  [ http-nio-8098-exec-1:608343 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:20:25  [ http-nio-8098-exec-4:609626 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:20:26  [ http-nio-8098-exec-9:610560 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:20:32  [ http-nio-8098-exec-1:616381 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:20:33  [ http-nio-8098-exec-7:617008 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:20:43  [ http-nio-8098-exec-8:627082 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:22:05  [ http-nio-8098-exec-9:709350 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:22:38  [ http-nio-8098-exec-4:742068 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:24:21  [ http-nio-8098-exec-2:845091 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:25:22  [ http-nio-8098-exec-6:906392 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:27:19  [ http-nio-8098-exec-10:1023368 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:27:21  [ http-nio-8098-exec-4:1025327 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:28:37  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 15:28:39  [ http-nio-8098-exec-6:1963 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:30:33  [ http-nio-8098-exec-3:115412 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:30:59  [ http-nio-8098-exec-3:142269 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:37:50  [ http-nio-8098-exec-10:0 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:37:53  [ http-nio-8098-exec-4:2831 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:52  [ http-nio-8098-exec-6:181371 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:52  [ http-nio-8098-exec-6:181841 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:52  [ http-nio-8098-exec-9:182007 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:53  [ http-nio-8098-exec-3:182177 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:53  [ http-nio-8098-exec-9:182311 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:53  [ http-nio-8098-exec-5:182397 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:53  [ http-nio-8098-exec-4:182515 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:53  [ http-nio-8098-exec-10:182648 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:53  [ http-nio-8098-exec-2:182793 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:53  [ http-nio-8098-exec-5:182894 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:40:53  [ http-nio-8098-exec-5:183020 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:42:23  [ http-nio-8098-exec-2:272493 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:43:46  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 15:43:48  [ http-nio-8098-exec-4:1905 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:45:01  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 15:45:03  [ http-nio-8098-exec-9:1912 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:45:20  [ http-nio-8098-exec-4:19407 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:45:44  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 15:45:46  [ http-nio-8098-exec-2:1735 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:47:01  [ http-nio-8098-exec-9:76621 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:47:07  [ http-nio-8098-exec-8:82579 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:50:30  [ http-nio-8098-exec-9:286279 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:50:31  [ http-nio-8098-exec-3:287210 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:50:46  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 15:50:48  [ http-nio-8098-exec-8:2039 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:51:42  [ http-nio-8098-exec-2:55336 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:55:47  [ http-nio-8098-exec-1:300949 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:55:54  [ http-nio-8098-exec-7:307982 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:56:47  [ http-nio-8098-exec-4:360326 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:58:01  [ http-nio-8098-exec-6:434278 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:58:02  [ http-nio-8098-exec-9:435632 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:58:03  [ http-nio-8098-exec-4:436662 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:59:00  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-05-06 15:59:02  [ http-nio-8098-exec-4:2014 ] - [ INFO ]  权限检查成功！
-2019-05-06 15:59:05  [ http-nio-8098-exec-5:4643 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:00:29  [ http-nio-8098-exec-4:88396 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:01:34  [ http-nio-8098-exec-5:153459 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:15:43  [ http-nio-8098-exec-8:1002308 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:15:45  [ http-nio-8098-exec-1:1004574 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:16:24  [ http-nio-8098-exec-2:1043482 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:18:00  [ http-nio-8098-exec-10:1139787 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:18:01  [ http-nio-8098-exec-9:1141050 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:19:14  [ http-nio-8098-exec-10:1213567 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:19:16  [ http-nio-8098-exec-2:1215258 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:19:25  [ http-nio-8098-exec-3:1224747 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:19:46  [ http-nio-8098-exec-10:1245385 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:19:47  [ http-nio-8098-exec-2:1247118 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:21:21  [ http-nio-8098-exec-1:1340899 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:21:23  [ http-nio-8098-exec-3:1342630 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:21:26  [ http-nio-8098-exec-6:1345451 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:21:27  [ http-nio-8098-exec-7:1346510 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:22:03  [ http-nio-8098-exec-5:1382307 ] - [ INFO ]  权限检查成功！
-2019-05-06 16:22:03  [ http-nio-8098-exec-5:1382319 ] - [ ERROR ]  {conn-10001, stmt-20590} execute error. select SQL_CALC_FOUND_ROWS t.*,f.name as fsname,a.name as adminname,dy.id as dy_id,dy.bc_status as dy_bc_status,qy.bc_status as qy_bc_status,qy.qy_status as qy_qy_status from kj_icbc t  LEFT JOIN assess_fs f ON f.id=t.gems_fs_id  LEFT JOIN assess_gems a ON a.id=t.gems_id LEFT JOIN hbyh_dygd dy ON dy.icbc_id=t.id LEFT JOIN tlzf_qy qy ON qy.icbc_id=t.id    where t.app=2 and t.gems_fs_id in (1708,1709,1712,1713,1714,1727,1728,1729,1730,1731,1733,1734,1735,1736,1738,1739,1740,1741,1742,1743,1744) ORDER BY t.dt_edit DESC   limit 0,10
-java.sql.SQLSyntaxErrorException: Table 'kcway2.hbyh_dygd' doesn't exist
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1218)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2831)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeQuery(FilterAdapter.java:2503)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeQuery(FilterEventAdapter.java:302)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2828)
-	at com.alibaba.druid.wall.WallFilter.statement_executeQuery(WallFilter.java:528)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2828)
-	at com.alibaba.druid.filter.FilterAdapter.statement_executeQuery(FilterAdapter.java:2503)
-	at com.alibaba.druid.filter.FilterEventAdapter.statement_executeQuery(FilterEventAdapter.java:302)
-	at com.alibaba.druid.filter.FilterChainImpl.statement_executeQuery(FilterChainImpl.java:2828)
-	at com.alibaba.druid.proxy.jdbc.StatementProxyImpl.executeQuery(StatementProxyImpl.java:221)
-	at com.alibaba.druid.pool.DruidPooledStatement.executeQuery(DruidPooledStatement.java:291)
-	at com.tt.tool.DbTools.reclist(DbTools.java:87)
-	at com.tt.tool.DbCtrl.lists(DbCtrl.java:682)
-	at com.tt.table.Zxlr.doGetList(Zxlr.java:114)
-	at com.tt.manager.ManagerGet.doGet(ManagerGet.java:124)
-	at com.tt.manager.Manager.index(Manager.java:47)
-	at sun.reflect.GeneratedMethodAccessor64.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:645)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:750)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.lang.Thread.run(Thread.java:748)
-2019-05-06 16:22:03  [ http-nio-8098-exec-5:1382321 ] - [ ERROR ]  Tools.logError:Table 'kcway2.hbyh_dygd' doesn't exist
+2019-05-07 11:03:38  [ http-nio-8098-exec-8:1691706 ] - [ ERROR ]  Tools.logError:Unknown column '快加云' in 'where clause'
+2019-05-07 11:03:44  [ http-nio-8098-exec-4:1698210 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:03:47  [ http-nio-8098-exec-6:1700710 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:04:48  [ http-nio-8098-exec-1:1762256 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:04:51  [ http-nio-8098-exec-2:1764579 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:04:57  [ http-nio-8098-exec-10:1770976 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:08:29  [ http-nio-8098-exec-1:1983167 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:08:31  [ http-nio-8098-exec-10:1984976 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:08:32  [ http-nio-8098-exec-10:1986503 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:08:34  [ http-nio-8098-exec-10:1987596 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:08:34  [ http-nio-8098-exec-6:1988541 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:08:36  [ http-nio-8098-exec-5:1989818 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:09:52  [ http-nio-8098-exec-4:2065622 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:09:54  [ http-nio-8098-exec-1:2067675 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:09:55  [ http-nio-8098-exec-2:2068965 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:09:56  [ http-nio-8098-exec-4:2070446 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:09:58  [ http-nio-8098-exec-9:2071659 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:09:59  [ http-nio-8098-exec-10:2073114 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:10:00  [ http-nio-8098-exec-7:2074130 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:10:56  [ http-nio-8098-exec-9:2130498 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:10:58  [ http-nio-8098-exec-10:2131596 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:11:08  [ http-nio-8098-exec-5:2142457 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:12:58  [ http-nio-8098-exec-1:2252119 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:13:00  [ http-nio-8098-exec-2:2254207 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:13:02  [ http-nio-8098-exec-3:2256030 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:13:03  [ http-nio-8098-exec-2:2257176 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:13:05  [ http-nio-8098-exec-1:2259127 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:13:06  [ http-nio-8098-exec-3:2260370 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:13:08  [ http-nio-8098-exec-8:2262142 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:13:10  [ http-nio-8098-exec-4:2263591 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:13:10  [ http-nio-8098-exec-10:2264557 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:13:11  [ http-nio-8098-exec-10:2265379 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:13:12  [ http-nio-8098-exec-1:2266332 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:13:13  [ http-nio-8098-exec-2:2267073 ] - [ INFO ]  权限检查成功！
+2019-05-07 11:13:14  [ http-nio-8098-exec-9:2268020 ] - [ INFO ]  权限检查成功！

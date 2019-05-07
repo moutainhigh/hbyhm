@@ -56,6 +56,23 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
+                                <span class="input-group-addon">上级公司</span>
+                                <select id="up_id" name="up_id" title="请选择关联客户" data-size="10"
+                                        class="selectpicker  form-control"
+                                        multiple data-live-search="true" data-max-options="1">
+                                    <c:forEach items="${fslist}" var="fs">
+                                        <c:if test="${!empty infodb.up_id }">
+                                            <option value="${fs.id}" ${infodb.up_id eq fs.id?"selected='selected'":''}>${fs.name}</option>
+                                        </c:if>
+                                        <c:if test="${empty infodb.up_id }">
+                                            <option value="${fs.id}" ${minfo.icbc_erp_fsid eq fs.id?"selected='selected'":''}>${fs.name}</option>
+                                        </c:if>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
                                 <span class="input-group-addon">启用状态</span>
                                 <select id="showtag" name="showtag" class="form-control">
                                     <option value="1">是</option>

@@ -15,7 +15,7 @@ public class Config {
   public final static boolean TESTMODE = true;/* 测试/生产环境开关 */
   public final static boolean DEBUGMODE = true;/* 调试模式开关，调试模式下会打印异常到浏览器 */
   public final static String TTVER = "2.0 build 20190401"; /* 版本号 */
-  public final static String APP_TITLE = "河北银行"; //项目名称：类似大地保险
+  public final static String APP_TITLE = "人保进件"; //项目名称：类似大地保险
   public final static String APP_VER = " 1.0 build 20190325"; //项目版本
   public static String MANAGER_SKINCSS="skin-kcd";//皮肤主题{skin-tyjj,skin-kcd，skin-black,skin-purple ,skin-yellow,skin-red,skin-green}
   /**NOTE:

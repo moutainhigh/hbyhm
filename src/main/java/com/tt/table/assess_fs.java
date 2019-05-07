@@ -50,6 +50,9 @@ public class assess_fs extends DbCtrl {
         request.setAttribute("info", jsonInfo);//info为json后的info
         request.setAttribute("infodb", info);//infodb为TtMap的info
         request.setAttribute("id", nid);
+        //获取公司列表
+        TtList fslist= Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!=''");
+        request.setAttribute("fslist",fslist);
         //request.setAttribute("saveButton", "true");
         Modal modalMenu = new Modal();
         request.setAttribute("modals", modalMenu.getAllModals()); // 后台左侧菜单,sidebar.jsp里面用到的菜
@@ -116,7 +119,7 @@ public class assess_fs extends DbCtrl {
         }else{
             post.put("purview_map",post.get("purview_map"));
         }
-        post.put("up_id",Tools.minfo().get("icbc_erp_fsid"));
+//        post.put("up_id",Tools.minfo().get("icbc_erp_fsid"));
         post.put("icbc_erp_tag","1");
         post.put("fs_type","2");
         TtMap newpost=new TtMap();
@@ -127,21 +130,25 @@ public class assess_fs extends DbCtrl {
         if (id > 0) { // id为0时，新增
             edit(post, id);
         } else {
-            long fsid=add(post);
-            TtList apglist=Tools.reclist("select * from icbc_admin_agp where showtag=1 and fsid=0 and systag=1");
-            for(TtMap apg : apglist){
-                TtMap apgmap=new TtMap();
-                apgmap.put("name",apg.get("name"));
-                apgmap.put("purview_map",apg.get("purview_map"));
-                apgmap.put("showtag","1");
-                apgmap.put("fsid",String.valueOf(fsid));
-                apgmap.put("systag","0");
-                Tools.recAdd(apgmap,"icbc_admin_agp");
-            }
+            add(post);
         }
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
         boolean bSuccess = errorCode == 0;
         Tools.formatResult(result2, bSuccess, errorCode, bSuccess ? "编辑成功！" : errorMsg, bSuccess ? nextUrl : "");// 失败时停留在当前页面,nextUrl为空
+    }
+
+    @Override
+    public void succ(TtMap array, long id, int sqltp) {
+        TtList apglist=Tools.reclist("select * from icbc_admin_agp where showtag=1 and fsid=0 and systag=1");
+        for(TtMap apg : apglist){
+            TtMap apgmap=new TtMap();
+            apgmap.put("name",apg.get("name"));
+            apgmap.put("purview_map",apg.get("purview_map"));
+            apgmap.put("showtag","1");
+            apgmap.put("fsid",String.valueOf(id));
+            apgmap.put("systag","0");
+            Tools.recAdd(apgmap,"icbc_admin_agp");
+        }
     }
 
     /**
@@ -159,7 +166,7 @@ public class assess_fs extends DbCtrl {
         String dtbe = ""; // 搜索日期选择
         int pageInt = Integer.valueOf(Tools.myIsNull(post.get("p")) == false ? post.get("p") : "1"); // 当前页
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
-        String whereString ="t.fs_type=2";
+        String whereString ="t.fs_type=2 and name!=''";
         String tmpWhere = "";
         String fieldsString = "t.*";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
@@ -208,5 +215,31 @@ public class assess_fs extends DbCtrl {
         // request.setAttribute("showmsg", "测试弹出消息提示哈！"); //如果有showmsg字段，在载入列表前会提示
     }
 
+    @Override
+    public boolean chk(TtMap array, long id) {
+        if (!agpOK) {// 演示在需要权限检查的地方插入权限标志判断
+            return false;
+        }
+        if (!Tools.myIsNull(array.get("fromcommand"))) { // 从ManagerCmd来的。不用过滤参数
 
+        } else {
+            System.out.println("表单验证star");
+            String myErroMsg = "";
+            if(Tools.myIsNull(array.get("name"))){
+                myErroMsg = "公司名称不能为空！\n";
+            }else{
+                TtList fslist=Tools.reclist("select * from assess_fs where name='"+array.get("name")+"'");
+                if(fslist.size()>0){
+                    myErroMsg = "公司名称不能重复！\n";
+                }
+            }
+            super.errorMsg = super.chkMsg = myErroMsg;
+            if (!Tools.myIsNull(myErroMsg)) {
+                super.errorCode = 888;
+            }
+
+            System.out.println("表单验证end");
+        }
+        return super.errorCode == 0;
+    }
 }

@@ -48,6 +48,7 @@
                 eval("var res=" + res);
                 if (res.msg) {
                     alert(res.msg);
+                    isCommitted = false;
                 }
                 if (res.next_url) {
                     window.location.href = res.next_url;
