@@ -35,7 +35,7 @@
                     </select>
                 </div>
             </div>
-            <%}else if(minfo.get("superadmin").equals("2")){%>
+            <%} else if (minfo.get("superadmin").equals("2")) {%>
             <div class="form-group">
                 <label class="col-sm-2 control-label">账户类型</label>
                 <div class="col-sm-10">
@@ -60,9 +60,9 @@
                 <div class="col-sm-10">
                     <select id="icbc_erp_fsid" name="icbc_erp_fsid" title="请选择所属公司" data-size="10"
                             class="selectpicker  form-control"
-                            multiple data-live-search="true" data-max-options="1">
+                            multiple data-live-search="true" data-max-options="1" onchange="getagp(this.value) ">
                         <c:forEach items="${fslist}" var="fs">
-                                <option value="${fs.id}" ${infodb.icbc_erp_fsid eq fs.id?"selected='selected'":''}>${fs.name}</option>
+                            <option value="${fs.id}" ${infodb.icbc_erp_fsid eq fs.id?"selected='selected'":''}>${fs.name}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -91,8 +91,8 @@
                     var py = getPinYinFirstCharacter(name, "", "");
                     py = py.replace(/\ +/g, "").replace(/[\r\n]/g, "");
                     var tel = $("#tel").val();
-                    $("#username").val(py+"@"+tel);
-                    var password=tel.substring(tel.length-6,tel.length);
+                    $("#username").val(py + "@" + tel);
+                    var password = tel.substring(tel.length - 6, tel.length);
                     $("#password").val(password);
                 }
             </script>
@@ -274,6 +274,20 @@
 
                 }
 
+                function getagp(fsid) {
+                    var agpid = $("#agpid");
+                    agpid.empty();
+                    agpid.append("<option value='0'>请选择</option>");
+                    $.post("/manager/command?sdo=yhgl_agp&id=" + fsid,
+                        function (result) {
+                            var jsonObj = eval('(' + result + ')');
+                            var jsonObj1 = eval('(' + jsonObj.msg + ')');
+                            for (var r in jsonObj1) {
+                                agpid.append("<option value='" + jsonObj1[r].id + "'>" + jsonObj1[r].name + "</option>");
+                            }
+                        });
+                }
+
                 // objacl('#cp', '#upac_id', '/ttAjax?do=opt&cn=assess_admin&id=0&icbc_erp_fsid=${minfo.icbc_erp_fsid}&cp=', '${infodb.cp}', '${infodb.upac_id}');
             </script>
             <div class="form-group">
@@ -287,8 +301,8 @@
                         </option>
                         <%}%>
                         <%
-                        TtList agplist = Tools.reclist("select * from icbc_admin_agp where showtag=1 and systag=0 AND fsid=" + minfo.get("icbc_erp_fsid"));
-                        if (agplist.size() > 0) {
+                            TtList agplist = Tools.reclist("select * from icbc_admin_agp where showtag=1 and systag=0 AND fsid=" + minfo.get("icbc_erp_fsid"));
+                            if (agplist.size() > 0) {
                         %>
                         <%=Tools.dicopt("icbc_admin_agp", Tools.myIsNull(infodb.get("agpid")) ? 0 : Long.valueOf(infodb.get("agpid")), "systag=0 AND fsid=" + minfo.get("icbc_erp_fsid"), "")%>
                         <%
