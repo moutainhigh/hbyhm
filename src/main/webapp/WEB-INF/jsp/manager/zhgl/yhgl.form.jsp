@@ -24,7 +24,7 @@
         </c:if>
         <div class="box-body">
             <input type="hidden" id="gemsid" name="gemsid" value="${infodb.gemsid}">
-            <%if (Tools.isSuperAdmin(minfo)) {%>
+            <%if (minfo.get("superadmin").equals("1")) {%>
             <div class="form-group">
                 <label class="col-sm-2 control-label">账户类型</label>
                 <div class="col-sm-10">
@@ -35,32 +35,38 @@
                     </select>
                 </div>
             </div>
-            <%} else {%>
-            <input type="hidden" id="superadmin" name="superadmin" value="0">
-            <%}%>
-            <%if (Tools.isSuperAdmin(minfo) || Tools.isCcAdmin(minfo)) {%>
+            <%}else if(minfo.get("superadmin").equals("2")){%>
             <div class="form-group">
-                <label class="col-sm-2 control-label">所属公司</label>
+                <label class="col-sm-2 control-label">账户类型</label>
                 <div class="col-sm-10">
-                    <select id="icbc_erp_fsid" name="icbc_erp_fsid" class="form-control">
-                        <%
-                            System.out.println("bAdd+" + bAdd);
-                            if (bAdd) {
-                        %>
-                        <option value="0" selected="selected">请选择</option>
-                        <%=Tools.dicopt("assess_fs", 0, "id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"), "")%>
-                        <%} else {%>
-                        <option value="0" <%=infodb.get("icbc_erp_fsid").equals("0") ? "selected=\"selected\"" : ""%> >
-                            请选择
-                        </option>
-                        <%=Tools.dicopt("assess_fs", Long.valueOf(infodb.get("icbc_erp_fsid")), "id=" + infodb.get("icbc_erp_fsid") + " or up_id=" + infodb.get("icbc_erp_fsid"), "")%>
-                        <%}%>
+                    <select id="superadmin" name="superadmin" class="form-control">
+                        <option value="0">普通账户</option>
+                        <option value="2">内部员工</option>
                     </select>
                 </div>
             </div>
             <%} else {%>
-            <input type="hidden" id="icbc_erp_fsid" name="icbc_erp_fsid" value="<%=minfo.get("fsid")%>">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">账户类型</label>
+                <div class="col-sm-10">
+                    <select id="superadmin" name="superadmin" class="form-control">
+                        <option value="0">普通账户</option>
+                    </select>
+                </div>
+            </div>
             <%}%>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">所属公司</label>
+                <div class="col-sm-10">
+                    <select id="icbc_erp_fsid" name="icbc_erp_fsid" title="请选择所属公司" data-size="10"
+                            class="selectpicker  form-control"
+                            multiple data-live-search="true" data-max-options="1">
+                        <c:forEach items="${fslist}" var="fs">
+                                <option value="${fs.id}" ${infodb.icbc_erp_fsid eq fs.id?"selected='selected'":''}>${fs.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">姓名</label>
                 <div class="col-sm-10">

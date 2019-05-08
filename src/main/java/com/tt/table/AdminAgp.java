@@ -177,7 +177,20 @@ public class AdminAgp extends DbCtrl {
     }
     return sql;
   }
-
+  public String getAgpSqlWhere2(int fsid,int agpid) { // 根据当前登陆用户获取可以操作的模块的sql的where
+    String sql = " AND FALSE";
+    if (!Tools.isSuperAdmin(minfo)) {// 如果不是内部超级管理员
+      sql = getAgpSqlWhereForFsAll(); // 获取公司全部可以操作的模块
+      String purview_map = getAgpStrFs("assess_fs", String.valueOf(fsid)); // 所在公司的权限
+      sql = sql + " AND t.id in (" + purview_map + ")";
+      String agp_id = String.valueOf(agpid);
+      purview_map = getAgpStradmin("icbc_admin_agp", agp_id); // 所属角色权限
+      sql = sql + " AND t.id in (" + purview_map + ")";
+    } else {
+      sql = "";
+    }
+    return sql;
+  }
   public String getAgpSqlWhereForFsChecked() { // 获取公司已开通（即已经勾选的模块）的所有模块的sql的where
     String sql = " AND FALSE";
     if (!Tools.isSuperAdmin(minfo)) {// 如果不是内部超级管理员
@@ -189,7 +202,17 @@ public class AdminAgp extends DbCtrl {
     }
     return sql;
   }
-
+  public String getAgpSqlWhereForFsChecked2(int fsid) { // 获取公司已开通（即已经勾选的模块）的所有模块的sql的where
+    String sql = " AND FALSE";
+    if (!Tools.isSuperAdmin(minfo)) {// 如果不是内部超级管理员
+      sql = " AND superadmin=0";
+      String purview_map = getAgpStrFs("assess_fs",String.valueOf(fsid)); // 所在公司的权限
+      sql = sql + " AND t.id in (" + purview_map + ")";
+    } else {
+      sql = "";
+    }
+    return sql;
+  }
   /**
    * @description: 获取公司可以添加的所有模块，查询的sql的where，自带AND
    * @param {type}
@@ -208,7 +231,19 @@ public class AdminAgp extends DbCtrl {
     }
     return sql;
   }
-
+  public String getAgpSqlWhereForFsAll2() { // 获取公司可以开通的所有模块的sql的where
+    String sql = " AND FALSE";
+    if (!Tools.isSuperAdmin(minfo)) {// 如果不是内部超级管理员
+      if (Tools.isCcAdmin(minfo)) {
+        sql = " AND (superadmin=2 OR superadmin=0)";
+      } else {
+        sql = " AND superadmin=0";
+      }
+    } else {
+      sql = "";
+    }
+    return sql;
+  }
   private TtMap infoModal(String modalId) {
     return Tools.recinfo("select * from sys_modal_hbyh where id='" + modalId + "'");
   }

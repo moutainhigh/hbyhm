@@ -57,7 +57,7 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">上级公司</span>
-                                <select id="up_id" name="up_id" title="请选择关联客户" data-size="10"
+                                <select id="up_id" name="up_id" title="请选择上级公司" data-size="10"
                                         class="selectpicker  form-control"
                                         multiple data-live-search="true" data-max-options="1">
                                     <c:forEach items="${fslist}" var="fs">

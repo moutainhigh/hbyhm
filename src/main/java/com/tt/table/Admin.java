@@ -139,10 +139,30 @@ public class Admin extends DbCtrl {
       request.setAttribute("errorMsg", "权限访问错误！");
       return;
     }
+    TtMap minfo = Tools.minfo();
     long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
     String f="t.*,g.idcard as idcard";
-    leftsql="LEFT JOIN assess_gems g ON g.id=t.gemsid";
+    leftsql=" LEFT JOIN assess_gems g ON g.id=t.gemsid" ;
     TtMap info = info(nid,f);
+    String fssql = "";
+    int fsid=0;
+    int up_id=0;
+    if(nid>0){
+      fsid=Integer.parseInt(info.get("icbc_erp_fsid"));
+      up_id=Integer.parseInt(info.get("icbc_erp_fsid"));
+    }else{
+      fsid=Integer.parseInt(minfo.get("icbc_erp_fsid"));
+      up_id=Integer.parseInt(minfo.get("icbc_erp_fsid"));
+    }
+    if (Tools.isSuperAdmin(minfo)) {
+      fssql = "select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!=''";
+    } else if (Tools.isCcAdmin(minfo)) {
+      fssql = "select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + fsid + " or up_id=" + up_id + ")";
+    } else {
+      fssql = "select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and  id=" + fsid;
+    }
+    TtList fslist = Tools.reclist(fssql);
+    request.setAttribute("fslist", fslist);
     String jsonInfo = Tools.jsonEncode(info);
     request.setAttribute("info", jsonInfo);// info为json后的info
     request.setAttribute("infodb", info);// infodb为TtMap的info
@@ -171,8 +191,22 @@ public class Admin extends DbCtrl {
     TtList list = null;
     String fsid=post.get("fsid");
     if(Tools.myIsNull(fsid)){
-      if (Tools.isSuperAdmin(minfo) || Tools.isCcAdmin(minfo)) {
-        TtList fslist = Tools.reclist("select id,up_id from assess_fs where id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"));
+      if(Tools.isSuperAdmin(minfo)){
+        TtList fslist = Tools.reclist("select id,up_id from assess_fs where fs_type=2 and name!=''");
+        whereString += " AND ("; // 显示自己和下级公司的
+        if (fslist.size() > 0) {
+          for (int l=0;l<fslist.size();l++) {
+            TtMap fs=fslist.get(l);
+            if(l==0) {
+              whereString += " t.icbc_erp_fsid=" + fs.get("id");
+            }else{
+              whereString += " or t.icbc_erp_fsid=" + fs.get("id");
+            }
+          }
+        }
+        whereString += ")";
+      }else if (Tools.isCcAdmin(minfo)) {
+        TtList fslist = Tools.reclist("select id,up_id from assess_fs where fs_type=2 and name!='' and (id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid")+")");
         whereString += " AND ("; // 显示自己和下级公司的
         if (fslist.size() > 0) {
           for (int l=0;l<fslist.size();l++) {
