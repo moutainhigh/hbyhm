@@ -115,7 +115,7 @@
                                     <i class="fa fa-credit-card"></i>
                                 </a>
                                 <a id="modal_ds<%=m.get("id")%>"
-                                   href="javascript:alert('暂未签约,清先签约')"
+                                   href="javascript:alert('暂未签约,请先签约')"
                                    class="btn btn-default">
                                     <i class="fa fa-sign-in"></i>
                                 </a>

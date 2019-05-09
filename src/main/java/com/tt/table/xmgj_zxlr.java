@@ -5,6 +5,7 @@ package com.tt.table;
 import com.tt.data.TtList;
 import com.tt.data.TtMap;
 import com.tt.tool.*;
+import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -63,21 +64,26 @@ public class xmgj_zxlr extends DbCtrl {
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
 
-        if (Tools.isSuperAdmin(minfo) || Tools.isCcAdmin(minfo)) {
+        //超级管理员
+        if(Tools.isSuperAdmin(minfo)){
+
+        } else if(Tools.isAdmin(minfo)){//管理员
+
+        } else if (Tools.isCcAdmin(minfo)) {
             TtList fslist = Tools.reclist("select id,up_id from assess_fs where id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"));
-            String sql="";
-            //whereString += " AND ("; // 显示自己和下级公司的
+            String sql = "";
+//            whereString += " AND ("; // 显示自己和下级公司的
             if (fslist.size() > 0) {
-                for (int l=0;l<fslist.size();l++) {
-                    TtMap fs=fslist.get(l);
-                    if(l==fslist.size()-1) {
+                for (int l = 0; l < fslist.size(); l++) {
+                    TtMap fs = fslist.get(l);
+                    if (l == fslist.size() - 1) {
                         sql = sql + fs.get("id");
-                    }else{
-                        sql = sql + fs.get("id")+",";
+                    } else {
+                        sql = sql + fs.get("id") + ",";
                     }
                 }
             }
-            whereString += " and t.gems_fs_id in ("+sql+")";
+            whereString += " and t.gems_fs_id in (" + sql + ")";
         } else {
             whereString += " AND t.gems_fs_id=" + minfo.get("icbc_erp_fsid"); // 只显示自己公司的
         }
@@ -243,7 +249,12 @@ public class xmgj_zxlr extends DbCtrl {
         res.put("remark",newpost.get("remark"));
         Tools.recAdd(res,"kj_icbc_result");
 
-        Addadmin_msg.addmsg(minfo.get("gemsid"), post.get("bc_status"), newpost.get("remark"));
+        if(StringUtils.isNotEmpty(post.get("mid_add")) && post.get("mid_add").equals(post.get("mid_edit"))){
+            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark"), post.get("mid_edit"));
+        } else {
+            Addadmin_msg.addmsg(post.get("mid_add"), post.get("bc_status"), newpost.get("remark"), post.get("mid_add"));
+            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark"), post.get("mid_edit"));
+        }
 
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
         boolean bSuccess = errorCode == 0;

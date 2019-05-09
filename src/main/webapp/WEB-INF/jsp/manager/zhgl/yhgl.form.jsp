@@ -31,6 +31,7 @@
                     <select id="superadmin" name="superadmin" class="form-control">
                         <option value="0">普通账户</option>
                         <option value="1">超级管理员</option>
+                        <option value="3">管理员</option>
                         <option value="2">内部员工</option>
                     </select>
                 </div>

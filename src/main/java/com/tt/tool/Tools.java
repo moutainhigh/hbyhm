@@ -1443,6 +1443,15 @@ public class Tools {
 	}
 
 	/**
+	 * @description: 当前登陆用户是否超级管理员 用户信息表里的superadmin字段值为3
+	 * @param {type}
+	 * @return:
+	 */
+	public static boolean isAdmin(TtMap minfo) {// 内置管理员
+		return minfo.get("superadmin").equals("3");
+	}
+
+	/**
 	 * @description: urlEnCode的简化版，支持编码
 	 * @param charSet 为UTF-8或者GBK，或者其他编码
 	 * @return:
