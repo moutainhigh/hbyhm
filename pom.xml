@@ -160,6 +160,12 @@
             <artifactId>quartz</artifactId>
             <version>1.8.4</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/cn.jpush.api/jpush-client -->
+        <dependency>
+            <groupId>cn.jpush.api</groupId>
+            <artifactId>jpush-client</artifactId>
+            <version>3.3.3</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
