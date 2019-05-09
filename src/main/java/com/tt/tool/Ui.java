@@ -9,7 +9,7 @@ package com.tt.tool;
 
 
 public class Ui {
-    public String showOpt(String cn,long id) {
-      return Tools.dicopt(cn, id);
+    public String showOpt(String cn, long id) {
+        return Tools.dicopt(cn, id);
     }
 }

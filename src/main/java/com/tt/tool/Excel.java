@@ -25,6 +25,7 @@ import java.util.Map;
 @Controller
 public class Excel {
     private static POIFSFileSystem fs;
+
     @RequestMapping("/excel/demo")
     @ResponseBody
     public static void smain(String[] args) {
@@ -36,7 +37,7 @@ public class Excel {
                 dbCtrl.nopage = true;
                 dbCtrl.showall = true;
                 TtList list = dbCtrl.lists("", "t.name,t.password,t.avatarurl");
-                doOut(list, new String[] { "姓名", "密码", "头像地址" }, new String[] { "name", "password", "avatarurl" },
+                doOut(list, new String[]{"姓名", "密码", "头像地址"}, new String[]{"name", "password", "avatarurl"},
                         "/work/sd128/downloads/城市列表哈哈哈.xlsx", "excel2007", true); //
                 //doIn("/work/sd128/downloads/s2.xlsx");
             } catch (Exception e) {
@@ -49,9 +50,9 @@ public class Excel {
     }
 
     /**
-     * @description: 导出到Excel文件，2003/2007格式
-     *               ver="excel2003"为2003的xls格式，否则为2007后的xlsx格式,bDown设置是否输出到浏览器下载
      * @param {type}
+     * @description: 导出到Excel文件，2003/2007格式
+     * ver="excel2003"为2003的xls格式，否则为2007后的xlsx格式,bDown设置是否输出到浏览器下载
      * @return:
      */
     public static boolean doOut(TtList list, String[] headers, String[] fields, String toFile,
@@ -155,8 +156,8 @@ public class Excel {
     }
 
     /**
-     * @description: 导入excel文件
      * @param {type}
+     * @description: 导入excel文件
      * @return:
      */
     public static void doIn(String sFile) {
@@ -205,7 +206,7 @@ public class Excel {
 
     /**
      * 读取Excel表格表头的内容
-     * 
+     *
      * @param is
      * @return String 表头内容的数组
      */
@@ -261,7 +262,7 @@ public class Excel {
 
     /**
      * 读取Excel数据内容
-     * 
+     *
      * @param is
      * @return Map 包含单元格数据内容的Map对象
      */
@@ -336,7 +337,7 @@ public class Excel {
 
     /**
      * 根据HSSFCell类型设置数据
-     * 
+     *
      * @param cell
      * @return
      */
@@ -345,30 +346,30 @@ public class Excel {
         if (cell != null) {
             // 判断当前Cell的Type
             switch (cell.getCellTypeEnum()) {
-            // 如果当前Cell的Type为NUMERIC
-            case NUMERIC:
-            case FORMULA: {
-                // 判断当前的cell是否为Date
-                if (HSSFDateUtil.isCellDateFormatted(cell)) {
-                    Date date = cell.getDateCellValue();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    cellvalue = sdf.format(date);
+                // 如果当前Cell的Type为NUMERIC
+                case NUMERIC:
+                case FORMULA: {
+                    // 判断当前的cell是否为Date
+                    if (HSSFDateUtil.isCellDateFormatted(cell)) {
+                        Date date = cell.getDateCellValue();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        cellvalue = sdf.format(date);
+                    }
+                    // 如果是纯数字
+                    else {
+                        // 取得当前Cell的数值
+                        cellvalue = String.valueOf(cell.getNumericCellValue());
+                    }
+                    break;
                 }
-                // 如果是纯数字
-                else {
-                    // 取得当前Cell的数值
-                    cellvalue = String.valueOf(cell.getNumericCellValue());
-                }
-                break;
-            }
-            // 如果当前Cell的Type为STRIN
-            case STRING:
-                // 取得当前的Cell字符串
-                cellvalue = cell.getRichStringCellValue().getString();
-                break;
-            // 默认的Cell值
-            default:
-                cellvalue = " ";
+                // 如果当前Cell的Type为STRIN
+                case STRING:
+                    // 取得当前的Cell字符串
+                    cellvalue = cell.getRichStringCellValue().getString();
+                    break;
+                // 默认的Cell值
+                default:
+                    cellvalue = " ";
             }
         } else {
             cellvalue = "";
@@ -379,7 +380,7 @@ public class Excel {
 
     /**
      * 根据HSSFCell类型设置数据
-     * 
+     *
      * @param cell
      * @return
      */
@@ -388,30 +389,30 @@ public class Excel {
         if (cell != null) {
             // 判断当前Cell的Type
             switch (cell.getCellTypeEnum()) {
-            // 如果当前Cell的Type为NUMERIC
-            case NUMERIC:
-            case FORMULA: {
-                // 判断当前的cell是否为Date
-                if (HSSFDateUtil.isCellDateFormatted(cell)) {
-                    Date date = cell.getDateCellValue();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    cellvalue = sdf.format(date);
+                // 如果当前Cell的Type为NUMERIC
+                case NUMERIC:
+                case FORMULA: {
+                    // 判断当前的cell是否为Date
+                    if (HSSFDateUtil.isCellDateFormatted(cell)) {
+                        Date date = cell.getDateCellValue();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        cellvalue = sdf.format(date);
+                    }
+                    // 如果是纯数字
+                    else {
+                        // 取得当前Cell的数值
+                        cellvalue = String.valueOf(cell.getNumericCellValue());
+                    }
+                    break;
                 }
-                // 如果是纯数字
-                else {
-                    // 取得当前Cell的数值
-                    cellvalue = String.valueOf(cell.getNumericCellValue());
-                }
-                break;
-            }
-            // 如果当前Cell的Type为STRIN
-            case STRING:
-                // 取得当前的Cell字符串
-                cellvalue = cell.getRichStringCellValue().getString();
-                break;
-            // 默认的Cell值
-            default:
-                cellvalue = " ";
+                // 如果当前Cell的Type为STRIN
+                case STRING:
+                    // 取得当前的Cell字符串
+                    cellvalue = cell.getRichStringCellValue().getString();
+                    break;
+                // 默认的Cell值
+                default:
+                    cellvalue = " ";
             }
         } else {
             cellvalue = "";

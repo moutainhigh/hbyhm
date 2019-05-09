@@ -5,15 +5,14 @@ import com.tt.data.TtMap;
 public class Addadmin_msg {
 
     /**
-     *
-     * @param receiveid     推送的用户id assess_admin表中的gems_id
-     * @param bc_status     审核状态
-     * @param remark1       留言
+     * @param receiveid 推送的用户id assess_admin表中的gems_id
+     * @param bc_status 审核状态
+     * @param remark1   留言
      * @return
      */
-    public static long addmsg(String receiveid, String bc_status, String remark1){
+    public static long addmsg(String receiveid, String bc_status, String remark1) {
         String status = "";
-        switch (bc_status){
+        switch (bc_status) {
             case "0":
                 status = "请选择";
                 break;

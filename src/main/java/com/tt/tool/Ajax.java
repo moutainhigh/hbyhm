@@ -67,12 +67,12 @@ public class Ajax {
             case "info":// 查询某表某条记录的值
                 if (Tools.myIsNull(cn) != true) {
                     String re = post.get("re");
-                    if(re.equals("json")){
-                        TtMap ttMap= Tools.recinfo("select * from "+cn+" where id="+id);
-                        result=Tools.jsonEncode(ttMap);
-                    }else{
-                        TtMap ttMap= Tools.recinfo("select * from "+cn+" where id="+id);
-                        result =ttMap.toString();
+                    if (re.equals("json")) {
+                        TtMap ttMap = Tools.recinfo("select * from " + cn + " where id=" + id);
+                        result = Tools.jsonEncode(ttMap);
+                    } else {
+                        TtMap ttMap = Tools.recinfo("select * from " + cn + " where id=" + id);
+                        result = ttMap.toString();
                     }
                 }
                 return result;

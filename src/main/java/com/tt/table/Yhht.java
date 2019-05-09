@@ -177,19 +177,19 @@ public class Yhht extends DbCtrl {
 
         if (Tools.isSuperAdmin(minfo) || Tools.isCcAdmin(minfo)) {
             TtList fslist = Tools.reclist("select id,up_id from assess_fs where id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"));
-            String sql="";
+            String sql = "";
             //whereString += " AND ("; // 显示自己和下级公司的
             if (fslist.size() > 0) {
-                for (int l=0;l<fslist.size();l++) {
-                    TtMap fs=fslist.get(l);
-                    if(l==fslist.size()-1) {
+                for (int l = 0; l < fslist.size(); l++) {
+                    TtMap fs = fslist.get(l);
+                    if (l == fslist.size() - 1) {
                         sql = sql + fs.get("id");
-                    }else{
-                        sql = sql + fs.get("id")+",";
+                    } else {
+                        sql = sql + fs.get("id") + ",";
                     }
                 }
             }
-            whereString += " and t.gems_fs_id in ("+sql+")";
+            whereString += " and t.gems_fs_id in (" + sql + ")";
         } else {
             whereString += " AND t.gems_fs_id=" + minfo.get("icbc_erp_fsid"); // 只显示自己公司的
         }

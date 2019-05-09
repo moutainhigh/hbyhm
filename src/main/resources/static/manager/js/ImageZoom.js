@@ -1,418 +1,437 @@
-var ImageZoom = function(image, viewer, options) {
-	this._initialize( image, viewer, options );
-	this._initLoad();
+var ImageZoom = function (image, viewer, options) {
+    this._initialize(image, viewer, options);
+    this._initLoad();
 };
 
 ImageZoom.prototype = {
-  //³õÊ¼»¯³ÌÐò
-  _initialize: function(image, viewer, options) {
-	this._image = $$(image);//Ô­Í¼
-	this._zoom = document.createElement("img");//ÏÔÊ¾Í¼
-	this._viewer = $$(viewer);//ÏÔÊ¾¿ò
-	this._viewerWidth = 0;//ÏÔÊ¾¿ò¿í
-	this._viewerHeight = 0;//ÏÔÊ¾¿ò¸ß
-	this._preload = new Image();//Ô¤ÔØ¶ÔÏó
-	this._rect = null;//Ô­Í¼×ø±ê
-	this._repairLeft = 0;//ÏÔÊ¾Í¼x×ø±êÐÞÕý
-	this._repairTop = 0;//ÏÔÊ¾Í¼y×ø±êÐÞÕý
-	this._rangeWidth = 0;//ÏÔÊ¾·¶Î§¿í¶È
-	this._rangeHeight = 0;//ÏÔÊ¾·¶Î§¸ß¶È
-	this._timer = null;//¼ÆÊ±Æ÷
-	this._loaded = false;//ÊÇ·ñ¼ÓÔØ
-	this._substitute = false;//ÊÇ·ñÌæ»»
-	
-	var opt = this._setOptions(options);
-	
-	this._scale = opt.scale;
-	this._max = opt.max;
-	this._min = opt.min;
-	this._originPic = opt.originPic;
-	this._zoomPic = opt.zoomPic;
-	this._rangeWidth = opt.rangeWidth;
-	this._rangeHeight = opt.rangeHeight;
-	
-	this.delay = opt.delay;
-	this.autoHide = opt.autoHide;
-	this.mouse = opt.mouse;
-	this.rate = opt.rate;
-	
-	this.onLoad = opt.onLoad;
-	this.onStart = opt.onStart;
-	this.onMove = opt.onMove;
-	this.onEnd = opt.onEnd;
-	
-	var oThis = this, END = function(){ oThis._end(); };
-	this._END = function(){ oThis._timer = setTimeout( END, oThis.delay ); };
-	this._START = $$F.bindAsEventListener( this._start, this );
-	this._MOVE = $$F.bindAsEventListener( this._move, this );
-	this._MOUSE = $$F.bindAsEventListener( this._mouse, this );
-	this._OUT = $$F.bindAsEventListener( function(e){
-			if ( !e.relatedTarget ) this._END();
-		}, this );
-	
-	$$CE.fireEvent( this, "init" );
-  },
-  //ÉèÖÃÄ¬ÈÏÊôÐÔ
-  _setOptions: function(options) {
-    this.options = {//Ä¬ÈÏÖµ
-		scale:		0,//±ÈÀý(´óÍ¼/Ô­Í¼)
-		max:		10,//×î´ó±ÈÀý
-		min:		1.5,//×îÐ¡±ÈÀý
-		originPic:	"",//Ô­Í¼µØÖ·
-		zoomPic:	"",//´óÍ¼µØÖ·
-		rangeWidth:	0,//ÏÔÊ¾·¶Î§¿í¶È
-		rangeHeight:0,//ÏÔÊ¾·¶Î§¸ß¶È
-		delay:		20,//ÑÓ³Ù½áÊøÊ±¼ä
-		autoHide:	true,//ÊÇ·ñ×Ô¶¯Òþ²Ø
-		mouse:		false,//Êó±êËõ·Å
-		rate:		.2,//Êó±êËõ·Å±ÈÂÊ
-		onLoad:		$$.emptyFunction,//¼ÓÔØÍê³ÉÊ±Ö´ÐÐ
-		onStart:	$$.emptyFunction,//¿ªÊ¼·Å´óÊ±Ö´ÐÐ
-		onMove:		$$.emptyFunction,//·Å´óÒÆ¶¯Ê±Ö´ÐÐ
-		onEnd:		$$.emptyFunction//·Å´ó½áÊøÊ±Ö´ÐÐ
-    };
-    return $$.extend(this.options, options || {});
-  },
-  //³õÊ¼»¯¼ÓÔØ
-  _initLoad: function() {
-	var image = this._image, originPic = this._originPic,
-		useOrigin = !this._zoomPic && this._scale,
-		loadImage = $$F.bind( useOrigin ? this._loadOriginImage : this._loadImage, this );
-	//ÉèÖÃ×Ô¶¯Òþ²Ø
-	this.autoHide && this._hide();
-	//ÏÈ¼ÓÔØÔ­Í¼
-	if ( originPic && originPic != image.src ) {//Ê¹ÓÃ×Ô¶¨ÒåµØÖ·
-		image.onload = loadImage;
-		image.src = originPic;
-	} else if ( image.src ) {//Ê¹ÓÃÔªËØµØÖ·
-		if ( !image.complete ) {//Î´ÔØÈëÍê
-			image.onload = loadImage;
-		} else {//ÒÑ¾­ÔØÈë
-			loadImage();
-		}
-	} else {
-		return;//Ã»ÓÐÔ­Í¼µØÖ·
-	}
-	//¼ÓÔØ´óÍ¼
-	if ( !useOrigin ) {
-		var preload = this._preload, zoomPic = this._zoomPic || image.src,
-			loadPreload = $$F.bind( this._loadPreload, this );
-		if ( zoomPic != preload.src ) {//ÐÂµØÖ·ÖØÐÂ¼ÓÔØ
-			preload.onload = loadPreload;
-			preload.src = zoomPic;
-		} else {//ÕýÔÚ¼ÓÔØ
-			if ( !preload.complete ) {//Î´ÔØÈëÍê
-				preload.onload = loadPreload;
-			} else {//ÒÑ¾­ÔØÈë
-				this._loadPreload();
-			}
-		}
-	}
-  },
-  //Ô­Í¼·Å´ó¼ÓÔØ³ÌÐò
-  _loadOriginImage: function() {
-	this._image.onload = null;
-	this._zoom.src = this._image.src;
-	this._initLoaded();
-  },
-  //Ô­Í¼¼ÓÔØ³ÌÐò
-  _loadImage: function() {
-	this._image.onload = null;
-	if ( this._loaded ) {//´óÍ¼ÒÑ¾­¼ÓÔØ
-		this._initLoaded();
-	} else {
-		this._loaded = true;
-		if ( this._scale ) {//ÓÐ×Ô¶¨Òå±ÈÀý²ÅÓÃÔ­Í¼·Å´óÌæ»»´óÍ¼
-			this._substitute = true;
-			this._zoom.src = this._image.src;
-			this._initLoaded();
-		}
-	}
-  },
-  //´óÍ¼Ô¤ÔØ³ÌÐò
-  _loadPreload: function() {
-	this._preload.onload = null;
-	this._zoom.src = this._preload.src;
-	if ( this._loaded ) {//Ô­Í¼ÒÑ¾­¼ÓÔØ
-		//Ã»ÓÐÊ¹ÓÃÌæ»»
-		if ( !this._substitute ) { this._initLoaded(); }
-	} else {
-		this._loaded = true;
-	}
-  },
-  //³õÊ¼»¯¼ÓÔØÉèÖÃ
-  _initLoaded: function(src) {
-	//³õÊ¼»¯ÏÔÊ¾Í¼
-	this._initSize();
-	//³õÊ¼»¯ÏÔÊ¾¿ò
-	this._initViewer();
-	//³õÊ¼»¯Êý¾Ý
-	this._initData();
-	//¿ªÊ¼Ö´ÐÐ
-	$$CE.fireEvent( this, "load" );
-	this.onLoad();
-	this.start();
-  },
-  //³õÊ¼»¯ÏÔÊ¾Í¼³ß´ç
-  _initSize: function() {
-	var zoom = this._zoom, image = this._image, scale = this._scale;
-	if ( !scale ) { scale = this._preload.width / image.width; }
-	this._scale = scale = Math.min( Math.max( this._min, scale ), this._max );
-	//°´±ÈÀýÉèÖÃÏÔÊ¾Í¼´óÐ¡
-	zoom.width = Math.ceil( image.width * scale );
-	zoom.height = Math.ceil( image.height * scale );
-  },
-  //³õÊ¼»¯ÏÔÊ¾¿ò
-  _initViewer: function() {
-	var zoom = this._zoom, viewer = this._viewer;
-	//ÉèÖÃÑùÊ½
-	var styles = { padding: 0, overflow: "hidden" }, p = $$D.getStyle( viewer, "position" );
-	if ( p != "relative" && p != "absolute" ){ styles.position = "relative"; };
-	$$D.setStyle( viewer, styles );
-	zoom.style.position = "absolute";
-	//²åÈëÏÔÊ¾Í¼
-	if ( !$$D.contains( viewer, zoom ) ){ viewer.appendChild( zoom ); }
-  },
-  //³õÊ¼»¯Êý¾Ý
-  _initData: function() {
-	var zoom = this._zoom, image = this._image, viewer = this._viewer,
-		scale = this._scale, rangeWidth = this._rangeWidth, rangeHeight = this._rangeHeight;
-	//Ô­Í¼×ø±ê
-	this._rect = $$D.rect( image );
-	//ÐÞÕý²ÎÊý
-	this._repairLeft = image.clientLeft + parseInt($$D.getStyle( image, "padding-left" ));
-	this._repairTop = image.clientTop + parseInt($$D.getStyle( image, "padding-top" ));
-	//ÉèÖÃ·¶Î§²ÎÊýºÍÏÔÊ¾¿ò´óÐ¡
-	if ( rangeWidth > 0 && rangeHeight > 0 ) {
-		rangeWidth = Math.ceil( rangeWidth );
-		rangeHeight = Math.ceil( rangeHeight );
-		this._viewerWidth = Math.ceil( rangeWidth * scale );
-		this._viewerHeight = Math.ceil( rangeHeight * scale );
-		$$D.setStyle( viewer, {
-			width: this._viewerWidth + "px",
-			height: this._viewerHeight + "px"
-		});
-	} else {
-		var styles;
-		if ( !viewer.clientWidth ) {//Òþ²Ø
-			var style = viewer.style;
-			styles = {
-				display: style.display,
-				position: style.position,
-				visibility: style.visibility
-			};
-			$$D.setStyle( viewer, {
-				display: "block", position: "absolute", visibility: "hidden"
-			});
-		}
-		this._viewerWidth = viewer.clientWidth;
-		this._viewerHeight = viewer.clientHeight;
-		if ( styles ) { $$D.setStyle( viewer, styles ); }
-		
-		rangeWidth = Math.ceil( this._viewerWidth / scale );
-		rangeHeight = Math.ceil( this._viewerHeight / scale );
-	}
-	this._rangeWidth = rangeWidth;
-	this._rangeHeight = rangeHeight;
-  },
-  //¿ªÊ¼
-  _start: function() {
-	clearTimeout( this._timer );
-	var viewer = this._viewer, image = this._image, scale = this._scale;
-	viewer.style.display = "block";
-	$$CE.fireEvent( this, "start" );
-	this.onStart();
-	$$E.removeEvent( image, "mouseover", this._START );
-	$$E.removeEvent( image, "mousemove", this._START );
-	$$E.addEvent( document, "mousemove", this._MOVE );
-	$$E.addEvent( document, "mouseout", this._OUT );
-	this.mouse && $$E.addEvent( document, $$B.firefox ? "DOMMouseScroll" : "mousewheel", this._MOUSE );
-  },
-  //ÒÆ¶¯
-  _move: function(e) {
-	clearTimeout( this._timer );
-	var x = e.pageX, y = e.pageY, rect = this._rect;
-	if ( x < rect.left || x > rect.right || y < rect.top || y > rect.bottom ) {
-		this._END();//ÒÆ³öÔ­Í¼·¶Î§
-	} else {
-		var pos = {}, scale = this._scale, zoom = this._zoom,
-			viewerWidth = this._viewerWidth,
-			viewerHeight = this._viewerHeight;
-		//ÐÞÕý×ø±ê
-		pos.left = viewerWidth / 2 - ( x - rect.left - this._repairLeft ) * scale;
-		pos.top = viewerHeight / 2 - ( y - rect.top - this._repairTop ) * scale;
-		
-		$$CE.fireEvent( this, "repair", e, pos );
-		//·¶Î§ÏÞÖÆ
-		x = Math.ceil(Math.min(Math.max( pos.left, viewerWidth - zoom.width ), 0));
-		y = Math.ceil(Math.min(Math.max( pos.top, viewerHeight - zoom.height ), 0));
-		//ÉèÖÃ¶¨Î»
-		zoom.style.left = x + "px";
-		zoom.style.top = y + "px";
-		
-		$$CE.fireEvent( this, "move", e, x, y );
-		this.onMove();
-	}
-  },
-  //½áÊø
-  _end: function() {
-	$$CE.fireEvent( this, "end" );
-	this.onEnd();
-	this.autoHide && this._hide();
-	this.stop();
-	this.start();
-  },
-  //Òþ²Ø
-  _hide: function() {
-	this._viewer.style.display = "none";
-  },
-  //Êó±êËõ·Å
-  _mouse: function(e) {
-	this._scale += ( e.wheelDelta ? e.wheelDelta / (-120) : (e.detail || 0) / 3 ) * this.rate;
-	
-	var opt = this.options;
-	this._rangeWidth = opt.rangeWidth;
-	this._rangeHeight = opt.rangeHeight;
-	
-	this._initSize();
-	this._initData();
-	this._move(e);
-	e.preventDefault();
-  },
-  //¿ªÊ¼
-  start: function() {
-	if ( this._viewerWidth && this._viewerHeight ) {
-		var image = this._image, START = this._START;
-		$$E.addEvent( image, "mouseover", START );
-		$$E.addEvent( image, "mousemove", START );
-	}
-  },
-  //Í£Ö¹
-  stop: function() {
-	clearTimeout( this._timer );
-	$$E.removeEvent( this._image, "mouseover", this._START );
-	$$E.removeEvent( this._image, "mousemove", this._START );
-	$$E.removeEvent( document, "mousemove", this._MOVE );
-	$$E.removeEvent( document, "mouseout", this._OUT );
-	$$E.removeEvent( document, $$B.firefox ? "DOMMouseScroll" : "mousewheel", this._MOUSE );
-  },
-  //ÐÞ¸ÄÉèÖÃ
-  reset: function(options) {
-	this.stop();
-	
-	var viewer = this._viewer, zoom = this._zoom;
-	if ( $$D.contains( viewer, zoom ) ) { viewer.removeChild( zoom ); }
-	
-	var opt = $$.extend( this.options, options || {} );
-	this._scale = opt.scale;
-	this._max = opt.max;
-	this._min = opt.min;
-	this._originPic = opt.originPic;
-	this._zoomPic = opt.zoomPic;
-	this._rangeWidth = opt.rangeWidth;
-	this._rangeHeight = opt.rangeHeight;
-	
-	//ÖØÖÃÊôÐÔ
-	this._loaded = this._substitute = false;
-	this._rect = null;
-	this._repairLeft = this._repairTop = 
-	this._viewerWidth = this._viewerHeight = 0;
-	
-	this._initLoad();
-  },
-  //Ïú»Ù³ÌÐò
-  dispose: function() {
-	$$CE.fireEvent( this, "dispose" );
-	this.stop();
-	if ( $$D.contains( this._viewer, this._zoom ) ) {
-		this._viewer.removeChild( this._zoom );
-	}
-	this._image.onload = this._preload.onload =
-		this._image = this._preload = this._zoom = this._viewer =
-		this.onLoad = this.onStart = this.onMove = this.onEnd =
-		this._START = this._MOVE = this._END = this._OUT = null
-  }
+    //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    _initialize: function (image, viewer, options) {
+        this._image = $$(image);//Ô­Í¼
+        this._zoom = document.createElement("img");//ï¿½ï¿½Ê¾Í¼
+        this._viewer = $$(viewer);//ï¿½ï¿½Ê¾ï¿½ï¿½
+        this._viewerWidth = 0;//ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+        this._viewerHeight = 0;//ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+        this._preload = new Image();//Ô¤ï¿½Ø¶ï¿½ï¿½ï¿½
+        this._rect = null;//Ô­Í¼ï¿½ï¿½ï¿½ï¿½
+        this._repairLeft = 0;//ï¿½ï¿½Ê¾Í¼xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        this._repairTop = 0;//ï¿½ï¿½Ê¾Í¼yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        this._rangeWidth = 0;//ï¿½ï¿½Ê¾ï¿½ï¿½Î§ï¿½ï¿½ï¿½
+        this._rangeHeight = 0;//ï¿½ï¿½Ê¾ï¿½ï¿½Î§ï¿½ß¶ï¿½
+        this._timer = null;//ï¿½ï¿½Ê±ï¿½ï¿½
+        this._loaded = false;//ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
+        this._substitute = false;//ï¿½Ç·ï¿½ï¿½æ»»
+
+        var opt = this._setOptions(options);
+
+        this._scale = opt.scale;
+        this._max = opt.max;
+        this._min = opt.min;
+        this._originPic = opt.originPic;
+        this._zoomPic = opt.zoomPic;
+        this._rangeWidth = opt.rangeWidth;
+        this._rangeHeight = opt.rangeHeight;
+
+        this.delay = opt.delay;
+        this.autoHide = opt.autoHide;
+        this.mouse = opt.mouse;
+        this.rate = opt.rate;
+
+        this.onLoad = opt.onLoad;
+        this.onStart = opt.onStart;
+        this.onMove = opt.onMove;
+        this.onEnd = opt.onEnd;
+
+        var oThis = this, END = function () {
+            oThis._end();
+        };
+        this._END = function () {
+            oThis._timer = setTimeout(END, oThis.delay);
+        };
+        this._START = $$F.bindAsEventListener(this._start, this);
+        this._MOVE = $$F.bindAsEventListener(this._move, this);
+        this._MOUSE = $$F.bindAsEventListener(this._mouse, this);
+        this._OUT = $$F.bindAsEventListener(function (e) {
+            if (!e.relatedTarget) this._END();
+        }, this);
+
+        $$CE.fireEvent(this, "init");
+    },
+    //ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    _setOptions: function (options) {
+        this.options = {//Ä¬ï¿½ï¿½Öµ
+            scale: 0,//ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Í¼/Ô­Í¼)
+            max: 10,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            min: 1.5,//ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½
+            originPic: "",//Ô­Í¼ï¿½ï¿½Ö·
+            zoomPic: "",//ï¿½ï¿½Í¼ï¿½ï¿½Ö·
+            rangeWidth: 0,//ï¿½ï¿½Ê¾ï¿½ï¿½Î§ï¿½ï¿½ï¿½
+            rangeHeight: 0,//ï¿½ï¿½Ê¾ï¿½ï¿½Î§ï¿½ß¶ï¿½
+            delay: 20,//ï¿½Ó³Ù½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+            autoHide: true,//ï¿½Ç·ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
+            mouse: false,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            rate: .2,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å±ï¿½ï¿½ï¿½
+            onLoad: $$.emptyFunction,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ö´ï¿½ï¿½
+            onStart: $$.emptyFunction,//ï¿½ï¿½Ê¼ï¿½Å´ï¿½Ê±Ö´ï¿½ï¿½
+            onMove: $$.emptyFunction,//ï¿½Å´ï¿½ï¿½Æ¶ï¿½Ê±Ö´ï¿½ï¿½
+            onEnd: $$.emptyFunction//ï¿½Å´ï¿½ï¿½ï¿½ï¿½Ê±Ö´ï¿½ï¿½
+        };
+        return $$.extend(this.options, options || {});
+    },
+    //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    _initLoad: function () {
+        var image = this._image, originPic = this._originPic,
+            useOrigin = !this._zoomPic && this._scale,
+            loadImage = $$F.bind(useOrigin ? this._loadOriginImage : this._loadImage, this);
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
+        this.autoHide && this._hide();
+        //ï¿½È¼ï¿½ï¿½ï¿½Ô­Í¼
+        if (originPic && originPic != image.src) {//Ê¹ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Ö·
+            image.onload = loadImage;
+            image.src = originPic;
+        } else if (image.src) {//Ê¹ï¿½ï¿½Ôªï¿½Øµï¿½Ö·
+            if (!image.complete) {//Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                image.onload = loadImage;
+            } else {//ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
+                loadImage();
+            }
+        } else {
+            return;//Ã»ï¿½ï¿½Ô­Í¼ï¿½ï¿½Ö·
+        }
+        //ï¿½ï¿½ï¿½Ø´ï¿½Í¼
+        if (!useOrigin) {
+            var preload = this._preload, zoomPic = this._zoomPic || image.src,
+                loadPreload = $$F.bind(this._loadPreload, this);
+            if (zoomPic != preload.src) {//ï¿½Âµï¿½Ö·ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½
+                preload.onload = loadPreload;
+                preload.src = zoomPic;
+            } else {//ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½
+                if (!preload.complete) {//Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                    preload.onload = loadPreload;
+                } else {//ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
+                    this._loadPreload();
+                }
+            }
+        }
+    },
+    //Ô­Í¼ï¿½Å´ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½
+    _loadOriginImage: function () {
+        this._image.onload = null;
+        this._zoom.src = this._image.src;
+        this._initLoaded();
+    },
+    //Ô­Í¼ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½
+    _loadImage: function () {
+        this._image.onload = null;
+        if (this._loaded) {//ï¿½ï¿½Í¼ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
+            this._initLoaded();
+        } else {
+            this._loaded = true;
+            if (this._scale) {//ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­Í¼ï¿½Å´ï¿½ï¿½æ»»ï¿½ï¿½Í¼
+                this._substitute = true;
+                this._zoom.src = this._image.src;
+                this._initLoaded();
+            }
+        }
+    },
+    //ï¿½ï¿½Í¼Ô¤ï¿½Ø³ï¿½ï¿½ï¿½
+    _loadPreload: function () {
+        this._preload.onload = null;
+        this._zoom.src = this._preload.src;
+        if (this._loaded) {//Ô­Í¼ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
+            //Ã»ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½æ»»
+            if (!this._substitute) {
+                this._initLoaded();
+            }
+        } else {
+            this._loaded = true;
+        }
+    },
+    //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    _initLoaded: function (src) {
+        //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê¾Í¼
+        this._initSize();
+        //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½
+        this._initViewer();
+        //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        this._initData();
+        //ï¿½ï¿½Ê¼Ö´ï¿½ï¿½
+        $$CE.fireEvent(this, "load");
+        this.onLoad();
+        this.start();
+    },
+    //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê¾Í¼ï¿½ß´ï¿½
+    _initSize: function () {
+        var zoom = this._zoom, image = this._image, scale = this._scale;
+        if (!scale) {
+            scale = this._preload.width / image.width;
+        }
+        this._scale = scale = Math.min(Math.max(this._min, scale), this._max);
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Í¼ï¿½ï¿½Ð¡
+        zoom.width = Math.ceil(image.width * scale);
+        zoom.height = Math.ceil(image.height * scale);
+    },
+    //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½
+    _initViewer: function () {
+        var zoom = this._zoom, viewer = this._viewer;
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
+        var styles = {padding: 0, overflow: "hidden"}, p = $$D.getStyle(viewer, "position");
+        if (p != "relative" && p != "absolute") {
+            styles.position = "relative";
+        }
+        ;
+        $$D.setStyle(viewer, styles);
+        zoom.style.position = "absolute";
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Í¼
+        if (!$$D.contains(viewer, zoom)) {
+            viewer.appendChild(zoom);
+        }
+    },
+    //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    _initData: function () {
+        var zoom = this._zoom, image = this._image, viewer = this._viewer,
+            scale = this._scale, rangeWidth = this._rangeWidth, rangeHeight = this._rangeHeight;
+        //Ô­Í¼ï¿½ï¿½ï¿½ï¿½
+        this._rect = $$D.rect(image);
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        this._repairLeft = image.clientLeft + parseInt($$D.getStyle(image, "padding-left"));
+        this._repairTop = image.clientTop + parseInt($$D.getStyle(image, "padding-top"));
+        //ï¿½ï¿½ï¿½Ã·ï¿½Î§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ð¡
+        if (rangeWidth > 0 && rangeHeight > 0) {
+            rangeWidth = Math.ceil(rangeWidth);
+            rangeHeight = Math.ceil(rangeHeight);
+            this._viewerWidth = Math.ceil(rangeWidth * scale);
+            this._viewerHeight = Math.ceil(rangeHeight * scale);
+            $$D.setStyle(viewer, {
+                width: this._viewerWidth + "px",
+                height: this._viewerHeight + "px"
+            });
+        } else {
+            var styles;
+            if (!viewer.clientWidth) {//ï¿½ï¿½ï¿½ï¿½
+                var style = viewer.style;
+                styles = {
+                    display: style.display,
+                    position: style.position,
+                    visibility: style.visibility
+                };
+                $$D.setStyle(viewer, {
+                    display: "block", position: "absolute", visibility: "hidden"
+                });
+            }
+            this._viewerWidth = viewer.clientWidth;
+            this._viewerHeight = viewer.clientHeight;
+            if (styles) {
+                $$D.setStyle(viewer, styles);
+            }
+
+            rangeWidth = Math.ceil(this._viewerWidth / scale);
+            rangeHeight = Math.ceil(this._viewerHeight / scale);
+        }
+        this._rangeWidth = rangeWidth;
+        this._rangeHeight = rangeHeight;
+    },
+    //ï¿½ï¿½Ê¼
+    _start: function () {
+        clearTimeout(this._timer);
+        var viewer = this._viewer, image = this._image, scale = this._scale;
+        viewer.style.display = "block";
+        $$CE.fireEvent(this, "start");
+        this.onStart();
+        $$E.removeEvent(image, "mouseover", this._START);
+        $$E.removeEvent(image, "mousemove", this._START);
+        $$E.addEvent(document, "mousemove", this._MOVE);
+        $$E.addEvent(document, "mouseout", this._OUT);
+        this.mouse && $$E.addEvent(document, $$B.firefox ? "DOMMouseScroll" : "mousewheel", this._MOUSE);
+    },
+    //ï¿½Æ¶ï¿½
+    _move: function (e) {
+        clearTimeout(this._timer);
+        var x = e.pageX, y = e.pageY, rect = this._rect;
+        if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) {
+            this._END();//ï¿½Æ³ï¿½Ô­Í¼ï¿½ï¿½Î§
+        } else {
+            var pos = {}, scale = this._scale, zoom = this._zoom,
+                viewerWidth = this._viewerWidth,
+                viewerHeight = this._viewerHeight;
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            pos.left = viewerWidth / 2 - (x - rect.left - this._repairLeft) * scale;
+            pos.top = viewerHeight / 2 - (y - rect.top - this._repairTop) * scale;
+
+            $$CE.fireEvent(this, "repair", e, pos);
+            //ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½
+            x = Math.ceil(Math.min(Math.max(pos.left, viewerWidth - zoom.width), 0));
+            y = Math.ceil(Math.min(Math.max(pos.top, viewerHeight - zoom.height), 0));
+            //ï¿½ï¿½ï¿½Ã¶ï¿½Î»
+            zoom.style.left = x + "px";
+            zoom.style.top = y + "px";
+
+            $$CE.fireEvent(this, "move", e, x, y);
+            this.onMove();
+        }
+    },
+    //ï¿½ï¿½ï¿½ï¿½
+    _end: function () {
+        $$CE.fireEvent(this, "end");
+        this.onEnd();
+        this.autoHide && this._hide();
+        this.stop();
+        this.start();
+    },
+    //ï¿½ï¿½ï¿½ï¿½
+    _hide: function () {
+        this._viewer.style.display = "none";
+    },
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    _mouse: function (e) {
+        this._scale += (e.wheelDelta ? e.wheelDelta / (-120) : (e.detail || 0) / 3) * this.rate;
+
+        var opt = this.options;
+        this._rangeWidth = opt.rangeWidth;
+        this._rangeHeight = opt.rangeHeight;
+
+        this._initSize();
+        this._initData();
+        this._move(e);
+        e.preventDefault();
+    },
+    //ï¿½ï¿½Ê¼
+    start: function () {
+        if (this._viewerWidth && this._viewerHeight) {
+            var image = this._image, START = this._START;
+            $$E.addEvent(image, "mouseover", START);
+            $$E.addEvent(image, "mousemove", START);
+        }
+    },
+    //Í£Ö¹
+    stop: function () {
+        clearTimeout(this._timer);
+        $$E.removeEvent(this._image, "mouseover", this._START);
+        $$E.removeEvent(this._image, "mousemove", this._START);
+        $$E.removeEvent(document, "mousemove", this._MOVE);
+        $$E.removeEvent(document, "mouseout", this._OUT);
+        $$E.removeEvent(document, $$B.firefox ? "DOMMouseScroll" : "mousewheel", this._MOUSE);
+    },
+    //ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½
+    reset: function (options) {
+        this.stop();
+
+        var viewer = this._viewer, zoom = this._zoom;
+        if ($$D.contains(viewer, zoom)) {
+            viewer.removeChild(zoom);
+        }
+
+        var opt = $$.extend(this.options, options || {});
+        this._scale = opt.scale;
+        this._max = opt.max;
+        this._min = opt.min;
+        this._originPic = opt.originPic;
+        this._zoomPic = opt.zoomPic;
+        this._rangeWidth = opt.rangeWidth;
+        this._rangeHeight = opt.rangeHeight;
+
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        this._loaded = this._substitute = false;
+        this._rect = null;
+        this._repairLeft = this._repairTop =
+            this._viewerWidth = this._viewerHeight = 0;
+
+        this._initLoad();
+    },
+    //ï¿½ï¿½ï¿½Ù³ï¿½ï¿½ï¿½
+    dispose: function () {
+        $$CE.fireEvent(this, "dispose");
+        this.stop();
+        if ($$D.contains(this._viewer, this._zoom)) {
+            this._viewer.removeChild(this._zoom);
+        }
+        this._image.onload = this._preload.onload =
+            this._image = this._preload = this._zoom = this._viewer =
+                this.onLoad = this.onStart = this.onMove = this.onEnd =
+                    this._START = this._MOVE = this._END = this._OUT = null
+    }
 }
 
 ImageZoom._MODE = {
-	//ÍÏ±ú
-	"handle": {
-		options: {//Ä¬ÈÏÖµ
-			handle:		""//ÍÏ±ú¶ÔÏó
-    	},
-		methods: {
-			init: function() {
-				var handle = $$( this.options.handle );
-				if ( !handle ) {//Ã»ÓÐ¶¨ÒåµÄ»°ÓÃ¸´ÖÆÏÔÊ¾¿ò´úÌæ
-					var body = document.body;
-					handle = body.insertBefore(this._viewer.cloneNode(false), body.childNodes[0]);
-					handle.id = "";
-					handle["_createbyhandle"] = true;//Éú³É±êÊ¶ÓÃÓÚÒÆ³ý
-				}
-				$$D.setStyle( handle, { padding: 0, margin: 0, display: "none" } );
-				
-				this._handle = handle;
-				this._repairHandleLeft = 0;//ÐÞÕý×ø±êleft
-				this._repairHandleTop = 0;//ÐÞÕý×ø±êtop
-			},
-			load: function() {
-				var handle = this._handle, rect = this._rect;
-				$$D.setStyle( handle, {
-					position: "absolute",
-					width: this._rangeWidth + "px",
-					height: this._rangeHeight + "px",
-					display: "block",
-					visibility: "hidden"
-				});
-				//»ñÈ¡ÐÞÕý²ÎÊý
-				this._repairHandleLeft = rect.left + this._repairLeft - handle.clientLeft;
-				this._repairHandleTop = rect.top + this._repairTop - handle.clientTop;
-				//ÐÞÕýoffsetParentÎ»ÖÃ
-				if ( !/BODY|HTML/.test( handle.offsetParent.nodeName ) ) {
-					var parent = handle.offsetParent, rect = $$D.rect( parent );
-					this._repairHandleLeft -= rect.left + parent.clientLeft;
-					this._repairHandleTop -= rect.top + parent.clientTop;
-				}
-				//Òþ²Ø
-				$$D.setStyle( handle, { display: "none", visibility: "visible" });
-			},
-			start: function() {
-				this._handle.style.display = "block";
-			},
-			move: function(e, x, y) {
-				var style = this._handle.style, scale = this._scale;
-				style.left = Math.ceil( this._repairHandleLeft - x / scale ) + "px";
-				style.top = Math.ceil( this._repairHandleTop - y / scale )  + "px";
-			},
-			end: function() {
-				this._handle.style.display = "none";
-			},
-			dispose: function() {
-				if( "_createbyhandle" in this._handle ){ document.body.removeChild( this._handle ); }
-				this._handle = null;
-			}
-		}
-	}
+    //ï¿½Ï±ï¿½
+    "handle": {
+        options: {//Ä¬ï¿½ï¿½Öµ
+            handle: ""//ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½
+        },
+        methods: {
+            init: function () {
+                var handle = $$(this.options.handle);
+                if (!handle) {//Ã»ï¿½Ð¶ï¿½ï¿½ï¿½Ä»ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½
+                    var body = document.body;
+                    handle = body.insertBefore(this._viewer.cloneNode(false), body.childNodes[0]);
+                    handle.id = "";
+                    handle["_createbyhandle"] = true;//ï¿½ï¿½ï¿½É±ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½
+                }
+                $$D.setStyle(handle, {padding: 0, margin: 0, display: "none"});
+
+                this._handle = handle;
+                this._repairHandleLeft = 0;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½left
+                this._repairHandleTop = 0;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½top
+            },
+            load: function () {
+                var handle = this._handle, rect = this._rect;
+                $$D.setStyle(handle, {
+                    position: "absolute",
+                    width: this._rangeWidth + "px",
+                    height: this._rangeHeight + "px",
+                    display: "block",
+                    visibility: "hidden"
+                });
+                //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                this._repairHandleLeft = rect.left + this._repairLeft - handle.clientLeft;
+                this._repairHandleTop = rect.top + this._repairTop - handle.clientTop;
+                //ï¿½ï¿½ï¿½ï¿½offsetParentÎ»ï¿½ï¿½
+                if (!/BODY|HTML/.test(handle.offsetParent.nodeName)) {
+                    var parent = handle.offsetParent, rect = $$D.rect(parent);
+                    this._repairHandleLeft -= rect.left + parent.clientLeft;
+                    this._repairHandleTop -= rect.top + parent.clientTop;
+                }
+                //ï¿½ï¿½ï¿½ï¿½
+                $$D.setStyle(handle, {display: "none", visibility: "visible"});
+            },
+            start: function () {
+                this._handle.style.display = "block";
+            },
+            move: function (e, x, y) {
+                var style = this._handle.style, scale = this._scale;
+                style.left = Math.ceil(this._repairHandleLeft - x / scale) + "px";
+                style.top = Math.ceil(this._repairHandleTop - y / scale) + "px";
+            },
+            end: function () {
+                this._handle.style.display = "none";
+            },
+            dispose: function () {
+                if ("_createbyhandle" in this._handle) {
+                    document.body.removeChild(this._handle);
+                }
+                this._handle = null;
+            }
+        }
+    }
 }
 
-ImageZoom.prototype._initialize = (function(){
-	var init = ImageZoom.prototype._initialize,
-		mode = ImageZoom._MODE,
-		modes = {
-			"handle": [ mode.handle ]
-		};
-	return function(){
-		var options = arguments[2];
-		if ( options && options.mode && modes[ options.mode ] ) {
-			$$A.forEach( modes[ options.mode ], function( mode ){
-				//À©Õ¹options
-				$$.extend( options, mode.options, false );
-				//À©Õ¹¹³×Ó
-				$$A.forEach( mode.methods, function( method, name ){
-					$$CE.addEvent( this, name, method );
-				}, this );
-			}, this );
-		}
-		init.apply( this, arguments );
-	}
+ImageZoom.prototype._initialize = (function () {
+    var init = ImageZoom.prototype._initialize,
+        mode = ImageZoom._MODE,
+        modes = {
+            "handle": [mode.handle]
+        };
+    return function () {
+        var options = arguments[2];
+        if (options && options.mode && modes[options.mode]) {
+            $$A.forEach(modes[options.mode], function (mode) {
+                //ï¿½ï¿½Õ¹options
+                $$.extend(options, mode.options, false);
+                //ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½ï¿½
+                $$A.forEach(mode.methods, function (method, name) {
+                    $$CE.addEvent(this, name, method);
+                }, this);
+            }, this);
+        }
+        init.apply(this, arguments);
+    }
 })();

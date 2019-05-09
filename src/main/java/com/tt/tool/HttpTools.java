@@ -89,7 +89,7 @@ public class HttpTools {
 
     /**
      * 除去数组中的空值和签名参数
-     * 
+     *
      * @param sArray 签名参数组
      * @return 去掉空值与签名参数后的新签名参数组
      */
@@ -111,7 +111,7 @@ public class HttpTools {
 
     /**
      * 描述：获取IP地址
-     * 
+     *
      * @param request
      */
     public static String getIpAddress(HttpServletRequest request) {
@@ -204,7 +204,7 @@ public class HttpTools {
             }
             tempStr = new String(arrayOut.toByteArray());
         } catch (IOException e) {
-            
+
             e.printStackTrace();
         }
         return tempStr;
@@ -516,6 +516,7 @@ public class HttpTools {
             }
         }
     }
+
     /**
      * @Description:使用HttpURLConnection发送get请求
      */
@@ -620,6 +621,7 @@ public class HttpTools {
         }
         return resultBuffer.toString();
     }
+
     @SuppressWarnings({"unchecked"})
     public static TtMap httpClientPostmss(String urlParam, Map<String, Object> params, String charset,
                                           TtMap headers) {
@@ -628,20 +630,20 @@ public class HttpTools {
         return result;
     }
 
-     /**
+    /**
      * @Description:使用HttpClient发送post请求,params处理成&后再urlEncode
      */
     public static String httpClientPost_String(String urlParam, String params, String charset,
-            TtMap headers) {
+                                               TtMap headers) {
         StringBuffer resultBuffer = null;
         CloseableHttpClient client = HttpClientBuilder.create().setProxy(null).build();
         HttpPost httpPost = new HttpPost(urlParam);
         // 构建请求参数
         BufferedReader br = null;
         try {
-                System.out.println("param:"+params);
-                StringEntity entity = new StringEntity(params, charset);
-                httpPost.setEntity(entity);
+            System.out.println("param:" + params);
+            StringEntity entity = new StringEntity(params, charset);
+            httpPost.setEntity(entity);
             if (headers != null && headers.size() > 0) {
                 for (Map.Entry<String, String> entryHeader : headers.entrySet()) {
                     httpPost.addHeader(entryHeader.getKey(), entryHeader.getValue());
@@ -670,11 +672,12 @@ public class HttpTools {
         }
         return resultBuffer.toString();
     }
+
     /**
      * @Description:使用HttpClient发送post请求,params处理成&后再urlEncode
      */
     public static String httpClientPost(String urlParam, Map<String, Object> params, String charset,
-            TtMap headers) {
+                                        TtMap headers) {
         StringBuffer resultBuffer = null;
         CloseableHttpClient client = HttpClientBuilder.create().setProxy(null).build();
         HttpPost httpPost = new HttpPost(urlParam);
@@ -724,7 +727,7 @@ public class HttpTools {
      * @Description:使用HttpClient发送get请求
      */
     public static String httpClientGet(String urlParam, Map<String, Object> params, String charset,
-            TtMap headers) {
+                                       TtMap headers) {
         StringBuffer resultBuffer = null;
         CloseableHttpClient client = HttpClientBuilder.create().setProxy(null).build();
         BufferedReader br = null;
@@ -998,7 +1001,7 @@ public class HttpTools {
 
     /**
      * 向指定URL发送GET方法的请求,参数不加urlencode
-     * 
+     *
      * @param url   发送请求的URL
      * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return URL 所代表远程资源的响应结果

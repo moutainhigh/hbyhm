@@ -18,6 +18,7 @@ public class yhqy extends DbCtrl {
     private boolean canAdd = true;
     private final String classAgpId = "56"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
+
     public yhqy() {
         super("tlzf_qy");
         AdminAgp adminAgp = new AdminAgp();
@@ -48,7 +49,8 @@ public class yhqy extends DbCtrl {
         int pageInt = Integer.valueOf(Tools.myIsNull(post.get("p")) == false ? post.get("p") : "1"); // 当前页
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
 
-        String whereString = "true";;
+        String whereString = "true";
+        ;
         String tmpWhere = "";
         String fieldsString = "t.*,f.name as fsname,a.name as adminname";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
@@ -107,27 +109,27 @@ public class yhqy extends DbCtrl {
             request.setAttribute("errorMsg", "权限访问错误！");
             return;
         }
-        String wsql="";
-        if(!Tools.myIsNull(post.get("app"))){
+        String wsql = "";
+        if (!Tools.myIsNull(post.get("app"))) {
             switch (post.get("app")) {
                 case "2":
-                    wsql=" and app=2";
+                    wsql = " and app=2";
                     break;
                 case "3":
-                    wsql=" and app=3";
+                    wsql = " and app=3";
                     break;
                 case "4":
-                    wsql=" and app=4";
+                    wsql = " and app=4";
                     break;
             }
         }
         //查询主订单客户
-        TtList icbclist = Tools.reclist("select * from kj_icbc where true "+wsql);
+        TtList icbclist = Tools.reclist("select * from kj_icbc where true " + wsql);
         request.setAttribute("icbclist", icbclist);
         long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
         TtMap info = info(nid);
 
-        if(nid>0) {
+        if (nid > 0) {
             TtList resultlist = Tools.reclist("select * from tlzf_qy_result where qryid=" + nid);
             request.setAttribute("resultlist", resultlist);
         }
@@ -138,23 +140,23 @@ public class yhqy extends DbCtrl {
     }
 
     public void doPost(TtMap post, long id, TtMap result2) {
-        TtMap newpost=new TtMap();
+        TtMap newpost = new TtMap();
         newpost.putAll(post);
-        TtMap mmap=Tools.minfo();
+        TtMap mmap = Tools.minfo();
         if (id > 0) { // id为0时，新增
             edit(post, id);
         } else {
-            post.put("qd_type","2");
-            post.put("gems_id",mmap.get("gemsid"));
-            post.put("gems_fs_id",mmap.get("icbc_erp_fsid"));
+            post.put("qd_type", "2");
+            post.put("gems_id", mmap.get("gemsid"));
+            post.put("gems_fs_id", mmap.get("icbc_erp_fsid"));
             add(post);
         }
         //添加记录
-        TtMap resmap=new TtMap();
-        resmap.put("qryid",String.valueOf(id));
-        resmap.put("status",newpost.get("bc_status"));
-        resmap.put("remark",newpost.get("remark1"));
-        Tools.recAdd(resmap,"tlzf_qy_result");
+        TtMap resmap = new TtMap();
+        resmap.put("qryid", String.valueOf(id));
+        resmap.put("status", newpost.get("bc_status"));
+        resmap.put("remark", newpost.get("remark1"));
+        Tools.recAdd(resmap, "tlzf_qy_result");
 
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
         boolean bSuccess = errorCode == 0;
@@ -169,10 +171,10 @@ public class yhqy extends DbCtrl {
      */
     @Override
     public void succ(TtMap array, long id, int sqltp) {
-        System.out.println("新增后的数据展示："+array);
-        TtMap ttMap=new TtMap();
-        ttMap.put("gems_code",orderutil.getOrderId("TLQYKJY", 8, id));
-        Tools.recEdit(ttMap,"tlzf_qy",id);
+        System.out.println("新增后的数据展示：" + array);
+        TtMap ttMap = new TtMap();
+        ttMap.put("gems_code", orderutil.getOrderId("TLQYKJY", 8, id));
+        Tools.recEdit(ttMap, "tlzf_qy", id);
 
     }
 }

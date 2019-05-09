@@ -11,10 +11,11 @@ import java.util.HashMap;
 
 /**
  * tt自定义的Map(String,String) <String,String> ，简化编码之用
+ *
  * @param {type}
- * @return Map<String,String>的简化版
+ * @return Map<String   ,   String>的简化版
  */
 public class TtMap extends HashMap<String, String> {
 
-  private static final long serialVersionUID = 362498820763181265L;
+    private static final long serialVersionUID = 362498820763181265L;
 }

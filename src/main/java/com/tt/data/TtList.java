@@ -11,9 +11,10 @@ import java.util.ArrayList;
 
 /**
  * tt自定义的List(map(string,string)),简化编码之用
+ *
  * @param {type}
- * @return List(map(string,string))的简化版
+ * @return List(map ( string, string))的简化版
  */
 public class TtList extends ArrayList<TtMap> {
-  private static final long serialVersionUID = 8683452581122892189L;
+    private static final long serialVersionUID = 8683452581122892189L;
 }

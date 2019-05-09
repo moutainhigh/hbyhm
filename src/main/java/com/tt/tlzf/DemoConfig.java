@@ -18,7 +18,7 @@ import com.tt.tool.Config;
  **/
 public class DemoConfig {
 
-    public static  String TXZF_URL = Config.TESTMODE
+    public static String TXZF_URL = Config.TESTMODE
             ? "https://test.allinpaygd.com/aipg/ProcessServlet" //测试环境
             : "https://tlt.allinpay.com/aipg/ProcessServlet";//正式环境
     public static String BUSINESS_CODE = Config.TESTMODE

@@ -73,34 +73,35 @@ public class DataDic {
     public static TtMap dic_app = new TtMap();
     public static TtMap dic_zzcl_zvzk = new TtMap();
     public static TtMap dic_tlzf_currency = new TtMap();
+
     public static synchronized void initDic() {
         if (dicYesOrNo.size() > 0) { // 已经初始化过了
             return;
         }
         /*通联支付货币类型*/
-        dic_tlzf_currency.put("CNY","人民币");
-        dic_tlzf_currency.put("HKD","港元");
-        dic_tlzf_currency.put("USD","美元");
+        dic_tlzf_currency.put("CNY", "人民币");
+        dic_tlzf_currency.put("HKD", "港元");
+        dic_tlzf_currency.put("USD", "美元");
         /*资质材料-子女状况*/
-        dic_zzcl_zvzk.put("0","请选择");
-        dic_zzcl_zvzk.put("1","无");
-        dic_zzcl_zvzk.put("2","一个");
-        dic_zzcl_zvzk.put("3","两个");
-        dic_zzcl_zvzk.put("4","两个以上");
+        dic_zzcl_zvzk.put("0", "请选择");
+        dic_zzcl_zvzk.put("1", "无");
+        dic_zzcl_zvzk.put("2", "一个");
+        dic_zzcl_zvzk.put("3", "两个");
+        dic_zzcl_zvzk.put("4", "两个以上");
         /*类型*/
-        dic_app.put("0","工行贷");
-        dic_app.put("1","通用进件");
-        dic_app.put("2","河北银行");
-        dic_app.put("3","厦门国际");
-        dic_app.put("4","华夏银行");
+        dic_app.put("0", "工行贷");
+        dic_app.put("1", "通用进件");
+        dic_app.put("2", "河北银行");
+        dic_app.put("3", "厦门国际");
+        dic_app.put("4", "华夏银行");
         /*通联支付协议状态*/
-        dic_tlzf_xy_status.put("0","无");
-        dic_tlzf_xy_status.put("1","失效");
-        dic_tlzf_xy_status.put("2","有效");
+        dic_tlzf_xy_status.put("0", "无");
+        dic_tlzf_xy_status.put("1", "失效");
+        dic_tlzf_xy_status.put("2", "有效");
         /*通联支付手动状态*/
-        dic_tlzf_sd_status.put("1","待审核");
-        dic_tlzf_sd_status.put("2","代收成功");
-        dic_tlzf_sd_status.put("3","代收失败");
+        dic_tlzf_sd_status.put("1", "待审核");
+        dic_tlzf_sd_status.put("2", "代收成功");
+        dic_tlzf_sd_status.put("3", "代收失败");
         /*通联支付交易状态*/
         dic_tlzf_ds_bc_status.put("1", "提交待交易");
         dic_tlzf_ds_bc_status.put("2", "交易失败");

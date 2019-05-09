@@ -13,12 +13,12 @@ import com.alibaba.druid.support.http.WebStatFilter;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 
-@WebFilter(filterName="druidWebStatFilter",urlPatterns="/*",
-    initParams={
-			@WebInitParam(name="exclusions",value="*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid_tt/*"),//忽略资源
-			@WebInitParam(name="sessionStatEnable",value="true"),//session监控开关
-			@WebInitParam(name="principalSessionName",value="tt_mid")//监控sessionname
-     }
+@WebFilter(filterName = "druidWebStatFilter", urlPatterns = "/*",
+        initParams = {
+                @WebInitParam(name = "exclusions", value = "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid_tt/*"),//忽略资源
+                @WebInitParam(name = "sessionStatEnable", value = "true"),//session监控开关
+                @WebInitParam(name = "principalSessionName", value = "tt_mid")//监控sessionname
+        }
 )
 public class DruidStatFilter extends WebStatFilter {
 }

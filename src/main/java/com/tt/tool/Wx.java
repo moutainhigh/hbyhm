@@ -224,7 +224,7 @@ public class Wx {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            
+
         }
         return result;
     }
@@ -250,7 +250,7 @@ public class Wx {
         try {
             @SuppressWarnings({"all"})
             //HttpClient client = new DefaultHttpClient();
-            CloseableHttpClient client = HttpClientBuilder.create().setProxy(null).build();
+                    CloseableHttpClient client = HttpClientBuilder.create().setProxy(null).build();
             JSONObject OpenidJSONO = getJsonObject(requestUrl, client);
             client.close();
             return String.valueOf(OpenidJSONO.get("access_token"));
@@ -402,7 +402,7 @@ public class Wx {
         String returnCode = (String) map.get("return_code");
         if ("SUCCESS".equals(returnCode)) {
             // 验证签名是否正确
-            TtMap validParams = HttpTools.paraFilter((TtMap)map); // 回调验签时需要去除sign和空值参数
+            TtMap validParams = HttpTools.paraFilter((TtMap) map); // 回调验签时需要去除sign和空值参数
             String validStr = HttpTools.createLinkString(validParams);// 把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
             TtMap info = this.getWxConfig(defWxName);
             String sign = Tools.md5(validStr + "&key=" + info.get("pay_key")).toUpperCase();// 拼装生成服务器端验证的签名

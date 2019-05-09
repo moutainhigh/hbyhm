@@ -51,7 +51,7 @@ public class SaticScheduleTask {
                 }
                 int days = addDate.differentDays(date1, date2);
                 if (days <= 3 && days > 0) {
-                    System.out.println("短信通知："+ttMap.get("account_name"));
+                    System.out.println("短信通知：" + ttMap.get("account_name"));
                     int account = Integer.parseInt(ttMap.get("fw_price"));
                     //短信通知
                     ApiSms.mmsSend(ttMap.get("tel"), "尊敬的客户" + ttMap.get("account_name") +

@@ -581,7 +581,7 @@ public class dsgl extends DbCtrl {
                 if (Tools.myIsNull(array.get("account_no"))) {
                     myErroMsg += "银行卡号不能为空！\n";
                 }
-            }else{
+            } else {
 
             }
             super.errorMsg = super.chkMsg = myErroMsg;

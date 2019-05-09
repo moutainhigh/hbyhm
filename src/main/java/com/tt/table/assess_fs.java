@@ -56,14 +56,14 @@ public class assess_fs extends DbCtrl {
         //request.setAttribute("saveButton", "true");
         Modal modalMenu = new Modal();
         String fssql = "";
-        int fsid=0;
-        int up_id=0;
-        if(nid>0){
-            fsid=Integer.parseInt(info.get("id"));
-            up_id=Integer.parseInt(info.get("up_id"));
-        }else{
-            fsid=Integer.parseInt(minfo.get("icbc_erp_fsid"));
-            up_id=Integer.parseInt(minfo.get("icbc_erp_fsid"));
+        int fsid = 0;
+        int up_id = 0;
+        if (nid > 0) {
+            fsid = Integer.parseInt(info.get("id"));
+            up_id = Integer.parseInt(info.get("up_id"));
+        } else {
+            fsid = Integer.parseInt(minfo.get("icbc_erp_fsid"));
+            up_id = Integer.parseInt(minfo.get("icbc_erp_fsid"));
         }
         if (Tools.isSuperAdmin(minfo)) {
             fssql = "select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!=''";

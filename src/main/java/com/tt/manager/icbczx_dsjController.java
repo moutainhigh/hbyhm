@@ -156,7 +156,7 @@ public class icbczx_dsjController {
                 "from kj_icbc ki\n" +
                 "LEFT JOIN assess_fs fs on ki.gems_fs_id=fs.id\n" +
                 "LEFT JOIN assess_gems gems on ki.gems_id=gems.id\n" +
-                "where ki.id="+paramemap.get("id");
+                "where ki.id=" + paramemap.get("id");
         TtMap icbc = Tools.recinfo(sql);
         TtMap dsj = Tools.recinfo("select * from kjs_icbc_dsj where icbc_id=" + paramemap.get("id"));
         String result = "";
@@ -175,7 +175,7 @@ public class icbczx_dsjController {
                 break;
         }
         if (result != null) {
-            JSONObject res =JSONObject.parseObject(Tools.jsonDeCode(result.replace(":\"{", ":{").replace("}\"", "}")).toString()) ;
+            JSONObject res = JSONObject.parseObject(Tools.jsonDeCode(result.replace(":\"{", ":{").replace("}\"", "}")).toString());
             if (res.get("detail") != null && !res.get("detail").equals("")) {
                 JSONObject detail = JSONObject.parseObject(res
                         .getString("detail"));
@@ -210,7 +210,7 @@ public class icbczx_dsjController {
 
 
     public static void main(String[] args) {
-        String s="{\"detail\":{\"success\":1,\"id\":\"WF2019050617215212669706\",\"reasonDesc\":null,\"reasonCode\":null,\"resultDesc\":\"{\"ANTIFRAUD\":{\"risk_items\":[{\"risk_id\":1,\"rule_id\":\"30415014\",\"score\":1,\"rule_uuid\":\"08e7a359b530492bbf27f993a47bbff0\",\"risk_name\":\"6个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"}],\"cross_partner_count\":1,\"type\":\"cross_partner\"}},{\"risk_id\":2,\"rule_id\":\"30415024\",\"score\":0,\"rule_uuid\":\"d65fd878700c45918c74a5cc8057f159\",\"risk_name\":\"12个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"},{\"count\":1,\"industryDisplayName\":\"小额贷款公司\"}],\"cross_partner_count\":2,\"type\":\"cross_partner\"}},{\"risk_id\":3,\"rule_id\":\"30415034\",\"score\":0,\"rule_uuid\":\"92ce3f80062945219c650a0ef0890746\",\"risk_name\":\"24个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"},{\"count\":1,\"industryDisplayName\":\"小额贷款公司\"}],\"cross_partner_count\":2,\"type\":\"cross_partner\"}}],\"score\":1,\"decision\":\"PASS\"}}\"},\"status\":{\"isSuccess\":true,\"requestId\":\"78582c07a7e046bf919ea3ba935c9a47\",\"responseCode\":\"0000\",\"responseMessage\":\"查询成功!\",\"warningMessage\":null}}";
+        String s = "{\"detail\":{\"success\":1,\"id\":\"WF2019050617215212669706\",\"reasonDesc\":null,\"reasonCode\":null,\"resultDesc\":\"{\"ANTIFRAUD\":{\"risk_items\":[{\"risk_id\":1,\"rule_id\":\"30415014\",\"score\":1,\"rule_uuid\":\"08e7a359b530492bbf27f993a47bbff0\",\"risk_name\":\"6个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"}],\"cross_partner_count\":1,\"type\":\"cross_partner\"}},{\"risk_id\":2,\"rule_id\":\"30415024\",\"score\":0,\"rule_uuid\":\"d65fd878700c45918c74a5cc8057f159\",\"risk_name\":\"12个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"},{\"count\":1,\"industryDisplayName\":\"小额贷款公司\"}],\"cross_partner_count\":2,\"type\":\"cross_partner\"}},{\"risk_id\":3,\"rule_id\":\"30415034\",\"score\":0,\"rule_uuid\":\"92ce3f80062945219c650a0ef0890746\",\"risk_name\":\"24个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"},{\"count\":1,\"industryDisplayName\":\"小额贷款公司\"}],\"cross_partner_count\":2,\"type\":\"cross_partner\"}}],\"score\":1,\"decision\":\"PASS\"}}\"},\"status\":{\"isSuccess\":true,\"requestId\":\"78582c07a7e046bf919ea3ba935c9a47\",\"responseCode\":\"0000\",\"responseMessage\":\"查询成功!\",\"warningMessage\":null}}";
 
         Object obj = Tools.jsonDeCode(s.replace(":\"{", ":{").replace("}\"", "}"));
 

@@ -40,7 +40,7 @@ function ajax_edit(id, field, val) {
         cn = arguments[4];
         succfun = arguments[3];
     } else if (arguments[3]) {
-        if (typeof(cn) == 'function') {
+        if (typeof (cn) == 'function') {
             succfun = arguments[3];
         } else {
             cn = arguments[3];
@@ -62,7 +62,7 @@ function ajax_edit(id, field, val) {
     } else {
         var list_ids_param = 'id=' + id;
     }
-    jQuery.post('command?cn=' + cn + '&sdo=edit&' + list_ids_param, param, function(jstr) {
+    jQuery.post('command?cn=' + cn + '&sdo=edit&' + list_ids_param, param, function (jstr) {
         if (succfun) {
             succfun(jstr);
         } else {
@@ -71,25 +71,25 @@ function ajax_edit(id, field, val) {
     });
 }
 
-jQuery(function() {
-    $('form').each(function() {
+jQuery(function () {
+    $('form').each(function () {
         var this_form = $(this);
-        this_form.find(':text,textarea').each(function() {
+        this_form.find(':text,textarea').each(function () {
             var alt = $(this).attr('placeholder');
             if (alt) {
-                $(this).blur(function() {
+                $(this).blur(function () {
                     if ($(this).val() == '') {
                         $(this).val(alt);
                     }
-                }).focus(function() {
+                }).focus(function () {
                     if ($(this).val() == alt) {
                         $(this).val('');
                     }
                 }).blur();
             }
         })
-        this_form.submit(function() {
-            this_form.find(':text,textarea').each(function() {
+        this_form.submit(function () {
+            this_form.find(':text,textarea').each(function () {
                 var alt = $(this).attr('placeholder');
                 if (alt) {
                     if ($(this).val() == alt) {
@@ -102,7 +102,7 @@ jQuery(function() {
 
     })
 
-    jQuery('a[id^=delid]').click(function() {
+    jQuery('a[id^=delid]').click(function () {
         var thisobj = jQuery(this);
         var succfun = jQuery(this).attr('succfun');
         var id = thisobj.attr('id').replace('delid_', '');
@@ -113,7 +113,7 @@ jQuery(function() {
             cn = thisobj.attr('href').replace('#', '');
         }
         if (cn && id && confirm('您确定要删除这个项目吗?')) {
-            jQuery.getJSON('command?cn=' + cn + '&sdo=del&id=' + id, function(jo) {
+            jQuery.getJSON('command?cn=' + cn + '&sdo=del&id=' + id, function (jo) {
                 if (succfun) {
                     eval(succfun.replace(/jQuery\(this\)/g, 'thisobj'));
                 } else {
@@ -125,7 +125,7 @@ jQuery(function() {
             });
         }
     });
-    jQuery('a[id^=undelid]').click(function() {
+    jQuery('a[id^=undelid]').click(function () {
         var thisobj = jQuery(this);
         var succfun = jQuery(this).attr('succfun');
         var id = thisobj.attr('id').replace('undelid_', '');
@@ -136,7 +136,7 @@ jQuery(function() {
             cn = thisobj.attr('href').replace('#', '');
         }
         if (cn && id) {
-            jQuery.get('command?cn=' + cn + '&sdo=undel&id=' + id, function(jo) {
+            jQuery.get('command?cn=' + cn + '&sdo=undel&id=' + id, function (jo) {
                 if (succfun) {
                     eval(succfun.replace(/jQuery\(this\)/g, 'thisobj'));
                 } else {
@@ -150,11 +150,11 @@ jQuery(function() {
     });
     //jQuery(':input.date').datepicker();
 });
-$.fn.smartFloat = function() {
-    var position = function(element) {
+$.fn.smartFloat = function () {
+    var position = function (element) {
         var top = element.position().top,
             pos = element.css("position");
-        $(window).scroll(function() {
+        $(window).scroll(function () {
             var scrolls = $(this).scrollTop();
             if (scrolls > top) {
                 if (window.XMLHttpRequest) {
@@ -177,7 +177,7 @@ $.fn.smartFloat = function() {
         });
     };
 
-    return $(this).each(function() {
+    return $(this).each(function () {
         position($(this));
     });
 };

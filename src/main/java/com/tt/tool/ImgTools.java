@@ -55,7 +55,7 @@ public class ImgTools {
 
     /**
      * 给图片加上水印
-     * 
+     *
      * @param srcFile
      * @param shuiyfile
      * @param pos
@@ -75,22 +75,22 @@ public class ImgTools {
                 System.out.println(pos);
             }
             switch (pos) {
-            case 1:// 左上
-                gsrc.drawImage(suiyin, 5, 5, null);
-                break;
-            case 2:// 右上
-                gsrc.drawImage(suiyin, mpsrc2.getWidth() - 5 - suiyin.getWidth(), 5, null);
-                break;
-            case 3:// 右下
-                gsrc.drawImage(suiyin, mpsrc2.getWidth() - 5 - suiyin.getWidth(),
-                        mpsrc2.getHeight() - 5 - suiyin.getHeight(), null);
-                break;
-            case 4:// 左下
-                gsrc.drawImage(suiyin, 5, mpsrc2.getHeight() - 5 - suiyin.getHeight(), null);
-                break;
-            default:
-                gsrc.drawImage(suiyin, mpsrc2.getWidth() - 5 - suiyin.getWidth(),
-                        mpsrc2.getHeight() - 5 - suiyin.getHeight(), null);
+                case 1:// 左上
+                    gsrc.drawImage(suiyin, 5, 5, null);
+                    break;
+                case 2:// 右上
+                    gsrc.drawImage(suiyin, mpsrc2.getWidth() - 5 - suiyin.getWidth(), 5, null);
+                    break;
+                case 3:// 右下
+                    gsrc.drawImage(suiyin, mpsrc2.getWidth() - 5 - suiyin.getWidth(),
+                            mpsrc2.getHeight() - 5 - suiyin.getHeight(), null);
+                    break;
+                case 4:// 左下
+                    gsrc.drawImage(suiyin, 5, mpsrc2.getHeight() - 5 - suiyin.getHeight(), null);
+                    break;
+                default:
+                    gsrc.drawImage(suiyin, mpsrc2.getWidth() - 5 - suiyin.getWidth(),
+                            mpsrc2.getHeight() - 5 - suiyin.getHeight(), null);
             }
 
             gsrc.dispose();
@@ -106,16 +106,16 @@ public class ImgTools {
     }
 
     /**
+     * @param {type}
      * @description: 写入图片，支持各种格式。
-     * @param {type} 
-     * @return: 
+     * @return:
      */
     private static void doToFileNew(BufferedImage dstImage, String dstName) throws IOException {
         if (dstImage.getTransparency() == Transparency.TRANSLUCENT) {
             dstImage = get24BitImage(dstImage);
         }
         String formatName = dstName.substring(dstName.lastIndexOf(".") + 1);
-        ImageIO.write(dstImage, /* "GIF" */ formatName /* format desired */ , new File(dstName) /* target */ );
+        ImageIO.write(dstImage, /* "GIF" */ formatName /* format desired */, new File(dstName) /* target */);
     }
     /*
      * private static void doToFile(BufferedImage mpsrc2, String saveFile) throws
@@ -166,6 +166,7 @@ public class ImgTools {
      * private static BufferedImage getRoundedImage(BufferedImage img, int size) {
      * return getRoundedImage(img, size, size / 2, 2, 0, ""); }
      */
+
     /**
      * 先按最小宽高为size等比例绽放, 然后图像居中抠出半径为radius的圆形图像
      *
@@ -176,7 +177,7 @@ public class ImgTools {
      * @return
      */
     private static BufferedImage getRoundedImage(BufferedImage img, int size, int radius, int type, int height,
-            String shuiyfile) {
+                                                 String shuiyfile) {
         BufferedImage result = new BufferedImage(size, type == 3 ? height : size, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = result.createGraphics();
         // 先按最小宽高为size等比例绽放, 然后图像居中抠出直径为size的圆形图像
@@ -283,7 +284,7 @@ public class ImgTools {
      * @param font             水印字体
      */
     public static void shuiyTxt(String srcImgPath, String tarImgPath, String waterMarkContent, Color markContentColor,
-            Font font) {
+                                Font font) {
         try {
             // 读取原图片信息
             File srcImgFile = new File(srcImgPath);// 得到文件

@@ -58,24 +58,24 @@ public class wx_xcx {
         String r = " limit " + start + "," + limtInt;
         TtList jsonlist = Tools.reclist("select * from http_content" + r);
         //System.out.println(jsonlist);
-        TtList newlist=new TtList();
-        for(TtMap ttMap:jsonlist){
-            TtMap newmap=new TtMap();
-            newmap.put("title",ttMap.get("title")
-                    .replaceAll("\"","")
-                    .replaceAll("'","")
-                    .replaceAll("<strong>","")
-                    .replaceAll("</strong>","")
-                    .replaceAll("&quot;",""));
-            newmap.put("name",ttMap.get("name"));
-            newmap.put("urlfrom",ttMap.get("urlfrom"));
-            newmap.put("id",ttMap.get("id"));
-            newmap.put("type",ttMap.get("type"));
-            newmap.put("url",ttMap.get("url"));
-            newmap.put("pn",ttMap.get("pn"));
+        TtList newlist = new TtList();
+        for (TtMap ttMap : jsonlist) {
+            TtMap newmap = new TtMap();
+            newmap.put("title", ttMap.get("title")
+                    .replaceAll("\"", "")
+                    .replaceAll("'", "")
+                    .replaceAll("<strong>", "")
+                    .replaceAll("</strong>", "")
+                    .replaceAll("&quot;", ""));
+            newmap.put("name", ttMap.get("name"));
+            newmap.put("urlfrom", ttMap.get("urlfrom"));
+            newmap.put("id", ttMap.get("id"));
+            newmap.put("type", ttMap.get("type"));
+            newmap.put("url", ttMap.get("url"));
+            newmap.put("pn", ttMap.get("pn"));
             newlist.add(newmap);
         }
-        String result=Tools.jsonEncode(newlist);
+        String result = Tools.jsonEncode(newlist);
         return replaceBlank(result);
     }
 

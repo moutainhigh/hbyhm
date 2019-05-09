@@ -13,53 +13,53 @@ import com.tt.tlzf.xstruct.quickpay.FAGRARET;
 import net.sf.json.JSONObject;
 
 /**
- * @Description  快捷签约短信发起
+ * @Description 快捷签约短信发起
  * @Author meixf@allinpay.com
  * @Date 2018年5月24日
  **/
 public class Tranx310001 {
 
-	//200604000006429-1555381739566
-	public static void main(String args[]){
-		InfoReq inforeq = DemoUtil.makeReq("310001");
-		//http://tyjjm.kcway.net/kcdhttp?query=2&type=310001&ACCOUNT_NAME=%E5%B5%87%E7%AB%B9%E4%B8%AD&BANK_CODE=&ACCOUNT_TYPE=&ACCOUNT_NO=6222004000493013989&ID_TYPE=&ID=620528197501116230&TEL=15601257600&CVV2=&VAILDDATE=&MERREM=%E6%B5%8B%E8%AF%95&REMARK=%E6%88%91%E8%A6%81%E7%AD%BE%E7%BA%A6
-		FAGRA fagra = new FAGRA();
-		fagra.setACCOUNT_NAME("游振鑫");//
-		fagra.setACCOUNT_NO("6236681820008004310");//
-		fagra.setACCOUNT_PROP("0");
-		fagra.setTEL("13559130130");//
-		fagra.setID("350721198501300017");//
-		fagra.setID_TYPE("0");
-		fagra.setMERCHANT_ID(DemoConfig.merchantid);
-		fagra.setACCOUNT_TYPE("00");
-		fagra.setCVV2("");
-		fagra.setVALIDDATE("");
-		fagra.setMERREM("123");
-		fagra.setREMARK("123123123");
-		
-		AipgReq req = new AipgReq();
-		req.setINFO(inforeq);
-		req.addTrx(fagra);
-		try{
-			//step1 对象转xml
-			String xml = XmlParser.toXml(req);
-			//step2 加签
-			String signedXml = DemoUtil.buildSignedXml(xml);
-			//step3 发往通联
-			String url = DemoConfig.TXZF_URL;
-			System.out.println("请求地址："+url);
-			System.out.println("============================请求报文============================");
-			System.out.println(signedXml);
-			String respText = HttpUtil.post(signedXml, url);
-			System.out.println("============================响应报文============================");
-			System.out.println(respText);
-			//step4 验签
-			if(!DemoUtil.verifyXml(respText)){
-				System.out.println("====================================================>验签失败");
-				return;
-			}
-			System.out.println("====================================================>验签成功");
-			//step5 xml转对象
+    //200604000006429-1555381739566
+    public static void main(String args[]) {
+        InfoReq inforeq = DemoUtil.makeReq("310001");
+        //http://tyjjm.kcway.net/kcdhttp?query=2&type=310001&ACCOUNT_NAME=%E5%B5%87%E7%AB%B9%E4%B8%AD&BANK_CODE=&ACCOUNT_TYPE=&ACCOUNT_NO=6222004000493013989&ID_TYPE=&ID=620528197501116230&TEL=15601257600&CVV2=&VAILDDATE=&MERREM=%E6%B5%8B%E8%AF%95&REMARK=%E6%88%91%E8%A6%81%E7%AD%BE%E7%BA%A6
+        FAGRA fagra = new FAGRA();
+        fagra.setACCOUNT_NAME("游振鑫");//
+        fagra.setACCOUNT_NO("6236681820008004310");//
+        fagra.setACCOUNT_PROP("0");
+        fagra.setTEL("13559130130");//
+        fagra.setID("350721198501300017");//
+        fagra.setID_TYPE("0");
+        fagra.setMERCHANT_ID(DemoConfig.merchantid);
+        fagra.setACCOUNT_TYPE("00");
+        fagra.setCVV2("");
+        fagra.setVALIDDATE("");
+        fagra.setMERREM("123");
+        fagra.setREMARK("123123123");
+
+        AipgReq req = new AipgReq();
+        req.setINFO(inforeq);
+        req.addTrx(fagra);
+        try {
+            //step1 对象转xml
+            String xml = XmlParser.toXml(req);
+            //step2 加签
+            String signedXml = DemoUtil.buildSignedXml(xml);
+            //step3 发往通联
+            String url = DemoConfig.TXZF_URL;
+            System.out.println("请求地址：" + url);
+            System.out.println("============================请求报文============================");
+            System.out.println(signedXml);
+            String respText = HttpUtil.post(signedXml, url);
+            System.out.println("============================响应报文============================");
+            System.out.println(respText);
+            //step4 验签
+            if (!DemoUtil.verifyXml(respText)) {
+                System.out.println("====================================================>验签失败");
+                return;
+            }
+            System.out.println("====================================================>验签成功");
+            //step5 xml转对象
 			/*AipgRsp rsp = XmlParser.parseRsp(respText);
 			InfoRsp infoRsp = rsp.getINFO();
 			System.out.println(infoRsp.getRET_CODE());
@@ -69,22 +69,22 @@ public class Tranx310001 {
 				System.out.println(fr.getRET_CODE());
 				System.out.println(fr.getERR_MSG());
 			}*/
-		    String s=	XmlExercise.xml2json(respText);
-			System.out.println(s);
-			JSONObject res=JSONObject.fromObject(s);
-			System.out.println("INFO:"+res.get("INFO"));
-			if(res.get("INFO")!=null&&!res.get("INFO").equals("")){
-				JSONObject INFO=JSONObject.fromObject(res.get("INFO"));
-				System.out.println("ERR_MSG:"+INFO.get("ERR_MSG"));
-			}
-			System.out.println("FAGRARET:"+res.get("FAGRARET"));
-			if(res.get("FAGRARET")!=null&&!res.get("FAGRARET").equals("")){
-				JSONObject FAGRARET=JSONObject.fromObject(res.get("FAGRARET"));
-				System.out.println("ERR_MSG:"+FAGRARET.get("ERR_MSG"));
-			}
+            String s = XmlExercise.xml2json(respText);
+            System.out.println(s);
+            JSONObject res = JSONObject.fromObject(s);
+            System.out.println("INFO:" + res.get("INFO"));
+            if (res.get("INFO") != null && !res.get("INFO").equals("")) {
+                JSONObject INFO = JSONObject.fromObject(res.get("INFO"));
+                System.out.println("ERR_MSG:" + INFO.get("ERR_MSG"));
+            }
+            System.out.println("FAGRARET:" + res.get("FAGRARET"));
+            if (res.get("FAGRARET") != null && !res.get("FAGRARET").equals("")) {
+                JSONObject FAGRARET = JSONObject.fromObject(res.get("FAGRARET"));
+                System.out.println("ERR_MSG:" + FAGRARET.get("ERR_MSG"));
+            }
 
-		}catch(AIPGException e){
-			e.printStackTrace();
-		}
-	}
+        } catch (AIPGException e) {
+            e.printStackTrace();
+        }
+    }
 }

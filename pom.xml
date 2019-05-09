@@ -187,7 +187,7 @@
                     <target>1.7</target>
                     <encoding>UTF-8</encoding>
                     <compilerArguments>
-                        <verbose />
+                        <verbose/>
                         <bootclasspath>${java.home}\lib\rt.jar;${java.home}\lib\jce.jar</bootclasspath>
                     </compilerArguments>
                 </configuration>

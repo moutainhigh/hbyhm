@@ -10,7 +10,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.WebApplicationInitializer;
 
-@ComponentScan(basePackages = { "com.example.demo",
+@ComponentScan(basePackages = {"com.example.demo",
         "com.tt.tool",
         "com.tt.manager",
         "com.tt.tlzf.servlet",
