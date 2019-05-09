@@ -265,6 +265,8 @@ public class Zxlr extends DbCtrl {
         res.put("status", array.get("bc_status"));
         res.put("remark", array.get("remark"));
         Tools.recAdd(res, "kj_icbc_result");
+        //推送
+
     }
 
     @Override

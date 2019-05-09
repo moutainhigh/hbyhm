@@ -24,18 +24,42 @@
 <a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}&dt=<%=nd%>" class="btn btn-default">
     <i class="fa fa-plus"></i>今天的
 </a>
-<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}&dtbe=<%=nd%> - <%=nd7%>" class="btn btn-default">
+<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}&dtbe=<%=nd%> - <%=nd7%>"
+   class="btn btn-default">
     <i class="fa fa-plus"></i>7天的
 </a>
-<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}&dtbe=<%=nd%> - <%=nd30%>" class="btn btn-default">
+<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}&dtbe=<%=nd%> - <%=nd30%>"
+   class="btn btn-default">
     <i class="fa fa-plus"></i>30天的
 </a>
-<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}&dtbe=<%=nd%> - <%=nd365%>" class="btn btn-default">
+<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}&dtbe=<%=nd%> - <%=nd365%>"
+   class="btn btn-default">
     <i class="fa fa-plus"></i>365天的
 </a>
 <a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}&dt=<%=nd1%>" class="btn btn-default">
     <i class="fa fa-plus"></i>明天的
 </a>
-<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}" class="btn btn-default" style="background: #800000;color:white;">
+<a href="/manager/index?cn=dsgl&sdo=list&type=cwgl&api_type=${api_type}" class="btn btn-default"
+   style="background: #800000;color:white;">
     <i class="fa fa-plus"></i>总额：${totals}元
 </a>
+<c:if test="${api_type eq '0'}">
+    <a href="javascript:sd_ds()" class="btn btn-warning" style="background: #800000;color:white;">
+        手动代收批处理
+    </a>
+</c:if>
+<c:if test="${api_type eq '1'}">
+    <a href="javascript:alert('暂无此功能')" class="btn btn-warning" style="background: #800000;color:white;">
+        手动代付批处理
+    </a>
+</c:if>
+<script>
+    function sd_ds() {
+        $.post("/manager/command?sdo=sd_ds", function (result) {
+            var res = eval('(' + result + ')');
+            alert(res.msg);
+            window.location.href = "";
+        });
+    }
+
+</script>

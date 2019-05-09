@@ -7,6 +7,8 @@
  */
 package com.tt.manager;
 
+import com.tt.api.ApiSms;
+import com.tt.data.TtList;
 import com.tt.data.TtMap;
 import com.tt.table.Admin;
 import com.tt.tlzf.DemoConfig;
@@ -33,9 +35,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.tools.Tool;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Date;
+
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+
 @Controller
 public class ManagerCmd {
     /**
@@ -57,7 +62,7 @@ public class ManagerCmd {
         TtMap postUrl = Tools.getUrlParam();
         TtMap post = Tools.getPostMap(request, true);// 过滤参数，过滤mysql的注入，url参数注入
         System.out.println(Tools.jsonEncode(post));
-        System.out.println("ajax提交："+post);
+        System.out.println("ajax提交：" + post);
         String cn = postUrl.get("cn") == null ? "" : postUrl.get("cn");
         TtMap result2 = new TtMap();
         Tools.formatResult(result2, false, 999, "异常，请重试！", "");// 初始化返回
@@ -117,10 +122,10 @@ public class ManagerCmd {
                 }
                 break;
             case "tlzf_ds"://通联支付 代收
-                int errorCode=0;
-                String errorMsg="";
-                TtMap dk = Tools.recinfo("select * from tlzf_dk_details where id="+postUrl.get("id"));
-                if(!dk.isEmpty()){
+                int errorCode = 0;
+                String errorMsg = "";
+                TtMap dk = Tools.recinfo("select * from tlzf_dk_details where id=" + postUrl.get("id"));
+                if (!dk.isEmpty()) {
                     InfoReq infoReq = DemoUtil.makeReq("310011");
                     FASTTRX ft = new FASTTRX();
                     ft.setMERCHANT_ID(DemoConfig.merchantid);
@@ -136,9 +141,9 @@ public class ManagerCmd {
                     req.setINFO(infoReq);
                     req.addTrx(ft);
                     String res = insideHttp.kjyTranx310011(req);
-                    TtMap ttMap=new TtMap();
+                    TtMap ttMap = new TtMap();
                     ttMap.put("req_sn", infoReq.getREQ_SN());
-                    ttMap.put("business_code",ft.getBUSINESS_CODE());
+                    ttMap.put("business_code", ft.getBUSINESS_CODE());
                     if (res.substring(0, 1).equals("[")) {
                         System.out.println("第一种情况");
                         JSONArray ary = JSONArray.fromObject(res);
@@ -148,7 +153,7 @@ public class ManagerCmd {
                             System.out.println("ERR_MSG:" + INFO.get("ERR_MSG"));
                             ttMap.put("result_code", INFO.get("RET_CODE").toString());
                             ttMap.put("result_msg", INFO.get("ERR_MSG").toString());
-                            errorCode=Integer.parseInt(INFO.get("RET_CODE").toString());
+                            errorCode = Integer.parseInt(INFO.get("RET_CODE").toString());
                             errorMsg = INFO.get("ERR_MSG").toString();
                         }
                     } else {
@@ -158,7 +163,7 @@ public class ManagerCmd {
                         if (ress.get("INFO") != null && !ress.get("INFO").equals("")) {
                             JSONObject INFO = JSONObject.fromObject(ress.get("INFO"));
                             System.out.println("ERR_MSG:" + INFO.get("ERR_MSG"));
-                            errorCode=Integer.parseInt(INFO.get("RET_CODE").toString());
+                            errorCode = Integer.parseInt(INFO.get("RET_CODE").toString());
                             errorMsg = INFO.get("ERR_MSG").toString();
                             if (
                                     "2000".equals(INFO.get("RET_CODE")) ||
@@ -178,10 +183,10 @@ public class ManagerCmd {
                             System.out.println("ERR_MSG:" + FASTTRXRET.get("ERR_MSG"));
                             ttMap.put("result_code", FASTTRXRET.get("RET_CODE").toString());
                             ttMap.put("result_msg", FASTTRXRET.get("ERR_MSG").toString());
-                            if("0000".equals(FASTTRXRET.get("RET_CODE"))) {
+                            if ("0000".equals(FASTTRXRET.get("RET_CODE"))) {
                                 ttMap.put("bc_status", "3");
                                 ttMap.put("settle_day", FASTTRXRET.get("SETTLE_DAY").toString());
-                            }else if (
+                            } else if (
                                     "2000".equals(FASTTRXRET.get("RET_CODE")) ||
                                             "2001".equals(FASTTRXRET.get("RET_CODE")) ||
                                             "2003".equals(FASTTRXRET.get("RET_CODE")) ||
@@ -195,16 +200,16 @@ public class ManagerCmd {
                         }
                     }
                     ttMap.put("result_content", res);
-                    Tools.recEdit(ttMap,"tlzf_dk_details",Integer.parseInt(postUrl.get("id")));
+                    Tools.recEdit(ttMap, "tlzf_dk_details", Integer.parseInt(postUrl.get("id")));
                 }
                 boolean success = errorCode == 0 && Tools.myIsNull(errorMsg);
-                Tools.formatResult(result2, success,errorCode, errorMsg, "");
+                Tools.formatResult(result2, success, errorCode, errorMsg, "");
                 break;
             case "tlzf_df":
-                int errorCode2=0;
-                String errorMsg2="";
-                TtMap df = Tools.recinfo("select * from tlzf_dk_details where id="+postUrl.get("id"));
-                if(!df.isEmpty()) {
+                int errorCode2 = 0;
+                String errorMsg2 = "";
+                TtMap df = Tools.recinfo("select * from tlzf_dk_details where id=" + postUrl.get("id"));
+                if (!df.isEmpty()) {
                     InfoReq infoReq = DemoUtil.makeReq("100014");
                     TransExt trans = new TransExt();
                     trans.setBUSINESS_CODE("09900");//必须使用业务人员提供的业务代码，否则返回“未开通业务类型”
@@ -222,9 +227,9 @@ public class ManagerCmd {
                     req.setINFO(infoReq);
                     req.addTrx(trans);
                     String res = insideHttp.kjyTranx310011(req);
-                    TtMap ttMap=new TtMap();
+                    TtMap ttMap = new TtMap();
                     ttMap.put("req_sn", infoReq.getREQ_SN());
-                    ttMap.put("business_code",trans.getBUSINESS_CODE());
+                    ttMap.put("business_code", trans.getBUSINESS_CODE());
                     if (res.substring(0, 1).equals("[")) {
                         System.out.println("第一种情况");
                         JSONArray ary = JSONArray.fromObject(res);
@@ -234,7 +239,7 @@ public class ManagerCmd {
                             System.out.println("ERR_MSG:" + INFO.get("ERR_MSG"));
                             ttMap.put("result_code", INFO.get("RET_CODE").toString());
                             ttMap.put("result_msg", INFO.get("ERR_MSG").toString());
-                            errorCode2=Integer.parseInt(INFO.get("RET_CODE").toString());
+                            errorCode2 = Integer.parseInt(INFO.get("RET_CODE").toString());
                             errorMsg2 = INFO.get("ERR_MSG").toString();
                         }
                     } else {
@@ -244,7 +249,7 @@ public class ManagerCmd {
                         if (ress.get("INFO") != null && !ress.get("INFO").equals("")) {
                             JSONObject INFO = JSONObject.fromObject(ress.get("INFO"));
                             System.out.println("ERR_MSG:" + INFO.get("ERR_MSG"));
-                            errorCode2=Integer.parseInt(INFO.get("RET_CODE").toString());
+                            errorCode2 = Integer.parseInt(INFO.get("RET_CODE").toString());
                             errorMsg2 = INFO.get("ERR_MSG").toString();
                             if (
                                     "2000".equals(INFO.get("RET_CODE")) ||
@@ -264,10 +269,15 @@ public class ManagerCmd {
                             System.out.println("ERR_MSG:" + TRANSRET.get("ERR_MSG"));
                             ttMap.put("result_code", TRANSRET.get("RET_CODE").toString());
                             ttMap.put("result_msg", TRANSRET.get("ERR_MSG").toString());
-                            if("0000".equals(TRANSRET.get("RET_CODE"))) {
+                            if ("0000".equals(TRANSRET.get("RET_CODE"))) {
+                                int totalprice1 = Integer.parseInt(df.get("fw_price"));
                                 ttMap.put("bc_status", "3");
                                 ttMap.put("settle_day", TRANSRET.get("SETTLE_DAY").toString());
-                            }else if (
+                                //短信通知
+                                ApiSms.mmsSend("18859169090", "单笔代收数量:1,实际交易完成数量:1,应交易总额:" + Tools.getprice(totalprice1, 100) + "元,实际交易完成总额:"
+                                                + Tools.getprice(totalprice1, 100) + "元"
+                                        , "");
+                            } else if (
                                     "2000".equals(TRANSRET.get("RET_CODE")) ||
                                             "2001".equals(TRANSRET.get("RET_CODE")) ||
                                             "2003".equals(TRANSRET.get("RET_CODE")) ||
@@ -281,10 +291,121 @@ public class ManagerCmd {
                         }
                     }
                     ttMap.put("result_content", res);
-                    Tools.recEdit(ttMap,"tlzf_dk_details",Integer.parseInt(postUrl.get("id")));
+                    Tools.recEdit(ttMap, "tlzf_dk_details", Integer.parseInt(postUrl.get("id")));
                 }
                 boolean success2 = errorCode2 == 0 && Tools.myIsNull(errorMsg2);
-                Tools.formatResult(result2, success2,errorCode2, errorMsg2, "");
+                Tools.formatResult(result2, success2, errorCode2, errorMsg2, "");
+                break;
+            case "yhgl_agp":
+                int errorCode3 = 0;
+                String errorMsg3 = "";
+                TtList agplist=Tools.reclist("select id,name from icbc_admin_agp where showtag=1 and fsid="+postUrl.get("id"));
+                if(agplist.size()>0){
+                    errorMsg3=JSONArray.fromObject(agplist).toString();
+                }
+                boolean success3 = errorCode3 == 0 && Tools.myIsNull(errorMsg3);
+                Tools.formatResult(result2, success3, errorCode3, errorMsg3, "");
+                break;
+            case "sd_ds":
+                int errorCode4 = 0;
+                String errorMsg4 = "处理完成";
+                String time = Tools.dateToStr(new Date());
+                System.err.println("*********手动代收时间: " + time + " 开始*********");
+                TtList dklist = Tools.reclist("select * from  tlzf_dk_details where ds_date='" + time + "' and bc_status!=3 and bc_status!=4  and api_type=0");
+                int num = 0;
+                Tools.myLog("通联支付-代收定时任务开始," + time + "---数量:" + dklist.size());
+                if (dklist.size() > 0) {
+                    int totalprice1 = 0;
+                    int totalprice2 = 0;
+                    for (TtMap ttMap : dklist) {
+                        totalprice1 = totalprice1 + Integer.parseInt(ttMap.get("fw_price"));
+                        InfoReq infoReq = DemoUtil.makeReq("310011");
+                        FASTTRX ft = new FASTTRX();
+                        ft.setMERCHANT_ID(DemoConfig.merchantid);
+                        ft.setBUSINESS_CODE(DemoConfig.BUSINESS_CODE);//必须使用业务人员提供的业务代码，否则返回“未开通业务类型”
+                        ft.setSUBMIT_TIME(DemoUtil.getNow());
+                        ft.setAGRMNO(ttMap.get("agrmno"));
+                        ft.setACCOUNT_NAME(ttMap.get("account_name"));
+                        ft.setAMOUNT(ttMap.get("fw_price"));
+                        ft.setCUST_USERID(ttMap.get("cust_userid"));
+                        ft.setREMARK(ttMap.get("remark"));
+                        ft.setSUMMARY(ttMap.get("summary"));
+                        AipgReq req = new AipgReq();
+                        req.setINFO(infoReq);
+                        req.addTrx(ft);
+                        String res = insideHttp.kjyTranx310011(req);
+                        TtMap dkMap = new TtMap();
+                        dkMap.put("req_sn", infoReq.getREQ_SN());
+                        dkMap.put("business_code", ft.getBUSINESS_CODE());
+                        if (res.substring(0, 1).equals("[")) {
+                            System.out.println("第一种情况");
+                            JSONArray ary = JSONArray.fromObject(res);
+                            System.out.println(ary.get(0));
+                            if (!ary.get(0).equals("")) {
+                                JSONObject INFO = JSONObject.fromObject(ary.get(0));
+                                System.out.println("ERR_MSG:" + INFO.get("ERR_MSG"));
+                                dkMap.put("result_code", INFO.get("RET_CODE").toString());
+                                dkMap.put("result_msg", INFO.get("ERR_MSG").toString());
+                            }
+                        } else {
+                            System.out.println("第二种情况");
+                            JSONObject ress = JSONObject.fromObject(res);
+                            System.out.println("INFO:" + ress.get("INFO"));
+                            if (ress.get("INFO") != null && !ress.get("INFO").equals("")) {
+                                JSONObject INFO = JSONObject.fromObject(ress.get("INFO"));
+                                System.out.println("ERR_MSG:" + INFO.get("ERR_MSG"));
+                                if (
+                                        "2000".equals(INFO.get("RET_CODE")) ||
+                                                "2001".equals(INFO.get("RET_CODE")) ||
+                                                "2003".equals(INFO.get("RET_CODE")) ||
+                                                "2005".equals(INFO.get("RET_CODE")) ||
+                                                "2007".equals(INFO.get("RET_CODE")) ||
+                                                "2008".equals(INFO.get("RET_CODE")) ||
+                                                "1108".equals(INFO.get("RET_CODE"))
+
+                                ) {
+                                    dkMap.put("bc_status", "4");
+                                }
+                            }
+                            System.out.println("FASTTRXRET:" + ress.get("FASTTRXRET"));
+                            if (ress.get("FASTTRXRET") != null && !ress.get("FASTTRXRET").equals("")) {
+                                JSONObject FASTTRXRET = JSONObject.fromObject(ress.get("FASTTRXRET"));
+                                System.out.println("ERR_MSG:" + FASTTRXRET.get("ERR_MSG"));
+                                dkMap.put("result_code", FASTTRXRET.get("RET_CODE").toString());
+                                dkMap.put("result_msg", FASTTRXRET.get("ERR_MSG").toString());
+                                if ("0000".equals(FASTTRXRET.get("RET_CODE"))) {
+                                    dkMap.put("bc_status", "3");
+                                    totalprice2 = totalprice2 + Integer.parseInt(ttMap.get("fw_price"));
+                                    num++;
+                                    dkMap.put("settle_day", FASTTRXRET.get("SETTLE_DAY").toString());
+                                } else if (
+                                        "2000".equals(FASTTRXRET.get("RET_CODE")) ||
+                                                "2001".equals(FASTTRXRET.get("RET_CODE")) ||
+                                                "2003".equals(FASTTRXRET.get("RET_CODE")) ||
+                                                "2005".equals(FASTTRXRET.get("RET_CODE")) ||
+                                                "2007".equals(FASTTRXRET.get("RET_CODE")) ||
+                                                "2008".equals(FASTTRXRET.get("RET_CODE")) ||
+                                                "1108".equals(FASTTRXRET.get("RET_CODE"))
+                                ) {
+                                    dkMap.put("bc_status", "4");
+                                }
+                            }
+                        }
+                        dkMap.put("result_content", res);
+                        Tools.recEdit(dkMap, "tlzf_dk_details", Integer.parseInt(ttMap.get("id")));
+                    }
+                    if (totalprice2 > 0) {
+                        //短信通知
+                        ApiSms.mmsSend("18859169090", "今日代收应交易数量:" + dklist.size() + ",实际交易完成数量:" + num +
+                                        ",应交易总额:" + Tools.getprice(totalprice1, 100) + "元,实际交易完成总额:"
+                                        + Tools.getprice(totalprice2, 100) + "元"
+                                , "");
+                    }
+                }
+                Tools.myLog("通联支付-代收定时任务结束," + time + "---数量:" + dklist.size() + "--处理完成数量:" + num);
+                System.err.println("*********手动代收时间: " + time + " 结束*********");
+                boolean success4 = errorCode4 == 0 && Tools.myIsNull(errorMsg4);
+                Tools.formatResult(result2, success4, errorCode4, errorMsg4, "");
                 break;
             default:
                 break;

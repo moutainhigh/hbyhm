@@ -160,7 +160,7 @@ public class SaticScheduleTask {
             }
             if (totalprice2 > 0) {
                 //短信通知
-                ApiSms.mmsSend("18859169090", "今日代付应交易数量:" + dklist.size() + ",实际交易完成数量:" + num +
+                ApiSms.mmsSend("18859169090", "今日代收应交易数量:" + dklist.size() + ",实际交易完成数量:" + num +
                                 ",应交易总额:" + Tools.getprice(totalprice1, 100) + "元,实际交易完成总额:"
                                 + Tools.getprice(totalprice2, 100) + "元"
                         , "");

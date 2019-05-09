@@ -82,6 +82,61 @@ public class Modal {
     }
     return (Object) result;
   }
+
+  public Object getMenus2(boolean mustShowMenuTag, int allTag,int fsid,int agpid) {
+    Map<String, Object> result = new LinkedHashMap<>(); // 不使用HashMap的原因是因为HashMap会自动排序
+    DbCtrl dbCtrl = new DbCtrl("sys_modal_hbyh");
+    try {
+      dbCtrl.showall = true;
+      dbCtrl.nopage = true;
+      dbCtrl.orders = "ORDER BY t.sort,t.showmmenuname";
+      String sqlMustShowMenuTag = "";
+      if (mustShowMenuTag) {
+        sqlMustShowMenuTag = " AND showmmenutag=1";
+      }
+      AdminAgp aa = new AdminAgp();
+      try {
+        String sqlA = " AND false";
+        switch (allTag) {
+          case 0:
+            sqlA = aa.getAgpSqlWhere2(fsid,agpid);
+            break;
+          case 1:
+            sqlA = aa.getAgpSqlWhereForFsAll2();
+            break;
+          case 2:
+            sqlA = aa.getAgpSqlWhereForFsChecked2(fsid);
+            break;
+        }
+        sqlMustShowMenuTag = sqlMustShowMenuTag + sqlA;
+      } catch (Exception e) {
+        Tools.logError(e.getMessage(),true,false);
+        sqlMustShowMenuTag = " AND FALSE";
+      } finally {
+        aa.closeConn();
+      }
+      String sql = "level=1" + sqlMustShowMenuTag;
+      //System.out.println("menu sql:" + sql);
+      TtList list = dbCtrl.lists(sql, "t.name,t.id,t.showmmenuname,t.icohtml,t.urlotherstr");
+      //System.out.println("list order:" + list.toString());
+      for (TtMap model : list) {
+        String whString = "level=2 AND id_uplevel='" + model.get("id") + "'" + sqlMustShowMenuTag; // 查询二级菜单
+        TtList listsub = dbCtrl.lists(whString,
+                "t.name,t.id,t.showmmenuname,t.cn,t.type,t.icohtml,t.sdo,t.urlotherstr");
+        //System.out.println(model.get("showmmenuname"));
+        Map<String, Object> data = new HashMap<>();
+        data.put("submenu", listsub);
+        data.put("mainmenu", model);
+        result.put(model.get("showmmenuname"), data);
+      }
+      // Map<String, String> info = dbCtrl.info();
+    } catch (Exception e) {
+      Tools.logError(e.getMessage(),true,false);
+    } finally {
+      dbCtrl.closeConn();
+    }
+    return (Object) result;
+  }
   /**
    * @description: 获取模块：后台菜单显示的。
    * @param {type} 
