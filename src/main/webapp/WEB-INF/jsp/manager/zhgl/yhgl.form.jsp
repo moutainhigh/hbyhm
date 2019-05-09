@@ -274,7 +274,6 @@
                     }
 
                 }
-
                 function getagp(fsid) {
                     var agpid = $("#agpid");
                     agpid.empty();
@@ -288,7 +287,6 @@
                             }
                         });
                 }
-
                 // objacl('#cp', '#upac_id', '/ttAjax?do=opt&cn=assess_admin&id=0&icbc_erp_fsid=${minfo.icbc_erp_fsid}&cp=', '${infodb.cp}', '${infodb.upac_id}');
             </script>
             <div class="form-group">
