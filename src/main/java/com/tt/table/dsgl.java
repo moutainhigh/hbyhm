@@ -556,12 +556,6 @@ public class dsgl extends DbCtrl {
                 if (Tools.myIsNull(array.get("amount"))) {
                     myErroMsg += "代收总金额不能为空！\n";
                 }
-                if (Tools.myIsNull(array.get("account_name"))) {
-                    myErroMsg += "账户名不能为空！\n";
-                }
-                if (Tools.myIsNull(array.get("account_no"))) {
-                    myErroMsg += "银行卡号不能为空！\n";
-                }
             } else if (array.get("tl").equals("3")) {
                 if (Tools.myIsNull(array.get("fw_price"))) {
                     myErroMsg += "服务费不能为空！\n";
