@@ -24,9 +24,13 @@
                 <div class="box-tools pull-right">
                     <h3 class="box-title">订单编号：${infodb.gems_code}</h3>
                 </div>
+                <input id="mid_add" name="mid_add" value="<%=infodb.get("mid_add")%>" type="hidden"/>
+                <input id="mid_edit" name="mid_edit" value="<%=infodb.get("mid_edit")%>" type="hidden"/>
             </div>
         </c:if>
         <c:if test="${id eq 0}">
+            <input id="mid_add" name="mid_add" value="<%=infodb.get("mid_add")%>" type="hidden"/>
+            <input id="mid_edit" name="mid_edit" value="<%=infodb.get("mid_edit")%>" type="hidden"/>
             <input id="gems_id" name="gems_id" value="<%=minfo.get("id")%>" type="hidden"/>
             <input id="gems_fs_id" name="gems_fs_id" value="<%=minfo.get("icbc_erp_fsid")%>" type="hidden"/>
             <div class="box-header with-border">
