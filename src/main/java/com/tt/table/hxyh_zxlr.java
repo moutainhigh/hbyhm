@@ -251,28 +251,12 @@ public class hxyh_zxlr extends DbCtrl {
         Tools.recAdd(res,"kj_icbc_result");
 
         if(StringUtils.isNotEmpty(post.get("mid_add")) && post.get("mid_add").equals(post.get("mid_edit"))){
-            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark"), post.get("mid_edit"));
+            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark"), post.get("c_name"), "征信录入", "华夏银行", post.get("mid_add"));
 
-            String sql = "select jgid from assess_admin where id ="+post.get("mid_edit");
-            TtMap recinfo = Tools.recinfo(sql);
-            if (recinfo!=null && recinfo.size()>0){
-                Jdpush.testSendPush("7e21faf06524b22f0ee1414c","c87361ae4d7d91067b3ea01a", recinfo.get("jgid"), newpost.get("remark"));
-            }
         } else {
-            Addadmin_msg.addmsg(post.get("mid_add"), post.get("bc_status"), newpost.get("remark"), post.get("mid_add"));
-            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark"), post.get("mid_edit"));
+            Addadmin_msg.addmsg(post.get("mid_add"), post.get("bc_status"), newpost.get("remark"), post.get("c_name"),"征信录入","华夏银行", post.get("mid_add"));
+            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark"), post.get("c_name"), "征信录入", "华夏银行", post.get("mid_add"));
 
-            String sql = "select jgid from assess_admin where id ="+post.get("mid_add");
-            TtMap recinfo = Tools.recinfo(sql);
-            String sql1 = "select jgid from assess_admin where id ="+post.get("mid_edit");
-            TtMap recinfo1 = Tools.recinfo(sql1);
-
-            if (recinfo!=null && recinfo.size()>0){
-                Jdpush.testSendPush("7e21faf06524b22f0ee1414c","c87361ae4d7d91067b3ea01a", recinfo.get("jgid"), newpost.get("remark"));
-            }
-            if (recinfo1!=null && recinfo1.size()>0){
-                Jdpush.testSendPush("7e21faf06524b22f0ee1414c","c87361ae4d7d91067b3ea01a", recinfo1.get("jgid"), newpost.get("remark"));
-            }
         }
 
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";

@@ -3,8 +3,10 @@ package com.tt.table;
 import com.alibaba.druid.pool.DruidPooledConnection;
 import com.tt.data.TtList;
 import com.tt.data.TtMap;
+import com.tt.tool.Addadmin_msg;
 import com.tt.tool.DbCtrl;
 import com.tt.tool.Tools;
+import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -157,6 +159,15 @@ public class yhqy extends DbCtrl {
         resmap.put("status", newpost.get("bc_status"));
         resmap.put("remark", newpost.get("remark1"));
         Tools.recAdd(resmap, "tlzf_qy_result");
+
+        if(StringUtils.isNotEmpty(post.get("mid_add")) && post.get("mid_add").equals(post.get("mid_edit"))){
+            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark1"), post.get("c_name"), "代收签约", "河北银行", post.get("mid_add"));
+
+        } else {
+            Addadmin_msg.addmsg(post.get("mid_add"), post.get("bc_status"), newpost.get("remark1"), post.get("c_name"),"代收签约","河北银行", post.get("mid_add"));
+            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark1"), post.get("c_name"), "代收签约", "河北银行", post.get("mid_add"));
+
+        }
 
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
         boolean bSuccess = errorCode == 0;
