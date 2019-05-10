@@ -220,7 +220,6 @@ public class xmgj_yhht extends DbCtrl {
         }
         /* 搜索过来的字段处理完成 */
 
-
         whereString += tmpWhere; // 过滤
         orders = orderString;// 排序
         p = pageInt; // 显示页
