@@ -114,6 +114,9 @@ public class Xxzl extends DbCtrl {
         TtMap newpost=new TtMap();
         newpost.putAll(post);
         if (id > 0) { // id为0时，新增
+            if (StringUtils.isEmpty(post.get("c_work_intime"))){
+                post.put("c_work_intime", "0000-00-00 00:00:00");
+            }
             edit(post, id);
             icbc_id = id;
         } else {
