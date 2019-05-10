@@ -191,24 +191,28 @@ public class Admin extends DbCtrl {
         TtList list = null;
         String fsid = post.get("fsid");
         if (Tools.myIsNull(fsid)) {
-            if (Tools.isSuperAdmin(minfo)) {
+            //超级管理员
+            if(Tools.isSuperAdmin(minfo)){
+
+            } else if(Tools.isAdmin(minfo)){//管理员
 
             } else if (Tools.isCcAdmin(minfo)) {
-                TtList fslist = Tools.reclist("select id,up_id from assess_fs where fs_type=2 and name!='' and (id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
-                whereString += " AND ("; // 显示自己和下级公司的
+                TtList fslist = Tools.reclist("select id,up_id from assess_fs where id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"));
+                String sql = "";
+                //whereString += " AND ("; // 显示自己和下级公司的
                 if (fslist.size() > 0) {
                     for (int l = 0; l < fslist.size(); l++) {
                         TtMap fs = fslist.get(l);
-                        if (l == 0) {
-                            whereString += " t.icbc_erp_fsid=" + fs.get("id");
+                        if (l == fslist.size() - 1) {
+                            sql = sql + fs.get("id");
                         } else {
-                            whereString += " or t.icbc_erp_fsid=" + fs.get("id");
+                            sql = sql + fs.get("id") + ",";
                         }
                     }
                 }
-                whereString += ")";
+                whereString += " and t.gems_fs_id in (" + sql + ")";
             } else {
-                whereString += " AND t.icbc_erp_fsid=" + minfo.get("icbc_erp_fsid"); // 只显示自己公司的
+                whereString += " AND t.gems_fs_id=" + minfo.get("icbc_erp_fsid"); // 只显示自己公司的
             }
 
         } else {
