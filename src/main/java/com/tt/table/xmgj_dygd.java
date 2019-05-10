@@ -15,7 +15,6 @@ public class xmgj_dygd extends DbCtrl {
     private boolean canAdd = true;
     private final String classAgpId = "73"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
-
     public xmgj_dygd() {
         super("xmgj_dygd");
         AdminAgp adminAgp = new AdminAgp();
@@ -33,21 +32,19 @@ public class xmgj_dygd extends DbCtrl {
             adminAgp.closeConn();
         }
     }
-
     //图片处理
-    public TtMap tozip(String imgs, String imgsname) {
+    public TtMap tozip(String imgs,String imgsname){
         TtMap imginfo = new TtMap();
-        if (!Tools.myIsNull(imgs)) {
-            String[] imgstep2_1ss = imgs.split("\u0005");
-            for (int i = 0; i < imgstep2_1ss.length; i++) {
-                if (!Tools.myIsNull(imgstep2_1ss[i])) {
-                    imginfo.put(imgsname + (i + 1), imgstep2_1ss[i]);
+        if(!Tools.myIsNull(imgs)){
+            String[] imgstep2_1ss=imgs.split("\u0005");
+            for(int i=0;i<imgstep2_1ss.length;i++){
+                if(!Tools.myIsNull(imgstep2_1ss[i])){
+                    imginfo.put(imgsname+(i+1),imgstep2_1ss[i]);
                 }
             }
         }
         return imginfo;
     }
-
     /**
      * @param {type} {type}
      * @说明: 给继承的子类重载用的
@@ -61,12 +58,12 @@ public class xmgj_dygd extends DbCtrl {
         long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
         TtMap info = info(nid, f);
         String jsonInfo = Tools.jsonEncode(info);
-        if (!Tools.myIsNull(post.get("toZip")) && post.get("toZip").equals("1")) {
+        if(!Tools.myIsNull(post.get("toZip"))&& post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
             //征信录入资料
-            TtMap imgstep16_1ss = tozip(info.get("imgstep16_1ss"), "抵押相关归档视频");
+            TtMap imgstep16_1ss=tozip(info.get("imgstep16_1ss"),"抵押相关归档视频");
             imginfo.putAll(imgstep16_1ss);
-            if (!imginfo.isEmpty()) {
+            if(!imginfo.isEmpty()) {
                 try {
                     closeConn();
                     if (!Zip.imgsToZipDown(imginfo, title + ".zip", null)) {
@@ -81,11 +78,11 @@ public class xmgj_dygd extends DbCtrl {
                         e.printStackTrace();
                     }
                 }
-            } else {
+            }else{
                 errorMsg = "导出ZIP失败!";
                 request.setAttribute("errorMsg", errorMsg);
             }
-        } else {
+        }else {
             //历史操作查询
             if (nid > 0) {
                 TtList lslist = Tools.reclist("select * from xmgj_dygd_result where qryid=" + nid);
@@ -107,15 +104,15 @@ public class xmgj_dygd extends DbCtrl {
         }
     }
 
-    public void imgs(TtMap post) {
-        String imgstep13_1ss = "";
-        if (!post.get("imgstep13_1ss_num").isEmpty() && !post.get("imgstep13_1ss_num").equals("")) {
-            int imgstep13_1ss_num = Integer.parseInt(post.get("imgstep13_1ss_num"));
-            for (int i = 1; i <= imgstep13_1ss_num; i++) {
-                imgstep13_1ss = imgstep13_1ss + post.get("imgstep13_1ss" + i) + "\u0005";
+    public void imgs(TtMap post){
+        String imgstep13_1ss="";
+        if(!post.get("imgstep13_1ss_num").isEmpty()&&!post.get("imgstep13_1ss_num").equals("")){
+            int imgstep13_1ss_num=Integer.parseInt(post.get("imgstep13_1ss_num"));
+            for(int i=1;i<=imgstep13_1ss_num;i++){
+                imgstep13_1ss=imgstep13_1ss+post.get("imgstep13_1ss"+i)+"\u0005";
             }
         }
-        post.put("imgstep13_1ss", imgstep13_1ss);
+        post.put("imgstep13_1ss",imgstep13_1ss);
 
     }
 
@@ -125,7 +122,7 @@ public class xmgj_dygd extends DbCtrl {
      * @return: 返回
      */
     public void doPost(TtMap post, long id, TtMap result2) {
-        TtMap newpost = new TtMap();
+        TtMap newpost=new TtMap();
         newpost.putAll(post);
         long icbc_id = 0;
         //imgs(post);
@@ -134,10 +131,10 @@ public class xmgj_dygd extends DbCtrl {
             icbc_id = id;
         } else {
             icbc_id = add(post);
-            TtMap map = new TtMap();
+            TtMap map=new TtMap();
             //订单编号更新操作
-            map.put("gems_code", orderutil.getOrderId("GDJJ123", 7, icbc_id));
-            edit(map, icbc_id);
+            map.put("gems_code",orderutil.getOrderId("GDJJ123", 7, icbc_id));
+            edit(map,icbc_id);
         }
         //历史添加
         TtMap res = new TtMap();
@@ -174,8 +171,7 @@ public class xmgj_dygd extends DbCtrl {
         int pageInt = Integer.valueOf(Tools.myIsNull(post.get("p")) == false ? post.get("p") : "1"); // 当前页
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
 
-        String whereString = "true";
-        ;
+        String whereString = "true";;
         String tmpWhere = "";
         String fieldsString = "t.*,f.name as fsname,a.name as adminname,i.c_name as c_name";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
@@ -188,7 +184,7 @@ public class xmgj_dygd extends DbCtrl {
         } else if (Tools.isCcAdmin(minfo)) {
             TtList fslist = Tools.reclist("select id,up_id from assess_fs where id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"));
             String sql = "";
-            //whereString += " AND ("; // 显示自己和下级公司的
+//            whereString += " AND ("; // 显示自己和下级公司的
             if (fslist.size() > 0) {
                 for (int l = 0; l < fslist.size(); l++) {
                     TtMap fs = fslist.get(l);
@@ -248,6 +244,7 @@ public class xmgj_dygd extends DbCtrl {
         request.setAttribute("canAdd", canAdd); // 是否显示新增按钮
         // request.setAttribute("showmsg", "测试弹出消息提示哈！"); //如果有showmsg字段，在载入列表前会提示
     }
+
 
 
 }

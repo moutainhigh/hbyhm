@@ -299,9 +299,9 @@ public class ManagerCmd {
             case "yhgl_agp":
                 int errorCode3 = 0;
                 String errorMsg3 = "";
-                TtList agplist = Tools.reclist("select id,name from icbc_admin_agp where showtag=1 and fsid=" + postUrl.get("id"));
-                if (agplist.size() > 0) {
-                    errorMsg3 = JSONArray.fromObject(agplist).toString();
+                TtList agplist=Tools.reclist("select id,name from icbc_admin_agp where showtag=1 and fsid="+postUrl.get("id"));
+                if(agplist.size()>0){
+                    errorMsg3=JSONArray.fromObject(agplist).toString();
                 }
                 boolean success3 = errorCode3 == 0 && Tools.myIsNull(errorMsg3);
                 Tools.formatResult(result2, success3, errorCode3, errorMsg3, "");

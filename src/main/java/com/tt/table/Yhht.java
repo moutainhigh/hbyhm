@@ -188,7 +188,7 @@ public class Yhht extends DbCtrl {
         } else if (Tools.isCcAdmin(minfo)) {
             TtList fslist = Tools.reclist("select id,up_id from assess_fs where id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"));
             String sql = "";
-            //whereString += " AND ("; // 显示自己和下级公司的
+//            whereString += " AND ("; // 显示自己和下级公司的
             if (fslist.size() > 0) {
                 for (int l = 0; l < fslist.size(); l++) {
                     TtMap fs = fslist.get(l);

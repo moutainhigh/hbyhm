@@ -62,9 +62,10 @@ public class Zxlr extends DbCtrl {
                 ",qy.qy_status as qy_qy_status";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
+        //超级管理员
         if(Tools.isSuperAdmin(minfo)){
 
-        }else if(Tools.isAdmin(minfo)){
+        } else if(Tools.isAdmin(minfo)){//管理员
 
         } else if (Tools.isCcAdmin(minfo)) {
             TtList fslist = Tools.reclist("select id,up_id from assess_fs where id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"));
@@ -279,6 +280,7 @@ public class Zxlr extends DbCtrl {
             System.out.println("表单验证star");
 
             String myErroMsg = "";
+
 
 
             super.errorMsg = super.chkMsg = myErroMsg;
