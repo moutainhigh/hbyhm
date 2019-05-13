@@ -10,9 +10,9 @@
 <%
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     Date nowDate = new Date();
-    Date date7 = addDate.dayAddNum(nowDate, 7);
-    Date date30 = addDate.dayAddNum(nowDate, 30);
-    Date date365 = addDate.dayAddNum(nowDate, 365);
+    Date date7 = addDate.dayAddNum(nowDate, -7);
+    Date date30 = addDate.dayAddNum(nowDate, -30);
+    Date date365 = addDate.dayAddNum(nowDate, -365);
     Date date1 = addDate.dayAddNum(nowDate, 1);
     String nd = sdf.format(nowDate);
     String nd7 = sdf.format(date7);
