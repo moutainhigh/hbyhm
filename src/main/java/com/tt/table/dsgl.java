@@ -101,7 +101,7 @@ public class dsgl extends DbCtrl {
             dtArr[1] = dtArr[1].trim();
             System.out.println("DTBE开始日期:" + dtArr[0] + "结束日期:" + dtArr[1]);
             // todo处理选择时间段
-            whereString += " AND t.ds_date >= '" + dtArr[0] + "' and t.ds_date <='" + dtArr[1] + "'";
+            whereString += " AND t.ds_date <= '" + dtArr[0] + "' and t.ds_date >='" + dtArr[1] + "'";
         }
         if (Tools.myIsNull(post.get("dt")) == false) {
             whereString += " AND t.ds_date = '" + post.get("dt") + "'";

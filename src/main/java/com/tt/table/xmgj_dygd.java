@@ -54,6 +54,7 @@ public class xmgj_dygd extends DbCtrl {
      * @说明: 给继承的子类重载用的
      * @return: 返回
      */
+    @Override
     public void doGetForm(HttpServletRequest request, TtMap post) {
         String f = "t.*,a.name as admin_name,fs.name as fs_name,i.c_name as c_name";
         leftsql = " LEFT JOIN assess_gems a ON a.id=t.gems_id" +
@@ -125,6 +126,7 @@ public class xmgj_dygd extends DbCtrl {
      * @说明: 给子类重载用，处理post
      * @return: 返回
      */
+    @Override
     public void doPost(TtMap post, long id, TtMap result2) {
         TtMap newpost = new TtMap();
         newpost.putAll(post);
@@ -166,6 +168,7 @@ public class xmgj_dygd extends DbCtrl {
      * @说明: 给继承的子类重载用的
      * @return: 返回
      */
+    @Override
     public void doGetList(HttpServletRequest request, TtMap post) {
         if (!agpOK) {// 演示在需要权限检查的地方插入权限标志判断
             request.setAttribute("errorMsg", errorMsg);
