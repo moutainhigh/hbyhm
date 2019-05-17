@@ -47,6 +47,7 @@ public class icbczx_dsjController {
         // map.put("accountName", "皮晴晴");
         // map.put("accountMobile", "13333333333");
         // map.put("idNumber", "330105196602220623");
+        System.out.println("mmm1m"+map);
         String mpstr = HttpTools.httpClientPost(url, map, "UTF-8", headers);
         // mpstr = new String(mpstr.getBytes("GBK"), "ISO-8859-1");
         // mpstr = new String(mpstr.getBytes("ISO-8859-1"), "UTF-8");
@@ -87,7 +88,9 @@ public class icbczx_dsjController {
         String result = "";
         try {
             String report_id = "";
+            System.out.println("mmm" + map);
             result = getdsjzxhttp(map);
+            System.out.println("result::" + result);
             // result = new String(result.getBytes("GBK"), "ISO-8859-1");
             // result = new String(result.getBytes("ISO-8859-1"), "UTF-8");
             JSONObject resjJsonObject = JSONObject.parseObject(result);
