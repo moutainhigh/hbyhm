@@ -93,6 +93,18 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">银行卡号</span>
+                                <input type="text" class="form-control" id="c_bank_id" name="c_bank_id" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">客户经理手机号</span>
+                                <input type="text" class="form-control" id="c_am_tel" name="c_am_tel" placeholder="">
+                            </div>
+                        </div>
 
                     </div>
                 </div>
