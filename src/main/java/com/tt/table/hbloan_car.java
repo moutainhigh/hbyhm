@@ -7,7 +7,7 @@ import com.tt.tool.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-public class loan_car extends DbCtrl {
+public class hbloan_car extends DbCtrl {
     private final String title = "拖车管理";
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
     private boolean canDel = false;
@@ -15,7 +15,7 @@ public class loan_car extends DbCtrl {
     private final String classAgpId = "155"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
-    public loan_car() {
+    public hbloan_car() {
         super("loan_overdue_list");
         AdminAgp adminAgp = new AdminAgp();
         try {

@@ -8,16 +8,16 @@ import com.tt.tool.Tools;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class loan_ssgl extends DbCtrl {
+public class hbloan_jqcl extends DbCtrl {
 
-    private final String title = "诉讼管理";
+    private final String title = "结清处理";
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
     private boolean canDel = false;
     private boolean canAdd = false;
     private final String classAgpId = "153"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
-    public loan_ssgl(){
+    public hbloan_jqcl(){
         super("loan_overdue_list");
 
         AdminAgp adminAgp = new AdminAgp();
@@ -49,13 +49,20 @@ public class loan_ssgl extends DbCtrl {
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
         String whereString = "true";
         String tmpWhere = "";
-        System.out.println("............."+post.get("tctype"));
-        if ("1".equals(post.get("sstype"))){     //未诉讼
-            tmpWhere = " and t.type_id = 4 and t.type_status = 41";
+        System.out.println("............."+post.get("hxtype"));
+        if ("1".equals(post.get("jqtype"))){     //正常结清
+            tmpWhere = " and t.type_id = 6 and t.type_status = 61";
         }
-        if ("2".equals(post.get("sstype"))){     //已诉讼
-            tmpWhere = " and t.type_id = 4 and t.type_status = 42";
+        if ("2".equals(post.get("jqtype"))){     //提前结清
+            tmpWhere = " and t.type_id = 6 and t.type_status = 62";
         }
+        if ("3".equals(post.get("jqtype"))){     //强制结清
+            tmpWhere = " and t.type_id = 6 and t.type_status = 63";
+        }
+        if ("4".equals(post.get("jqtype"))){     //亏损结清
+            tmpWhere = " and t.type_id = 6 and t.type_status = 64";
+        }
+
 
         String fieldsString = "t.*, c.order_code, c.c_name, c.c_cardno, b.`name` bank_name, ca.car_type, ca.carno, f.`name` fs_name, g.`name` gems_name"; // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
@@ -166,7 +173,7 @@ public class loan_ssgl extends DbCtrl {
         request.setAttribute("mapafter", mapafter);
         request.setAttribute("bbmap",bbmap);
         request.setAttribute("jllist", jllist);
-        request.setAttribute("sstype", post.get("sstype"));
+        request.setAttribute("jqtype", post.get("jqtype"));
         request.setAttribute("id", nid);
     }
 

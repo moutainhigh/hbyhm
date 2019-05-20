@@ -8,16 +8,16 @@ import com.tt.tool.Tools;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class loan_tcgl extends DbCtrl {
+public class hbloan_dczy extends DbCtrl {
 
-    private final String title = "拖车管理";
+    private final String title = "电催作业";
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
     private boolean canDel = false;
     private boolean canAdd = false;
     private final String classAgpId = "153"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
-    public loan_tcgl(){
+    public hbloan_dczy(){
         super("loan_overdue_list");
 
         AdminAgp adminAgp = new AdminAgp();
@@ -48,22 +48,8 @@ public class loan_tcgl extends DbCtrl {
         int pageInt = Integer.valueOf(Tools.myIsNull(post.get("p")) == false ? post.get("p") : "1"); // 当前页
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
         String whereString = "true";
-        String tmpWhere = "";
-        System.out.println("............."+post.get("tctype"));
-        if ("1".equals(post.get("tctype"))){     //拖车未受理
-            tmpWhere = " and t.type_id = 3 and t.type_status = 31";
-        }
-        if ("2".equals(post.get("tctype"))){     //拖车已受理
-            tmpWhere = " and t.type_id = 3 and t.type_status = 32";
-        }
-        if ("3".equals(post.get("tctype"))){     //拖车完成
-            tmpWhere = " and t.type_id = 3 and t.type_status = 33";
-        }
-        if ("4".equals(post.get("tctype"))){     //拖车失败
-            System.out.println("进入拖车失败");
-            tmpWhere = " and t.type_id = 3 and t.type_status = 34";
-        }
-        String fieldsString = "t.*, c.order_code, c.c_name, c.c_cardno, b.`name` bank_name, ca.car_type, ca.carno, f.`name` fs_name, g.`name` gems_name"; // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
+        String tmpWhere = " and t.type_id = 2";
+        String fieldsString = "t.*, c.order_code, c.c_name, c.c_cardno, c.loan_tpid, k.dk_price, f.`name` fs_name, g.`name` gems_name"; // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
         /* 开始处理搜索过来的字段 */
         kw = post.get("kw");
@@ -90,9 +76,8 @@ public class loan_tcgl extends DbCtrl {
         limit = limtInt; // 每页显示记录数
         showall = true; // 忽略deltag和showtag
         leftsql= "LEFT JOIN dd_icbc c on c.id=t.icbc_id " +
-                 "LEFT JOIN dd_icbc_cars ca on ca.icbc_id=t.icbc_id " +
+                 "LEFT JOIN icbc_kk k on k.icbc_id=t.icbc_id " +
                  "LEFT JOIN fs f on f.id=t.gems_fs_id " +
-                 "LEFT JOIN icbc_banklist b on b.id=c.bank_id " +
                  "LEFT JOIN admin g on g.id=t.gems_id ";
 
         list = lists(whereString, fieldsString);
@@ -122,7 +107,6 @@ public class loan_tcgl extends DbCtrl {
 
     @Override
     public void doGetForm(HttpServletRequest request, TtMap post) {
-        System.out.println("pppp"+post);
         long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
 
         String bbsql = "select * from loan_overdue_list where id = " + nid;
@@ -175,7 +159,6 @@ public class loan_tcgl extends DbCtrl {
         request.setAttribute("mapafter", mapafter);
         request.setAttribute("bbmap",bbmap);
         request.setAttribute("jllist", jllist);
-        request.setAttribute("tctype", post.get("tctype"));
         request.setAttribute("id", nid);
     }
 

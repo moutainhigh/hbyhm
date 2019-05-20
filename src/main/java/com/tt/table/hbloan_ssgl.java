@@ -8,16 +8,16 @@ import com.tt.tool.Tools;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class loan_khyqmd extends DbCtrl {
+public class hbloan_ssgl extends DbCtrl {
 
-    private final String title = "客户逾期名单";
+    private final String title = "诉讼管理";
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
     private boolean canDel = false;
     private boolean canAdd = false;
-    private final String classAgpId = "154"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
+    private final String classAgpId = "153"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
-    public loan_khyqmd(){
+    public hbloan_ssgl(){
         super("loan_overdue_list");
 
         AdminAgp adminAgp = new AdminAgp();
@@ -48,8 +48,16 @@ public class loan_khyqmd extends DbCtrl {
         int pageInt = Integer.valueOf(Tools.myIsNull(post.get("p")) == false ? post.get("p") : "1"); // 当前页
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
         String whereString = "true";
-        String tmpWhere = " and t.type_id = 1";
-        String fieldsString = "t.*, c.order_code, c.c_name, c.c_cardno"; // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
+        String tmpWhere = "";
+        System.out.println("............."+post.get("tctype"));
+        if ("1".equals(post.get("sstype"))){     //未诉讼
+            tmpWhere = " and t.type_id = 4 and t.type_status = 41";
+        }
+        if ("2".equals(post.get("sstype"))){     //已诉讼
+            tmpWhere = " and t.type_id = 4 and t.type_status = 42";
+        }
+
+        String fieldsString = "t.*, c.order_code, c.c_name, c.c_cardno, b.`name` bank_name, ca.car_type, ca.carno, f.`name` fs_name, g.`name` gems_name"; // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
         /* 开始处理搜索过来的字段 */
         kw = post.get("kw");
@@ -75,7 +83,11 @@ public class loan_khyqmd extends DbCtrl {
         p = pageInt; // 显示页
         limit = limtInt; // 每页显示记录数
         showall = true; // 忽略deltag和showtag
-        leftsql= "LEFT JOIN dd_icbc c on c.id=t.icbc_id ";
+        leftsql= "LEFT JOIN dd_icbc c on c.id=t.icbc_id " +
+                 "LEFT JOIN dd_icbc_cars ca on ca.icbc_id=t.icbc_id " +
+                 "LEFT JOIN fs f on f.id=t.gems_fs_id " +
+                 "LEFT JOIN icbc_banklist b on b.id=c.bank_id " +
+                 "LEFT JOIN admin g on g.id=t.gems_id ";
 
         list = lists(whereString, fieldsString);
         System.out.println("list::::++  "+list);
@@ -101,7 +113,61 @@ public class loan_khyqmd extends DbCtrl {
 
     @Override
     public void doGetForm(HttpServletRequest request, TtMap post) {
-        super.doGetForm(request, post);
+        System.out.println("pppp"+post);
+        long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
+
+        String bbsql = "select * from loan_overdue_list where id = " + nid;
+        TtMap bbmap = Tools.recinfo(bbsql);
+
+        String sql = "SELECT SQL_CALC_FOUND_ROWS\n" +
+                "\tt.*,\n" +
+                "\tk.dk_price,\n" +
+                "\tk.dk_total_price,\n" +
+                "\tk.aj_date,\n" +
+                "\tc.pg_price,\n" +
+                "\tb.`name` blankname,\n" +
+                "\tc.ppxh,\n" +
+                "\tc.car_type,\n" +
+                "\tc.car_vin,\n" +
+                "\tc.motorcode,\n" +
+                "\tc.carno,\n" +
+                "\tc.car_color_id,\n" +
+                "\tk.aj_lv,\n" +
+                "\tk.sf_price,\n" +
+                "\tk.jrfw_price,\n" +
+                "\tib.`name` bankname\n" +
+                "FROM\n" +
+                "\tdd_icbc t\n" +
+                "\tLEFT JOIN icbc_kk k ON k.icbc_id = t.id\n" +
+                "\tLEFT JOIN dd_icbc_cars c ON c.icbc_id = t.id\n" +
+                "\tLEFT JOIN icbc_banklist b ON b.id = t.bank_id\n" +
+                "\tLEFT JOIN icbc_banklist ib ON ib.id = t.bank_id\n" +
+                "WHERE\n" +
+                "\tt.id = " + bbmap.get("icbc_id");
+        TtMap map = Tools.recinfo(sql);
+
+        String hkjhsql = "SELECT * FROM loan_repayment_schedule WHERE icbc_id = " + bbmap.get("icbc_id");
+        TtList reclist = Tools.reclist(hkjhsql);
+
+        //贷后信息
+        String dhsql = "select *,a.`name` gems_name,f.`name` fs_name from icbc_kk k left join admin a on a.id=k.gems_id left join fs f on f.id=k.gems_fs_id where icbc_id = " + bbmap.get("icbc_id");
+        TtMap mapafter = Tools.recinfo(dhsql);
+
+        //记录栏
+        String jlsql = "select lo.*,a.`name` gems_name from loan_overdue_list_result lo left join admin a on a.id = lo.mid_add where icbc_id = " + bbmap.get("icbc_id");
+        TtList jllist = Tools.reclist(jlsql);
+
+        System.out.println("jjjjjjj" + jllist);
+        System.out.println("主贷人信息:"+map);
+        String jsonInfo = Tools.jsonEncode(map);
+        request.setAttribute("info", jsonInfo);//info为json后的info
+        request.setAttribute("infodb", map);//infodb为TtMap的info
+        request.setAttribute("hkjh", reclist);
+        request.setAttribute("mapafter", mapafter);
+        request.setAttribute("bbmap",bbmap);
+        request.setAttribute("jllist", jllist);
+        request.setAttribute("sstype", post.get("sstype"));
+        request.setAttribute("id", nid);
     }
 
     @Override

@@ -8,7 +8,7 @@ import com.tt.tool.Tools;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class loan_pmgl extends DbCtrl {
+public class hbloan_pmgl extends DbCtrl {
 
     private final String title = "拍卖管理";
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
@@ -17,7 +17,7 @@ public class loan_pmgl extends DbCtrl {
     private final String classAgpId = "153"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
-    public loan_pmgl(){
+    public hbloan_pmgl(){
         super("loan_overdue_list");
 
         AdminAgp adminAgp = new AdminAgp();

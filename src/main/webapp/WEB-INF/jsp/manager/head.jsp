@@ -44,6 +44,7 @@
     <script src="js/jQuery-2.1.4.min.js" type="text/javascript"></script>
     <script src="js/common.js" type="text/javascript"></script>
     <script src="js/jquery.form.js" type="text/javascript"></script>
+    <script src="js/ajaxfileupload.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/php.js"></script>
     <!-- Bootstrap 3.3.2 JS -->
     <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

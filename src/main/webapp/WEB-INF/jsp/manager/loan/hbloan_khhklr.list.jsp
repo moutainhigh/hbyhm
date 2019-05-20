@@ -117,6 +117,7 @@
                     window.location.reload();
                 },
                 error: function(data, status, e) {  //提交失败自动执行的处理函数。
+                    alert("NO");
                     console.error(e);
                 }
             });

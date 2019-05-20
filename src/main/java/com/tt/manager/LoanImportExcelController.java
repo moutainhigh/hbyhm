@@ -30,6 +30,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.UUID;
 
+import static com.tt.tool.Config.FILEUP_SAVEPATH;
+
 @Controller
 public class LoanImportExcelController {
 
@@ -52,7 +54,9 @@ public class LoanImportExcelController {
         String relatDir1 = new SimpleDateFormat("yyyy/MM/dd/").format(new Date());
         // 文件夹不存在则创建
 //        File fdir = new File("D:/gitRepository/ddbx/src/main/webapp/upload/Excel/" + relatDir1);
-        File fdir = new File("/KCDIMG/ddbx-upload/Excel/" + relatDir1);
+//        ? "src/main/webapp/upload/" /* 测试模式上传文件保存路径，/\开头的为绝对路径，否则是相对路径 */
+//        : "/KCDIMG/assess/upload/"; /* 生产模式上传文件保存路径，/\开头的为绝对路径，否则是相对路径 */
+        File fdir = new File(FILEUP_SAVEPATH+"Excel/" + relatDir1);
         if (!fdir.exists()) {
             fdir.mkdirs();
         }
@@ -118,19 +122,19 @@ public class LoanImportExcelController {
 
                     rowMap.put("dt_add", Getnow());
                     rowMap.put("dt_edit", Getnow());
-                    long loan_import_excels = Tools.recAdd(rowMap, "loan_import_excels");//把excel表格中的数据录入数据库表loan_import_excels
+                    long loan_import_excels = Tools.recAdd(rowMap, "hbloan_import_excels");//把excel表格中的数据录入数据库表loan_import_excels
                     System.out.println("excel表格数据录入:" + loan_import_excels);
 
                     double overdue_amount = Double.parseDouble(rowMap.get("overdue_amount")) ;//获取excel表格中的逾期金额
                     if (overdue_amount > 0) { //该人逾期金额大于0
                         System.out.println("预期金额大于0");
                         TtMap icbc = new TtMap();
-                        String yqsql = "select * from loan_overdue_list where c_cardno = " + rowMap.get("id_card");
+                        String yqsql = "select * from hbloan_overdue_list where c_cardno = " + rowMap.get("id_card");
                         TtMap yqmap = new TtMap();
                         yqmap = Tools.recinfo(yqsql);
                         if (0 == yqmap.size()) {
                             System.out.println("逾期表里没有此人!");
-                            String sql = "select * from dd_icbc where c_cardno = " + rowMap.get("id_card");
+                            String sql = "select k.*,hbxx.carno as c_carno,hbxx.vincode as c_carvin from kj_icbc k,hbyh_xxzl hbxx where c_cardno="+rowMap.get("id_card")+"and hbxx.icbc_id=k.id";
                             icbc = Tools.recinfo(sql);
                             System.out.println("iiii " + icbc);
                             TtMap addOverdueClient = new TtMap();
@@ -150,7 +154,7 @@ public class LoanImportExcelController {
                             addOverdueClient.put("c_carvin",(icbc.get("c_carvin")));
                             addOverdueClient.put("overdue_amount", String.valueOf(overdue_amount)); //逾期金额
                             addOverdueClient.put("overdue_days",rowMap.get("overdue_days")); //逾期天数
-                            long loan_overdue_list = Tools.recAdd(addOverdueClient, "loan_overdue_list");
+                            long loan_overdue_list = Tools.recAdd(addOverdueClient, "hbloan_overdue_list");
                             System.out.println("添加逾期表:: "+loan_overdue_list);
                         }
 //                        TtMap upPay = new TtMap();
@@ -164,7 +168,7 @@ public class LoanImportExcelController {
 //                        upPay.put("c_cardno",rowMap.get("id_card"));
 //                        upPay.put("icbc_id",(recinfo==null?null:recinfo.get("icbc_id")));
                         //修改还款计划表
-                        String hksql = "update loan_repayment_schedule set\n" +
+                        String hksql = "update hbloan_repayment_schedule set\n" +
                                 "dt_edit='" + Getnow() + "', \n" +
                                 "practical_date='" + rowMap.get("practical_date") + "',\n" +
                                 "practical_money=" + rowMap.get("balance_card") +",\n" +
@@ -200,7 +204,7 @@ public class LoanImportExcelController {
         map.put("gems_fs_id",minfo.get("fsid"));// 公司ID
         map.put("gems_id", minfo.get("gemsid"));// 公司人员ID
         map.put("fsname", minfo.get("comname"));// 公司名字
-        long loan_import_record = Tools.recAdd(map, "loan_import_record");//把excel表格中的数据录入数据库表loan_import_excels //添加excel导入文件记录
+        long loan_import_record = Tools.recAdd(map, "hbloan_import_record");//把excel表格中的数据录入数据库表loan_import_excels //添加excel导入文件记录
 
         if(loan_import_record > 0){
             result = "1";  //导入成功

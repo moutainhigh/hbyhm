@@ -8,7 +8,7 @@ import com.tt.tool.Tools;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class loan_khhklr extends DbCtrl {
+public class hbloan_khhklr extends DbCtrl {
 
     private final String title = "客户还款录入";
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
@@ -17,8 +17,8 @@ public class loan_khhklr extends DbCtrl {
     private final String classAgpId = "79"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
-    public loan_khhklr() {
-        super("sloan_import_record");
+    public hbloan_khhklr() {
+        super("hbloan_import_record");
 
         AdminAgp adminAgp = new AdminAgp();
         try {
