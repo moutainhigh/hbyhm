@@ -54,6 +54,31 @@
                                 <small class="label pull-right bg-red">5</small>
                             </span> --%>
                         </a>
+                        <ul class="treeview-menu">
+                            <%
+                                for (TtMap keysub : submenus) {//三级级菜单循环开始
+                                    String icohtml = keysub.get("icohtml");
+                                    String subMenuName = keysub.get("showmmenuname");
+                                    String urlotherstr = keysub.get("urlotherstr");
+                                    nowcn = keysub.get("cn");
+                                    nowsdo = keysub.get("sdo");
+                                    nowtype = keysub.get("type");
+                                    boolean active = nowcn.equals(cn) && nowtype.equals(type) /*&& nowsdo.equals(sdo)*/;
+                            %>
+                            <li <% if (active) { %> class="active" <%}%> >
+                                <a href="index?cn=<%=nowcn%>&sdo=<%=nowsdo%>&type=<%=nowtype%><%=urlotherstr%>"><%=icohtml%>
+                                    <span><%=subMenuName%></span>
+                                    <%--显示小图标 <span class="pull-right-container">
+                                        <small class="label pull-right bg-green">16</small>
+                                        <small class="label pull-right bg-red">5</small>
+                                    </span> --%>
+                                </a>
+                                </li>
+                                <%
+                                        //三级级菜单循环结束
+                                    }
+                                %>
+                        </ul>
                     </li>
                     <%
                             //二级级菜单循环结束

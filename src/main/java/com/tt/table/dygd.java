@@ -248,6 +248,24 @@ public class dygd extends DbCtrl {
         // request.setAttribute("showmsg", "测试弹出消息提示哈！"); //如果有showmsg字段，在载入列表前会提示
     }
 
+    @Override
+    public void succ(TtMap array, long id, int sqltp) {
 
-
+        /*
+         生成还款计划
+         */
+        String auditStatus  = array.get("bc_status");
+        // 3 = 通过,然后生成还款计划
+        if(auditStatus.equals("3")){
+            TtMap toS = new TtMap();
+            toS.put("icbc_id",array.get("icbc_id"));
+            toS.put("yhdksh_61_je","24000"); //金额
+            toS.put("yhdksh_61_syhk","1100"); //首月还款
+            toS.put("yhdksh_61_fq","12");//分期数
+            toS.put("yhdksh_61_sqhkr","2019-5-18");  //首期还款日
+            toS.put("yhdksh_61_yh","1000"); //月还
+            AddPaySchedule APS = new AddPaySchedule();
+            APS.addPaySchedule(toS);
+        }
+    }
 }
