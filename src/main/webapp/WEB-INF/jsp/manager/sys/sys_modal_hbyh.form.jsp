@@ -34,7 +34,7 @@
 						<span class="input-group-addon">上级模块</span>
 					<select id="id_uplevel" name="id_uplevel" class="form-control">
 						<option value="0">一级菜单</option>
-						${Tools.dicopt("sys_modal_hbyh",id_uplevel,"level=1 || level=2","")}
+						${Tools.dicopt("sys_modal_hbyh",id_uplevel,"level=1","")}
 					</select>
 					</div>
 				</div>
