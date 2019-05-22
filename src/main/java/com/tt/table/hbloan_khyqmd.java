@@ -14,11 +14,11 @@ public class hbloan_khyqmd extends DbCtrl {
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
     private boolean canDel = false;
     private boolean canAdd = false;
-    private final String classAgpId = "154"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
+    private final String classAgpId = "81"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
     public hbloan_khyqmd(){
-        super("loan_overdue_list");
+        super("hbloan_overdue_list");
 
         AdminAgp adminAgp = new AdminAgp();
         try {
@@ -49,7 +49,7 @@ public class hbloan_khyqmd extends DbCtrl {
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
         String whereString = "true";
         String tmpWhere = " and t.type_id = 1";
-        String fieldsString = "t.*, c.order_code, c.c_name, c.c_cardno"; // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
+        String fieldsString = "t.*, c.gems_code, c.c_name, c.c_cardno"; // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
         /* 开始处理搜索过来的字段 */
         kw = post.get("kw");
@@ -75,7 +75,7 @@ public class hbloan_khyqmd extends DbCtrl {
         p = pageInt; // 显示页
         limit = limtInt; // 每页显示记录数
         showall = true; // 忽略deltag和showtag
-        leftsql= "LEFT JOIN dd_icbc c on c.id=t.icbc_id ";
+        leftsql= "LEFT JOIN kj_icbc c on c.id=t.icbc_id ";
 
         list = lists(whereString, fieldsString);
         System.out.println("list::::++  "+list);

@@ -15,31 +15,31 @@
             <div class="row" >
                 <label class="col-sm-1"  >主贷人姓名:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.c_name }
+                    ${infodb.c_name}
                 </div>
                 <label class="col-sm-1">身份证号:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.c_cardno }
+                    ${infodb.c_cardno}
                 </div>
                 <label class="col-sm-1" >金融产品:<i class="red">*</i></label>
                 <div class="col-sm-2">
                     <c:if test="${infodb.loan_tpid==1}">
-                        卡分期
+                        存量车
                     </c:if>
                 </div>
                 <label class="col-sm-1" >车辆评估价格:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.pg_price}
+                    ${infodb.c_loaninfo_car_priceresult}
                 </div>
             </div>
             <div class="row">
                 <label class="col-sm-1" >贷款金额:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.dk_price}
+                    ${infodb.c_loaninfo_dkze}
                 </div>
                 <label class="col-sm-1">贷款期数:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.aj_date}
+                    ${infodb.c_loaninfo_periods}
                 </div>
                 <label class="col-sm-1" >每月应还:<i class="red">*</i></label>
                 <div class="col-sm-2">
@@ -47,7 +47,7 @@
                 </div>
                 <label class="col-sm-1">贷款银行:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.blankname}
+                    ${infodb.bank_id}
                 </div>
                 <%-- <label class="col-sm-1" >还款日期:<i class="red">*</i></label>
                 <div class="col-sm-2">
@@ -102,7 +102,7 @@
                         </c:if>
                     </td>
                     <td class="text-center">${map.overdue_money}</td>
-                        <%-- <td class="text-center">${map.hx_date }</td> --%>
+                        <%-- <td class="text-center">${map.hx_date}</td> --%>
                 </tr>
             </c:forEach>
 
@@ -136,27 +136,39 @@
                 <td class="text-center">${infodb.c_tel }</td>
                 <td class="text-center" onclick="toggleModel()"><i class="fa fa-search-plus"></i></td>
             </tr>
-            <c:if test="${not empty mapafter.jjlxr_c_name}">
+            <c:if test="${not empty mapafter.c_ec1_name}">
                 <tr>
-                    <td class="text-center">紧急联系人</td>
-                    <td class="text-center">${mapafter.jjlxr_c_name}</td>
+                    <td class="text-center">紧急联系人1</td>
+                    <td class="text-center">${mapafter.c_ec1_name}</td>
                     <td class="text-center"></td>
-                    <td class="text-center">${mapafter.jjlxr_jdrgx}</td>
+                    <td class="text-center">${mapafter.c_ec1_rsforloan}</td>
                     <td class="text-center"></i>--</td>
                     <td class="text-center"></i>--</td>
-                    <td class="text-center">${mapafter.jjlxr_c_tel}</td>
+                    <td class="text-center">${mapafter.c_ec1_mobile}</td>
                     <td class="text-center" onclick="jjlxrModel()">--</td>
                 </tr>
             </c:if>
-            <c:if test="${not empty mapafter.qtlxr_c_name}">
+            <c:if test="${not empty mapafter.c_ec2_name}">
                 <tr>
                     <td class="text-center">紧急联系人2</td>
-                    <td class="text-center">${mapafter.qtlxr_c_name}</td>
+                    <td class="text-center">${mapafter.c_ec2_name}</td>
                     <td class="text-center"></td>
-                    <td class="text-center">${mapafter.qtlxr_jdrgx}</td>
+                    <td class="text-center">${mapafter.c_ec2_rsforloan}</td>
                     <td class="text-center"></i>--</td>
                     <td class="text-center"></i>--</td>
-                    <td class="text-center">${mapafter.qtlxr_c_tel}</td>
+                    <td class="text-center">${mapafter.c_ec2_tel}</td>
+                    <td class="text-center" onclick="jjlxrModel()">--</td>
+                </tr>
+            </c:if>
+            <c:if test="${not empty mapafter.c_ec3_name}">
+                <tr>
+                    <td class="text-center">紧急联系人3</td>
+                    <td class="text-center">${mapafter.c_ec3_name}</td>
+                    <td class="text-center"></td>
+                    <td class="text-center">${mapafter.c_ec3_rsforloan}</td>
+                    <td class="text-center"></i>--</td>
+                    <td class="text-center"></i>--</td>
+                    <td class="text-center">${mapafter.c_ec3_tel}</td>
                     <td class="text-center" onclick="jjlxrModel()">--</td>
                 </tr>
             </c:if>
@@ -187,69 +199,85 @@
                 <div class="row" >
                     <label class="col-sm-1">姓名:<i class="red">*</i></label>
                     <div class="col-sm-3">
-                        ${infodb.c_name }
+                        ${mapafter.c_buycar_name }
                     </div>
-                    <label class="col-sm-1">性别:<i class="red">*</i></label>
+                    <label class="col-sm-2">性别:<i class="red">*</i></label>
                     <div class="col-sm-2">
-                        <c:if test="${infodb.c_sex == 1}">男</c:if>
-                        <c:if test="${infodb.c_sex == 2}">女</c:if>
+                        <c:if test="${mapafter.c_buycar_sex == 1}">男</c:if>
+                        <c:if test="${mapafter.c_buycar_sex == 2}">女</c:if>
                     </div>
                     <label class="col-sm-2">手机号:<i class="red">*</i></label>
-                    <div class="col-sm-2">
-                        ${infodb.c_tel }
+                    <div class="col-sm-1">
+                        ${mapafter.c_buycar_tel }
                     </div>
                 </div>
                 <div class="row" >
 
                     <label class="col-sm-2">身份证号:<i class="red">*</i></label>
-                    <div class="col-sm-2">
-                        ${infodb.c_cardno}
+                    <div class="col-sm-3">
+                        ${mapafter.c_buycar_id_cardno}
                     </div>
                     <label class="col-sm-2" >居住地:<i class="red">*</i></label>
                     <div class="col-sm-3">
-                        ${mapafter.zdr_xzdz }
+                        ${mapafter.c_buycar_live_address }
                     </div>
                 </div>
                 <div class="row" >
                     <label class="col-sm-2">身份证地址:<i class="red">*</i></label>
-                    <div class="col-sm-3">
-
+                    <div class="col-sm-2">
+                        ${mapafter.c_buycar_cr_address }
                     </div>
-                    <label class="col-sm-1">学历:<i class="red">*</i></label>
-                    <div class="col-sm-1">
-                        ${mapafter.zdr_xl }
+                    <label class="col-sm-2">学历:<i class="red">*</i></label>
+                    <div class="col-sm-2">
+                        <c:if test="${mapafter.c_buycar_eb == 1}">初中以下</c:if>
+                        <c:if test="${mapafter.c_buycar_eb == 2}">高中及中专</c:if>
+                        <c:if test="${mapafter.c_buycar_eb == 3}">大专</c:if>
+                        <c:if test="${mapafter.c_buycar_eb == 4}">本科</c:if>
+                        <c:if test="${mapafter.c_buycar_eb == 5}">硕士及以上</c:if>
+                        <c:if test="${mapafter.c_buycar_eb == 6}">其他</c:if>
                     </div>
                     <label class="col-sm-2">婚姻情况:<i class="red">*</i></label>
-                    <div class="col-sm-1">
-                        未婚
+                    <div class="col-sm-2">
+                        <c:if test="${mapafter.c_buycar_marriage == 1}">已婚有子女</c:if>
+                        <c:if test="${mapafter.c_buycar_marriage == 2}">已婚无子女</c:if>
+                        <c:if test="${mapafter.c_buycar_marriage == 3}">已婚</c:if>
+                        <c:if test="${mapafter.c_buycar_marriage == 4}">未婚单身</c:if>
+                        <c:if test="${mapafter.c_buycar_marriage == 5}">离异单身</c:if>
+                        <c:if test="${mapafter.c_buycar_marriage == 6}">丧偶单身</c:if>
                     </div>
                 </div>
                 <div class="row" >
                     <label class="col-sm-2 " style="" >单位性质:<i class="red">*</i></label>
                     <div class="col-sm-2">
-                        私企
+                        <c:if test="${mapafter.c_work_unittype == 0}">--</c:if>
+                        <c:if test="${mapafter.c_work_unittype == 1}">国有企业</c:if>
+                        <c:if test="${mapafter.c_work_unittype == 2}">民营企业</c:if>
+                        <c:if test="${mapafter.c_work_unittype == 3}">个体工商户</c:if>
+                        <c:if test="${mapafter.c_work_unittype == 4}">其他</c:if>
+                        <c:if test="${mapafter.c_work_unittype == 5}">国家机关</c:if>
+                        <c:if test="${mapafter.c_work_unittype == 6}">事业单位</c:if>
                     </div>
                     <label class="col-sm-2">单位名称:<i class="red">*</i></label>
                     <div class="col-sm-2">
-                        ${mapafter.zdr_gzdw}
+                        ${mapafter.c_work_name}
                     </div>
                     <label class="col-sm-2" >单位职务:<i class="red">*</i></label>
                     <div class="col-sm-2">
-                        开发
+                        ${mapafter.c_work_post}
                     </div>
                 </div>
                 <div class="row" >
                     <label class="col-sm-2">单位电话:<i class="red">*</i></label>
                     <div class="col-sm-2">
-                        ${mapafter.zdr_dwdh }
+                        ${mapafter.c_work_tel }
                     </div>
                     <label class="col-sm-2">单位地址:<i class="red">*</i></label>
                     <div class="col-sm-2">
-                        ${mapafter.zdr_dwdz}
+                        ${mapafter.c_work_address}
                     </div>
                     <label class="col-sm-2" >个人月收入:<i class="red">*</i></label>
                     <div class="col-sm-2">
-                        ${mapafter.zdr_grsr }
+                        ${mapafter.c_work_income_month }
                     </div>
                 </div>
                 <!-- 模态框插入内容 end -->

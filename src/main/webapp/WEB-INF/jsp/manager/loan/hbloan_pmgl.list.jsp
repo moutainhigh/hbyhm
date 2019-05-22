@@ -31,9 +31,6 @@
                             身份证号
                         </th>
                         <th class="text-center">
-                            贷款银行
-                        </th>
-                        <th class="text-center">
                             车辆类型
                         </th>
                         <th class="text-center">
@@ -55,24 +52,16 @@
                     <c:forEach items="${list}" var="u" varStatus="num">
                         <tr role="row" class="odd">
                             <td class="text-center">
-                                    ${u.order_code}
+                                    ${u.gems_code}
                             </td>
                             <td class="text-center">
                                     ${u.c_name}
                             </td>
                             <td class="text-center">
-                                    ${u.c_cardno}
+                                    ${u.carno}
                             </td>
                             <td class="text-center">
-                                    ${u.bank_name}
-                            </td>
-                            <td class="text-center">
-                                <c:if test="${u.car_type == '1'}">
-                                    新车
-                                </c:if>
-                                <c:if test="${u.car_type == '2'}">
-                                    二手车
-                                </c:if>
+                                <c:if test="${u.loan_tpid == '1'}">存量车</c:if>
                             </td>
                             <td class="text-center">
                                     ${u.gems_name}
@@ -84,15 +73,17 @@
                                     ${u.carno}
                             </td>
                             <td class="text-center">
-                                <c:if test="${u.type_status == '51'}">
-                                    未拍卖
-                                </c:if>
-                                <c:if test="${u.type_status == '52'}">
-                                    亏损(拍卖完成)
-                                </c:if>
-                                <c:if test="${u.type_status == '53'}">
-                                    盈利(拍卖完成)
-                                </c:if>
+                                <span class="label label-success" style="font-size: 14px;">
+                                    <c:if test="${u.type_status == '51'}">
+                                        未拍卖
+                                    </c:if>
+                                    <c:if test="${u.type_status == '52'}">
+                                        亏损(拍卖完成)
+                                    </c:if>
+                                    <c:if test="${u.type_status == '53'}">
+                                        盈利(拍卖完成)
+                                    </c:if>
+                                </span>
                             </td>
                             <td class="text-center">
                                 <div class="table-button">

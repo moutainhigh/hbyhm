@@ -58,7 +58,7 @@
                     <c:forEach items="${list}" var="u" varStatus="num">
                         <tr role="row" class="odd">
                             <td class="text-center">
-                                    ${u.order_code}
+                                    ${u.gems_code}
                             </td>
                             <td class="text-center">
                                     ${u.c_name}
@@ -67,7 +67,7 @@
                                     ${u.c_cardno}
                             </td>
                             <td class="text-center">
-                                    ${u.loan_tpid}
+                                    <c:if test="${u.loan_tpid == '1'}">存量车</c:if>
                             </td>
                             <td class="text-center">
                                     ${u.dk_price}

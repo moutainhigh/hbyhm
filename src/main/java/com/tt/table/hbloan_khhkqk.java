@@ -13,14 +13,14 @@ import java.math.BigDecimal;
 public class hbloan_khhkqk extends DbCtrl {
 
     private final String title = "客户还款情况";
-    private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
+    private String orderString = "GROUP BY icbc_id ORDER BY t.dt_edit DESC"; // 默认排序
     private boolean canDel = false;
     private boolean canAdd = false;
     private final String classAgpId = "80"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
     public hbloan_khhkqk() {
-        super("hbyh_dygd");
+        super("tlzf_dk_details");
 
         AdminAgp adminAgp = new AdminAgp();
         try {
@@ -49,9 +49,9 @@ public class hbloan_khhkqk extends DbCtrl {
         String dtbe = ""; // 搜索日期选择
         int pageInt = Integer.valueOf(Tools.myIsNull(post.get("p")) == false ? post.get("p") : "1"); // 当前页
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
-        String whereString = "true";
+        String whereString = "t.qd_type=2";
         String tmpWhere = "";
-        String fieldsString = "t.*,xx.c_loaninfo_dkze,xx.c_loaninfo_periods,xx.c_loaninfo_car_priceresult"; // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
+        String fieldsString = "t.*,c.*,xx.c_loaninfo_dkze,xx.c_loaninfo_periods,xx.c_loaninfo_car_priceresult"; // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
         /* 开始处理搜索过来的字段 */
         kw = post.get("kw");
@@ -127,12 +127,12 @@ public class hbloan_khhkqk extends DbCtrl {
 
         long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
 
-        String sql = "select SQL_CALC_FOUND_ROWS t.*,k.dk_price,k.dk_total_price,k.aj_date,c.pg_price,b.`name` blankname from dd_icbc t LEFT JOIN icbc_kk k on k.icbc_id=t.id LEFT JOIN dd_icbc_cars c on c.icbc_id=t.id LEFT JOIN icbc_banklist b on b.id=t.bank_id where t.id = " + nid;
+        String sql = "select SQL_CALC_FOUND_ROWS t.*,xx.*,xx.c_loaninfo_dkze,xx.c_loaninfo_periods,xx.c_loaninfo_car_priceresult from kj_icbc t LEFT JOIN hbyh_xxzl xx on xx.icbc_id=t.id where t.id = " + nid;
         TtMap map = Tools.recinfo(sql);
         String Myyh ="0";
-        if (StringUtils.isNotEmpty(map.get("dk_total_price")) && StringUtils.isNotEmpty(map.get("aj_date"))) {
-            BigDecimal dk_total_price = new BigDecimal(map.get("dk_total_price")); //贷款总额
-            BigDecimal aj_date = new BigDecimal(map.get("aj_date"));    //贷款期限
+        if (StringUtils.isNotEmpty(map.get("c_loaninfo_dkze")) && StringUtils.isNotEmpty(map.get("c_loaninfo_periods"))) {
+            BigDecimal dk_total_price = new BigDecimal(map.get("c_loaninfo_dkze")); //贷款总额
+            BigDecimal aj_date = new BigDecimal(map.get("c_loaninfo_periods"));    //贷款期限
             BigDecimal myyh = dk_total_price.divide(aj_date, 3,BigDecimal.ROUND_DOWN);//计算出每月应还并保留三位小数
             String a1 = myyh.toString();
             int c1 = Integer.parseInt(a1.substring(a1.indexOf(".")+3));//截取第三位小数转成int
@@ -148,11 +148,11 @@ public class hbloan_khhkqk extends DbCtrl {
         }
         map.put("myyh", Myyh);
 
-        String hkjhsql = "SELECT * FROM loan_repayment_schedule WHERE icbc_id = " + nid;
+        String hkjhsql = "SELECT * FROM hbloan_repayment_schedule WHERE icbc_id = " + nid;
         TtList reclist = Tools.reclist(hkjhsql);
 
         //贷后信息
-        String dhsql = "select *,a.`name` gems_name,f.`name` fs_name from icbc_kk k left join admin a on a.id=k.gems_id left join fs f on f.id=k.gems_fs_id where icbc_id = " + nid;
+        String dhsql = "select * from hbyh_xxzl where icbc_id=" + nid;
         TtMap mapafter = Tools.recinfo(dhsql);
 
         System.out.println("主贷人信息:"+map);

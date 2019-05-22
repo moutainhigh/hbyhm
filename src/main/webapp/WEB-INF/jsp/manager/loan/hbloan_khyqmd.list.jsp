@@ -67,7 +67,7 @@
                                 <div class="table-button">
                                     <%--location.href='/manager/jrdcajax?id=${u.id}&icbc_id=${u.icbc_id}--%>
                                     <a href="javascript:0" onclick="confirm('确定进入电催作业吗?')?jrdc(${u.icbc_id}, ${u.id}):''" class="btn btn-default">
-                                        <i class="fa fa-pencil"></i>
+                                        <i class="fa fa-hand-paper-o"></i>
                                     </a>
                                 </div>
                             </td>
@@ -142,7 +142,7 @@
             },
             success: function (data) {
                 alert(data.msg);
-                window.location.href="/manager/index?cn=loan_khyqmd&sdo=list&type=loan";
+                window.location.href="/manager/index?cn=hbloan_khyqmd&sdo=list&type=loan";
             }
         });
     }

@@ -18,7 +18,7 @@
             <div class="row" >
                 <label class="col-sm-1" >订单编号:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.order_code}
+                    ${infodb.gems_code}
                 </div>
                 <label class="col-sm-1">主贷人姓名:<i class="red">*</i></label>
                 <div class="col-sm-2">
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="row">
-                <label class="col-sm-1" >业务员::<i class="red">*</i></label>
+                <label class="col-sm-1" >业务员:<i class="red">*</i></label>
                 <div class="col-sm-2">
                     ${mapafter.gems_name }
                 </div>
@@ -44,21 +44,21 @@
                 </div>
                 <label class="col-sm-1" >现住地址:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${mapafter.zdr_xzdz }
+                    ${mapafter.c_buycar_live_address }
                 </div>
                 <label class="col-sm-1" >单位名称:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${mapafter.zdr_gzdw }
+                    ${mapafter.c_work_name }
                 </div>
             </div>
             <div class="row" >
                 <label class="col-sm-1" >单位电话:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${mapafter.zdr_dwdh }
+                    ${mapafter.c_work_tel }
                 </div>
                 <label class="col-sm-1">单位地址:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${mapafter.zdr_dwdz }
+                    ${mapafter.c_work_address }
                 </div>
             </div>
         </div>
@@ -71,31 +71,31 @@
             <div class="row" >
                 <label class="col-sm-1" >车辆价格:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.pg_price}
+                    --
                 </div>
                 <label class="col-sm-1">评估价格:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.pg_price}
+                    ${infodb.c_loaninfo_car_priceresult}
                 </div>
                 <label class="col-sm-1" >品牌:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.ppxh}
+                    ${infodb.cbname}
                 </div>
                 <label class="col-sm-1" >车辆型号:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.ppxh}
+                    ${infodb.cmname}
                 </div>
             </div>
 
             <div class="row" >
                 <label class="col-sm-1" >车辆类型:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    <!-- 1新车，2二手车 -->
-                    ${infodb.cars_type==1?'新车':'二手车'}
+                    <!-- 1国产，2'进口 -->
+                    ${infodb.c_loaninfo_car_type==1?'国产':'进口'}
                 </div>
                 <label class="col-sm-1">车架号:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.car_vin}
+                    ${infodb.vincode}
                 </div>
                 <label class="col-sm-1" >发动机号:<i class="red">*</i></label>
                 <div class="col-sm-2">
@@ -110,7 +110,27 @@
             <div class="row" >
                 <label class="col-sm-1" >颜色:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.car_color_id}
+                    <c:if test="${infodb.color_id == '1'}">黑</c:if>
+                    <c:if test="${infodb.color_id == '2'}">白</c:if>
+                    <c:if test="${infodb.color_id == '3'}">灰</c:if>
+                    <c:if test="${infodb.color_id == '4'}">红</c:if>
+                    <c:if test="${infodb.color_id == '5'}">银</c:if>
+                    <c:if test="${infodb.color_id == '6'}">蓝</c:if>
+                    <c:if test="${infodb.color_id == '7'}">金</c:if>
+                    <c:if test="${infodb.color_id == '8'}">棕</c:if>
+                    <c:if test="${infodb.color_id == '9'}">橙</c:if>
+                    <c:if test="${infodb.color_id == '10'}">黄</c:if>
+                    <c:if test="${infodb.color_id == '11'}">紫</c:if>
+                    <c:if test="${infodb.color_id == '12'}">绿</c:if>
+                    <c:if test="${infodb.color_id == '13'}">褐</c:if>
+                    <c:if test="${infodb.color_id == '14'}">栗</c:if>
+                    <c:if test="${infodb.color_id == '15'}">米</c:if>
+                    <c:if test="${infodb.color_id == '16'}">银灰</c:if>
+                    <c:if test="${infodb.color_id == '17'}">青</c:if>
+                    <c:if test="${infodb.color_id == '18'}">香槟</c:if>
+                    <c:if test="${infodb.color_id == '19'}">咖啡</c:if>
+                    <c:if test="${infodb.color_id == '20'}">天山</c:if>
+                    <c:if test="${infodb.color_id == '21'}">其他色</c:if>
                 </div>
             </div>
         </div>
@@ -123,30 +143,30 @@
             <div class="row" >
                 <label class="col-sm-1" >车辆价格:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.pg_price}
+                    --
                 </div>
                 <label class="col-sm-1">业务产品名称:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.loan_tpid==1?'卡分期':'汽车分期'}
+                    ${infodb.loan_tpid==1?'存量车':'汽车分期'}
                 </div>
                 <label class="col-sm-1" >贷款银行:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.bankname}
+                    ${infodb.loan_bank }
                 </div>
-                <label class="col-sm-1" >执行利率:<i class="red">*</i></label>
+                <label class="col-sm-1" >执行利率（%）:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.aj_lv}
+                    ${infodb.c_loaninfo_car_loanrate }
                 </div>
             </div>
 
             <div class="row" >
                 <label class="col-sm-1" >首付金额:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.sf_price}
+                    ${infodb.c_loaninfo_sfje}
                 </div>
                 <label class="col-sm-1">实际贷款额:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.dk_total_price}
+                    ${infodb.c_loaninfo_dkze }
                 </div>
                 <label class="col-sm-1" >首付比例:<i class="red">*</i></label>
                 <div class="col-sm-2">
@@ -154,18 +174,18 @@
                 </div>
                 <label class="col-sm-1" >贷款期数:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.aj_date}
+                    ${infodb.c_loaninfo_periods }
                 </div>
             </div>
 
             <div class="row" >
                 <label class="col-sm-1" style="" >银行分期本金:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    --
+                    ${infodb.c_loaninfo_car_pcpprice }
                 </div>
                 <label class="col-sm-1">金融服务费:<i class="red">*</i></label>
                 <div class="col-sm-2">
-                    ${infodb.jrfw_price }
+                    ${infodb.c_loaninfo_fee }
                 </div>
                 <label class="col-sm-1" >本息合计:<i class="red">*</i></label>
                 <div class="col-sm-2">
@@ -219,12 +239,12 @@
 
     <form id="form1" onsubmit="return false" action="##"  method="post">
 
-        <c:if test="${pmtype == 1}">
+        <c:if test="${bbmap.type_status == 51}">
             <div class="box-header with-border">
                 <h3 class="box-title">处置结果: </h3>
             </div>
             <ul class="pagination no-margin" style="padding-top: 10px;">
-                <select id="coolStatus" name="coolStatus" style="width: 180px;" class="form-control">
+                <select id="coolStatus" name="coolStatus" style="width: 260px;" class="form-control">
                     <option value="">--请选择--</option>
                     <option value="71">亏损&lt;6000(拍卖完成)[进入未核销]</option>
                     <option value="41">亏损&gt;6000(拍卖完成)[进入诉讼]</option>
@@ -288,7 +308,7 @@
         var icbc_id = ${bbmap.icbc_id};
         var lolId = ${bbmap.id};
 
-        var pmtype = ${pmtype};
+        //var pmtype = ${pmtype};
 
         var coolStatus = $('#coolStatus').val();//处置结果
         if (coolStatus=='') {
@@ -312,7 +332,7 @@
                 type_status:type_status,
                 icbc_id:icbc_id,
                 lolId:lolId,
-                pmtype:pmtype,
+                //pmtype:pmtype,
                 coolStatus:coolStatus
             },
             success:function(data){

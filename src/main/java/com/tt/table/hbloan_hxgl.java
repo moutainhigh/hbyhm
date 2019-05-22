@@ -14,11 +14,11 @@ public class hbloan_hxgl extends DbCtrl {
     private String orderString = "ORDER BY dt_edit DESC"; // 默认排序
     private boolean canDel = false;
     private boolean canAdd = false;
-    private final String classAgpId = "153"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
+    private final String classAgpId = "86"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
     public hbloan_hxgl(){
-        super("loan_overdue_list");
+        super("hbloan_overdue_list");
 
         AdminAgp adminAgp = new AdminAgp();
         try {
@@ -48,7 +48,7 @@ public class hbloan_hxgl extends DbCtrl {
         int pageInt = Integer.valueOf(Tools.myIsNull(post.get("p")) == false ? post.get("p") : "1"); // 当前页
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
         String whereString = "true";
-        String tmpWhere = "";
+        String tmpWhere = " and t.type_id = 7";
         System.out.println("............."+post.get("hxtype"));
         if ("1".equals(post.get("hxtype"))){     //未核销
             tmpWhere = " and t.type_id = 7 and t.type_status = 71";
@@ -58,7 +58,7 @@ public class hbloan_hxgl extends DbCtrl {
         }
 
 
-        String fieldsString = "t.*, c.order_code, c.c_name, c.c_cardno, b.`name` bank_name, ca.car_type, ca.carno, f.`name` fs_name, g.`name` gems_name"; // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
+        String fieldsString = "t.*,k.carno,c.bank_id,c.loan_tpid,c.gems_code,c.c_name,c.c_cardno,f.`name` fs_name,g.`name` gems_name"; // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
         /* 开始处理搜索过来的字段 */
         kw = post.get("kw");
@@ -84,11 +84,10 @@ public class hbloan_hxgl extends DbCtrl {
         p = pageInt; // 显示页
         limit = limtInt; // 每页显示记录数
         showall = true; // 忽略deltag和showtag
-        leftsql= "LEFT JOIN dd_icbc c on c.id=t.icbc_id " +
-                 "LEFT JOIN dd_icbc_cars ca on ca.icbc_id=t.icbc_id " +
-                 "LEFT JOIN fs f on f.id=t.gems_fs_id " +
-                 "LEFT JOIN icbc_banklist b on b.id=c.bank_id " +
-                 "LEFT JOIN admin g on g.id=t.gems_id ";
+        leftsql= "LEFT JOIN kj_icbc c on c.id=t.icbc_id " +
+                "LEFT JOIN hbyh_xxzl k on k.icbc_id=t.icbc_id " +
+                "LEFT JOIN assess_fs f on f.id=t.gems_fs_id " +
+                "LEFT JOIN assess_gems g on g.id=t.gems_id ";
 
         list = lists(whereString, fieldsString);
         System.out.println("list::::++  "+list);
@@ -117,45 +116,34 @@ public class hbloan_hxgl extends DbCtrl {
         System.out.println("pppp"+post);
         long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
 
-        String bbsql = "select * from loan_overdue_list where id = " + nid;
+        String bbsql = "select * from hbloan_overdue_list where id = " + nid;
         TtMap bbmap = Tools.recinfo(bbsql);
 
+        //客户信息
         String sql = "SELECT SQL_CALC_FOUND_ROWS\n" +
                 "\tt.*,\n" +
-                "\tk.dk_price,\n" +
-                "\tk.dk_total_price,\n" +
-                "\tk.aj_date,\n" +
-                "\tc.pg_price,\n" +
-                "\tb.`name` blankname,\n" +
-                "\tc.ppxh,\n" +
-                "\tc.car_type,\n" +
-                "\tc.car_vin,\n" +
-                "\tc.motorcode,\n" +
-                "\tc.carno,\n" +
-                "\tc.car_color_id,\n" +
-                "\tk.aj_lv,\n" +
-                "\tk.sf_price,\n" +
-                "\tk.jrfw_price,\n" +
-                "\tib.`name` bankname\n" +
-                "FROM\n" +
-                "\tdd_icbc t\n" +
-                "\tLEFT JOIN icbc_kk k ON k.icbc_id = t.id\n" +
-                "\tLEFT JOIN dd_icbc_cars c ON c.icbc_id = t.id\n" +
-                "\tLEFT JOIN icbc_banklist b ON b.id = t.bank_id\n" +
-                "\tLEFT JOIN icbc_banklist ib ON ib.id = t.bank_id\n" +
-                "WHERE\n" +
+                "\tk.*, \n" +
+                "\tcb.name as cbname, \n" +
+                "\tcm.name as cmname\n" +
+                "\tFROM\n" +
+                "\tkj_icbc t\n" +
+                "\tLEFT JOIN hbyh_xxzl k ON k.icbc_id = t.id\n" +
+                "\tLEFT JOIN car_brand cb ON cb.id = k.brid_v2\n" +
+                "\tLEFT JOIN car_model cm ON cm.id = k.carid_v2\n" +
+                "\tWHERE\n" +
                 "\tt.id = " + bbmap.get("icbc_id");
         TtMap map = Tools.recinfo(sql);
 
-        String hkjhsql = "SELECT * FROM loan_repayment_schedule WHERE icbc_id = " + bbmap.get("icbc_id");
+        //还款计划
+        String hkjhsql = "SELECT * FROM hbloan_repayment_schedule WHERE icbc_id = " + bbmap.get("icbc_id");
         TtList reclist = Tools.reclist(hkjhsql);
 
         //贷后信息
-        String dhsql = "select *,a.`name` gems_name,f.`name` fs_name from icbc_kk k left join admin a on a.id=k.gems_id left join fs f on f.id=k.gems_fs_id where icbc_id = " + bbmap.get("icbc_id");
+        String dhsql = "select k.*,a.`name` gems_name,f.`name` fs_name from hbyh_xxzl k left join assess_gems a on a.id=k.gems_id left join assess_fs f on f.id=k.gems_fs_id where k.icbc_id = " + bbmap.get("icbc_id");
         TtMap mapafter = Tools.recinfo(dhsql);
 
         //记录栏
-        String jlsql = "select lo.*,a.`name` gems_name from loan_overdue_list_result lo left join admin a on a.id = lo.mid_add where icbc_id = " + bbmap.get("icbc_id");
+        String jlsql = "select lo.*,a.`name` gems_name from hbloan_overdue_list_result lo left join assess_gems a on a.id = lo.mid_add where lo.icbc_id = " + bbmap.get("icbc_id");
         TtList jllist = Tools.reclist(jlsql);
 
         System.out.println("jjjjjjj" + jllist);

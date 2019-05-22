@@ -39,9 +39,6 @@
                                 贷款期数
                             </th>
                             <th class="hidden-xs text-center">
-                                还款日期
-                            </th>
-                            <th class="hidden-xs text-center">
                                 车辆评估价格
                             </th>
                             <th class="hidden-xs text-center">
@@ -54,7 +51,7 @@
                         <c:forEach items="${list}" var="u" varStatus="num">
                             <tr role="row" class="odd">
                                 <td class="text-center">
-                                        ${u.order_code}
+                                        ${u.gems_code}
                                 </td>
                                 <td class="text-center">
                                         ${u.c_name}
@@ -64,7 +61,7 @@
                                 </td>
                                 <td class="text-center">
                                     <c:if test="${u.loan_tpid == '1'}">
-                                        卡分期
+                                        存量车
                                     </c:if>
                                 </td>
                                 <td class="text-center">
@@ -74,9 +71,6 @@
                                         ${u.c_loaninfo_periods}
                                 </td>
                                 <td class="text-center">
-                                        ${u.first_month_date}
-                                </td>
-                                <td class="text-center">
                                         ${u.c_loaninfo_car_priceresult}
                                 </td>
                                 <td class="text-center">
@@ -84,7 +78,7 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="table-button">
-                                        <a href="<%=url%>${u.id}" class="btn btn-default">
+                                        <a href="<%=url%>${u.icbc_id}" class="btn btn-default">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                     </div>
