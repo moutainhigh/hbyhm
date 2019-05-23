@@ -88,7 +88,9 @@ public class hbloan_dczy extends DbCtrl {
             }
         }
         //电催的配置
-//        Stirng consql = "select * from loan_config";
+        String configSql = "select * from hbloan_config where gems_fs_id="+Tools.minfo().get("icbc_erp_fsid");
+        TtMap getConfig = Tools.recinfo(configSql);
+        request.setAttribute("getConfig",getConfig);// 贷后配置信息
 
         System.out.println("li::::  "+list);
         request.setAttribute("list", list);// 列表list数据

@@ -176,8 +176,8 @@
                                     }
                                     var form = new FormData(document.getElementById("configTable"));
                                     $.ajax({
-                                        url:"${pageContext.request.contextPath }/loan/loanConfig.do",
-                                        type:"post",
+                                        url:"/manager/loanConfig",
+                                        type:"POST",
                                         data:form,
                                         processData:false,
                                         contentType:false,

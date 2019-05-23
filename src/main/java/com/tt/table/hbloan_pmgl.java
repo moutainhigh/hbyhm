@@ -147,6 +147,12 @@ public class hbloan_pmgl extends DbCtrl {
         String jlsql = "select lo.*,a.`name` gems_name from hbloan_overdue_list_result lo left join assess_gems a on a.id = lo.mid_add where lo.icbc_id = " + bbmap.get("icbc_id");
         TtList jllist = Tools.reclist(jlsql);
 
+        //电催的配置
+        String configSql = "select * from hbloan_config where gems_fs_id="+Tools.minfo().get("icbc_erp_fsid");
+        TtMap getConfig = Tools.recinfo(configSql);
+        request.setAttribute("getConfig",getConfig);// 贷后配置信息
+        System.err.println(getConfig+"--9999999999999");
+
         System.out.println("jjjjjjj" + jllist);
         System.out.println("主贷人信息:"+map);
         String jsonInfo = Tools.jsonEncode(map);

@@ -246,8 +246,8 @@
             <ul class="pagination no-margin" style="padding-top: 10px;">
                 <select id="coolStatus" name="coolStatus" style="width: 260px;" class="form-control">
                     <option value="">--请选择--</option>
-                    <option value="71">亏损&lt;6000(拍卖完成)[进入未核销]</option>
-                    <option value="41">亏损&gt;6000(拍卖完成)[进入诉讼]</option>
+                    <option value="71">亏损&lt;${(getConfig.overdue_money!=null?getConfig.overdue_money:6000)}(拍卖完成)[进入未核销]</option>
+                    <option value="41">亏损&gt;${(getConfig.overdue_money!=null?getConfig.overdue_money:6000)}(拍卖完成)[进入诉讼]</option>
                     <option value="53">盈利(拍卖完成)</option>
                 </select>
             </ul>

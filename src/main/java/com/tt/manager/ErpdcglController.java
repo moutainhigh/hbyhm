@@ -3,6 +3,7 @@ package com.tt.manager;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.tt.data.TtMap;
+import com.tt.tool.DbCtrl;
 import com.tt.tool.DbTools;
 import com.tt.tool.Tools;
 import org.springframework.stereotype.Controller;
@@ -348,6 +349,51 @@ public class ErpdcglController {
         }
         res.put("msg", msg);
         return res;
+    }
+
+    //添加或修改配置
+    @PostMapping("/manager/loanConfig")
+    @ResponseBody
+    public String loanConfig(
+            String overdue_one,
+            String overdue_two,
+            String overdue_three,
+            String overdue_to_phone,
+            String overdue_money,
+            HttpServletRequest request){
+        //获取当前操作人信息
+        TtMap pdsession= Tools.minfo();
+        System.err.println(pdsession+"--6666666666666666699999999");
+        //1先查询是否有公司配置信息 ，
+        //2如果有展示信息，修改提交保存
+        //3如果没有填写信息，提交保存
+        String configSql = "select * from hbloan_config where gems_fs_id="+pdsession.get("icbc_erp_fsid");
+        TtMap getConfig = Tools.recinfo(configSql);
+        System.err.println(getConfig+"---");
+        TtMap updateConfig = new TtMap();
+        updateConfig.put("overdue_one",overdue_one);
+        updateConfig.put("overdue_two",overdue_two);
+        updateConfig.put("overdue_three",overdue_three);
+        updateConfig.put("overdue_to_phone",overdue_to_phone);
+        updateConfig.put("overdue_money",overdue_money);
+        updateConfig.put("gems_fs_id",pdsession.get("icbc_erp_fsid"));
+        updateConfig.put("mid_edit",pdsession.get("icbc_erp_fsid"));
+        String companyNameSql = "select name from assess_fs where id="+pdsession.get("icbc_erp_fsid");
+        TtMap getCName = Tools.recinfo(companyNameSql);
+        updateConfig.put("company_name",getCName.get("name"));
+        Long a = 0L;
+        DbCtrl dbCtrl = new DbCtrl(null,"hbloan_config");
+        if(Tools.myIsNull(getConfig.get("id"))){ //公司此条配置不存在,就添加
+            updateConfig.put("mid_add",pdsession.get("icbc_erp_fsid"));
+            a = dbCtrl.add(updateConfig);
+        }else{
+            a = (long)dbCtrl.edit(updateConfig,Long.parseLong(getConfig.get("id")));
+        }
+        String result = "failure";
+        if(a > 0){
+            result = "successful!";
+        }
+        return result;
     }
 
 }
