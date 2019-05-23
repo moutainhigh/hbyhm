@@ -309,37 +309,36 @@ public class dsgl extends DbCtrl {
                                 result.put("status", ttMap.get("bc_status"));
                                 result.put("remark", post.get("remark"));
                                 Tools.recAdd(result, "tlzf_dk_details_result");
-
-                                /**
-                                 * 生成还款计划   开始
-                                 */
-                                String  xx_xxzl = "";
-                                String  xxloan_repayment_schedule = "";
-                                switch(post.get("qd_type")){
-                                    case "2": // 河北银行
-                                        xx_xxzl = "hbyh_xxzl";
-                                        xxloan_repayment_schedule = "hbloan_repayment_schedule";
-                                        break;
-                                    case "3": // 厦门银行
-                                        xx_xxzl = "xmgj_xxzl";
-                                        xxloan_repayment_schedule = "xmloan_repayment_schedule";
-                                        break;
-                                    case "4": // 华夏银行
-                                        xx_xxzl = "hxyh_xxzl";
-                                        xxloan_repayment_schedule = "hxloan_repayment_schedule";
-                                        break;
-                                }
-                                TtMap toS = new TtMap();
-                                toS.put("xx_xxzl",xx_xxzl);//贷款信息表
-                                toS.put("icbc_id",post.get("icbc_id")); //icbc_id
-                                toS.put("yhdksh_61_sqhkr",post.get("ds_date"));  //首期还款日
-                                toS.put("xxloan_repayment_schedule",xxloan_repayment_schedule); //生成还款计划表
-                                AddPaySchedule APS = new AddPaySchedule();
-                                APS.addPaySchedule(toS);
-                                /**
-                                 * 生成还款计划   结束
-                                 */
                             }
+                            /**
+                             * 生成还款计划   开始
+                             */
+                            String  xx_xxzl = "";
+                            String  xxloan_repayment_schedule = "";
+                            switch(post.get("qd_type")){
+                                case "2": // 河北银行
+                                    xx_xxzl = "hbyh_xxzl";
+                                    xxloan_repayment_schedule = "hbloan_repayment_schedule";
+                                    break;
+                                case "3": // 厦门银行
+                                    xx_xxzl = "xmgj_xxzl";
+                                    xxloan_repayment_schedule = "xmloan_repayment_schedule";
+                                    break;
+                                case "4": // 华夏银行
+                                    xx_xxzl = "hxyh_xxzl";
+                                    xxloan_repayment_schedule = "hxloan_repayment_schedule";
+                                    break;
+                            }
+                            TtMap toS = new TtMap();
+                            toS.put("xx_xxzl",xx_xxzl);//贷款信息表
+                            toS.put("icbc_id",post.get("icbc_id")); //icbc_id
+                            toS.put("yhdksh_61_sqhkr",post.get("ds_date"));  //首期还款日
+                            toS.put("xxloan_repayment_schedule",xxloan_repayment_schedule); //生成还款计划表
+                            AddPaySchedule APS = new AddPaySchedule();
+                            APS.addPaySchedule(toS);
+                            /**
+                             * 生成还款计划   结束
+                             */
                         }
                     }
                     /*if (!qy.isEmpty()) {
