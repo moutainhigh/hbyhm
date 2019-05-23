@@ -408,7 +408,8 @@
             },
             success:function(data){
                 alert("提交成功");
-                location.reload(true);
+                self.location = document.referrer;  //返回上一页面
+                //location.reload(true);  //刷新本页面
             }
         })
     }
@@ -442,8 +443,9 @@
                     dctype_id:'3' //申请电催||诉讼
                 },
                 success:function(data){
-                    // alert(data);
-                    location.reload(true);
+                    alert(data.msg);
+                    self.location = document.referrer;  //返回上一页面
+                    //location.reload(true);
                     // location.href="";
                 }
             })

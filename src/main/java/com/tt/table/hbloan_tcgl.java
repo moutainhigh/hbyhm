@@ -1,5 +1,7 @@
 package com.tt.table;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.tt.data.TtList;
 import com.tt.data.TtMap;
 import com.tt.tool.Config;
@@ -7,6 +9,7 @@ import com.tt.tool.DbCtrl;
 import com.tt.tool.Tools;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 public class hbloan_tcgl extends DbCtrl {
 
@@ -113,6 +116,7 @@ public class hbloan_tcgl extends DbCtrl {
 
         String bbsql = "select * from hbloan_overdue_list where id = " + nid;
         TtMap bbmap = Tools.recinfo(bbsql);
+        System.err.println(bbmap+"-7777777777777777");
 
         //客户信息
         String sql = "SELECT SQL_CALC_FOUND_ROWS\n" +
@@ -140,6 +144,18 @@ public class hbloan_tcgl extends DbCtrl {
         //记录栏
         String jlsql = "select lo.*,a.`name` gems_name from hbloan_overdue_list_result lo left join assess_gems a on a.id = lo.mid_add where lo.icbc_id = " + bbmap.get("icbc_id");
         TtList jllist = Tools.reclist(jlsql);
+
+        //回显 入库时间  入库地址回显
+        if(bbmap.get("type_status").equals("33") || bbmap.get("type_status").equals("32") ){
+            String mapssql = "select k.*,k.result_value from hbloan_overdue_list_result k where k.type_status=33 and k.icbc_id ="+bbmap.get("icbc_id")+" ORDER BY dt_add DESC limit 0,1";
+            TtMap maps = Tools.recinfo(mapssql);
+            if(maps.get("result_value")!=null && !maps.get("result_value").equals("")){
+                JSONObject json = (JSONObject)JSON.parse(maps.get("result_value"));
+                Map<String, Object> mapl = null;
+                mapl = (Map<String, Object>)json;
+                request.setAttribute("maps", mapl);
+            }
+        }
 
         System.out.println("jjjjjjj" + jllist);
         System.out.println("主贷人信息:"+map);

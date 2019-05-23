@@ -239,18 +239,75 @@
 
     <form id="form1" onsubmit="return false" action="##"  method="post">
 
-        <c:if test="${bbmap.type_status == 51}">
+        <c:if test="${bbmap.type_status == 32}">
+
+            <div class="box-header with-border">
+                <h3 class="box-title">拖车结果: </h3>
+            </div>
+            <ul class="pagination no-margin" style="padding-top: 10px;">
+                <select id="coolStatus" name="coolStatus" style="width: 180px;" class="form-control">
+                    <option value="">--请选择--</option>
+                    <option value="33">拖车完成</option>
+                    <option value="34">失败</option>
+                </select>
+            </ul>
+
+            <div class="box-header with-border" style="margin-top:20px;">
+                <h3 class="box-title">入库时间: </h3>
+                <h3 class="box-title" style="margin-left:300px;margin-top:40px;">入库地址:</h3>
+                <h3 class="box-title" style="margin-left:400px;">入库影像:</h3>
+            </div>
+
+            <div style="margin-top:10px;width:300px;">
+                <div class="input-group date ng-isolate-scope ng-not-empty ng-valid ng-valid-required">
+                    <input id="coolTime" name="coolTime" class="form-control" type="text" lay-key="1"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+                <input id="coolAddress" name="coolAddress" type="text" style="margin-top:-35px;margin-left:380px;width:390px;" class="form-control">
+                <!-- <input onchange="javascript:setImagePreview();"  name="coolVideo" id="coolVideo" style="display: none;margin-top:-35px;margin-left:870px;width:390px;height:35px;"  class="file-upload-input" type="file">  -->
+                <input type="hidden" id="coolVideo" name="coolVideo" value="">
+                <input style="display: none" onchange="javascript:setImagePreview();" enctype="multipart/form-data" type="file" value="" id="file" name="file" class="file-upload-input">
+
+                <label for="file">
+                    <!--上传图片    -->
+                    <img id="preview" style="margin-top:-35px;margin-left:870px;width:50px;height:50px;" class="img-thumbnail" src="images/mgcaraddimg.jpg">
+                </label>
+            </div>
+
+        </c:if>
+        <c:if test="${bbmap.type_status == 33}">
+
+            <div class="box-header with-border" style="margin-top:20px;">
+                <h3 class="box-title">入库时间: </h3>
+                <h3 class="box-title" style="margin-left:300px;margin-top:40px;">入库地址:</h3>
+                <h3 class="box-title" style="margin-left:400px;">入库影像:</h3>
+            </div>
+
+            <div style="margin-top:10px;width:300px;">
+                <div class="input-group date ng-isolate-scope ng-not-empty ng-valid ng-valid-required">
+                    <input value="${maps.coolTime}"t id="coolTime" name="coolTime" class="form-control" type="text" lay-key="1"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+                <input value="${maps.coolAddress}" id="coolAddress1" name="coolAddress" type="text" style="margin-top:-35px;margin-left:380px;width:390px;" class="form-control">
+                <input type="hidden" id="coolVideo1" name="coolVideo" value="${maps.coolVideo}">
+
+                
+                <input style="display: none" onchange="javascript:setImagePreview();" enctype="multipart/form-data" type="file" value="" id="file" name="file" class="file-upload-input">
+                <label for="file">
+                    <!--上传图片    -->
+                    <img id="preview1" style="margin-top:-35px;margin-left:870px;width:50px;height:50px;" class="img-thumbnail" src="images/mgcaraddimg.jpg">
+                </label>
+            </div>
+
             <div class="box-header with-border">
                 <h3 class="box-title">处置结果: </h3>
             </div>
             <ul class="pagination no-margin" style="padding-top: 10px;">
-                <select id="coolStatus" name="coolStatus" style="width: 260px;" class="form-control">
+                <select id="coolStatus1" name="coolStatus" style="width: 180px;" class="form-control">
                     <option value="">--请选择--</option>
-                    <option value="71">亏损&lt;6000(拍卖完成)[进入未核销]</option>
-                    <option value="41">亏损&gt;6000(拍卖完成)[进入诉讼]</option>
-                    <option value="53">盈利(拍卖完成)</option>
+                    <option value="51">拍卖</option>
+                    <option value="63">强制结清</option>
                 </select>
             </ul>
+
         </c:if>
         <div class="box-header with-border">
             <h3 class="box-title">信息录入栏: </h3>
@@ -301,44 +358,59 @@
     </div>
 </div>
 <script>
-    //信息录入栏 诉讼
+    //信息录入栏
     function addPhoneResult(){
-        var type_id = ${bbmap.type_id};
-        var type_status = ${bbmap.type_status};
-        var icbc_id = ${bbmap.icbc_id};
-        var lolId = ${bbmap.id};
+        var tctype = ${bbmap.type_status};
+        var coolStatus;
+        var coolTime = $('#coolTime').val();
+        var coolAddress = $('#coolAddress').val();
+        var coolVideo = $('#coolVideo').val();
 
-        //var pmtype = ${pmtype};
+        if (tctype == 32) {  //拖车已受理
+            coolStatus = $('#coolStatus').val();
+            if(coolStatus==''){
+                alert("请选择拖车结果!");
+                return false;
+            }
 
-        var coolStatus = $('#coolStatus').val();//处置结果
-        if (coolStatus=='') {
-            alert("请选择拍卖结果!");
-            return false;
         }
-
+        if (tctype == 33) {     //拖车完成
+            coolStatus = $('#coolStatus1').val();
+            if(coolStatus==''){
+                alert("请选择处置结果!");
+                return false;
+            }
+        }
         var result_msg = $('#result_msg').val();
         //alert(result_msg);
         if(result_msg==''){
             alert("请在录入栏填写信息!");
             return false;
         }
+        var type_id = ${bbmap.type_id};
+        var type_status = ${bbmap.type_status};
+        var icbc_id = ${bbmap.icbc_id};
+        var lolId = ${bbmap.id};
         //alert(lolId+"--"+icbc_id+"--"+type_status+"--"+type_id+"--");
         $.ajax({
             type: "POST",
-            url: "/manager/pmglajaxpost",
+            url: "/manager/jrdcajaxpost",
             data:{
                 result_msg:result_msg,
                 type_id:type_id,
                 type_status:type_status,
                 icbc_id:icbc_id,
                 lolId:lolId,
-                //pmtype:pmtype,
-                coolStatus:coolStatus
+                dctype_id:'4',   //拖车管理信息录入栏提交
+                coolStatus:coolStatus,
+                coolTime:coolTime,
+                coolAddress:coolAddress,
+                coolVideo:coolVideo,
+                tctype:tctype
             },
             success:function(data){
                 alert("提交成功");
-                self.location = document.referrer;  //返回上一页面
-                //location.reload(true);
+                location.reload(true);
             }
         })
     }
@@ -372,8 +444,7 @@
                     dctype_id:'3' //申请电催||诉讼
                 },
                 success:function(data){
-                    alert(data.msg);
-                    self.location = document.referrer;  //返回上一页面
+                    alert(data);
                     //location.reload(true);
                     // location.href="";
                 }
@@ -384,4 +455,11 @@
 
     }
 
+</script>
+<script>
+    //执行一个laydate实例
+    laydate.render({
+        elem: '#coolTime', //指定元素
+        type: 'datetime'
+    });
 </script>

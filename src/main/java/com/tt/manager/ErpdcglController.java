@@ -13,6 +13,35 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ErpdcglController {
+    @PostMapping(value = "/manager/jqclajaxpost")
+    @ResponseBody
+    public TtMap ajaxpostjq(HttpServletRequest request) {
+        System.out.println("进入结清");
+        TtMap post = Tools.getPostMap(request, true);// 过滤参数，过滤mysql的注入，url参数注入
+        System.out.println("参数列表为:" + post);
+        TtMap res = new TtMap();
+        String msg = "编辑成功";
+        TtMap minfo = Tools.minfo();//当前登录用户信息
+        System.out.println("minfo：" + minfo);
+
+        TtMap map = new TtMap();
+        map.put("qryid", post.get("lolId"));
+        map.put("mid_add", minfo.get("gemsid"));
+        map.put("mid_edit", minfo.get("gemsid"));
+        map.put("dt_add", LoanImportExcelController.Getnow());
+        map.put("dt_edit", LoanImportExcelController.Getnow());
+        map.put("type_id", post.get("type_id"));
+        map.put("type_status", post.get("type_status"));
+        map.put("remark", "某个结清记录");
+        map.put("result_msg", post.get("result_msg"));
+        map.put("icbc_id", post.get("icbc_id"));
+        Tools.recAdd(map, "hbloan_overdue_list_result");
+
+        res.put("msg", msg);
+        return res;
+    }
+
+
     @PostMapping(value = "/manager/hxglajaxpost")
     @ResponseBody
     public TtMap ajaxposts(HttpServletRequest request) {
@@ -280,6 +309,9 @@ public class ErpdcglController {
                         map3.put("type_status", "33");
                         map3.put("remark", "拖车完成");
                         map3.put("result_msg", post.get("result_msg"));
+                        map3.put("coolTime", post.get("coolTime"));
+                        map3.put("coolAddress", post.get("coolAddress"));
+                        map3.put("coolVideo", post.get("coolVideo")); //JSONObject.parseObject(JSON.toJSONString(map3)).toString()
                         map3.put("result_value", JSONObject.parseObject(JSON.toJSONString(map3)).toString());
                         Tools.recAdd(map3, "hbloan_overdue_list_result");
                     } else if ("34".equals(coolStatus)) {  //34:拖车失败
@@ -295,12 +327,10 @@ public class ErpdcglController {
                     String coolStatus = post.get("coolStatus");     //拖车结果  51:拍卖 63:强制结清
                     if (coolStatus.equals("51")){
                         dbTools2.recupdate("update hbloan_overdue_list set type_id=5,type_status=" + coolStatus + " where icbc_id=" + post.get("icbc_id"));
-                        map3.put("type_id", "5");
                     } else {
                         dbTools2.recupdate("update hbloan_overdue_list set type_id=6,type_status=" + coolStatus + " where icbc_id=" + post.get("icbc_id"));
-                        map3.put("type_id", "6");
                     }
-
+                    map3.put("type_id", "3");
                     map3.put("type_status", coolStatus);
                     map3.put("remark", "拖车(完成)信息录入栏提交");
                     map3.put("result_msg", post.get("result_msg"));

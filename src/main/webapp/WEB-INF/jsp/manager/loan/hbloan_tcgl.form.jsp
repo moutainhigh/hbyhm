@@ -266,10 +266,9 @@
                 <!-- <input onchange="javascript:setImagePreview();"  name="coolVideo" id="coolVideo" style="display: none;margin-top:-35px;margin-left:870px;width:390px;height:35px;"  class="file-upload-input" type="file">  -->
                 <input type="hidden" id="coolVideo" name="coolVideo" value="">
                 <input style="display: none" onchange="javascript:setImagePreview();" enctype="multipart/form-data" type="file" value="" id="file" name="file" class="file-upload-input">
-
                 <label for="file">
                     <!--上传图片    -->
-                    <img id="preview" style="margin-top:-35px;margin-left:870px;width:50px;height:50px;" class="img-thumbnail" src="/kjs_icbc/kjs_icbc_style/images/logo.png">
+                    <img id="preview" style="margin-top:-35px;margin-left:870px;width:50px;height:50px;" class="img-thumbnail" src="images/mgcaraddimg.jpg">
                 </label>
             </div>
 
@@ -284,16 +283,14 @@
 
             <div style="margin-top:10px;width:300px;">
                 <div class="input-group date ng-isolate-scope ng-not-empty ng-valid ng-valid-required">
-                    <input id="coolTime1" name="coolTime" class="form-control" type="text" lay-key="1"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input readonly="readonly" value="${maps.coolTime}"t id="coolTime1" name="coolTime1" class="form-control" type="text" lay-key="1"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
-                <input id="coolAddress1" name="coolAddress" type="text" style="margin-top:-35px;margin-left:380px;width:390px;" class="form-control">
-                <!-- <input onchange="javascript:setImagePreview();"  name="coolVideo" id="coolVideo" style="display: none;margin-top:-35px;margin-left:870px;width:390px;height:35px;"  class="file-upload-input" type="file">  -->
-                <input type="hidden" id="coolVideo1" name="coolVideo" value="">
-                <input style="display: none" onchange="javascript:setImagePreview();" enctype="multipart/form-data" type="file" value="" id="file" name="file" class="file-upload-input">
-
+                <input readonly="readonly" value="${maps.coolAddress}" id="coolAddress1" name="coolAddress" type="text" style="margin-top:-35px;margin-left:380px;width:390px;" class="form-control">
+                <input type="hidden" id="coolVideo1" name="coolVideo" value="${maps.coolVideo}">
+                <input readonly="readonly" style="display: none" onchange="javascript:setImagePreview();" enctype="multipart/form-data" type="file" value="" id="file" name="file" class="file-upload-input">
                 <label for="file">
                     <!--上传图片    -->
-                    <img id="preview1" style="margin-top:-35px;margin-left:870px;width:50px;height:50px;" class="img-thumbnail" src="/kjs_icbc/kjs_icbc_style/images/logo.png">
+                    <img id="preview1" style="margin-top:-35px;margin-left:870px;width:50px;height:50px;" class="img-thumbnail" src="images/mgcaraddimg.jpg">
                 </label>
             </div>
 
@@ -358,13 +355,13 @@
     </div>
 </div>
 <script>
-
-
-
     //信息录入栏
     function addPhoneResult(){
         var tctype = ${bbmap.type_status};
         var coolStatus;
+        var coolTime = $('#coolTime').val();
+        var coolAddress = $('#coolAddress').val();
+        var coolVideo = $('#coolVideo').val();
 
         if (tctype == 32) {  //拖车已受理
             coolStatus = $('#coolStatus').val();
@@ -372,6 +369,7 @@
                 alert("请选择拖车结果!");
                 return false;
             }
+
         }
         if (tctype == 33) {     //拖车完成
             coolStatus = $('#coolStatus1').val();
@@ -402,11 +400,15 @@
                 lolId:lolId,
                 dctype_id:'4',   //拖车管理信息录入栏提交
                 coolStatus:coolStatus,
+                coolTime:coolTime,
+                coolAddress:coolAddress,
+                coolVideo:coolVideo,
                 tctype:tctype
             },
             success:function(data){
                 alert("提交成功");
-                location.reload(true);
+                self.location = document.referrer;  //返回上一页面
+                //location.reload(true);  //刷新本页面
             }
         })
     }
@@ -440,7 +442,8 @@
                     dctype_id:'3' //申请电催||诉讼
                 },
                 success:function(data){
-                    alert(data);
+                    alert(data.msg);
+                    self.location = document.referrer;  //返回上一页面
                     //location.reload(true);
                     // location.href="";
                 }

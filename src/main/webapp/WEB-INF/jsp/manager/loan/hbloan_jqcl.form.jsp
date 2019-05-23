@@ -289,45 +289,36 @@
 </div>
 <script>
     <%--//信息录入栏 诉讼--%>
-    <%--function addPhoneResult(){--%>
-        <%--var type_id = ${bbmap.type_id};--%>
-        <%--var type_status = ${bbmap.type_status};--%>
-        <%--var icbc_id = ${bbmap.icbc_id};--%>
-        <%--var lolId = ${bbmap.id};--%>
+    function addPhoneResult(){
+        var type_id = ${bbmap.type_id};
+        var type_status = ${bbmap.type_status};
+        var icbc_id = ${bbmap.icbc_id};
+        var lolId = ${bbmap.id};
 
-        <%--var hxtype = ${hxtype};--%>
-
-        <%--var coolStatus = $('#coolStatus').val();//处置结果--%>
-        <%--if (coolStatus=='') {--%>
-            <%--alert("请选择处置结果!");--%>
-            <%--return false;--%>
-        <%--}--%>
-
-        <%--var result_msg = $('#result_msg').val();--%>
-        <%--//alert(result_msg);--%>
-        <%--if(result_msg==''){--%>
-            <%--alert("请在录入栏填写信息!");--%>
-            <%--return false;--%>
-        <%--}--%>
-        <%--//alert(lolId+"--"+icbc_id+"--"+type_status+"--"+type_id+"--");--%>
-        <%--$.ajax({--%>
-            <%--type: "POST",--%>
-            <%--url: "/manager/hxglajaxpost",--%>
-            <%--data:{--%>
-                <%--result_msg:result_msg,--%>
-                <%--type_id:type_id,--%>
-                <%--type_status:type_status,--%>
-                <%--icbc_id:icbc_id,--%>
-                <%--lolId:lolId,--%>
-                <%--hxtype:hxtype,--%>
-                <%--coolStatus:coolStatus--%>
-            <%--},--%>
-            <%--success:function(data){--%>
-                <%--alert("提交成功");--%>
-                <%--location.reload(true);--%>
-            <%--}--%>
-        <%--})--%>
-    <%--}--%>
+        var result_msg = $('#result_msg').val();
+        //alert(result_msg);
+        if(result_msg==''){
+            alert("请在录入栏填写信息!");
+            return false;
+        }
+        //alert(lolId+"--"+icbc_id+"--"+type_status+"--"+type_id+"--");
+        $.ajax({
+            type: "POST",
+            url: "/manager/jqclajaxpost",
+            data:{
+                result_msg:result_msg,
+                type_id:type_id,
+                type_status:type_status,
+                icbc_id:icbc_id,
+                lolId:lolId
+            },
+            success:function(data){
+                alert("提交成功");
+                self.location = document.referrer;  //返回上一页面
+                //location.reload(true);
+            }
+        })
+    }
 
     //申请拖车和诉讼
     function appCar(clickType){
@@ -358,7 +349,8 @@
                     dctype_id:'3' //申请电催||诉讼
                 },
                 success:function(data){
-                    alert(data);
+                    alert(dat.msg);
+                    self.location = document.referrer;  //返回上一页面
                     //location.reload(true);
                     // location.href="";
                 }

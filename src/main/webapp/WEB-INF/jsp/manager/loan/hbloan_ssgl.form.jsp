@@ -314,7 +314,8 @@
             },
             success:function(data){
                 alert("提交成功");
-                location.reload(true);
+                self.location = document.referrer;  //返回上一页面
+                //location.reload(true);
             }
         })
     }
@@ -348,7 +349,8 @@
                     dctype_id:'3' //申请电催||诉讼
                 },
                 success:function(data){
-                    alert(data);
+                    alert(data.msg);
+                    self.location = document.referrer;  //返回上一页面
                     //location.reload(true);
                     // location.href="";
                 }
