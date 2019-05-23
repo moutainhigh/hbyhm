@@ -139,6 +139,28 @@ public class ManagerTools {
                 return "xmgj_gsclhs";
             case "xmgj_dyclhs":
                 return "xmgj_dyclhs";
+            case "hbloan_khhklr":
+                return "hbloan_khhklr";
+            case "hbloan_khhkqk":
+                return "hbloan_khhkqk";
+            case "hbloan_car":
+                return "hbloan_car";
+            case "hbloan_phone":
+                return "hbloan_phone";
+            case "hbloan_khyqmd":
+                return "hbloan_khyqmd";
+            case "hbloan_dczy":
+                return "hbloan_dczy";
+            case "hbloan_tcgl":
+                return "hbloan_tcgl";
+            case "hbloan_ssgl":
+                return "hbloan_ssgl";
+            case "hbloan_pmgl":
+                return "hbloan_pmgl";
+            case "hbloan_hxgl":
+                return "hbloan_hxgl";
+            case "hbloan_jqcl":
+                return "hbloan_jqcl";
             // 不需要使用数据库的CN
             case "home":
             case "tlzf_ds":

@@ -15,6 +15,7 @@
         <input type="hidden" name="type" id="type" value="${type}">
         <input type="hidden" name="id" id="id" value="${empty qy.id?0:qy.id}">
         <input type="hidden" name="tl" id="tl" value="1">
+        <input type="hidden" name="qd_type" id="qd_type" value="${icbc.app}">
         <input type="hidden" name="icbc_id" id="icbc_id" value="${icbc.id}">
             <%--<input type="hidden" name="gems_id" id="gems_id" value="${minfo.gemsid}">--%>
             <%--<input type="hidden" name="gems_fs_id" id="gems_fs_id" value="${minfo.icbc_erp_fsid}">--%>
@@ -170,6 +171,7 @@
         <input type="hidden" name="cn" value="${cn}">
         <input type="hidden" name="type" value="${type}">
         <input type="hidden" name="id" value="0">
+        <input type="hidden" name="qd_type" id="qd_type" value="${icbc.app}">
         <input type="hidden" name="icbc_id" value="${icbc.id}">
         <div class="form-group" style="padding-top: 25px">
             <label for="title2" class="col-sm-3 control-label">签约信息:</label>
@@ -326,6 +328,7 @@
         <input type="hidden" name="cn" value="${cn}">
         <input type="hidden" name="type" value="${type}">
         <input type="hidden" name="id" value="0">
+        <input type="hidden" name="qd_type" id="qd_type" value="${icbc.app}">
         <input type="hidden" name="icbc_id" value="${icbc.id}">
         <div class="form-group">
             <label for="title2" class="col-sm-3 control-label">账户名:</label>
