@@ -14,7 +14,7 @@
             <h3 class="box-title" style="float: right">操作选项: </h3>
         </div>
 
-        <div class="modal-body">
+<div class="modal-body">
             <div class="row" >
                 <label class="col-sm-1" >订单编号:<i class="red">*</i></label>
                 <div class="col-sm-2">
@@ -238,21 +238,6 @@
     </div>
 
     <form id="form1" onsubmit="return false" action="##"  method="post">
-
-        <c:if test="${bbmap.type_status == 72}">
-            <div class="box-header with-border">
-                <h3 class="box-title">处置结果: </h3>
-            </div>
-            <ul class="pagination no-margin" style="padding-top: 10px;">
-                <select id="coolStatus" name="coolStatus" style="width: 180px;" class="form-control">
-                    <option value="">--请选择--</option>
-                    <option value="61">正常结清</option>
-                    <option value="62">提前结清</option>
-                    <option value="63">强制结清</option>
-                    <option value="64">亏损结清</option>
-                </select>
-            </ul>
-        </c:if>
         <div class="box-header with-border">
             <h3 class="box-title">信息录入栏: </h3>
             <textarea style="border:1px solid #ccc;margin-top:10px;height:120px" id="result_msg" name="result_msg" class="form-control"></textarea>
@@ -310,12 +295,6 @@
         var lolId = ${bbmap.id};
 
 
-        var coolStatus = $('#coolStatus').val();//处置结果
-        if (coolStatus=='') {
-            alert("请选择处置结果!");
-            return false;
-        }
-
         var result_msg = $('#result_msg').val();
         //alert(result_msg);
         if(result_msg==''){
@@ -325,14 +304,13 @@
         //alert(lolId+"--"+icbc_id+"--"+type_status+"--"+type_id+"--");
         $.ajax({
             type: "POST",
-            url: "/manager/hxglajaxpost",
+            url: "/manager/ssglajaxpostxm",
             data:{
                 result_msg:result_msg,
                 type_id:type_id,
                 type_status:type_status,
                 icbc_id:icbc_id,
                 lolId:lolId,
-                coolStatus:coolStatus
             },
             success:function(data){
                 alert("提交成功");
@@ -361,7 +339,7 @@
         if(confirmMsg==true){
             $.ajax({
                 type: "POST",
-                url: "/manager/jrdcajaxpost",
+                url: "/manager/jrdcajaxpostxm",
                 data:{
                     result_msg:result_msg,
                     type_id:type_id,

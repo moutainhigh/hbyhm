@@ -309,7 +309,6 @@
         var icbc_id = ${bbmap.icbc_id};
         var lolId = ${bbmap.id};
 
-
         var coolStatus = $('#coolStatus').val();//处置结果
         if (coolStatus=='') {
             alert("请选择处置结果!");
@@ -325,7 +324,7 @@
         //alert(lolId+"--"+icbc_id+"--"+type_status+"--"+type_id+"--");
         $.ajax({
             type: "POST",
-            url: "/manager/hxglajaxpost",
+            url: "/manager/hxglajaxpostxm",
             data:{
                 result_msg:result_msg,
                 type_id:type_id,
@@ -361,7 +360,7 @@
         if(confirmMsg==true){
             $.ajax({
                 type: "POST",
-                url: "/manager/jrdcajaxpost",
+                url: "/manager/jrdcajaxpostxm",
                 data:{
                     result_msg:result_msg,
                     type_id:type_id,

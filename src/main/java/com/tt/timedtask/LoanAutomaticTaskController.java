@@ -35,7 +35,7 @@ public class LoanAutomaticTaskController {
 		System.out.println("hb修改逾期天数自动执行:"+LoanImportExcelController.Getnow()+"---"+countsDay);
 		log.info("hb修改逾期天数自动执行:"+LoanImportExcelController.Getnow()+"---"+countsDay);
 
-		String sql = "UPDATE hbloan_overdue_list l set dt_edit=sysdate(),l.type_status=(CASE WHEN l.overdue_days>=(select c.overdue_one from loan_config c where c.gems_fs_id=l.gems_fs_id) and l.overdue_days<(select c.overdue_two from loan_config c where c.gems_fs_id=l.gems_fs_id) THEN 11 WHEN l.overdue_days>=(select c.overdue_two from loan_config c where c.gems_fs_id=l.gems_fs_id) and l.overdue_days<(select c.overdue_three from loan_config c where c.gems_fs_id=l.gems_fs_id) THEN 12 WHEN l.overdue_days>=(select c.overdue_three from loan_config c where c.gems_fs_id=l.gems_fs_id) THEN 13 ELSE l.type_status END) where l.overdue_amount>0 and l.type_id=1";
+		String sql = "UPDATE hbloan_overdue_list l set dt_edit=sysdate(),l.type_status=(CASE WHEN l.overdue_days>=(select c.overdue_one from hbloan_config c where c.gems_fs_id=l.gems_fs_id) and l.overdue_days<(select c.overdue_two from hbloan_config c where c.gems_fs_id=l.gems_fs_id) THEN 11 WHEN l.overdue_days>=(select c.overdue_two from hbloan_config c where c.gems_fs_id=l.gems_fs_id) and l.overdue_days<(select c.overdue_three from hbloan_config c where c.gems_fs_id=l.gems_fs_id) THEN 12 WHEN l.overdue_days>=(select c.overdue_three from hbloan_config c where c.gems_fs_id=l.gems_fs_id) THEN 13 ELSE l.type_status END) where l.overdue_amount>0 and l.type_id=1";
 		int counts = dbTools.recupdate(sql);
 		System.out.println("hb修改逾期状态自动执行:"+LoanImportExcelController.Getnow()+"---"+counts);
 		log.info("hb修改逾期状态自动执行:"+LoanImportExcelController.Getnow()+"---"+counts);
@@ -49,7 +49,7 @@ public class LoanAutomaticTaskController {
 	@Scheduled(cron = "0 0 5 * * ?") //每天凌晨5点执行
 	public void tasktestTo(){
 		DbTools dbTools = new DbTools();
-		String sqlTo = "UPDATE hbloan_overdue_list l set dt_edit=sysdate(),l.type_id=2,l.type_status=0 where l.type_id=1 and l.overdue_days>(select c.overdue_to_phone from loan_config c where c.gems_fs_id=l.gems_fs_id)";
+		String sqlTo = "UPDATE hbloan_overdue_list l set dt_edit=sysdate(),l.type_id=2,l.type_status=0 where l.type_id=1 and l.overdue_days>(select c.overdue_to_phone from hbloan_config c where c.gems_fs_id=l.gems_fs_id)";
 		int counts = 0;
 		counts = dbTools.recupdate(sqlTo);
 		log.info("hb修改逾期到电催自动执行:"+ LoanImportExcelController.Getnow()+"---"+counts);

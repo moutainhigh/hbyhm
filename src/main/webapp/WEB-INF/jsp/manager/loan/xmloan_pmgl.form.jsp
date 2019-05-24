@@ -239,17 +239,16 @@
 
     <form id="form1" onsubmit="return false" action="##"  method="post">
 
-        <c:if test="${bbmap.type_status == 72}">
+        <c:if test="${bbmap.type_status == 51}">
             <div class="box-header with-border">
                 <h3 class="box-title">处置结果: </h3>
             </div>
             <ul class="pagination no-margin" style="padding-top: 10px;">
-                <select id="coolStatus" name="coolStatus" style="width: 180px;" class="form-control">
+                <select id="coolStatus" name="coolStatus" style="width: 260px;" class="form-control">
                     <option value="">--请选择--</option>
-                    <option value="61">正常结清</option>
-                    <option value="62">提前结清</option>
-                    <option value="63">强制结清</option>
-                    <option value="64">亏损结清</option>
+                    <option value="71">亏损&lt;${(getConfig.overdue_money!=null?getConfig.overdue_money:6000)}(拍卖完成)[进入未核销]</option>
+                    <option value="41">亏损&gt;${(getConfig.overdue_money!=null?getConfig.overdue_money:6000)}(拍卖完成)[进入诉讼]</option>
+                    <option value="53">盈利(拍卖完成)</option>
                 </select>
             </ul>
         </c:if>
@@ -309,10 +308,11 @@
         var icbc_id = ${bbmap.icbc_id};
         var lolId = ${bbmap.id};
 
+        //var pmtype = ${pmtype};
 
         var coolStatus = $('#coolStatus').val();//处置结果
         if (coolStatus=='') {
-            alert("请选择处置结果!");
+            alert("请选择拍卖结果!");
             return false;
         }
 
@@ -325,13 +325,14 @@
         //alert(lolId+"--"+icbc_id+"--"+type_status+"--"+type_id+"--");
         $.ajax({
             type: "POST",
-            url: "/manager/hxglajaxpost",
+            url: "/manager/pmglajaxpostxm",
             data:{
                 result_msg:result_msg,
                 type_id:type_id,
                 type_status:type_status,
                 icbc_id:icbc_id,
                 lolId:lolId,
+                //pmtype:pmtype,
                 coolStatus:coolStatus
             },
             success:function(data){
@@ -361,7 +362,7 @@
         if(confirmMsg==true){
             $.ajax({
                 type: "POST",
-                url: "/manager/jrdcajaxpost",
+                url: "/manager/jrdcajaxpostxm",
                 data:{
                     result_msg:result_msg,
                     type_id:type_id,

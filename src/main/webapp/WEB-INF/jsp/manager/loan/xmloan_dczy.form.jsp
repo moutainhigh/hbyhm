@@ -238,28 +238,13 @@
     </div>
 
     <form id="form1" onsubmit="return false" action="##"  method="post">
-
-        <c:if test="${bbmap.type_status == 72}">
-            <div class="box-header with-border">
-                <h3 class="box-title">处置结果: </h3>
-            </div>
-            <ul class="pagination no-margin" style="padding-top: 10px;">
-                <select id="coolStatus" name="coolStatus" style="width: 180px;" class="form-control">
-                    <option value="">--请选择--</option>
-                    <option value="61">正常结清</option>
-                    <option value="62">提前结清</option>
-                    <option value="63">强制结清</option>
-                    <option value="64">亏损结清</option>
-                </select>
-            </ul>
-        </c:if>
-        <div class="box-header with-border">
-            <h3 class="box-title">信息录入栏: </h3>
-            <textarea style="border:1px solid #ccc;margin-top:10px;height:120px" id="result_msg" name="result_msg" class="form-control"></textarea>
-        </div>
-        <div style="height:50px;margin:20px 0 0 0;">
-            <button type="button" class="btn btn-info search-btn" style="float:right" onclick="addPhoneResult()">提交</button>
-        </div>
+    <div class="box-header with-border">
+        <h3 class="box-title">电催录入栏: </h3>
+        <textarea style="border:1px solid #ccc;margin-top:10px;height:120px" id="result_msg" name="result_msg" class="form-control"></textarea>
+    </div>
+    <div style="height:50px;margin:20px 0 0 0;">
+        <button type="button" class="btn btn-info search-btn" style="float:right" onclick="addPhoneResult()">提交</button>
+    </div>
     </form>
 
 
@@ -300,49 +285,136 @@
 
         </table>
     </div>
+
+
 </div>
 <script>
-    //信息录入栏 诉讼
+
+    function toggleModel(){
+        $('#myModal').modal({ show: true });
+    }
+
+</script>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="addModal_nstrLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">主贷人信息</h4>
+            </div>
+            <div class="modal-body" style="border:1px solid #ccc;background-color:#F7F7F7;border-radius: 10px;margin:30px;">
+                <!-- 模态框插入内容 start -->
+
+                <div class="row" >
+                    <label class="col-sm-1">姓名:<i class="red">*</i></label>
+                    <div class="col-sm-3">
+                        ${infodb.c_name }
+                    </div>
+                    <label class="col-sm-1">性别:<i class="red">*</i></label>
+                    <div class="col-sm-2">
+                        <c:if test="${infodb.c_sex == 1}">男</c:if>
+                        <c:if test="${infodb.c_sex == 2}">女</c:if>
+                    </div>
+                    <label class="col-sm-2">手机号:<i class="red">*</i></label>
+                    <div class="col-sm-2">
+                        ${infodb.c_tel }
+                    </div>
+                </div>
+                <div class="row" >
+
+                    <label class="col-sm-2">身份证号:<i class="red">*</i></label>
+                    <div class="col-sm-2">
+                        ${infodb.c_cardno}
+                    </div>
+                    <label class="col-sm-2" >居住地:<i class="red">*</i></label>
+                    <div class="col-sm-3">
+                        ${mapafter.zdr_xzdz }
+                    </div>
+                </div>
+                <div class="row" >
+                    <label class="col-sm-2">身份证地址:<i class="red">*</i></label>
+                    <div class="col-sm-3">
+
+                    </div>
+                    <label class="col-sm-1">学历:<i class="red">*</i></label>
+                    <div class="col-sm-1">
+                        ${mapafter.zdr_xl }
+                    </div>
+                    <label class="col-sm-2">婚姻情况:<i class="red">*</i></label>
+                    <div class="col-sm-1">
+                        未婚
+                    </div>
+                </div>
+                <div class="row" >
+                    <label class="col-sm-2 " style="" >单位性质:<i class="red">*</i></label>
+                    <div class="col-sm-2">
+                        私企
+                    </div>
+                    <label class="col-sm-2">单位名称:<i class="red">*</i></label>
+                    <div class="col-sm-2">
+                        ${mapafter.zdr_gzdw}
+                    </div>
+                    <label class="col-sm-2" >单位职务:<i class="red">*</i></label>
+                    <div class="col-sm-2">
+                        开发
+                    </div>
+                </div>
+                <div class="row" >
+                    <label class="col-sm-2">单位电话:<i class="red">*</i></label>
+                    <div class="col-sm-2">
+                        ${mapafter.zdr_dwdh }
+                    </div>
+                    <label class="col-sm-2">单位地址:<i class="red">*</i></label>
+                    <div class="col-sm-2">
+                        ${mapafter.zdr_dwdz}
+                    </div>
+                    <label class="col-sm-2" >个人月收入:<i class="red">*</i></label>
+                    <div class="col-sm-2">
+                        ${mapafter.zdr_grsr }
+                    </div>
+                </div>
+                <!-- 模态框插入内容 end -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
     function addPhoneResult(){
-        var type_id = ${bbmap.type_id};
-        var type_status = ${bbmap.type_status};
-        var icbc_id = ${bbmap.icbc_id};
-        var lolId = ${bbmap.id};
-
-
-        var coolStatus = $('#coolStatus').val();//处置结果
-        if (coolStatus=='') {
-            alert("请选择处置结果!");
-            return false;
-        }
-
         var result_msg = $('#result_msg').val();
         //alert(result_msg);
         if(result_msg==''){
             alert("请在录入栏填写信息!");
             return false;
         }
+        var type_id = ${bbmap.type_id};
+        var type_status = ${bbmap.type_status};
+        var icbc_id = ${bbmap.icbc_id};
+        var lolId = ${bbmap.id};
         //alert(lolId+"--"+icbc_id+"--"+type_status+"--"+type_id+"--");
         $.ajax({
             type: "POST",
-            url: "/manager/hxglajaxpost",
+            url: "/manager/jrdcajaxpostxm",
             data:{
                 result_msg:result_msg,
                 type_id:type_id,
                 type_status:type_status,
                 icbc_id:icbc_id,
                 lolId:lolId,
-                coolStatus:coolStatus
+                dctype_id:'2'
             },
             success:function(data){
                 alert("提交成功");
                 self.location = document.referrer;  //返回上一页面
-                //location.reload(true);
+                //location.reload(true);  //刷新本页面
             }
         })
     }
 
-    //申请拖车和诉讼
+
     function appCar(clickType){
         if(clickType==1){//
             var type_id = '3';
@@ -361,7 +433,7 @@
         if(confirmMsg==true){
             $.ajax({
                 type: "POST",
-                url: "/manager/jrdcajaxpost",
+                url: "/manager/jrdcajaxpostxm",
                 data:{
                     result_msg:result_msg,
                     type_id:type_id,
@@ -380,7 +452,6 @@
         }else if(confirmMsg==false){
             //如果取消，暂时不做操作
         }
-
     }
 
 </script>

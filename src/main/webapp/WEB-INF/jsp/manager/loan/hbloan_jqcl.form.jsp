@@ -349,7 +349,7 @@
                     dctype_id:'3' //申请电催||诉讼
                 },
                 success:function(data){
-                    alert(dat.msg);
+                    alert(data.msg);
                     self.location = document.referrer;  //返回上一页面
                     //location.reload(true);
                     // location.href="";
