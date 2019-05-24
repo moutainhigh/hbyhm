@@ -46,7 +46,7 @@
                     <c:forEach items="${list}" var="u" varStatus="num">
                         <tr role="row" class="odd">
                             <td class="text-center">
-                                    ${u.order_code}
+                                    ${u.gems_code}
                             </td>
                             <td class="text-center">
                                     ${u.c_name}
@@ -131,7 +131,7 @@
         $.ajax({
             type: "POST",      //data 传送数据类型。post 传递
             dataType: 'json',  // 返回数据的数据类型json
-            url: "/manager/jrdcajaxpost",  // 控制器方法
+            url: "/manager/jrdcajaxpostxm",  // 控制器方法
             data: {
                 id:id,
                 icbc_id:icbc_id,
@@ -142,7 +142,7 @@
             },
             success: function (data) {
                 alert(data.msg);
-                window.location.href="/manager/index?cn=hbloan_khyqmd&sdo=list&type=loan";
+                window.location.href="/manager/index?cn=xmloan_khyqmd&sdo=list&type=loan";
             }
         });
     }

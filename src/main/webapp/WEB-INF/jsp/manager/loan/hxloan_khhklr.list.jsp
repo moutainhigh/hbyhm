@@ -7,9 +7,7 @@
 <html>
 <body>
 <div class="box">
-    <%
-        String url = Tools.urlKill("sdo|id")+"&sdo=form&id=";
-    %>
+
 <div class="box-body">
     <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
         <div class="row">
@@ -22,54 +20,62 @@
                     <thead>
                     <tr role="row">
                         <th class="text-center"><!-- hidden-xs为手机模式时自动隐藏， text-center为居中-->
-                            订单编号
+                            序号
                         </th>
                         <th class="text-center">
-                            客户姓名
+                            文件名称
                         </th>
                         <th class="text-center">
-                            身份证号
-                        </th>
-                        <th class="text-center">
-                            逾期金额
-                        </th>
-                        <th class="hidden-xs text-center">
-                            逾期天数
-                        </th>
-                        <th class="hidden-xs text-center">
                             导入时间
                         </th>
-                        <th class="text-center">操作</th>
+                        <th class="text-center">
+                            金融产品
+                        </th>
+                        <th class="hidden-xs text-center">
+                            操作人员
+                        </th>
+                        <th class="text-center">查看</th>
+                        <th class="text-center">下载</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${list}" var="u" varStatus="num">
                         <tr role="row" class="odd">
                             <td class="text-center">
-                                    ${u.gems_code}
+                                    ${u.uuid}
                             </td>
                             <td class="text-center">
-                                    ${u.c_name}
+                                    ${u.oriName}
                             </td>
                             <td class="text-center">
-                                    ${u.c_cardno}
-                            </td>
-                            <td class="text-center">
-                                    ${u.overdue_amount}
-                            </td>
-                            <td class="hidden-xs text-center">
-                                    ${u.overdue_days}
-                            </td>
-                            <td class="hidden-xs text-center">
                                     ${u.dt_add}
                             </td>
                             <td class="text-center">
+                                    ${u.financial_products}
+                            </td>
+                            <td class="hidden-xs text-center">
+                                    ${u.admin_name}
+                            </td>
+                            <td class="text-center">
                                 <div class="table-button">
-                                    <%--location.href='/manager/jrdcajax?id=${u.id}&icbc_id=${u.icbc_id}--%>
-                                    <a href="javascript:0" onclick="confirm('确定进入电催作业吗?')?jrdc(${u.icbc_id}, ${u.id}):''" class="btn btn-default">
-                                        <i class="fa fa-hand-paper-o"></i>
-                                    </a>
+                                        <c:if test="${!empty u.filepath}">
+                                            <a href="http://localhost:8092${u.filepath}" target="view_window">
+                                                <i class="fa fa-search-plus"></i>
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${empty u.filepath}">
+                                            <a href="javascript:alert('未检测到相关文档!')">
+                                                <i class="fa fa-search-plus"></i>
+                                            </a>
+                                        </c:if>
                                 </div>
+                            </td>
+                            <td class="text-center">
+                                <c:if test="${!empty u.filepath}">
+                                    <a href="http://localhost:8092${u.filepath}" target="view_window">
+                                        <i class="glyphicon glyphicon-download-alt"></i>
+                                    </a>
+                                </c:if>
                             </td>
                         </tr>
                     </c:forEach>
@@ -95,7 +101,7 @@
         if (image_check(feid)) { //自己添加的文件后缀名的验证
             $.ajaxFileUpload({
                 fileElementId: feid,    //需要上传的文件域的ID，即<input type="file">的ID。
-                url:"/manager/importExcelController",
+                url:"/manager/importExcelControllerhx",
                 type: 'post',   //当要提交自定义参数时，这个参数要设置成post
                 dataType: 'text/html',   //服务器返回的数据类型。可以为xml,script,json,html。如果不填写，jQuery会自动判断。
                 secureuri: false,   //是否启用安全提交，默认为false。
@@ -111,6 +117,7 @@
                     window.location.reload();
                 },
                 error: function(data, status, e) {  //提交失败自动执行的处理函数。
+                    alert("NO");
                     console.error(e);
                 }
             });
@@ -123,28 +130,6 @@
             alert("格式不对")
             return false;
         })();
-    }
-
-    function jrdc(icbc_id, id) {
-        // alert("进入");
-        // alert(icbc_id);
-        $.ajax({
-            type: "POST",      //data 传送数据类型。post 传递
-            dataType: 'json',  // 返回数据的数据类型json
-            url: "/manager/jrdcajaxpost",  // 控制器方法
-            data: {
-                id:id,
-                icbc_id:icbc_id,
-                dctype_id:'1'
-            },  //传送的数据
-            error: function () {
-                alert("编辑失败...请稍后重试！");
-            },
-            success: function (data) {
-                alert(data.msg);
-                window.location.href="/manager/index?cn=hbloan_khyqmd&sdo=list&type=loan";
-            }
-        });
     }
 
 </script>

@@ -183,6 +183,28 @@ public class ManagerTools {
                 return "xmloan_hxgl";
             case "xmloan_jqcl":
                 return "xmloan_jqcl";
+            case "hxloan_khhklr":
+                return "hxloan_khhklr";
+            case "hxloan_khhkqk":
+                return "hxloan_khhkqk";
+            case "hxloan_car":
+                return "hxloan_car";
+            case "hxloan_phone":
+                return "hxloan_phone";
+            case "hxloan_khyqmd":
+                return "hxloan_khyqmd";
+            case "hxloan_dczy":
+                return "hxloan_dczy";
+            case "hxloan_tcgl":
+                return "hxloan_tcgl";
+            case "hxloan_ssgl":
+                return "hxloan_ssgl";
+            case "hxloan_pmgl":
+                return "hxloan_pmgl";
+            case "hxloan_hxgl":
+                return "hxloan_hxgl";
+            case "hxloan_jqcl":
+                return "hxloan_jqcl";
             // 不需要使用数据库的CN
             case "home":
             case "tlzf_ds":
