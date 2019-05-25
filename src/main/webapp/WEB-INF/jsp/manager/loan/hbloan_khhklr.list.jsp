@@ -59,7 +59,7 @@
                             <td class="text-center">
                                 <div class="table-button">
                                         <c:if test="${!empty u.filepath}">
-                                            <a href="http://hbyhm.kcway.net${u.filepath}" target="view_window">
+                                            <a href="${u.filepath}" target="view_window">
                                                 <i class="fa fa-search-plus"></i>
                                             </a>
                                         </c:if>
@@ -72,7 +72,7 @@
                             </td>
                             <td class="text-center">
                                 <c:if test="${!empty u.filepath}">
-                                    <a href="http://hbyhm.kcway.net${u.filepath}" target="view_window">
+                                    <a href="${u.filepath}" target="view_window">
                                         <i class="glyphicon glyphicon-download-alt"></i>
                                     </a>
                                 </c:if>

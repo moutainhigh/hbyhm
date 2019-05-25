@@ -195,7 +195,7 @@ public class XMLoanImportExcelController {
         map.put("oriName", oriName);// 文件名称
         map.put("dt_add", Getnow());// 导入时间
         map.put("financial_products", "");
-        map.put("filepath", FILEUP_SAVEPATH+"Excel/" + relatDir1 + oriName);
+        map.put("filepath","upload/Excel/" + relatDir1 + oriName);
         map.put("mid_add", minfo.get("id"));// 获取操作人员
         map.put("mid_name", minfo.get("name"));// 获取操作人员
         map.put("gems_fs_id",minfo.get("icbc_erp_fsid"));// 公司ID
