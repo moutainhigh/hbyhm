@@ -21,8 +21,14 @@
                 String nowsdo = "";
                 String nowtype = "";
             %>
-            <li <% if (cn.equals("home") && type.equals("demo")) { %> class="active" <%}%>>
-                <a href="<%=urlHome%>"> <i class="fa fa-home"></i> <span>管理中心首页</span></a>
+            <li <% if (cn.equals("homeHx") && type.equals("demo")) { %> class="active" <%}%>>
+                <a href="<%=urlHome%>"> <i class="fa fa-home"></i> <span>华夏管理首页</span></a>
+            </li>
+            <li <% if (cn.equals("homeXm") && type.equals("demo")) { %> class="active" <%}%>>
+                <a href="/manager/index?cn=homeXm&sdo=form&type=demo"> <i class="fa fa-home"></i> <span>厦门管理首页</span></a>
+            </li>
+            <li <% if (cn.equals("homeHb") && type.equals("demo")) { %> class="active" <%}%>>
+                <a href="/manager/index?cn=homeHb&sdo=form&type=demo"> <i class="fa fa-home"></i> <span>河北管理首页</span></a>
             </li>
             <%
                 Map<String, Object> menus = (Map<String, Object>) request.getAttribute("menus");

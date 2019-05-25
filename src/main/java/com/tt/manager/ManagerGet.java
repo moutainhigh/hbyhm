@@ -13,6 +13,7 @@ import com.tt.tool.Config;
 import com.tt.tool.DbCtrl;
 import com.tt.tool.Tools;
 import com.tt.tool.UrlTools;
+import com.tt.visual.Visual;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +42,7 @@ public class ManagerGet {
         request.setAttribute("cssName", Config.MANAGER_SKINCSS);// 默认皮肤配色模板
         if (realCn == "") { // 为空时表示此cn不需要使用数据库，直接返回
             ManagerTools.doFetchDefault(request, cn, sdo);
+            Visual.management(request);
             return "jsp/manager/index_b";
         }
         TtMap post = Tools.getPostMap(request);// 过滤参数，过滤mysql的注入，url参数注入
