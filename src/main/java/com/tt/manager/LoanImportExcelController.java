@@ -52,8 +52,7 @@ public class LoanImportExcelController {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile file = multipartRequest.getFile("file");
         String relatDir1 = new SimpleDateFormat("yyyy/MM/dd/").format(new Date());
-        // 文件夹不存在则创建
-//        File fdir = new File("D:/gitRepository/ddbx/src/main/webapp/upload/Excel/" + relatDir1);
+        // 文件夹不存在则创建 E:/GIT_code/hbyhm/hbyhm/
 //        ? "src/main/webapp/upload/" /* 测试模式上传文件保存路径，/\开头的为绝对路径，否则是相对路径 */
 //        : "/KCDIMG/assess/upload/"; /* 生产模式上传文件保存路径，/\开头的为绝对路径，否则是相对路径 */
         File fdir = new File(FILEUP_SAVEPATH+"Excel/" + relatDir1);
@@ -201,9 +200,9 @@ public class LoanImportExcelController {
         map.put("filepath", FILEUP_SAVEPATH+"Excel/" + relatDir1 + oriName);
         map.put("mid_add", minfo.get("id"));// 获取操作人员
         map.put("mid_name", minfo.get("name"));// 获取操作人员
-        map.put("gems_fs_id",minfo.get("fsid"));// 公司ID
+        map.put("gems_fs_id",minfo.get("icbc_erp_fsid"));// 公司ID
         map.put("gems_id", minfo.get("gemsid"));// 公司人员ID
-        map.put("fsname", minfo.get("comname"));// 公司名字
+        map.put("fsname", "");// 公司名字
         long loan_import_record = Tools.recAdd(map, "hbloan_import_record");//把excel表格中的数据录入数据库表loan_import_excels //添加excel导入文件记录
 
         if(loan_import_record > 0){

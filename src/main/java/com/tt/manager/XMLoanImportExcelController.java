@@ -198,9 +198,9 @@ public class XMLoanImportExcelController {
         map.put("filepath", FILEUP_SAVEPATH+"Excel/" + relatDir1 + oriName);
         map.put("mid_add", minfo.get("id"));// 获取操作人员
         map.put("mid_name", minfo.get("name"));// 获取操作人员
-        map.put("gems_fs_id",minfo.get("fsid"));// 公司ID
+        map.put("gems_fs_id",minfo.get("icbc_erp_fsid"));// 公司ID
         map.put("gems_id", minfo.get("gemsid"));// 公司人员ID
-        map.put("fsname", minfo.get("comname"));// 公司名字
+        map.put("fsname", "");// 公司名字
         long loan_import_record = Tools.recAdd(map, "xmloan_import_record");//把excel表格中的数据录入数据库表loan_import_excels //添加excel导入文件记录
 
         if(loan_import_record > 0){
