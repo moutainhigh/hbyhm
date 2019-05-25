@@ -16,7 +16,7 @@ public class hxloan_khhkqk extends DbCtrl {
     private String orderString = "GROUP BY icbc_id ORDER BY t.dt_edit DESC"; // 默认排序
     private boolean canDel = false;
     private boolean canAdd = false;
-    private final String classAgpId = "80"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
+    private final String classAgpId = "98"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
     public hxloan_khhkqk() {
