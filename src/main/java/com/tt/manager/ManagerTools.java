@@ -206,7 +206,9 @@ public class ManagerTools {
             case "hxloan_jqcl":
                 return "hxloan_jqcl";
             // 不需要使用数据库的CN
-            case "home":
+            case "homeHx":
+            case "homeXm":
+            case "homeHb":
             case "tlzf_ds":
             case "tlzf_df":
             case "button":
@@ -248,7 +250,7 @@ public class ManagerTools {
                 request.setAttribute("htmlpages", ""); // 分页的html代码
                 request.setAttribute("canDel", false); // 分页的html代码
                 request.setAttribute("canAdd", false); // 分页的html代码
-                if (cn.equals("home")) {
+                if (cn.equals("homeHx")) {
                     request.setAttribute("sHideButton", "true");
                 }
         }
@@ -261,7 +263,7 @@ public class ManagerTools {
      * @return: 返回
      */
     public static String getHomeUrl() {
-        return Tools.urlKill("sdo|type|cn|kw") + "&sdo=form&type=demo&cn=home";
+        return Tools.urlKill("sdo|type|cn|kw") + "&sdo=form&type=demo&cn=homeHx";
     }
 
     /**

@@ -102,7 +102,7 @@ public class Manager {
                     TtMap info = Tools.recinfo(sql);
                     if (info.size() > 0) {
                         Tools.formatResult(result2, true, 0, "登陆成功！",
-                                Tools.myIsNull(refer) ? "/manager/index?cn=home&sdo=form&type=demo" : URLDecoder.decode(refer, "UTF-8"));
+                                Tools.myIsNull(refer) ? "/manager/index?cn=homeHx&sdo=form&type=demo" : URLDecoder.decode(refer, "UTF-8"));
                         long id = Long.parseLong(info.get("id"));
                         Tools.setNowUser(id, Boolean.parseBoolean(info.get("isadmin")));
                     } else {
