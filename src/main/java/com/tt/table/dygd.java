@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 public class dygd extends DbCtrl {
     private final String title = "抵押归档";
@@ -247,7 +248,5 @@ public class dygd extends DbCtrl {
         request.setAttribute("canAdd", canAdd); // 是否显示新增按钮
         // request.setAttribute("showmsg", "测试弹出消息提示哈！"); //如果有showmsg字段，在载入列表前会提示
     }
-
-
 
 }

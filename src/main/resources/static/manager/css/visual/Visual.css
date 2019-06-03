@@ -1,0 +1,266 @@
+*{
+	-webkit-text-size-adjust: none;
+	margin: 0;
+	padding: 0;
+}
+button{
+	border: 0;
+}
+p{
+	padding: 0;
+	margin: 0;
+}
+li{
+	list-style-type: none;
+	/*float: left;*/
+}
+
+select {
+	border: 0 !important;  /*Removes border*/
+	appearance:none;
+	-webkit-appearance: none;  /*Removes default chrome and safari style*/
+	-moz-appearance: none; /* Removes Default Firefox style*/
+	background: #ECF0F5 no-repeat;  /*Adds background-image*/
+	/*My custom style for fonts*/
+	line-height: 15px;
+
+	color: #3B3B3B;
+}
+select::-ms-expand { display: none; }
+/* 标题字体样式 */
+.font_color_title{
+	color: black;
+	font-size: 23px;
+	line-height: 28px;
+	margin-left: 10px;
+}
+/*   选择代理商   下字体样式 */
+.font_color_1{
+	font-size: 14px;
+	color: #3B3B3B;
+	margin-left: 5px;
+}
+.font_color_2{
+	color: #FFFFFF;/* 白色 */
+}
+.font_size_1{
+	font-size: 12px;
+}
+.font_color_3{
+	color: #585855;
+}
+.font_size_3{
+	font-size: 14px;
+	text-align: center;
+	font-weight: bold;
+}
+.font_color_4{
+	color: #7C5246;
+
+}
+.danshu_style{
+	font-size: 23px;
+	font-weight: 600;
+	line-height: 23px;
+	margin-top: 5px;
+}
+.danshu_style font{
+	font-size: 12px;
+	padding-left: 5px;
+}
+.condition1 li{
+	margin: 0;
+	float: left;
+	width: 32%;
+	text-align: center;
+}
+
+.condition1 li div i{
+	margin-left: 2px;
+	font-weight: 500;
+	font-size: 20px;
+	width: 20px;
+	line-height: 22px;
+
+}
+.condition1 li i{
+	font-weight: 500;
+	font-size: 16px;
+	width: 20px;
+	line-height: 20px;
+}
+.condition1 li input{
+	width: 90%;
+	background: none;
+	border: 2px solid #A9A9A9;
+	padding-left: 5px;
+	border-radius: 2px;
+	color:#3B3B3B;
+}
+.condition2 li{
+	margin: 0;
+	float: left;
+	width: 50%;
+	text-align: center;
+}
+.condition2 li div i{
+	margin-left: 2px;
+	font-weight: 500;
+	font-size: 20px;
+	width: 20px;
+	line-height: 22px;
+
+}
+.condition2 li input{
+	width: 90%;
+	background: none;
+	border: 2px solid #A9A9A9;
+	padding-left: 5px;
+	border-radius: 2px;
+	color:#3B3B3B;
+}
+.paiming_top{
+	height: 12%;
+	width: 100%;
+}
+.paiming_top_border{
+	height: 55px;
+	background: #D48265;
+	border: 1px solid #D48265;
+	text-align: center;
+	border-radius:4px;
+	margin: auto;
+    margin-top:5px;
+}
+.paiming_button{
+	background: #F7A043;
+	float: right;
+	color: white;
+	margin-right: 19%;
+	font-size: 13px;
+	border-radius: 2px;
+	padding: 3px 8px;
+}
+.visual_form_top_box {
+	width: 100%;
+	height: 43%;
+}
+.visual_form_bottom_box {
+	width: 100%;
+	height: 56%;
+}
+.visual_form1_bottom {
+	width: 100%;
+	height: 50%;}
+.visual_form_box{
+	width: 48%;
+	height: 100%;
+	float: left;
+}
+/*.visual_form_box div{
+	display: inline-block;
+}*/
+.baodan_left{
+	width: 58%;
+	height: 100%;
+	float: left;
+}
+.baodan_right{
+	width: 38%;
+	height: 100%;
+	float: left;
+}
+.baodan_right_1{
+	width: 48%;
+	height: 100%;
+	float: left;
+}
+.paiming_bottom_border{
+	height: 67px;
+	background: #D48265;
+	border: 1px solid #D48265;
+	text-align: center;
+	border-radius:4px;
+
+}
+.visual_form2_box{
+	width: 100%;
+	height: 48%;
+}
+.form2_box{
+	width: 52%;
+	height: 100%;
+	float: left;
+}
+.form2_box1{
+	width: 44%;
+	height: 100%;
+	float: left;
+}
+.form2_box_1{
+	width: 48%;
+	height: 100%;
+	float: left;
+}
+.form2_box_2{
+	width: 51%;
+	height: 100%;
+	float: left;
+}
+.form2_box_left{
+	width: 98%;
+	height: 100%;
+	float: left;
+}
+.form2_box_right{
+	width: 38%;
+	height: 100%;
+	float: left;
+}
+
+.graph_statistics_content{
+	height: 55px;
+	text-align: center;
+	border-radius:4px;
+}
+
+
+
+/* 逾期率排行 */
+.graph_overdue_center{
+	height: 60%;
+	width: 90%;
+	margin-left: 5%;
+	font-size: 13px;
+}
+.graph_overdue_center th{
+	color:#424a66;
+	text-align: center;
+}
+.yuqigd td{
+	padding-top: 5px
+}
+.graph_overdue_center td{
+	text-align: center;
+}
+.graph_overdue_center td:first-child{
+	color: #6A5046;
+	padding-right: 2px;
+}
+.graph_overdue_center td:last-child{
+	color: #ED2C39;
+	padding-left: 2px;
+}
+.graph_overdue_right{
+	width: 100%;
+	height: 25px;
+}
+.graph_overdue_right .font_color_3{
+	padding-top: 5px;
+}
+.graph_overdue_right li{
+	display: inline-block;
+	float: left;
+	font-size: 12px;
+	width: 24%;
+}

@@ -15,6 +15,7 @@
         <input type="hidden" name="type" id="type" value="${type}">
         <input type="hidden" name="id" id="id" value="${empty qy.id?0:qy.id}">
         <input type="hidden" name="tl" id="tl" value="1">
+        <input type="hidden" name="qd_type" id="qd_type" value="${icbc.app}">
         <input type="hidden" name="icbc_id" id="icbc_id" value="${icbc.id}">
             <%--<input type="hidden" name="gems_id" id="gems_id" value="${minfo.gemsid}">--%>
             <%--<input type="hidden" name="gems_fs_id" id="gems_fs_id" value="${minfo.icbc_erp_fsid}">--%>
@@ -106,7 +107,8 @@
 <c:if test="${param.tl eq '2'}">
     <div class="box-body">
         <div class="modal-header">
-            <h4 class="modal-title" id="">已有<font color="green">代收</font>记录</h4>
+            <h4 class="modal-title" id="" style="display:inline;">已有<font color="green">代收</font>记录</h4>
+            <a href="javascript:0" style="float: right" onclick="confirm('确定清除代收记录吗?')?qcds(${icbc.id}):alert('取消')" class="btn btn-default">清除代收记录</a>
         </div>
         <c:if test="${empty dslist}">
             <div class="modal-body form-horizontal">
@@ -169,6 +171,7 @@
         <input type="hidden" name="cn" value="${cn}">
         <input type="hidden" name="type" value="${type}">
         <input type="hidden" name="id" value="0">
+        <input type="hidden" name="qd_type" id="qd_type" value="${icbc.app}">
         <input type="hidden" name="icbc_id" value="${icbc.id}">
         <div class="form-group" style="padding-top: 25px">
             <label for="title2" class="col-sm-3 control-label">签约信息:</label>
@@ -235,6 +238,29 @@
             elem: '#ds_date', //指定元素
             type: 'date'
         });
+
+
+        function qcds(icbcid) {
+            alert(icbcid);
+
+            $.ajax({
+                type: "POST",      //data 传送数据类型。post 传递
+                dataType: 'json',  // 返回数据的数据类型json
+                url: "/ttAjaxPost",  // 控制器方法
+                data: {
+                    do:'qcds',
+                    icbc_id:icbcid
+                },  //传送的数据
+                error: function () {
+                    alert("编辑失败...请稍后重试！");
+                },
+                success: function (data) {
+                    // alert(data.msg);
+                    window.location.reload();
+                }
+            });
+        }
+
     </script>
 </c:if>
 <c:if test="${param.tl eq '3'}">
@@ -302,6 +328,7 @@
         <input type="hidden" name="cn" value="${cn}">
         <input type="hidden" name="type" value="${type}">
         <input type="hidden" name="id" value="0">
+        <input type="hidden" name="qd_type" id="qd_type" value="${icbc.app}">
         <input type="hidden" name="icbc_id" value="${icbc.id}">
         <div class="form-group">
             <label for="title2" class="col-sm-3 control-label">账户名:</label>
@@ -425,5 +452,7 @@
             elem: '#ds_date', //指定元素
             type: 'date'
         });
+
+
     </script>
 </c:if>

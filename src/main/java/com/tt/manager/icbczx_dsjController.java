@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.tagext.PageData;
-import javax.swing.plaf.synth.SynthSpinnerUI;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,12 +24,12 @@ import java.util.UUID;
 @Controller
 public class icbczx_dsjController {
 
-    public final static String merchantNo = Config.TESTMODE?"QDS04477":"QDS04477";
-    public final static String loginId = "kuaichedao";
-    public final static String accessKey = "5D883646019F232F9E528D21C0E4C353";
-    public final static String shopNumber = "QDS04477";
+    public final static String merchantNo = Config.TESTMODE ? "QDS00859":"QDS04477";
+    public final static String loginId = Config.TESTMODE ? "jinyuanbaotest":"kuaichedao";
+    public final static String accessKey = Config.TESTMODE ? "30378115019385C7CA422171156073D1":"5D883646019F232F9E528D21C0E4C353";
+    public final static String shopNumber = Config.TESTMODE ? "QDS00908":"QDS04477";
     public final static String url = Config.TESTMODE
-            ? "https://www.qhrtcb.com/hbservice/risk/bodyguard"
+            ? "http://47.101.136.207:8080/hbservice/risk/bodyguard"
             : "http://www.hibdata.com:7070/hbservice/risk/bodyguard";
 
 
@@ -48,13 +47,14 @@ public class icbczx_dsjController {
         // map.put("accountName", "皮晴晴");
         // map.put("accountMobile", "13333333333");
         // map.put("idNumber", "330105196602220623");
+        System.out.println("mmm1m"+map);
+        System.out.println("2019/5/17  17.04 部署");
         String mpstr = HttpTools.httpClientPost(url, map, "UTF-8", headers);
         // mpstr = new String(mpstr.getBytes("GBK"), "ISO-8859-1");
         // mpstr = new String(mpstr.getBytes("ISO-8859-1"), "UTF-8");
         // System.out.println(mpstr);
         return mpstr;
     }
-
 
     /**
      * 字符串去重
@@ -89,8 +89,9 @@ public class icbczx_dsjController {
         String result = "";
         try {
             String report_id = "";
+            System.out.println("mmm" + map);
             result = getdsjzxhttp(map);
-            System.out.println("map:"+map);
+            System.out.println("result::" + result);
             // result = new String(result.getBytes("GBK"), "ISO-8859-1");
             // result = new String(result.getBytes("ISO-8859-1"), "UTF-8");
             JSONObject resjJsonObject = JSONObject.parseObject(result);
@@ -212,10 +213,19 @@ public class icbczx_dsjController {
     }
 
 
-    public static void main(String[] args) {
-        String s = "{\"detail\":{\"success\":1,\"id\":\"WF2019050617215212669706\",\"reasonDesc\":null,\"reasonCode\":null,\"resultDesc\":\"{\"ANTIFRAUD\":{\"risk_items\":[{\"risk_id\":1,\"rule_id\":\"30415014\",\"score\":1,\"rule_uuid\":\"08e7a359b530492bbf27f993a47bbff0\",\"risk_name\":\"6个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"}],\"cross_partner_count\":1,\"type\":\"cross_partner\"}},{\"risk_id\":2,\"rule_id\":\"30415024\",\"score\":0,\"rule_uuid\":\"d65fd878700c45918c74a5cc8057f159\",\"risk_name\":\"12个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"},{\"count\":1,\"industryDisplayName\":\"小额贷款公司\"}],\"cross_partner_count\":2,\"type\":\"cross_partner\"}},{\"risk_id\":3,\"rule_id\":\"30415034\",\"score\":0,\"rule_uuid\":\"92ce3f80062945219c650a0ef0890746\",\"risk_name\":\"24个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"},{\"count\":1,\"industryDisplayName\":\"小额贷款公司\"}],\"cross_partner_count\":2,\"type\":\"cross_partner\"}}],\"score\":1,\"decision\":\"PASS\"}}\"},\"status\":{\"isSuccess\":true,\"requestId\":\"78582c07a7e046bf919ea3ba935c9a47\",\"responseCode\":\"0000\",\"responseMessage\":\"查询成功!\",\"warningMessage\":null}}";
+    public static void main(String[] args) throws UnsupportedEncodingException {
+//        String s = "{\"detail\":{\"success\":1,\"id\":\"WF2019050617215212669706\",\"reasonDesc\":null,\"reasonCode\":null,\"resultDesc\":\"{\"ANTIFRAUD\":{\"risk_items\":[{\"risk_id\":1,\"rule_id\":\"30415014\",\"score\":1,\"rule_uuid\":\"08e7a359b530492bbf27f993a47bbff0\",\"risk_name\":\"6个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"}],\"cross_partner_count\":1,\"type\":\"cross_partner\"}},{\"risk_id\":2,\"rule_id\":\"30415024\",\"score\":0,\"rule_uuid\":\"d65fd878700c45918c74a5cc8057f159\",\"risk_name\":\"12个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"},{\"count\":1,\"industryDisplayName\":\"小额贷款公司\"}],\"cross_partner_count\":2,\"type\":\"cross_partner\"}},{\"risk_id\":3,\"rule_id\":\"30415034\",\"score\":0,\"rule_uuid\":\"92ce3f80062945219c650a0ef0890746\",\"risk_name\":\"24个月内申请人在多个平台申请借款\",\"risk_detail\":{\"cross_partner_details\":[{\"count\":1,\"industryDisplayName\":\"一般消费分期平台\"},{\"count\":1,\"industryDisplayName\":\"小额贷款公司\"}],\"cross_partner_count\":2,\"type\":\"cross_partner\"}}],\"score\":1,\"decision\":\"PASS\"}}\"},\"status\":{\"isSuccess\":true,\"requestId\":\"78582c07a7e046bf919ea3ba935c9a47\",\"responseCode\":\"0000\",\"responseMessage\":\"查询成功!\",\"warningMessage\":null}}";
+//
+//        Object obj = Tools.jsonDeCode(s.replace(":\"{", ":{").replace("}\"", "}"));
 
-        Object obj = Tools.jsonDeCode(s.replace(":\"{", ":{").replace("}\"", "}"));
+//        {accountMobile=17338812228, accountName=周荣丑, requestId=99e8b2b491764ae2a15567c04d1fa081, idNumber=352225198802281016}
+        Map<String, Object> map = new HashMap<>();
+        map.put("accountMobile", "17338812228");
+        map.put("accountName", "周荣丑");
+        map.put("requestId", UUID.randomUUID().toString().replaceAll("-", ""));
+        map.put("idNumber", "352225198802281016");
+
+        icbczx_dsjController.getdsjzxhttp(map);
 
     }
 }

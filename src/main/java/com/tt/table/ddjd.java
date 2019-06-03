@@ -72,29 +72,62 @@ public class ddjd extends DbCtrl {
         request.setAttribute("jdlist", jdlist);
 
         //获取进度各板块
-        TtList modallist = Tools.reclist("select * from sys_modal_hbyh where modal_tag=1 order by sort");
+        TtList modallist = Tools.reclist("select * from sys_modal_hbyh where modal_tag=1 and id_uplevel=" +post.get("id_uplevel") + " order by sort");
         request.setAttribute("modallist", modallist);
 
+        String bankname = "";
+        String jdsql1 = "";
+        if ("27".equals(post.get("id_uplevel"))){ //河北银行
+            bankname = "hbyh";
+            jdsql1 = "select \n" +
+                    "i1.id as id_28, \n" +
+                    "i2.id as id_29,\n" +
+                    "i3.id as id_49,\n" +
+                    "i4.id as id_50,\n" +
+                    "i5.id as id_34,\n" +
+                    "i6.id as id_40,\n" +
+                    "i7.id as id_51,\n" +
+                    "i8.id as id_52,\n" +
+                    "i9.id as id_53\n" +
+                    "from kj_icbc i1\n";
+        } else if ("57".equals(post.get("id_uplevel"))){
+            bankname = "hxyh";
+            jdsql1 = "select \n" +
+                    "i1.id as id_58, \n" +
+                    "i2.id as id_59,\n" +
+                    "i3.id as id_60,\n" +
+                    "i4.id as id_61,\n" +
+                    "i5.id as id_62,\n" +
+                    "i6.id as id_63,\n" +
+                    "i7.id as id_64,\n" +
+                    "i8.id as id_65,\n" +
+                    "i9.id as id_66\n" +
+                    "from kj_icbc i1\n";
+        } else if ("67".equals(post.get("id_uplevel"))){
+            bankname = "xmgj";
+            jdsql1 = "select \n" +
+                    "i1.id as id_68, \n" +
+                    "i2.id as id_69,\n" +
+                    "i3.id as id_70,\n" +
+                    "i4.id as id_71,\n" +
+                    "i5.id as id_72,\n" +
+                    "i6.id as id_73,\n" +
+                    "i7.id as id_74,\n" +
+                    "i8.id as id_75,\n" +
+                    "i9.id as id_76\n" +
+                    "from kj_icbc i1\n";
+        }
+
         //查询各板块是否已进件
-        String jdsql = "select \n" +
-                "i1.id as id_28, \n" +
-                "i2.id as id_29,\n" +
-                "i3.id as id_49,\n" +
-                "i4.id as id_50,\n" +
-                "i5.id as id_34,\n" +
-                "i6.id as id_40,\n" +
-                "i7.id as id_51,\n" +
-                "i8.id as id_52,\n" +
-                "i9.id as id_53\n" +
-                "from kj_icbc i1\n" +
-                "LEFT JOIN hbyh_xxzl i2 ON i2.icbc_id=i1.id\n" +
-                "LEFT JOIN hbyh_yhht i3 ON i3.icbc_id=i1.id\n" +
-                "LEFT JOIN hbyh_gsht i4 ON i4.icbc_id=i1.id\n" +
-                "LEFT JOIN hbyh_gpsgd i5 ON i5.icbc_id=i1.id\n" +
-                "LEFT JOIN hbyh_dygd i6 ON i6.icbc_id=i1.id\n" +
-                "LEFT JOIN hbyh_yhclhs i7 ON i7.icbc_id=i1.id\n" +
-                "LEFT JOIN hbyh_gsclhs i8 ON i8.icbc_id=i1.id\n" +
-                "LEFT JOIN hbyh_dyclhs i9 ON i9.icbc_id=i1.id\n" +
+        String jdsql = jdsql1 +
+                "LEFT JOIN " +bankname + "_xxzl i2 ON i2.icbc_id=i1.id\n" +
+                "LEFT JOIN " +bankname + "_yhht i3 ON i3.icbc_id=i1.id\n" +
+                "LEFT JOIN " +bankname + "_gsht i4 ON i4.icbc_id=i1.id\n" +
+                "LEFT JOIN " +bankname + "_gpsgd i5 ON i5.icbc_id=i1.id\n" +
+                "LEFT JOIN " +bankname + "_dygd i6 ON i6.icbc_id=i1.id\n" +
+                "LEFT JOIN " +bankname + "_yhclhs i7 ON i7.icbc_id=i1.id\n" +
+                "LEFT JOIN " +bankname + "_gsclhs i8 ON i8.icbc_id=i1.id\n" +
+                "LEFT JOIN " +bankname + "_dyclhs i9 ON i9.icbc_id=i1.id\n" +
                 "where i1.id=" + post.get("icbc_id");
         TtMap jdtag = Tools.recinfo(jdsql);
         request.setAttribute("jdtag", jdtag);

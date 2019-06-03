@@ -139,8 +139,76 @@ public class ManagerTools {
                 return "xmgj_gsclhs";
             case "xmgj_dyclhs":
                 return "xmgj_dyclhs";
+            case "hbloan_khhklr":
+                return "hbloan_khhklr";
+            case "hbloan_khhkqk":
+                return "hbloan_khhkqk";
+            case "hbloan_car":
+                return "hbloan_car";
+            case "hbloan_phone":
+                return "hbloan_phone";
+            case "hbloan_khyqmd":
+                return "hbloan_khyqmd";
+            case "hbloan_dczy":
+                return "hbloan_dczy";
+            case "hbloan_tcgl":
+                return "hbloan_tcgl";
+            case "hbloan_ssgl":
+                return "hbloan_ssgl";
+            case "hbloan_pmgl":
+                return "hbloan_pmgl";
+            case "hbloan_hxgl":
+                return "hbloan_hxgl";
+            case "hbloan_jqcl":
+                return "hbloan_jqcl";
+            case "xmloan_khhklr":
+                return "xmloan_khhklr";
+            case "xmloan_khhkqk":
+                return "xmloan_khhkqk";
+            case "xmloan_car":
+                return "xmloan_car";
+            case "xmloan_phone":
+                return "xmloan_phone";
+            case "xmloan_khyqmd":
+                return "xmloan_khyqmd";
+            case "xmloan_dczy":
+                return "xmloan_dczy";
+            case "xmloan_tcgl":
+                return "xmloan_tcgl";
+            case "xmloan_ssgl":
+                return "xmloan_ssgl";
+            case "xmloan_pmgl":
+                return "xmloan_pmgl";
+            case "xmloan_hxgl":
+                return "xmloan_hxgl";
+            case "xmloan_jqcl":
+                return "xmloan_jqcl";
+            case "hxloan_khhklr":
+                return "hxloan_khhklr";
+            case "hxloan_khhkqk":
+                return "hxloan_khhkqk";
+            case "hxloan_car":
+                return "hxloan_car";
+            case "hxloan_phone":
+                return "hxloan_phone";
+            case "hxloan_khyqmd":
+                return "hxloan_khyqmd";
+            case "hxloan_dczy":
+                return "hxloan_dczy";
+            case "hxloan_tcgl":
+                return "hxloan_tcgl";
+            case "hxloan_ssgl":
+                return "hxloan_ssgl";
+            case "hxloan_pmgl":
+                return "hxloan_pmgl";
+            case "hxloan_hxgl":
+                return "hxloan_hxgl";
+            case "hxloan_jqcl":
+                return "hxloan_jqcl";
             // 不需要使用数据库的CN
-            case "home":
+            case "homeHx":
+            case "homeXm":
+            case "homeHb":
             case "tlzf_ds":
             case "tlzf_df":
             case "button":
@@ -182,7 +250,7 @@ public class ManagerTools {
                 request.setAttribute("htmlpages", ""); // 分页的html代码
                 request.setAttribute("canDel", false); // 分页的html代码
                 request.setAttribute("canAdd", false); // 分页的html代码
-                if (cn.equals("home")) {
+                if (cn.equals("homeHx")) {
                     request.setAttribute("sHideButton", "true");
                 }
         }
@@ -195,7 +263,7 @@ public class ManagerTools {
      * @return: 返回
      */
     public static String getHomeUrl() {
-        return Tools.urlKill("sdo|type|cn|kw") + "&sdo=form&type=demo&cn=home";
+        return Tools.urlKill("sdo|type|cn|kw") + "&sdo=form&type=demo&cn=homeHx";
     }
 
     /**

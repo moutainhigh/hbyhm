@@ -208,6 +208,13 @@ public class Ajax {
                     testDb.closeConn();
                 }
                 break;
+
+            case "qcds":
+                String sql = "DELETE FROM tlzf_dk_details WHERE icbc_id=" + post.get("icbc_id");
+                boolean recexec = new DbTools().recexec(sql);
+//                new DbTools().recexec("DELETE FROM tlzf_dk_details_result WHERE qryid=");
+                result2.put("结果", String.valueOf(recexec));
+                break;
         }
         return Tools.jsonEncode(result2);
     }
