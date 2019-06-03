@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.tagext.PageData;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +25,7 @@ import java.util.UUID;
 @Controller
 public class icbczx_dsjController {
 
-    public final static String merchantNo = "QDS04477";
+    public final static String merchantNo = Config.TESTMODE?"QDS04477":"QDS04477";
     public final static String loginId = "kuaichedao";
     public final static String accessKey = "5D883646019F232F9E528D21C0E4C353";
     public final static String shopNumber = "QDS04477";
@@ -53,6 +54,7 @@ public class icbczx_dsjController {
         // System.out.println(mpstr);
         return mpstr;
     }
+
 
     /**
      * 字符串去重
@@ -88,6 +90,7 @@ public class icbczx_dsjController {
         try {
             String report_id = "";
             result = getdsjzxhttp(map);
+            System.out.println("map:"+map);
             // result = new String(result.getBytes("GBK"), "ISO-8859-1");
             // result = new String(result.getBytes("ISO-8859-1"), "UTF-8");
             JSONObject resjJsonObject = JSONObject.parseObject(result);

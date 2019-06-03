@@ -25,9 +25,8 @@ public class ApiSms {
     private static String postPwd = "aG5u2stC";
 
     public static void main(String[] args) {
-        mmsSend("18637815946", "测试一下！", "");
+        mmsSend("18211860217", "验证码：888888888888888888888888888888888888888888888888", "");
     }
-
     /**
      * 发送短信，支持群发
      *
