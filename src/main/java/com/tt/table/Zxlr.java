@@ -56,6 +56,7 @@ public class Zxlr extends DbCtrl {
         String tmpWhere = "";
         String fieldsString = "t.*" +
                 ",f.name as fsname" +
+                ",aa.name as aa_name" +
                 ",a.name as adminname" +
                 ",dy.id as dy_id" +
                 ",dy.bc_status as dy_bc_status" +
@@ -110,10 +111,11 @@ public class Zxlr extends DbCtrl {
         showall = true; // 忽略deltag和showtag
         leftsql = " LEFT JOIN assess_fs f ON f.id=t.gems_fs_id " +
                 " LEFT JOIN assess_gems a ON a.id=t.gems_id" +
+                " LEFT JOIN assess_admin aa ON aa.id=t.current_editor_id" +
                 " LEFT JOIN hbyh_dygd dy ON dy.icbc_id=t.id" +
                 " LEFT JOIN tlzf_qy qy ON qy.icbc_id=t.id";
         list = lists(whereString, fieldsString);
-
+        System.out.println("fsdf"+list.get(0));
         if (!Tools.myIsNull(kw)) { // 搜索关键字高亮
             for (TtMap info : list) {
                 info.put("c_name",
@@ -153,6 +155,8 @@ public class Zxlr extends DbCtrl {
         String f = "t.*,a.name as admin_name,fs.name as fs_name";
         leftsql = " LEFT JOIN assess_gems a ON a.id=t.gems_id" +
                 " LEFT JOIN assess_fs fs ON fs.id=t.gems_fs_id";
+        TtMap minfo = Tools.minfo();
+        System.out.println("pp:"+post);
         long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
         TtMap info = info(nid, f);
         String jsonInfo = Tools.jsonEncode(info);
@@ -186,6 +190,10 @@ public class Zxlr extends DbCtrl {
                 TtList lslist = Tools.reclist("select * from kj_icbc_result where qryid=" + nid);
                 request.setAttribute("lslist", lslist);//
             }
+
+            TtMap map = new TtMap();
+            map.put("current_editor_id", minfo.get("id"));
+            Tools.recEdit(map, "kj_icbc", Long.parseLong(post.get("id")));
             request.setAttribute("info", jsonInfo);//info为json后的info
             request.setAttribute("infodb", info);//infodb为TtMap的info
             request.setAttribute("id", nid);
@@ -259,6 +267,17 @@ public class Zxlr extends DbCtrl {
         boolean bSuccess = errorCode == 0;
         Tools.formatResult(result2, bSuccess, errorCode, bSuccess ? "编辑" + title + "成功！" : errorMsg,
                 bSuccess ? nextUrl : "");//失败时停留在当前页面,nextUrl为空
+    }
+
+    @Override
+    public int edit(TtMap ary, long id) {
+
+        TtMap map = new TtMap();
+        map.put("current_editor_id", "-1");
+        int kj_icbc = Tools.recEdit(map, "kj_icbc", id);
+        System.out.println("issucc::" + kj_icbc);
+
+        return super.edit(ary, id);
     }
 
     @Override

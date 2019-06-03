@@ -11,6 +11,7 @@
 <div class="box">
     <%
         String url = Tools.urlKill("sdo|id")+"&sdo=form&id=";
+        TtMap minfo = Tools.minfo();
     %>
     <!-- /.box-header -->
     <div class="box-body">
@@ -75,9 +76,21 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="table-button">
+                                        <%
+                                            if (m.get("current_editor_id").length() == 0 || "-1".equals(m.get("current_editor_id")) || minfo.get("id").equals(m.get("current_editor_id"))) {
+                                        %>
                                         <a href="<%=url%><%=m.get("id")%>" class="btn btn-default">
                                             <i class="fa fa-pencil"></i>
                                         </a>
+                                        <%
+                                        } else {
+                                        %>
+                                        <a href="javascript:return false;" style="opacity: 0.2" class="btn btn-default">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <%
+                                            }
+                                        %>
                                         <a href="index?cn=ddjd&sdo=form&type=tyjj&icbc_id=<%=m.get("id")%>&id=<%=m.get("id")%>&tab=28&id_uplevel=57" class="btn btn-default">
                                             <i class="fa fa-search"></i>
                                         </a>
