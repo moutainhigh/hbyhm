@@ -36,6 +36,17 @@
                     </select>
                 </div>
             </div>
+            <%} else if (minfo.get("superadmin").equals("3")) {%>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">账户类型</label>
+                <div class="col-sm-10">
+                    <select id="superadmin" name="superadmin" class="form-control">
+                        <option value="0">普通账户</option>
+                        <option value="2">内部员工</option>
+                        <option value="3">管理员</option>
+                    </select>
+                </div>
+            </div>
             <%} else if (minfo.get("superadmin").equals("2")) {%>
             <div class="form-group">
                 <label class="col-sm-2 control-label">账户类型</label>
