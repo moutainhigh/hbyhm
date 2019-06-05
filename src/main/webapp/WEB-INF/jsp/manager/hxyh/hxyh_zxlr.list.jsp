@@ -85,7 +85,7 @@
                                         <%
                                         } else {
                                         %>
-                                        <a href="javascript:return false;" style="opacity: 0.2" class="btn btn-default">
+                                        <a href="javascript:return false;" onclick="alert('用户'+'<%=m.get("aa_name")%>'+'正在操作')" style="opacity: 0.2" class="btn btn-default">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                         <%
