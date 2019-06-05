@@ -133,8 +133,10 @@ public class xmgj_gpsgd extends DbCtrl {
      * @return: 返回
      */
     public void doPost(TtMap post, long id, TtMap result2) {
+        System.out.println("请求参数post：" + post);
         TtMap newpost=new TtMap();
         newpost.putAll(post);
+        System.out.println("new post: " + newpost);
         long icbc_id = 0;
         //imgs(post);
         if (id > 0) { // id为0时，新增
@@ -150,16 +152,19 @@ public class xmgj_gpsgd extends DbCtrl {
         //历史添加
         TtMap res = new TtMap();
         res.put("qryid", String.valueOf(icbc_id));
-        res.put("status", post.get("bc_status"));
+        res.put("status", newpost.get("bc_status"));
         res.put("remark", newpost.get("remark1"));
         Tools.recAdd(res, "xmgj_gpsgd_result");
 
-        if(StringUtils.isNotEmpty(post.get("mid_add")) && post.get("mid_add").equals(post.get("mid_edit"))){
-            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark1"), post.get("c_name"), "GPS归档", "厦门国际银行", post.get("mid_add"));
+        String sql = "select c_name from kj_icbc where id=" + newpost.get("icbc_id");
+        TtMap recinfo = Tools.recinfo(sql);
+        System.out.println("recinfo  " + recinfo);
+        if(StringUtils.isNotEmpty(newpost.get("mid_add")) && newpost.get("mid_add").equals(newpost.get("mid_edit"))){
+            Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"), "GPS归档", "厦门国际银行", newpost.get("mid_add"));
 
         } else {
-            Addadmin_msg.addmsg(post.get("mid_add"), post.get("bc_status"), newpost.get("remark1"), post.get("c_name"),"GPS归档","厦门国际银行", post.get("mid_add"));
-            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark1"), post.get("c_name"), "GPS归档", "厦门国际银行", post.get("mid_add"));
+            Addadmin_msg.addmsg(newpost.get("mid_add"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"),"GPS归档","厦门国际银行", newpost.get("mid_add"));
+            Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"), "GPS归档", "厦门国际银行", newpost.get("mid_add"));
 
         }
 
