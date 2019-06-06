@@ -160,6 +160,8 @@ public class Zxlr extends DbCtrl {
         long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
         TtMap info = info(nid, f);
         String jsonInfo = Tools.jsonEncode(info);
+        TtMap assess_admin = Tools.recinfo("select * from assess_admin where id =" + info.get("current_editor_id"));
+        System.out.println("当前操作人信息：" + assess_admin);
         if (!Tools.myIsNull(post.get("toZip")) && post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
             //征信录入资料
@@ -197,6 +199,7 @@ public class Zxlr extends DbCtrl {
             request.setAttribute("info", jsonInfo);//info为json后的info
             request.setAttribute("infodb", info);//infodb为TtMap的info
             request.setAttribute("id", nid);
+            request.setAttribute("assess_admin", assess_admin);
             //request.setAttribute("tl", post.get("tl"));
         }
     }

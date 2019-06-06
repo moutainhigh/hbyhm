@@ -11,6 +11,7 @@
 <div class="box">
     <%
         String url = Tools.urlKill("sdo|id")+"&sdo=form&id=";
+        TtMap minfo = Tools.minfo();
     %>
     <!-- /.box-header -->
     <div class="box-body">
@@ -71,6 +72,13 @@
                                 <span class="label label-success"><%=DataDic.dic_zx_status.get(m.get("bc_status"))%></span>
                             </td>
                             <td class="text-center">
+                                <%
+                                    if (!(m.get("current_editor_id").length() == 0 || "-1".equals(m.get("current_editor_id")) || minfo.get("id").equals(m.get("current_editor_id")))) {
+                                %>
+                                <span class="label label-success">用户<%=m.get("aa_name")%>正在操作</span>
+                                <%
+                                    }
+                                %>
                                 <div class="table-button">
                                     <a href="<%=url%><%=m.get("id")%>" class="btn btn-default">
                                         <i class="fa fa-pencil"></i>
