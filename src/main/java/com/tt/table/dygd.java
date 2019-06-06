@@ -180,7 +180,7 @@ public class dygd extends DbCtrl {
 
         String whereString = "true";;
         String tmpWhere = "";
-        String fieldsString = "t.*,f.name as fsname,a.name as adminname,i.c_name as c_name";
+        String fieldsString = "t.*,f.name as fsname,a.name as adminname,i.c_name as c_name,i.fk_status,i.id as icbc_id";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
         //超级管理员

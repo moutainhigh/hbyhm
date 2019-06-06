@@ -215,6 +215,18 @@ public class Ajax {
 //                new DbTools().recexec("DELETE FROM tlzf_dk_details_result WHERE qryid=");
                 result2.put("结果", String.valueOf(recexec));
                 break;
+            case "xgdz":
+                TtMap map =  new TtMap();
+                map.put("fk_status", post.get("fk_status"));
+                int i = Tools.recEdit(map, "kj_icbc", Long.parseLong(post.get("icbc_id")));
+                String res = "";
+                if (i > 0) {
+                    res = "success";
+                } else {
+                    res = "error";
+                }
+                result2.put("结果", res);
+                break;
         }
         return Tools.jsonEncode(result2);
     }

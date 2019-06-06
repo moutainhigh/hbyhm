@@ -40,6 +40,9 @@
                                 提交/更新时间
                             </th>
                             <th class="text-center">
+                                垫资/放款状态
+                            </th>
+                            <th class="text-center">
                                 状态
                             </th>
                             <th class="text-center">操作</th>
@@ -50,6 +53,7 @@
                             TtList list=(TtList) request.getAttribute("list");
                             if(list!=null&&list.size()>0){
                                 for(TtMap m:list){
+                                    request.setAttribute("m",m);
                         %>
                         <tr role="row" class="odd">
                             <td class="hidden-xs text-center">
@@ -66,6 +70,14 @@
                             </td>
                             <td class="text-center">
                                 <%=m.get("dt_add")%><br><%=m.get("dt_edit")%>
+                            </td>
+                            <td>
+                                <select id="fk_status" onchange="change('<%=m.get("icbc_id")%>',this.value)" class="selectpicker  form-control" data-max-options="1">
+                                    <option id="0" value="0" ${m.fk_status eq '0'?"selected = 'selected'":''}>未垫资</option>
+                                    <option id="1" value="1" ${m.fk_status eq '1'?"selected = 'selected'":''}>已垫资</option>
+                                    <option id="2" value="2" ${m.fk_status eq '2'?"selected = 'selected'":''}>已放款</option>
+                                </select>
+
                             </td>
                             <td class="text-center">
                                 <span class="label label-success"><%=DataDic.dic_zx_status.get(m.get("bc_status"))%></span>
@@ -90,6 +102,32 @@
     </div>
 </div>
 <script>
+
+        function change(icbc_id,value) {
+            // alert(icbc_id);
+            /*var options = $("#fk_status option:selected");
+            var fk_status = options.val();*/
+
+            // alert(value);
+            $.ajax({
+                type: "POST",      //data 传送数据类型。post 传递
+                dataType: 'json',  // 返回数据的数据类型json
+                url: "/ttAjaxPost",  // 控制器方法
+                data: {
+                    do:'xgdz',
+                    icbc_id:icbc_id,
+                    fk_status:value
+                },  //传送的数据
+                error: function () {
+                    alert("编辑失败...请稍后重试！");
+                },
+                success: function (data) {
+                     alert("更改成功");
+                }
+            });
+        }
+
+
 </script>
 </body>
 </html>

@@ -110,6 +110,7 @@ public class xmgj_xxzl extends DbCtrl {
      */
     public void doPost(TtMap post, long id, TtMap result2) {
         System.out.println("post:  "+post);
+        System.out.println("id:  " + id);
         long icbc_id = 0;
         TtMap newpost=new TtMap();
         newpost.putAll(post);
@@ -118,7 +119,8 @@ public class xmgj_xxzl extends DbCtrl {
             if (StringUtils.isEmpty(post.get("c_work_intime"))){
                 post.put("c_work_intime", "0000-00-00 00:00:00");
             }
-            edit(post, id);
+            int edit = edit(post, id);
+            System.out.println("修改结果 ： " + edit);
             icbc_id = id;
         } else {
             icbc_id = add(post);

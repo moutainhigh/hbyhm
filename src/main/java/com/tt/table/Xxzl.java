@@ -111,9 +111,11 @@ public class Xxzl extends DbCtrl {
      * @return: 返回
      */
     public void doPost(TtMap post, long id, TtMap result2) {
+        System.out.println("post" + post);
         long icbc_id = 0;
         TtMap newpost = new TtMap();
         newpost.putAll(post);
+        System.out.println("newpost: " + newpost);
         if (id > 0) { // id为0时，新增
             if (StringUtils.isEmpty(post.get("c_work_intime"))){
                 post.put("c_work_intime", "0000-00-00 00:00:00");
