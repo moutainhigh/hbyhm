@@ -168,6 +168,11 @@ public class xmgj_gpsgd extends DbCtrl {
         Tools.formatResult(result2, bSuccess, errorCode, bSuccess ? "编辑成功！" : errorMsg, bSuccess ? nextUrl : "");// 失败时停留在当前页面,nextUrl为空
     }
 
+    @Override
+    public void succ(TtMap array, long id, int sqltp) {
+        super.succ(array, id, sqltp);
+    }
+
     /**
      * @param {type} {type}
      * @说明: 给继承的子类重载用的
