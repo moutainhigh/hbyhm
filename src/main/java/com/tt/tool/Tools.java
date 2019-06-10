@@ -1443,7 +1443,7 @@ public class Tools {
 	}
 
 	/**
-	 * @description: 当前登陆用户是否超级管理员 用户信息表里的superadmin字段值为3
+	 * @description: 当前登陆用户是否管理员 用户信息表里的superadmin字段值为3
 	 * @param {type}
 	 * @return:
 	 */

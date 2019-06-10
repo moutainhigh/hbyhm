@@ -36,41 +36,43 @@ public class Xxzl extends DbCtrl {
     }
 
     //图片处理
-    public TtMap tozip(String imgs,String imgsname){
+    public TtMap tozip(String imgs, String imgsname) {
         TtMap imginfo = new TtMap();
-        if(!Tools.myIsNull(imgs)){
-            String[] imgstep2_1ss=imgs.split("\u0005");
-            for(int i=0;i<imgstep2_1ss.length;i++){
-                if(!Tools.myIsNull(imgstep2_1ss[i])){
-                    imginfo.put(imgsname+(i+1),imgstep2_1ss[i]);
+        if (!Tools.myIsNull(imgs)) {
+            String[] imgstep2_1ss = imgs.split("\u0005");
+            for (int i = 0; i < imgstep2_1ss.length; i++) {
+                if (!Tools.myIsNull(imgstep2_1ss[i])) {
+                    imginfo.put(imgsname + (i + 1), imgstep2_1ss[i]);
                 }
             }
         }
         return imginfo;
     }
+
     /**
      * @param {type} {type}
      * @说明: 给继承的子类重载用的
      * @return: 返回
      */
     public void doGetForm(HttpServletRequest request, TtMap post) {
-
-
-        String f = "t.*,a.name as admin_name,fs.name as fs_name,i.c_name as c_name";
+        String f = "t.*,a.name as admin_name,fs.name as fs_name,i.id as icbc_id,i.c_name as c_name";
         leftsql = " LEFT JOIN assess_gems a ON a.id=t.gems_id" +
                 " LEFT JOIN assess_fs fs ON fs.id=t.gems_fs_id" +
                 " LEFT JOIN kj_icbc i ON i.id=t.icbc_id";
         long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
         TtMap info = info(nid, f);
         String jsonInfo = Tools.jsonEncode(info);
-        if(!Tools.myIsNull(post.get("toZip"))&& post.get("toZip").equals("1")) {
+        TtMap minfo = Tools.minfo();
+        TtMap assess_admin = Tools.recinfo("select * from assess_admin where id =" + info.get("current_editor_id"));
+        System.out.println("当前操作人信息：" + assess_admin);
+        if (!Tools.myIsNull(post.get("toZip")) && post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
             //征信录入资料
-            TtMap imgstep9_1ss=tozip(info.get("imgstep9_1ss"),"车辆材料");
-            TtMap imgstep9_2ss=tozip(info.get("imgstep9_2ss"),"车辆信息");
+            TtMap imgstep9_1ss = tozip(info.get("imgstep9_1ss"), "车辆材料");
+            TtMap imgstep9_2ss = tozip(info.get("imgstep9_2ss"), "车辆信息");
             imginfo.putAll(imgstep9_1ss);
             imginfo.putAll(imgstep9_2ss);
-            if(!imginfo.isEmpty()) {
+            if (!imginfo.isEmpty()) {
                 try {
                     closeConn();
                     if (!Zip.imgsToZipDown(imginfo, title + ".zip", null)) {
@@ -85,11 +87,11 @@ public class Xxzl extends DbCtrl {
                         e.printStackTrace();
                     }
                 }
-            }else{
+            } else {
                 errorMsg = "导出ZIP失败!";
                 request.setAttribute("errorMsg", errorMsg);
             }
-        }else {
+        } else {
             //历史操作查询
             if (nid > 0) {
                 TtList lslist = Tools.reclist("select * from hbyh_xxzl_result where qryid=" + nid);
@@ -98,9 +100,15 @@ public class Xxzl extends DbCtrl {
                 TtMap icbc = Tools.recinfo("select * from kj_icbc where id=" + info.get("icbc_id"));
                 request.setAttribute("icbc", icbc);
             }
+
+            TtMap map = new TtMap();
+            map.put("current_editor_id", minfo.get("id"));
+            Tools.recEdit(map, "hbyh_xxzl", nid);
+
             request.setAttribute("info", jsonInfo);//info为json后的info
             request.setAttribute("infodb", info);//infodb为TtMap的info
             request.setAttribute("id", nid);
+            request.setAttribute("assess_admin", assess_admin);
         }
     }
 
@@ -110,9 +118,11 @@ public class Xxzl extends DbCtrl {
      * @return: 返回
      */
     public void doPost(TtMap post, long id, TtMap result2) {
+        System.out.println("post" + post);
         long icbc_id = 0;
-        TtMap newpost=new TtMap();
+        TtMap newpost = new TtMap();
         newpost.putAll(post);
+        System.out.println("newpost: " + newpost);
         if (id > 0) { // id为0时，新增
             if (StringUtils.isEmpty(post.get("c_work_intime"))){
                 post.put("c_work_intime", "0000-00-00 00:00:00");
@@ -121,24 +131,27 @@ public class Xxzl extends DbCtrl {
             icbc_id = id;
         } else {
             icbc_id = add(post);
-            TtMap map=new TtMap();
+            TtMap map = new TtMap();
             //订单编号更新操作
-            map.put("gems_code",orderutil.getOrderId("XXKCD", 7, icbc_id));
-            edit(map,icbc_id);
+            map.put("gems_code", orderutil.getOrderId("XXKCD", 7, icbc_id));
+            edit(map, icbc_id);
         }
         //历史添加
         TtMap res = new TtMap();
         res.put("qryid", String.valueOf(icbc_id));
-        res.put("status", post.get("bc_status"));
+        res.put("status", newpost.get("bc_status"));
         res.put("remark", newpost.get("remark1"));
         Tools.recAdd(res, "hbyh_xxzl_result");
 
-        if(StringUtils.isNotEmpty(post.get("mid_add")) && post.get("mid_add").equals(post.get("mid_edit"))){
-            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark1"), post.get("c_name"), "贷款材料", "河北银行", post.get("mid_add"));
+        String sql = "select c_name from kj_icbc where id=" + newpost.get("icbc_id");
+        TtMap recinfo = Tools.recinfo(sql);
+
+        if(StringUtils.isNotEmpty(newpost.get("mid_add")) && newpost.get("mid_add").equals(newpost.get("mid_edit"))){
+            Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"), "贷款材料", "河北银行", newpost.get("mid_add"));
 
         } else {
-            Addadmin_msg.addmsg(post.get("mid_add"), post.get("bc_status"), newpost.get("remark1"), post.get("c_name"),"贷款材料","河北银行", post.get("mid_add"));
-            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark1"), post.get("c_name"), "贷款材料", "河北银行", post.get("mid_add"));
+            Addadmin_msg.addmsg(newpost.get("mid_add"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"),"贷款材料","河北银行", newpost.get("mid_add"));
+            Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"), "贷款材料", "河北银行", newpost.get("mid_add"));
 
         }
 
@@ -163,9 +176,9 @@ public class Xxzl extends DbCtrl {
         int pageInt = Integer.valueOf(Tools.myIsNull(post.get("p")) == false ? post.get("p") : "1"); // 当前页
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
 
-        String whereString = "true";;
+        String whereString = "true";
         String tmpWhere = "";
-        String fieldsString = "t.*,f.name as fsname,a.name as adminname,i.c_name as c_name";
+        String fieldsString = "t.*,f.name as fsname,a.name as adminname,i.c_name as c_name,aa.name as aa_name";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
 
@@ -177,7 +190,7 @@ public class Xxzl extends DbCtrl {
         } else if (Tools.isCcAdmin(minfo)) {
             TtList fslist = Tools.reclist("select id,up_id from assess_fs where id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"));
             String sql = "";
-//            whereString += " AND ("; // 显示自己和下级公司的
+            //whereString += " AND ("; // 显示自己和下级公司的
             if (fslist.size() > 0) {
                 for (int l = 0; l < fslist.size(); l++) {
                     TtMap fs = fslist.get(l);
@@ -217,7 +230,8 @@ public class Xxzl extends DbCtrl {
         showall = true; // 忽略deltag和showtag
         leftsql = "LEFT JOIN assess_fs f ON f.id=t.gems_fs_id " +
                 "LEFT JOIN assess_gems a ON a.id=t.gems_id " +
-                "LEFT JOIN kj_icbc i ON i.id=t.icbc_id";
+                "LEFT JOIN kj_icbc i ON i.id=t.icbc_id " +
+                "LEFT JOIN assess_admin aa ON aa.id=t.current_editor_id";
         list = lists(whereString, fieldsString);
 
         if (!Tools.myIsNull(kw)) { // 搜索关键字高亮
@@ -248,19 +262,19 @@ public class Xxzl extends DbCtrl {
         } else {
             String myErroMsg = "";
 
-            if(Tools.myIsNull(array.get("cardt1"))){
+            if (Tools.myIsNull(array.get("cardt1"))) {
                 myErroMsg += "登记日期不能为空！\n";
             }
 /*            if(Tools.myIsNull(array.get("c_buycar_bd"))){
                 myErroMsg += "出生日期不能为空！\n";
             }*/
-            if(Tools.myIsNull(array.get("c_work_intime"))){
+            if (Tools.myIsNull(array.get("c_work_intime"))) {
                 myErroMsg += "入职时间不能为空！\n";
             }
-            if(Tools.myIsNull(array.get("carindate"))){
+            if (Tools.myIsNull(array.get("carindate"))) {
                 myErroMsg += "登记日期不能为空！\n";
             }
-            if(Tools.myIsNull(array.get("carl"))){
+            if (Tools.myIsNull(array.get("carl"))) {
                 myErroMsg += "汽车排量不能为空！\n";
             }
             super.errorMsg = super.chkMsg = myErroMsg;

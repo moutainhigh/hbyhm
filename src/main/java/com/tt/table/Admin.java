@@ -326,6 +326,9 @@ public class Admin extends DbCtrl {
     // 操作成功会执行这个方法
     @Override
     public void succ(TtMap array, long id, int sqltp) {
+        System.out.println("aarrr: " + array);
+        System.out.println("id: " + id);
+        System.out.println("dopost方法执行成功进入srcc");
         TtMap gems = new TtMap();
         gems.put("name", array.get("name"));
         gems.put("fsid", array.get("icbc_erp_fsid"));
@@ -342,9 +345,16 @@ public class Admin extends DbCtrl {
         } else {
             gems.put("imgurl", array.get("imgurl"));
         }
-        if (id > 0) {
+
+        TtMap recinfo = Tools.recinfo("select * from assess_gems where mem_id=" + id);
+        if (recinfo.size() > 0) {
+            System.out.println("修改用户");
             Tools.recEdit(gems, "assess_gems", Long.valueOf(array.get("gemsid")));
+            TtMap map = new TtMap();
+            map.put("gemsid", String.valueOf(recinfo.get("id")));
+            Tools.recEdit(map, "assess_admin", id);
         } else {
+            System.out.println("新增用户");
             gems.put("deltag", "0");
             gems.put("aid_ssm", "0");
             gems.put("hometag", "0");

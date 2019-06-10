@@ -162,6 +162,8 @@ public class xmgj_zxlr extends DbCtrl {
         long nid = Tools.myIsNull(post.get("id"))?0:Tools.strToLong(post.get("id"));
         TtMap info = info(nid,f);
         String jsonInfo = Tools.jsonEncode(info);
+        TtMap assess_admin = Tools.recinfo("select * from assess_admin where id =" + info.get("current_editor_id"));
+        System.out.println("当前操作人信息：" + assess_admin);
         if(!Tools.myIsNull(post.get("toZip"))&& post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
             //征信录入资料
@@ -201,6 +203,7 @@ public class xmgj_zxlr extends DbCtrl {
             request.setAttribute("info", jsonInfo);//info为json后的info
             request.setAttribute("infodb", info);//infodb为TtMap的info
             request.setAttribute("id", nid);
+            request.setAttribute("assess_admin", assess_admin);
         }
     }
 
@@ -255,16 +258,19 @@ public class xmgj_zxlr extends DbCtrl {
         //历史添加
         TtMap res=new TtMap();
         res.put("qryid",String.valueOf(icbc_id));
-        res.put("status",post.get("bc_status"));
+        res.put("status",newpost.get("bc_status"));
         res.put("remark",newpost.get("remark"));
         Tools.recAdd(res,"kj_icbc_result");
 
-        if(StringUtils.isNotEmpty(post.get("mid_add")) && post.get("mid_add").equals(post.get("mid_edit"))){
-            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark"), post.get("c_name"), "征信录入", "厦门国际银行", post.get("mid_add"));
+        String sql = "select c_name from kj_icbc where id=" + newpost.get("icbc_id");
+        TtMap recinfo = Tools.recinfo(sql);
+
+        if(StringUtils.isNotEmpty(newpost.get("mid_add")) && newpost.get("mid_add").equals(post.get("mid_edit"))){
+            Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark"), recinfo.get("c_name"), "征信录入", "厦门国际银行", newpost.get("mid_add"));
 
         } else {
-            Addadmin_msg.addmsg(post.get("mid_add"), post.get("bc_status"), newpost.get("remark"), post.get("c_name"),"征信录入","厦门国际银行", post.get("mid_add"));
-            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark"), post.get("c_name"), "征信录入", "厦门国际银行", post.get("mid_add"));
+            Addadmin_msg.addmsg(newpost.get("mid_add"), newpost.get("bc_status"), newpost.get("remark"), recinfo.get("c_name"),"征信录入","厦门国际银行", newpost.get("mid_add"));
+            Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark"), recinfo.get("c_name"), "征信录入", "厦门国际银行", newpost.get("mid_add"));
 
         }
 

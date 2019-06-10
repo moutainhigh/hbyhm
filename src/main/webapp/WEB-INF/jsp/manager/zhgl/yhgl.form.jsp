@@ -36,7 +36,18 @@
                     </select>
                 </div>
             </div>
-            <%}else if(minfo.get("superadmin").equals("2")){%>
+            <%} else if (minfo.get("superadmin").equals("3")) {%>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">账户类型</label>
+                <div class="col-sm-10">
+                    <select id="superadmin" name="superadmin" class="form-control">
+                        <option value="0">普通账户</option>
+                        <option value="2">内部员工</option>
+                        <option value="3">管理员</option>
+                    </select>
+                </div>
+            </div>
+            <%} else if (minfo.get("superadmin").equals("2")) {%>
             <div class="form-group">
                 <label class="col-sm-2 control-label">账户类型</label>
                 <div class="col-sm-10">
@@ -61,9 +72,9 @@
                 <div class="col-sm-10">
                     <select id="icbc_erp_fsid" name="icbc_erp_fsid" title="请选择所属公司" data-size="10"
                             class="selectpicker  form-control"
-                            multiple data-live-search="true" data-max-options="1">
+                            multiple data-live-search="true" data-max-options="1" onchange="getagp(this.value) ">
                         <c:forEach items="${fslist}" var="fs">
-                                <option value="${fs.id}" ${infodb.icbc_erp_fsid eq fs.id?"selected='selected'":''}>${fs.name}</option>
+                            <option value="${fs.id}" ${infodb.icbc_erp_fsid eq fs.id?"selected='selected'":''}>${fs.name}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -92,8 +103,8 @@
                     var py = getPinYinFirstCharacter(name, "", "");
                     py = py.replace(/\ +/g, "").replace(/[\r\n]/g, "");
                     var tel = $("#tel").val();
-                    $("#username").val(py+"@"+tel);
-                    var password=tel.substring(tel.length-6,tel.length);
+                    $("#username").val(py + "@" + tel);
+                    var password = tel.substring(tel.length - 6, tel.length);
                     $("#password").val(password);
                 }
             </script>
@@ -300,8 +311,8 @@
                         </option>
                         <%}%>
                         <%
-                        TtList agplist = Tools.reclist("select * from icbc_admin_agp where showtag=1 and systag=0 AND fsid=" + minfo.get("icbc_erp_fsid"));
-                        if (agplist.size() > 0) {
+                            TtList agplist = Tools.reclist("select * from icbc_admin_agp where showtag=1 and systag=0 AND fsid=" + minfo.get("icbc_erp_fsid"));
+                            if (agplist.size() > 0) {
                         %>
                         <%=Tools.dicopt("icbc_admin_agp", Tools.myIsNull(infodb.get("agpid")) ? 0 : Long.valueOf(infodb.get("agpid")), "systag=0 AND fsid=" + minfo.get("icbc_erp_fsid"), "")%>
                         <%

@@ -140,16 +140,19 @@ public class hxyh_dygd extends DbCtrl {
         //历史添加
         TtMap res = new TtMap();
         res.put("qryid", String.valueOf(icbc_id));
-        res.put("status", post.get("bc_status"));
+        res.put("status", newpost.get("bc_status"));
         res.put("remark", newpost.get("remark1"));
         Tools.recAdd(res, "hxyh_dygd_result");
 
-        if(StringUtils.isNotEmpty(post.get("mid_add")) && post.get("mid_add").equals(post.get("mid_edit"))){
-            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark1"), post.get("c_name"), "抵押归档", "华夏银行", post.get("mid_add"));
+        String sql = "select c_name from kj_icbc where id=" + newpost.get("icbc_id");
+        TtMap recinfo = Tools.recinfo(sql);
+
+        if(StringUtils.isNotEmpty(newpost.get("mid_add")) && newpost.get("mid_add").equals(newpost.get("mid_edit"))){
+            Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"), "抵押归档", "华夏银行", newpost.get("mid_add"));
 
         } else {
-            Addadmin_msg.addmsg(post.get("mid_add"), post.get("bc_status"), newpost.get("remark1"), post.get("c_name"),"抵押归档","华夏银行", post.get("mid_add"));
-            Addadmin_msg.addmsg(post.get("mid_edit"), post.get("bc_status"), newpost.get("remark1"), post.get("c_name"), "抵押归档", "华夏银行", post.get("mid_add"));
+            Addadmin_msg.addmsg(newpost.get("mid_add"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"),"抵押归档","华夏银行", newpost.get("mid_add"));
+            Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"), "抵押归档", "华夏银行", newpost.get("mid_add"));
 
         }
 
@@ -176,7 +179,7 @@ public class hxyh_dygd extends DbCtrl {
 
         String whereString = "true";;
         String tmpWhere = "";
-        String fieldsString = "t.*,f.name as fsname,a.name as adminname,i.c_name as c_name";
+        String fieldsString = "t.*,f.name as fsname,a.name as adminname,i.c_name as c_name,i.fk_status,i.id as icbc_id";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
         //超级管理员
