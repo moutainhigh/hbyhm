@@ -54,6 +54,7 @@ public class Xxzl extends DbCtrl {
      * @说明: 给继承的子类重载用的
      * @return: 返回
      */
+    @Override
     public void doGetForm(HttpServletRequest request, TtMap post) {
         String f = "t.*,a.name as admin_name,fs.name as fs_name,i.id as icbc_id,i.c_name as c_name";
         leftsql = " LEFT JOIN assess_gems a ON a.id=t.gems_id" +
@@ -68,10 +69,14 @@ public class Xxzl extends DbCtrl {
         if (!Tools.myIsNull(post.get("toZip")) && post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
             //征信录入资料
-            TtMap imgstep9_1ss = tozip(info.get("imgstep9_1ss"), "车辆材料");
-            TtMap imgstep9_2ss = tozip(info.get("imgstep9_2ss"), "车辆信息");
+            TtMap imgstep9_1ss=tozip(info.get("imgstep9_1ss"),"车辆材料");
+            TtMap imgstep9_2ss=tozip(info.get("imgstep9_2ss"),"车辆信息");
+            TtMap imgstep10_1ss=tozip(info.get("imgstep10_1ss"),"家访材料");
+            TtMap imgstep11_1ss=tozip(info.get("imgstep11_1ss"),"证明材料");
             imginfo.putAll(imgstep9_1ss);
             imginfo.putAll(imgstep9_2ss);
+            imginfo.putAll(imgstep10_1ss);
+            imginfo.putAll(imgstep11_1ss);
             if (!imginfo.isEmpty()) {
                 try {
                     closeConn();
@@ -100,11 +105,9 @@ public class Xxzl extends DbCtrl {
                 TtMap icbc = Tools.recinfo("select * from kj_icbc where id=" + info.get("icbc_id"));
                 request.setAttribute("icbc", icbc);
             }
-
             TtMap map = new TtMap();
             map.put("current_editor_id", minfo.get("id"));
             Tools.recEdit(map, "hbyh_xxzl", nid);
-
             request.setAttribute("info", jsonInfo);//info为json后的info
             request.setAttribute("infodb", info);//infodb为TtMap的info
             request.setAttribute("id", nid);
@@ -117,6 +120,7 @@ public class Xxzl extends DbCtrl {
      * @说明: 给子类重载用，处理post
      * @return: 返回
      */
+    @Override
     public void doPost(TtMap post, long id, TtMap result2) {
         System.out.println("post" + post);
         long icbc_id = 0;
@@ -124,7 +128,7 @@ public class Xxzl extends DbCtrl {
         newpost.putAll(post);
         System.out.println("newpost: " + newpost);
         if (id > 0) { // id为0时，新增
-            if (StringUtils.isEmpty(post.get("c_work_intime"))){
+            if (StringUtils.isEmpty(post.get("c_work_intime"))) {
                 post.put("c_work_intime", "0000-00-00 00:00:00");
             }
             edit(post, id);
@@ -146,11 +150,11 @@ public class Xxzl extends DbCtrl {
         String sql = "select c_name from kj_icbc where id=" + newpost.get("icbc_id");
         TtMap recinfo = Tools.recinfo(sql);
 
-        if(StringUtils.isNotEmpty(newpost.get("mid_add")) && newpost.get("mid_add").equals(newpost.get("mid_edit"))){
+        if (StringUtils.isNotEmpty(newpost.get("mid_add")) && newpost.get("mid_add").equals(newpost.get("mid_edit"))) {
             Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"), "贷款材料", "河北银行", newpost.get("mid_add"));
 
         } else {
-            Addadmin_msg.addmsg(newpost.get("mid_add"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"),"贷款材料","河北银行", newpost.get("mid_add"));
+            Addadmin_msg.addmsg(newpost.get("mid_add"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"), "贷款材料", "河北银行", newpost.get("mid_add"));
             Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"), "贷款材料", "河北银行", newpost.get("mid_add"));
 
         }
@@ -165,6 +169,7 @@ public class Xxzl extends DbCtrl {
      * @说明: 给继承的子类重载用的
      * @return: 返回
      */
+    @Override
     public void doGetList(HttpServletRequest request, TtMap post) {
         if (!agpOK) {// 演示在需要权限检查的地方插入权限标志判断
             request.setAttribute("errorMsg", errorMsg);
@@ -181,31 +186,37 @@ public class Xxzl extends DbCtrl {
         String fieldsString = "t.*,f.name as fsname,a.name as adminname,i.c_name as c_name,aa.name as aa_name";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
+        //根据权限获取公司id
+        String fsids = "";
+        TtList fslist = new TtList();
+        switch (minfo.get("superadmin")) {
+            case "0":
+                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id=" + minfo.get("icbc_erp_fsid"));
+                break;
+            case "1":
+                fslist = Tools.reclist("select * from assess_fs where deltag=0 and showtag=1 and name!=''");
+                break;
+            case "2":
+                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
+                break;
+            case "3":
+                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in (" + Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
+                break;
+            default:
 
-        //超级管理员
-        if(Tools.isSuperAdmin(minfo)){
-
-        } else if(Tools.isAdmin(minfo)){//管理员
-
-        } else if (Tools.isCcAdmin(minfo)) {
-            TtList fslist = Tools.reclist("select id,up_id from assess_fs where id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"));
-            String sql = "";
-            //whereString += " AND ("; // 显示自己和下级公司的
-            if (fslist.size() > 0) {
-                for (int l = 0; l < fslist.size(); l++) {
-                    TtMap fs = fslist.get(l);
-                    if (l == fslist.size() - 1) {
-                        sql = sql + fs.get("id");
-                    } else {
-                        sql = sql + fs.get("id") + ",";
-                    }
+                break;
+        }
+        if (fslist.size() > 0) {
+            for (int l = 0; l < fslist.size(); l++) {
+                TtMap fs = fslist.get(l);
+                if (l == fslist.size() - 1) {
+                    fsids = fsids + fs.get("id");
+                } else {
+                    fsids = fsids + fs.get("id") + ",";
                 }
             }
-            whereString += " and t.gems_fs_id in (" + sql + ")";
-        } else {
-            whereString += " AND t.gems_fs_id=" + minfo.get("icbc_erp_fsid"); // 只显示自己公司的
         }
-
+        whereString += " AND t.gems_fs_id in (" + fsids + ")";
         /* 开始处理搜索过来的字段 */
         kw = post.get("kw");
         dtbe = post.get("dtbe");
@@ -221,8 +232,6 @@ public class Xxzl extends DbCtrl {
             // todo处理选择时间段
         }
         /* 搜索过来的字段处理完成 */
-
-
         whereString += tmpWhere; // 过滤
         orders = orderString;// 排序
         p = pageInt; // 显示页
@@ -231,7 +240,7 @@ public class Xxzl extends DbCtrl {
         leftsql = "LEFT JOIN assess_fs f ON f.id=t.gems_fs_id " +
                 "LEFT JOIN assess_gems a ON a.id=t.gems_id " +
                 "LEFT JOIN kj_icbc i ON i.id=t.icbc_id " +
-                "LEFT JOIN assess_admin aa ON aa.id=t.current_editor_id";
+                "LEFT JOIN assess_admin aa ON aa.id=i.current_editor_id";
         list = lists(whereString, fieldsString);
 
         if (!Tools.myIsNull(kw)) { // 搜索关键字高亮

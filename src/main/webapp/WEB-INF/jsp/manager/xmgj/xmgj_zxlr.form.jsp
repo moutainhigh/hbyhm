@@ -201,8 +201,8 @@
                 <label class="col-sm-2 control-label">贷款产品</label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
-                        <div class="col-sm-4">
-                            <%--<div class="input-group">
+                        <%--<div class="col-sm-4">
+                            <div class="input-group">
                                 <span class="input-group-addon">按揭银行</span>
                                 <select class="form-control" id="bank_id" name="bank_id">
                                     <option value="0">请选择按揭银行</option>
@@ -210,8 +210,9 @@
                                     <option value="2">工行武林支行</option>
                                     <option value="3">工行义乌支行</option>
                                 </select>
-                            </div>--%>
+                            </div>
                         </div>
+                        --%>
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">贷款产品</span>

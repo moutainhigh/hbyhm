@@ -64,30 +64,37 @@ public class Zxlr extends DbCtrl {
                 ",qy.qy_status as qy_qy_status";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
-        //超级管理员
-        if(Tools.isSuperAdmin(minfo)){
+        //根据权限获取公司id
+        String fsids="";
+        TtList fslist=new TtList();
+        switch (minfo.get("superadmin")) {
+            case "0":
+                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id="+minfo.get("icbc_erp_fsid"));
+                break;
+            case "1":
+                fslist = Tools.reclist("select * from assess_fs where deltag=0 and showtag=1 and name!=''");
+                break;
+            case "2":
+                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
+                break;
+            case "3":
+                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in (" + Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
+                break;
+            default:
 
-        } else if(Tools.isAdmin(minfo)){//管理员
-
-        } else if (Tools.isCcAdmin(minfo)) {
-            TtList fslist = Tools.reclist("select id,up_id from assess_fs where id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"));
-            String sql = "";
-//            whereString += " AND ("; // 显示自己和下级公司的
-            if (fslist.size() > 0) {
-                for (int l = 0; l < fslist.size(); l++) {
-                    TtMap fs = fslist.get(l);
-                    if (l == fslist.size() - 1) {
-                        sql = sql + fs.get("id");
-                    } else {
-                        sql = sql + fs.get("id") + ",";
-                    }
+                break;
+        }
+        if (fslist.size() > 0) {
+            for (int l = 0; l < fslist.size(); l++) {
+                TtMap fs = fslist.get(l);
+                if (l == fslist.size() - 1) {
+                    fsids = fsids + fs.get("id");
+                } else {
+                    fsids = fsids + fs.get("id") + ",";
                 }
             }
-            whereString += " and t.gems_fs_id in (" + sql + ")";
-        } else {
-            whereString += " AND t.gems_fs_id=" + minfo.get("icbc_erp_fsid"); // 只显示自己公司的
         }
-
+        whereString += " AND t.gems_fs_id in ("+fsids+")";
         /* 开始处理搜索过来的字段 */
         kw = post.get("kw");
         dtbe = post.get("dtbe");
@@ -103,8 +110,6 @@ public class Zxlr extends DbCtrl {
             // todo处理选择时间段
         }
         /* 搜索过来的字段处理完成 */
-
-
         whereString += tmpWhere; // 过滤
         orders = orderString;// 排序
         p = pageInt; // 显示页
@@ -136,7 +141,6 @@ public class Zxlr extends DbCtrl {
         // request.setAttribute("showmsg", "测试弹出消息提示哈！"); //如果有showmsg字段，在载入列表前会提示
 
     }
-
     //图片处理
     public TtMap tozip(String imgs, String imgsname) {
         TtMap imginfo = new TtMap();
@@ -150,7 +154,6 @@ public class Zxlr extends DbCtrl {
         }
         return imginfo;
     }
-
     @Override
     public void doGetForm(HttpServletRequest request, TtMap post) {
         String f = "t.*,a.name as admin_name,fs.name as fs_name";
@@ -248,27 +251,8 @@ public class Zxlr extends DbCtrl {
             post.put("gems_code", "0");
             post.put("query_type", "0");
             icbc_id = add(post);
-            TtMap ordermap = new TtMap();
-            ordermap.put("gems_code", orderutil.getOrderId("HBYHKCD", 7, icbc_id));
-            //更新订单字段
-            Tools.recEdit(ordermap, "kj_icbc", icbc_id);
-        }
-
-        System.out.println("+++"+newpost.get("mid_add")+"   "+newpost.get("mid_edit"));
-        String sql = "select c_name from kj_icbc where id=" + newpost.get("icbc_id");
-        TtMap recinfo = Tools.recinfo(sql);
-
-        if(StringUtils.isNotEmpty(newpost.get("mid_add")) && newpost.get("mid_add").equals(newpost.get("mid_edit"))){
-            System.out.println("添加人审核人相同");
-            Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark"), recinfo.get("c_name"), "征信录入", "河北银行", newpost.get("mid_add"));
-
-        } else {
-            System.out.println("添加人审核人不同");
-            Addadmin_msg.addmsg(newpost.get("mid_add"), newpost.get("bc_status"), newpost.get("remark"), recinfo.get("c_name"),"征信录入","河北银行", newpost.get("mid_add"));
-            Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark"), recinfo.get("c_name"), "征信录入", "河北银行", newpost.get("mid_add"));
 
         }
-
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
         boolean bSuccess = errorCode == 0;
         Tools.formatResult(result2, bSuccess, errorCode, bSuccess ? "编辑" + title + "成功！" : errorMsg,
@@ -277,7 +261,6 @@ public class Zxlr extends DbCtrl {
 
     @Override
     public int edit(TtMap ary, long id) {
-
         TtMap map = new TtMap();
         map.put("current_editor_id", "-1");
         int kj_icbc = Tools.recEdit(map, "kj_icbc", id);
@@ -288,6 +271,10 @@ public class Zxlr extends DbCtrl {
 
     @Override
     public void succ(TtMap array, long id, int sqltp) {
+        TtMap ordermap = new TtMap();
+        ordermap.put("gems_code", orderutil.getOrderId("HBYHKCD", 7, id));
+        //更新订单字段
+        Tools.recEdit(ordermap, "kj_icbc", id);
         //历史添加
         TtMap res = new TtMap();
         res.put("qryid", String.valueOf(id));
@@ -295,7 +282,19 @@ public class Zxlr extends DbCtrl {
         res.put("remark", array.get("remark"));
         Tools.recAdd(res, "kj_icbc_result");
         //推送
+        System.out.println("+++"+array.get("mid_add")+"   "+array.get("mid_edit"));
+        String sql = "select c_name from kj_icbc where id=" + array.get("icbc_id");
+        TtMap recinfo = Tools.recinfo(sql);
 
+        if(StringUtils.isNotEmpty(array.get("mid_add")) && array.get("mid_add").equals(array.get("mid_edit"))){
+            System.out.println("添加人审核人相同");
+            Addadmin_msg.addmsg(array.get("mid_edit"), array.get("bc_status"), array.get("remark"), recinfo.get("c_name"), "征信录入", "河北银行", array.get("mid_add"));
+
+        } else {
+            System.out.println("添加人审核人不同");
+            Addadmin_msg.addmsg(array.get("mid_add"), array.get("bc_status"), array.get("remark"), recinfo.get("c_name"),"征信录入","河北银行", array.get("mid_add"));
+            Addadmin_msg.addmsg(array.get("mid_edit"), array.get("bc_status"), array.get("remark"), recinfo.get("c_name"), "征信录入", "河北银行", array.get("mid_add"));
+        }
     }
 
     @Override

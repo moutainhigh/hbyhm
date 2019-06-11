@@ -75,6 +75,7 @@ public class ManagerCmd {
         switch (postUrl.get("sdo")) { // 目前只有form模式下有post
             case "edit":
                 long id = Tools.myIsNull(postUrl.get("id")) ? 0 : Tools.strToLong(postUrl.get("id"));
+
                 switch (cn) {
                     case "admin":
                         if (id > 0) {
@@ -89,6 +90,21 @@ public class ManagerCmd {
                                 admin.closeConn();
                             }
                         }
+                        break;
+                    case "assess_fs":
+                        TtMap ttMap1=new TtMap();
+                        ttMap1.put("showtag",post.get("showtag"));
+                        Tools.recEdit(ttMap1,"assess_fs",id);
+                        break;
+                    case "assess_admin":
+                        TtMap ttMap2=new TtMap();
+                        ttMap2.put("showtag",post.get("showtag"));
+                        Tools.recEdit(ttMap2,"assess_admin",id);
+                        break;
+                    case "sys_modal_hbyh":
+                        TtMap ttMap3=new TtMap();
+                        ttMap3.put("ismark",post.get("ismark"));
+                        Tools.recEdit(ttMap3,"sys_modal_hbyh",id);
                         break;
                     case "tlzf_dk_details":
                         if (id > 0) {

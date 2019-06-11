@@ -1613,4 +1613,50 @@ public class Tools {
 		return now.format(dateTimeFormatter);
 	}
 
+
+	//根据id递归获取下级公司
+	public static String getfsids(int fsid){
+		TtMap ttMap=Tools.recinfo("select * from(\n" +
+				"select t1.id,t1.up_id,\n" +
+				"              if(find_in_set(up_id, @pids) > 0, @pids := concat(@pids, ',', id), 0) as ischild\n" +
+				"              from (\n" +
+				"                   select * from assess_fs fs where fs.fs_type=2 and fs.deltag=0 order by fs.up_id,fs.id\n" +
+				"                  ) t1,\n" +
+				"              (select @pids :="+fsid+" ) t2\n" +
+				") t3 where t3.ischild!=0 order by t3.ischild DESC LIMIT 1");
+		return ttMap.get("ischild");
+	}
+
+	public static String getfsidsbyminfo(TtMap minfo){
+		String fsids="";
+		TtList fslist=new TtList();
+		switch (minfo.get("superadmin")) {
+			case "0":
+				fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id="+minfo.get("icbc_erp_fsid"));
+				break;
+			case "1":
+				fslist = Tools.reclist("select * from assess_fs where deltag=0 and showtag=1 and name!=''");
+				break;
+			case "2":
+				fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
+				break;
+			case "3":
+				fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in (" + Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
+				break;
+			default:
+
+				break;
+		}
+		if (fslist.size() > 0) {
+			for (int l = 0; l < fslist.size(); l++) {
+				TtMap fs = fslist.get(l);
+				if (l == fslist.size() - 1) {
+					fsids = fsids + fs.get("id");
+				} else {
+					fsids = fsids + fs.get("id") + ",";
+				}
+			}
+		}
+		return fsids;
+	}
 }

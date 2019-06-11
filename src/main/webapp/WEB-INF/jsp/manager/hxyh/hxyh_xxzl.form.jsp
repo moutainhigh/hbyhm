@@ -689,9 +689,9 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">与借款人关系</span>
-                                <input type="text" class="form-control" id="c_ec<%=i%>_rsforloan"
-                                       name="c_ec<%=i%>_rsforloan"
-                                       placeholder="">
+                                <select id="c_ec<%=i%>_rsforloan" name="c_ec<%=i%>_rsforloan" class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, infodb.get("c_ec"+i+"_rsforloan"))%>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-4">
