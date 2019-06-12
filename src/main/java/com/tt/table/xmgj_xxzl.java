@@ -8,6 +8,8 @@ import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
 
 public class xmgj_xxzl extends DbCtrl {
     private final String title = "贷款材料";
@@ -107,6 +109,21 @@ public class xmgj_xxzl extends DbCtrl {
         }
     }
 
+    @Override
+    public TtMap param(TtMap ary, long id) {
+        System.out.println("处理前map******"+ary);
+        Iterator<Map.Entry<String, String>> it = ary.entrySet().iterator();
+        while (it.hasNext()){
+            Map.Entry<String, String> entry=it.next();
+            String key=entry.getKey();
+            String value=entry.getValue();
+            if(Tools.myIsNull(value)){
+                it.remove();
+            }
+        }
+        System.out.println("处理后map******"+ary);
+        return ary;
+    }
     /**
      * @param {type} {type}
      * @说明: 给子类重载用，处理post
@@ -125,36 +142,37 @@ public class xmgj_xxzl extends DbCtrl {
             }
             int edit = edit(post, id);
             System.out.println("修改结果 ： " + edit);
-            icbc_id = id;
         } else {
-            icbc_id = add(post);
-            TtMap map=new TtMap();
-            //订单编号更新操作
-            map.put("gems_code",orderutil.getOrderId("XXKCD", 7, icbc_id));
-            edit(map,icbc_id);
+            add(post);
         }
-        //历史添加
-        TtMap res = new TtMap();
-        res.put("qryid", String.valueOf(icbc_id));
-        res.put("status", newpost.get("bc_status"));
-        res.put("remark", newpost.get("remark1"));
-        Tools.recAdd(res, "xmgj_xxzl_result");
-
-        String sql = "select c_name from kj_icbc where id=" + newpost.get("icbc_id");
-        TtMap recinfo = Tools.recinfo(sql);
-
-        if(StringUtils.isNotEmpty(newpost.get("mid_add")) && newpost.get("mid_add").equals(newpost.get("mid_edit"))){
-            Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"), "贷款材料", "厦门国际银行", newpost.get("mid_add"));
-
-        } else {
-            Addadmin_msg.addmsg(newpost.get("mid_add"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"),"贷款材料","厦门国际银行", newpost.get("mid_add"));
-            Addadmin_msg.addmsg(newpost.get("mid_edit"), newpost.get("bc_status"), newpost.get("remark1"), recinfo.get("c_name"), "贷款材料", "厦门国际银行", newpost.get("mid_add"));
-
-        }
-
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
         boolean bSuccess = errorCode == 0;
         Tools.formatResult(result2, bSuccess, errorCode, bSuccess ? "编辑成功！" : errorMsg, bSuccess ? nextUrl : "");// 失败时停留在当前页面,nextUrl为空
+    }
+
+    @Override
+    public void succ(TtMap array, long id, int sqltp) {
+        //订单编号更新操作
+        TtMap map=new TtMap();
+        map.put("gems_code",orderutil.getOrderId("XXKCD", 7, id));
+        Tools.recEdit(map,"xmgj_xxzl",id);
+        //历史添加
+        TtMap res = new TtMap();
+        res.put("qryid", String.valueOf(id));
+        res.put("status", array.get("bc_status"));
+        res.put("remark", array.get("remark1"));
+        Tools.recAdd(res, "xmgj_xxzl_result");
+
+        String sql = "select c_name from kj_icbc where id=" + array.get("icbc_id");
+        TtMap recinfo = Tools.recinfo(sql);
+
+        if(StringUtils.isNotEmpty(array.get("mid_add")) && array.get("mid_add").equals(array.get("mid_edit"))){
+            Addadmin_msg.addmsg(array.get("mid_edit"), array.get("bc_status"), array.get("remark1"), recinfo.get("c_name"), "贷款材料", "厦门国际银行", array.get("mid_add"));
+
+        } else {
+            Addadmin_msg.addmsg(array.get("mid_add"), array.get("bc_status"), array.get("remark1"), recinfo.get("c_name"),"贷款材料","厦门国际银行", array.get("mid_add"));
+            Addadmin_msg.addmsg(array.get("mid_edit"), array.get("bc_status"), array.get("remark1"), recinfo.get("c_name"), "贷款材料", "厦门国际银行", array.get("mid_add"));
+        }
     }
 
     /**
@@ -255,5 +273,27 @@ public class xmgj_xxzl extends DbCtrl {
         request.setAttribute("canAdd", canAdd); // 是否显示新增按钮
         // request.setAttribute("showmsg", "测试弹出消息提示哈！"); //如果有showmsg字段，在载入列表前会提示
     }
+
+
+//    public static void main(String[] args) {
+//         TtMap ttMap=new TtMap();
+//         ttMap.put("1","1");
+//         ttMap.put("2","");
+//         ttMap.put("3","3");
+//         ttMap.put("4","");
+//         ttMap.put("5","5");
+//         ttMap.put("6","");
+//        Iterator<Map.Entry<String, String>> it = ttMap.entrySet().iterator();
+//        while (it.hasNext()){
+//            Map.Entry<String, String> entry=it.next();
+//            String key=entry.getKey();
+//            String value=entry.getValue();
+//            System.out.println("key:"+key+"--"+"value:"+value);
+//            if(Tools.myIsNull(value)){
+//                it.remove();
+//            }
+//        }
+//        System.out.println("ttMap:"+ttMap);
+//    }
 
 }
