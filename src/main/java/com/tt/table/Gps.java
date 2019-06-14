@@ -39,12 +39,17 @@ public class Gps extends DbCtrl {
         if(!Tools.myIsNull(imgs)){
             String[] imgstep2_1ss=imgs.split("\u0005");
             for(int i=0;i<imgstep2_1ss.length;i++){
-                if(!Tools.myIsNull(imgstep2_1ss[i])){
+                if(!Tools.myIsNull(imgstep2_1ss[i])&&imgstep2_1ss[i].contains("images/mgcaraddimg.jpg")==false){
                     imginfo.put(imgsname+(i+1),imgstep2_1ss[i]);
                 }
             }
         }
         return imginfo;
+    }
+
+    public static void main(String[] args) {
+String s="666";
+        System.out.println(s.contains("666"));
     }
     /**
      * @param {type} {type}
@@ -73,10 +78,13 @@ public class Gps extends DbCtrl {
             imginfo.putAll(imgstep14_2ss);
             imginfo.putAll(imgstep14_3ss);
             imginfo.putAll(imgstep14_4ss);
+            imginfo.put("安装员和车头合影",info.get("imgstep14_1"));
+            imginfo.put("GPS设备号照",info.get("imgstep14_2"));
+            imginfo.put("车辆备用钥匙",info.get("imgstep14_3"));
             if(!imginfo.isEmpty()) {
                 try {
                     closeConn();
-                    if (!Zip.imgsToZipDown(imginfo, title + ".zip", null)) {
+                    if (!Zip.imgsToZipDown(imginfo, title + ".zip", null,"jpg")) {
                         errorMsg = "导出ZIP失败!";
                         request.setAttribute("errorMsg", errorMsg);
                     }

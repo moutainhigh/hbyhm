@@ -25,12 +25,16 @@
                            aria-describedby="example2_info">
                         <thead>
                         <tr role="row">
-                            <th class="text-center" style="width:120px;">
+                            <th class="text-center" style="width:180px;">
                                 名称
                             </th>
                             <th class="hidden-xs text-center">
                                 <!-- hidden-xs为手机模式时自动隐藏， text-center为居中-->
                                 账户总数
+                            </th>
+                            <th class="hidden-xs text-center">
+                                <!-- hidden-xs为手机模式时自动隐藏， text-center为居中-->
+                                账户余额
                             </th>
                             <th class="text-center" style="width:120px;">
                                 上级公司
@@ -88,6 +92,11 @@
                                 </td>
                                 <td class="hidden-xs text-center">
                                         ${u.usercount}
+                                </td>
+                                <td class="hidden-xs text-center">
+                                    <a href="javascript:void(0)">
+                                        现金：${u.money}
+                                    </a>
                                 </td>
                                 <td class="text-center" style="width:120px;">
                                         ${u.up_name}

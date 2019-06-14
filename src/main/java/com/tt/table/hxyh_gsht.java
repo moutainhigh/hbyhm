@@ -69,7 +69,7 @@ public class hxyh_gsht extends DbCtrl {
             if(!imginfo.isEmpty()) {
                 try {
                     closeConn();
-                    if (!Zip.imgsToZipDown(imginfo, title + ".zip", null)) {
+                    if (!Zip.imgsToZipDown(imginfo, title + ".zip", null,"jpg")) {
                         errorMsg = "导出ZIP失败!";
                         request.setAttribute("errorMsg", errorMsg);
                     }

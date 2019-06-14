@@ -14,8 +14,8 @@ import java.io.IOException;
 public class hxyh_zxlr extends DbCtrl {
     private final String title = "征信录入";
     private String orderString = "ORDER BY t.dt_edit DESC"; // 默认排序
-    private boolean canDel = true;
-    private boolean canAdd = true;
+    private boolean canDel = false;
+    private boolean canAdd = false;
     private final String classAgpId = "58"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
@@ -112,6 +112,12 @@ public class hxyh_zxlr extends DbCtrl {
             System.out.println("DTBE开始日期:" + dtArr[0] + "结束日期:" + dtArr[1]);
             // todo处理选择时间段
         }
+        if(!Tools.myIsNull(post.get("stateid"))){
+            whereString += " AND aa.stateid="+post.get("stateid");
+        }
+        if(!Tools.myIsNull(post.get("cityid"))){
+            whereString += " AND aa.cityid="+post.get("cityid");
+        }
         /* 搜索过来的字段处理完成 */
 
 
@@ -184,7 +190,7 @@ public class hxyh_zxlr extends DbCtrl {
             imginfo.putAll(imginfo3);
             imginfo.putAll(imginfo4);
             try {
-                if (!Zip.imgsToZipDown(imginfo, title + ".zip", null)) {
+                if (!Zip.imgsToZipDown(imginfo, title + ".zip", null,"jpg")) {
                     errorMsg = "导出ZIP失败!";
                     request.setAttribute("errorMsg", errorMsg);
                 }

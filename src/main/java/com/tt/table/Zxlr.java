@@ -99,7 +99,7 @@ public class Zxlr extends DbCtrl {
         kw = post.get("kw");
         dtbe = post.get("dtbe");
         if (Tools.myIsNull(kw) == false) {
-            whereString += " AND c_name like '%" + kw + "%'";
+            whereString += " AND t.c_name like '%" + kw + "%'";
         }
         if (Tools.myIsNull(dtbe) == false) {
             dtbe = dtbe.replace("%2f", "-").replace("+", "");
@@ -108,6 +108,12 @@ public class Zxlr extends DbCtrl {
             dtArr[1] = dtArr[1].trim();
             System.out.println("DTBE开始日期:" + dtArr[0] + "结束日期:" + dtArr[1]);
             // todo处理选择时间段
+        }
+        if(!Tools.myIsNull(post.get("stateid"))){
+            whereString += " AND aa.stateid="+post.get("stateid");
+        }
+        if(!Tools.myIsNull(post.get("cityid"))){
+            whereString += " AND aa.cityid="+post.get("cityid");
         }
         /* 搜索过来的字段处理完成 */
         whereString += tmpWhere; // 过滤
@@ -121,7 +127,6 @@ public class Zxlr extends DbCtrl {
                 " LEFT JOIN hbyh_dygd dy ON dy.icbc_id=t.id" +
                 " LEFT JOIN tlzf_qy qy ON qy.icbc_id=t.id";
         list = lists(whereString, fieldsString);
-        System.out.println("fsdf"+list.get(0));
         if (!Tools.myIsNull(kw)) { // 搜索关键字高亮
             for (TtMap info : list) {
                 info.put("c_name",
@@ -178,7 +183,7 @@ public class Zxlr extends DbCtrl {
             imginfo.putAll(imginfo3);
             imginfo.putAll(imginfo4);
             try {
-                if (!Zip.imgsToZipDown(imginfo, title + ".zip", null)) {
+                if (!Zip.imgsToZipDown(imginfo, title + ".zip", null,"jpg")) {
                     errorMsg = "导出ZIP失败!";
                     request.setAttribute("errorMsg", errorMsg);
                 }

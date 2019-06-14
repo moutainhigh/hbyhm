@@ -286,7 +286,7 @@ public class Admin extends DbCtrl {
             }
             try {
                 closeConn();// 因为要跳到下载，所以要提前closeConn
-                if (!Zip.imgsToZipDown(info, title + ".zip", null)) {
+                if (!Zip.imgsToZipDown(info, title + ".zip", null,null)) {
                     errorMsg = "导出ZIP失败!";
                     request.setAttribute("errorMsg", errorMsg);
                 }

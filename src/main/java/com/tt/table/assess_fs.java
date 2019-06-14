@@ -8,6 +8,7 @@ import com.tt.tool.DbCtrl;
 import com.tt.tool.Tools;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class assess_fs extends DbCtrl {
@@ -99,29 +100,29 @@ public class assess_fs extends DbCtrl {
             return null;
         }
         TtMap minfo = Tools.minfo();
-        String superwheres="";
-            switch (minfo.get("superadmin")) {
-                case "0":
-                    superwheres =" ti.id="+minfo.get("icbc_erp_fsid");
-                    break;
-                case "1":
-                    //superwheres =" ti.id="+minfo.get("icbc_erp_fsid");
-                    break;
-                case "2":
-                    superwheres =" (t.id=" + minfo.get("icbc_erp_fsid") + " or t.up_id=" + minfo.get("icbc_erp_fsid") + ")";
-                    break;
-                case "3":
-                    String ids=Tools.getfsids(Tools.myIsNull(minfo.get("icbc_erp_fsid"))?0:Integer.parseInt(minfo.get("icbc_erp_fsid")));
-                    superwheres =" t.id in (" +ids+ ")";
-                    break;
-                default:
+        String superwheres = "";
+        switch (minfo.get("superadmin")) {
+            case "0":
+                superwheres = " ti.id=" + minfo.get("icbc_erp_fsid");
+                break;
+            case "1":
+                //superwheres =" ti.id="+minfo.get("icbc_erp_fsid");
+                break;
+            case "2":
+                superwheres = " (t.id=" + minfo.get("icbc_erp_fsid") + " or t.up_id=" + minfo.get("icbc_erp_fsid") + ")";
+                break;
+            case "3":
+                String ids = Tools.getfsids(Tools.myIsNull(minfo.get("icbc_erp_fsid")) ? 0 : Integer.parseInt(minfo.get("icbc_erp_fsid")));
+                superwheres = " t.id in (" + ids + ")";
+                break;
+            default:
 
-                    break;
-            }
+                break;
+        }
         if (Tools.myIsNull(wheres)) {
-            wheres = Tools.isSuperAdmin(minfo)?"":superwheres;
+            wheres = Tools.isSuperAdmin(minfo) ? "" : superwheres;
         } else {
-            wheres +=Tools.isSuperAdmin(minfo)?"":" AND "+superwheres; // 只显示自己公司的
+            wheres += Tools.isSuperAdmin(minfo) ? "" : " AND " + superwheres; // 只显示自己公司的
         }
         TtList lmss = super.lists(wheres, f);
         for (TtMap tmpInfo : lmss) {
@@ -130,6 +131,16 @@ public class assess_fs extends DbCtrl {
             tmpInfo.put("usercount", uermap.get("usercount")); // 显示/隐藏
             TtMap upmap = Tools.recinfo("select name from assess_fs where id=" + tmpInfo.get("up_id"));
             tmpInfo.put("up_name", upmap.get("name"));
+            TtMap money = Tools.recinfo("SELECT SUM(amount) as money FROM moneyfs where bintype=0 and fsid=" + tmpInfo.get("id"));
+            if(money.isEmpty()){
+                tmpInfo.put("money", String.valueOf(new BigDecimal("0.00")));
+            }else{
+                if(Tools.myIsNull(money.get("money"))){
+                    tmpInfo.put("money", String.valueOf(new BigDecimal("0.00")));
+                }else {
+                    tmpInfo.put("money", String.valueOf(new BigDecimal(money.get("money"))));
+                }
+            }
         }
         return lmss;
     }
@@ -181,10 +192,10 @@ public class assess_fs extends DbCtrl {
 
     @Override
     public void succ(TtMap array, long id, int sqltp) {
-        TtList ttMaps=Tools.reclist("select * from icbc_admin_agp where fsid="+id);
-        if(ttMaps.size()>0) {
+        TtList ttMaps = Tools.reclist("select * from icbc_admin_agp where fsid=" + id);
+        if (ttMaps.size() > 0) {
 
-        }else{
+        } else {
             TtList apglist = Tools.reclist("select * from icbc_admin_agp where showtag=1 and fsid=0 and systag=1");
             for (TtMap apg : apglist) {
                 TtMap apgmap = new TtMap();
@@ -194,6 +205,52 @@ public class assess_fs extends DbCtrl {
                 apgmap.put("fsid", String.valueOf(id));
                 apgmap.put("systag", "0");
                 Tools.recAdd(apgmap, "icbc_admin_agp");
+            }
+        }
+        //充值扣款
+        TtMap minfo = Tools.minfo();//获取当前登录用户信息
+        if (array.get("addmoney") != null
+                && !array.get("addmoney").equals("")) {
+            TtMap moneyfs = new TtMap();
+            moneyfs.put("type", "1");
+            moneyfs.put("status", "1");
+            moneyfs.put("otherid", "0");
+            moneyfs.put("orderid", "0");
+            moneyfs.put("mid", minfo.get("id"));
+            moneyfs.put("fsid", String.valueOf(id));
+            moneyfs.put("gemsid", "0");
+            moneyfs.put("amount",array.get("addmoney"));
+            moneyfs.put("remark","人保后台-"+array.get("czremark"));
+            moneyfs.put("bintype", array.get("bintype"));
+            moneyfs.put("fctype", array.get("fctype"));
+            long moneyfsid= Tools.recAdd(moneyfs,"moneyfs");
+            TtMap moneyfs1 = new TtMap();
+            moneyfs1.put("mid", minfo.get("id"));
+            moneyfs1.put("fsid", String.valueOf(id));
+            moneyfs1.put("gemsid", "0");
+            moneyfs1.put("amount", array.get("addmoney"));
+            moneyfs1.put("remark","人保后台-"+array.get("czremark"));
+            moneyfs1.put("moneyid", String.valueOf(moneyfsid));
+            moneyfs1.put("status","1");
+            moneyfs1.put("bintype",array.get("bintype"));
+            moneyfs1.put("fctype", array.get("fctype"));
+            long moneyfs1id= Tools.recAdd(moneyfs1,"moneyfs_1");
+            //退款 扣费
+            if(array.get("fctype").equals("3")
+                    || array.get("fctype").equals("4")){
+                TtMap moneyfs2 = new TtMap();
+                moneyfs2.put("mid", minfo.get("id"));
+                moneyfs2.put("fsid", String.valueOf(id));
+                moneyfs2.put("gemsid", "0");
+                moneyfs2.put("amount", array.get("addmoney"));
+                moneyfs2.put("remark","人保后台-"+array.get("czremark"));
+                moneyfs2.put("moneyid", String.valueOf(moneyfsid));
+                moneyfs2.put("status","1");
+                moneyfs2.put("bc_type","0");
+                moneyfs2.put("orderid", "0");
+                moneyfs2.put("type","0");
+                moneyfs2.put("bintype",array.get("bintype"));
+                Tools.recAdd(moneyfs2,"moneyfs_2");
             }
         }
     }

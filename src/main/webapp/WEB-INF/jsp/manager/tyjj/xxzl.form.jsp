@@ -141,6 +141,7 @@
                                 <span class="input-group-addon">手机号</span>
                                 <input type="text" class="form-control" id="c_buycar_tel" name="c_buycar_tel"
                                        placeholder="">
+                                <%--modal_show('${infodb.c_buycar_name}','${infodb.c_buycar_tel}','${infodb.c_buycar_id_cardno}')--%>
                                 <span class="input-group-addon"><a href="javascript:modal_show('${infodb.c_buycar_name}','${infodb.c_buycar_tel}','${infodb.c_buycar_id_cardno}')">通讯录</a></span>
                             </div>
                         </div>
@@ -156,7 +157,7 @@
                                             $("#c_name_ul").empty();
                                             for(var i in data){
                                                 $("#c_name_ul").append("<li>" +
-                                                    "<a href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&;id="+data[i].id+"\">" +
+                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id="+data[i].id+"\">" +
                                                     "<i class=\"fa fa-circle-o\" style=\"color:#00a65a\"></i>" +
                                                     data[i].c_name+"-"+data[i].c_cardno+"-"+data[i].fs_name+"-"+data[i].dt_add+
                                                     "<span class=\"pull-right\" style=\"color:#00a65a\">查询完成</span></a>\n" +
@@ -174,7 +175,7 @@
                                             $("#c_tel_ul").empty();
                                             for(var i in data){
                                                 $("#c_tel_ul").append("<li>" +
-                                                    "<a href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&;id="+data[i].id+"\">" +
+                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id="+data[i].id+"\">" +
                                                     "<i class=\"fa fa-circle-o\" style=\"color:#00a65a\"></i>" +
                                                     data[i].c_name+"-"+data[i].c_cardno+"-"+data[i].fs_name+"-"+data[i].dt_add+
                                                     "<span class=\"pull-right\" style=\"color:#00a65a\">查询完成</span></a>\n" +
@@ -192,7 +193,7 @@
                                             $("#c_cardno_ul").empty();
                                             for(var i in data){
                                                 $("#c_cardno_ul").append("<li>" +
-                                                    "<a href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&;id="+data[i].id+"\">" +
+                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id="+data[i].id+"\">" +
                                                     "<i class=\"fa fa-circle-o\" style=\"color:#00a65a\"></i>" +
                                                     data[i].c_name+"-"+data[i].c_cardno+"-"+data[i].fs_name+"-"+data[i].dt_add+
                                                     "<span class=\"pull-right\" style=\"color:#00a65a\">查询完成</span></a>\n" +

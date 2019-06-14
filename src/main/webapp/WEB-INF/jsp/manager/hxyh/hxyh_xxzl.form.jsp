@@ -131,6 +131,112 @@
                                 <span class="input-group-addon">手机号</span>
                                 <input type="text" class="form-control" id="c_buycar_tel" name="c_buycar_tel"
                                        placeholder="">
+                                <span class="input-group-addon"><a href="javascript:modal_show('${infodb.c_buycar_name}','${infodb.c_buycar_tel}','${infodb.c_buycar_id_cardno}')">通讯录</a></span>
+                            </div>
+                        </div>
+                        <script>
+                            function modal_show(c_name,c_tel,c_cardno) {
+                                //姓名命中
+                                $.post("/ttAjax?cn=assess_querythjl&do=list",
+                                    {
+                                        c_name:c_name
+                                    },
+                                    function (data) {
+                                        if(data.length>0){
+                                            $("#c_name_ul").empty();
+                                            for(var i in data){
+                                                $("#c_name_ul").append("<li>" +
+                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id="+data[i].id+"\">" +
+                                                    "<i class=\"fa fa-circle-o\" style=\"color:#00a65a\"></i>" +
+                                                    data[i].c_name+"-"+data[i].c_cardno+"-"+data[i].fs_name+"-"+data[i].dt_add+
+                                                    "<span class=\"pull-right\" style=\"color:#00a65a\">查询完成</span></a>\n" +
+                                                    "</li>");
+                                            }
+                                        }
+                                    },"json")
+                                //手机号命中
+                                $.post("/ttAjax?cn=assess_querythjl&do=list",
+                                    {
+                                        c_tel:c_tel
+                                    },
+                                    function (data) {
+                                        if(data.length>0){
+                                            $("#c_tel_ul").empty();
+                                            for(var i in data){
+                                                $("#c_tel_ul").append("<li>" +
+                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id="+data[i].id+"\">" +
+                                                    "<i class=\"fa fa-circle-o\" style=\"color:#00a65a\"></i>" +
+                                                    data[i].c_name+"-"+data[i].c_cardno+"-"+data[i].fs_name+"-"+data[i].dt_add+
+                                                    "<span class=\"pull-right\" style=\"color:#00a65a\">查询完成</span></a>\n" +
+                                                    "</li>");
+                                            }
+                                        }
+                                    },"json")
+                                //身份证命中
+                                $.post("/ttAjax?cn=assess_querythjl&do=list",
+                                    {
+                                        c_cardno:c_cardno
+                                    },
+                                    function (data) {
+                                        if(data.length>0){
+                                            $("#c_cardno_ul").empty();
+                                            for(var i in data){
+                                                $("#c_cardno_ul").append("<li>" +
+                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id="+data[i].id+"\">" +
+                                                    "<i class=\"fa fa-circle-o\" style=\"color:#00a65a\"></i>" +
+                                                    data[i].c_name+"-"+data[i].c_cardno+"-"+data[i].fs_name+"-"+data[i].dt_add+
+                                                    "<span class=\"pull-right\" style=\"color:#00a65a\">查询完成</span></a>\n" +
+                                                    "</li>");
+                                            }
+                                        }
+                                    },"json")
+                                $("#txlmodal").modal('show');
+                            }
+                        </script>
+                        <div class="modal fade" id="txlmodal" role="dialog" data-backdrop="static" aria-hidden="true"
+                             style="display: none;">
+                            <div class="modal-dialog" role="document">
+                                <div id="txlcontent" class="modal-content">
+                                    <div id="float_page_div">
+                                        <div class="box-body">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">姓名命中</h4>
+                                            </div>
+                                            <div class="modal-body form-horizontal">
+                                                <ul id="c_name_ul" class="nav nav-pills nav-stacked">
+
+                                                </ul>
+                                            </div>
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                <h4 class="modal-title" id="myModalLabe2">手机号命中</h4>
+                                            </div>
+                                            <div class="modal-body form-horizontal">
+                                                <ul id="c_tel_ul" class="nav nav-pills nav-stacked">
+
+                                                </ul>
+                                            </div>
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                <h4 class="modal-title" id="myModalLabe3">身份证命中</h4>
+                                            </div>
+                                            <div class="modal-body form-horizontal">
+                                                <ul id="c_cardno_ul" class="nav nav-pills nav-stacked">
+
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default pull-center"
+                                                        data-dismiss="modal" aria-label="Close">返回
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
