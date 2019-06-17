@@ -70,14 +70,14 @@ String s="666";
         if(!Tools.myIsNull(post.get("toZip"))&& post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
             //征信录入资料
-            TtMap imgstep14_1ss=tozip(info.get("imgstep14_1ss"),"车身照片车身照片（定位水印）");
+/*            TtMap imgstep14_1ss=tozip(info.get("imgstep14_1ss"),"车身照片车身照片（定位水印）");
             TtMap imgstep14_2ss=tozip(info.get("imgstep14_2ss"),"车身照片车身（影像上传）");
             TtMap imgstep14_3ss=tozip(info.get("imgstep14_3ss"),"设备与VIN码合影照片（定位水印）");
             TtMap imgstep14_4ss=tozip(info.get("imgstep14_4ss"),"设备与VIN码合影（影像上传）");
             imginfo.putAll(imgstep14_1ss);
             imginfo.putAll(imgstep14_2ss);
             imginfo.putAll(imgstep14_3ss);
-            imginfo.putAll(imgstep14_4ss);
+            imginfo.putAll(imgstep14_4ss);*/
             imginfo.put("安装员和车头合影",info.get("imgstep14_1"));
             imginfo.put("GPS设备号照",info.get("imgstep14_2"));
             imginfo.put("车辆备用钥匙",info.get("imgstep14_3"));

@@ -61,26 +61,43 @@
             </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">抵押相关归档视频</label>
+                <label class="col-sm-2 control-label">抵押相关材料</label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
                         <%
-                            String[] imgs={};
-                            if(infodb.get("imgstep16_1ss")!=null&&!infodb.get("imgstep16_1ss").equals("")){
-                                imgs=infodb.get("imgstep16_1ss").split("\u0005");
+                            String[] imgs = {};
+                            if (infodb.get("imgstep16_1ss") != null && !infodb.get("imgstep16_1ss").equals("")) {
+                                imgs = infodb.get("imgstep16_1ss").split("\u0005");
                             }
-                            for(int i=0;i<imgs.length;i++){
-                                if(imgs[i]!=null&&!imgs[i].equals("")){
+                            for (int i = 0; i < imgs.length; i++) {
+                                if (imgs[i] != null && !imgs[i].equals("")) {
+                                    String ref = imgs[i].substring(imgs[i].lastIndexOf(".")+1, imgs[i].length());
+                                    if (ref.equals("mp4")) {
                         %>
                         <div class="col-sm-4">
-                        <video class="video-js vjs-default-skin"
-                               controls  width="420" height="200"
-                               poster="/manager/images/logo.png">
-                            <source src="http://hbyhm.kcway.net/<%=imgs[i]%>" type="video/mp4">
-                        </video>
+                            <video class="video-js vjs-default-skin"
+                                   controls width="420" height="200"
+                                   poster="/manager/images/logo.png">
+                                <source src="http://hbyhm.kcway.net/<%=imgs[i]%>" type="video/mp4">
+                            </video>
                         </div>
                         <%
-                                }  }
+                        } else {%>
+                        <div id="div_<%=i%>"
+                             style="position: relative;width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"
+                             class="gallerys">
+                            <img id="imgstep16_1ss_<%=i%>" name="imgstep16_1ss_<%=i%>" src="<%=imgs[i]%>"
+                                 class="imgclass gallery-pic" style="width: 100%;height:100px;border-radius:10px;">
+                            <div style="padding-top:20px;">
+                                <a onclick="$.openPhotoGallery($('#imgstep16_1ss_<%=i%>'));"
+                                   style="font-size: 14px;">查看大图</a>
+                            </div>
+                        </div>
+                        <%
+
+                                    }
+                                }
+                            }
                         %>
                     </div>
                 </div>

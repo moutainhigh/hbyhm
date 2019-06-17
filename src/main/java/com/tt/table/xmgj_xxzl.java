@@ -66,15 +66,39 @@ public class xmgj_xxzl extends DbCtrl {
         String jsonInfo = Tools.jsonEncode(info);
         if(!Tools.myIsNull(post.get("toZip"))&& post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
+            TtMap imgstep9_1ss=new TtMap();
+            TtMap imgstep9_2ss=new TtMap();
+            TtMap imgstep10_1ss=new TtMap();
+            TtMap imgstep11_1ss=new TtMap();
             //征信录入资料
-            TtMap imgstep9_1ss=tozip(info.get("imgstep9_1ss"),"车辆材料");
-            TtMap imgstep9_2ss=tozip(info.get("imgstep9_2ss"),"车辆信息");
-            TtMap imgstep10_1ss=tozip(info.get("imgstep10_1ss"),"家访材料");
-            TtMap imgstep11_1ss=tozip(info.get("imgstep11_1ss"),"证明材料");
-            imginfo.putAll(imgstep9_1ss);
-            imginfo.putAll(imgstep9_2ss);
-            imginfo.putAll(imgstep10_1ss);
-            imginfo.putAll(imgstep11_1ss);
+            switch (post.get("uptype")) {
+                case "0":
+                    imgstep9_1ss = tozip(info.get("imgstep9_1ss"), "车辆材料");
+                    imgstep9_2ss = tozip(info.get("imgstep9_2ss"), "车辆信息");
+                    imgstep10_1ss = tozip(info.get("imgstep10_1ss"), "家访材料");
+                    imgstep11_1ss = tozip(info.get("imgstep11_1ss"), "证明材料");
+                    imginfo.putAll(imgstep9_1ss);
+                    imginfo.putAll(imgstep9_2ss);
+                    imginfo.putAll(imgstep10_1ss);
+                    imginfo.putAll(imgstep11_1ss);
+                    break;
+                case "1":
+                    imgstep9_1ss = tozip(info.get("imgstep9_1ss"), "车辆材料");
+                    imginfo.putAll(imgstep9_1ss);
+                    break;
+                case "2":
+                    imgstep9_2ss = tozip(info.get("imgstep9_2ss"), "车辆信息");
+                    imginfo.putAll(imgstep9_2ss);
+                    break;
+                case "3":
+                    imgstep10_1ss = tozip(info.get("imgstep10_1ss"), "家访材料");
+                    imginfo.putAll(imgstep10_1ss);
+                    break;
+                case "4":
+                    imgstep11_1ss = tozip(info.get("imgstep11_1ss"), "证明材料");
+                    imginfo.putAll(imgstep11_1ss);
+                    break;
+            }
             if(!imginfo.isEmpty()) {
                 try {
                     closeConn();

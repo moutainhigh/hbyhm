@@ -66,7 +66,7 @@ public class dygd extends DbCtrl {
         if(!Tools.myIsNull(post.get("toZip"))&& post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
             //征信录入资料
-            TtMap imgstep16_1ss=tozip(info.get("imgstep16_1ss"),"抵押相关归档视频");
+            TtMap imgstep16_1ss=tozip(info.get("imgstep16_1ss"),"抵押相关材料");
             imginfo.putAll(imgstep16_1ss);
             if(!imginfo.isEmpty()) {
                 try {

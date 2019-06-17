@@ -79,7 +79,7 @@
                                 <input id="install_man_name" name="install_man_name" type="text" value="" class="form-control"/>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <%--<div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">安装地址有线</span>
                                 <input id="install_address_line" name="install_address_line" type="text" value="" class="form-control"/>
@@ -90,25 +90,25 @@
                                 <span class="input-group-addon">安装地址无线</span>
                                 <input id="install_address_wifi" name="install_address_wifi" type="text" value="" class="form-control"/>
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">有线设备序列号</label>
+                <label class="col-sm-2 control-label">安装地址有线</label>
                 <div class="col-sm-10">
-                   <textarea id="imei1" name="imei1" style="width: 80%; height: 100px" class="form-control">
+                   <textarea id="install_address_line" name="install_address_line" style="width: 80%; height: 100px" class="form-control">
                    </textarea>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">有线设备序列号</label>
+                <label class="col-sm-2 control-label">安装地址无线</label>
                 <div class="col-sm-10">
-                   <textarea id="imei2" name="imei2" style="width: 80%; height: 100px" class="form-control">
+                   <textarea id="install_address_wifi" name="install_address_wifi" style="width: 80%; height: 100px" class="form-control">
                    </textarea>
                 </div>
             </div>
-            <%
+            <%--<%
                 //dicopt功能演示，指定表里面的name和id，并用name组成<option></option>
                 String azcs = Tools.dicopt("comm_states", 0);//省会，
             %>
@@ -142,7 +142,7 @@
                                                         /ttAjax?do=opt&cn=kjb_user&id=3&mid_add=100000 //显示创建人id为100000的所有用户，默认选择id为3的记录
                                                         * */
                 objacl('#state_id', '#city_id', '/ttAjax?do=opt&cn=comm_citys&id=0&state_id=', '${infodb.state_id}', '${infodb.city_id}');
-            </script>
+            </script>--%>
             <div class="form-group">
                 <label class="col-sm-2 control-label">安装员和车头合影</label>
                 <div class="col-sm-10">
@@ -281,7 +281,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+<%--            <div class="form-group">
                 <label class="col-sm-2 control-label">车身照片车身照片（定位水印）</label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
@@ -304,7 +304,7 @@
                                 imgs_length1 = ssImgs_1.length;
                             }
                         %>
-                        <%-- 可能这里用<%@include file %>模式更适合--%>
+                        &lt;%&ndash; 可能这里用<%@include file %>模式更适合&ndash;%&gt;
                         <jsp:include page="<%=upFile1%>">
                             <jsp:param name="img_MarginImgSrc" value=""/>
                             <jsp:param name="img_MarginImgClass" value=""/>
@@ -376,7 +376,7 @@
                                 imgs_length3 = ssImgs_3.length;
                             }
                         %>
-                        <%-- 可能这里用<%@include file %>模式更适合--%>
+                        &lt;%&ndash; 可能这里用<%@include file %>模式更适合&ndash;%&gt;
                         <jsp:include page="<%=upFile3%>">
                             <jsp:param name="img_MarginImgSrc" value=""/>
                             <jsp:param name="img_MarginImgClass" value=""/>
@@ -422,7 +422,7 @@
                                 imgs_length4 = ssImgs_4.length;
                             }
                         %>
-                        <%-- 可能这里用<%@include file %>模式更适合--%>
+                        &lt;%&ndash; 可能这里用<%@include file %>模式更适合&ndash;%&gt;
                         <jsp:include page="<%=upFile4%>">
                             <jsp:param name="img_MarginImgSrc" value=""/>
                             <jsp:param name="img_MarginImgClass" value=""/>
@@ -444,7 +444,7 @@
                                value="<%=imgs_length4%>"/>
                     </div>
                 </div>
-            </div>
+            </div>--%>
             <div class="form-group">
                 <label class="col-sm-2 control-label">审核和数据填充处理</label>
                 <div class="col-sm-10">

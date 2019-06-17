@@ -50,7 +50,7 @@
         <div class="box-body" id="tab-content">
             <div class="form-group">
                 <div class="col-sm-1">
-                    <a href="<%=Tools.urlKill("toZip")+"&toZip=1"%>" class="btn btn-primary">一键下载(相关文件)</a>
+                    <a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=0"%>" class="btn btn-primary">一键下载(相关文件)</a>
                 </div>
             </div>
             <div class="form-group">
@@ -959,7 +959,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">车辆信息材料</label>
+                <label class="col-sm-2 control-label">
+                    车辆信息材料
+                    <a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=1"%>" class="btn btn-primary" style="font-size: 14px;">
+                        一键下载(相关文件)
+                    </a>
+                </label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
                         <%
@@ -1001,7 +1006,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">车身照片</label>
+                <label class="col-sm-2 control-label">车身照片
+                    <a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=2"%>" class="btn btn-primary" style="font-size: 14px;">
+                        一键下载(相关文件)
+                    </a>
+                </label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
 
@@ -1115,7 +1124,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">家访材料</label>
+                <label class="col-sm-2 control-label">家访材料
+                    <a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=3"%>" class="btn btn-primary" style="font-size: 14px;">
+                        一键下载(相关文件)
+                    </a>
+                </label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
                         <%
@@ -1156,7 +1169,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">证明材料</label>
+                <label class="col-sm-2 control-label">证明材料
+                    <a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=4"%>" class="btn btn-primary" style="font-size: 14px;">
+                        一键下载(相关文件)
+                    </a>
+                </label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
                         <%

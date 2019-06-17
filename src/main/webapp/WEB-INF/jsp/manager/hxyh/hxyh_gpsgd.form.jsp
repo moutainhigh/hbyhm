@@ -69,24 +69,163 @@
                                 <input id="carno" name="carno" type="text" value="" class="form-control"/>
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">安装人员姓名</span>
+                                <input id="install_man_name" name="install_man_name" type="text" value="" class="form-control"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">有线设备序列号</label>
+                <label class="col-sm-2 control-label">有线设备安装部位</label>
                 <div class="col-sm-10">
-                   <textarea id="imei1" name="imei1" style="width: 80%; height: 100px" class="form-control">
+                   <textarea id="install_address_line" name="install_address_line" style="width: 80%; height: 100px" class="form-control">
                    </textarea>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">有线设备序列号</label>
+                <label class="col-sm-2 control-label">无线设安装部位</label>
                 <div class="col-sm-10">
-                   <textarea id="imei2" name="imei2" style="width: 80%; height: 100px" class="form-control">
+                   <textarea id="install_address_wifi" name="install_address_wifi" style="width: 80%; height: 100px" class="form-control">
                    </textarea>
                 </div>
             </div>
-            <%
+            <div class="form-group">
+                <label class="col-sm-2 control-label">安装员和车头合影</label>
+                <div class="col-sm-10">
+                    <div class="row inline-from">
+                        <%
+                            String upFile1 = "../upfile.inc.jsp";
+                            String imgstep14_1 = "imgstep14_1";
+                            String[] ssImgs1 = { //设置已有值
+                                    !Tools.myIsNull(infodb.get(imgstep14_1)) ? infodb.get(imgstep14_1) : ""
+                            };
+                            ssImgs1 = ssImgs1[0].split("\u0005");
+                            String sImgs1 = "";
+                            for (int i = 0; i < ssImgs1.length; i++) {
+                                if (ssImgs1[i] != null && !ssImgs1[i].equals("")) {
+                                    sImgs1 = sImgs1 + ssImgs1[i] + "|";
+                                }
+                            }
+                            String[] ssImgs_1 = sImgs1.split("\\|");//获取已有图片
+                            int imgs_length1 = 10;
+                            if (ssImgs_1.length > 0) {
+                                imgs_length1 = ssImgs_1.length;
+                            }
+                        %>
+                        <jsp:include page="<%=upFile1%>">
+                            <jsp:param name="img_MarginImgSrc" value=""/>
+                            <jsp:param name="img_MarginImgClass" value=""/>
+                            <jsp:param name="img_Total" value="<%=imgs_length1%>"/>
+                            <jsp:param name="img_NamePre" value="<%=imgstep14_1%>"/>
+                            <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
+                            <jsp:param name="l1div_Style"
+                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                            <jsp:param name="img_Style" value="width: 100%;height:100px;border-radius:10px;"/>
+                            <jsp:param name="img_FileStyle"
+                                       value="position: absolute;left: 0;top: 0;height: 100%;width: 100%;background: transparent;border: 0;margin: 0;padding: 0;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>
+                            <jsp:param name="img_Class" value="imgclass"/>
+                            <jsp:param name="img_FileClass" value="uploadfileclass"/>
+                            <jsp:param name="img_SmallWidth" value="100"/>
+                            <jsp:param name="img_SmallHeight" value="100"/>
+                            <jsp:param name="sImgs" value="<%=sImgs1%>"/>
+                        </jsp:include>
+                        <input id="<%=imgstep14_1%>_num" name="<%=imgstep14_1%>_num" type="hidden"
+                               value="<%=imgs_length1%>"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">GPS设备号照</label>
+                <div class="col-sm-10">
+                    <div class="row inline-from">
+                        <%
+                            String imgstep14_2 = "imgstep14_2";
+                            String[] ssImgs2 = { //设置已有值
+                                    !Tools.myIsNull(infodb.get(imgstep14_2)) ? infodb.get(imgstep14_2) : ""
+                            };
+                            ssImgs2 = ssImgs2[0].split("\u0005");
+                            String sImgs2 = "";
+                            for (int i = 0; i < ssImgs2.length; i++) {
+                                if (ssImgs2[i] != null && !ssImgs2[i].equals("")) {
+                                    sImgs2 = sImgs2 + ssImgs2[i] + "|";
+                                }
+                            }
+                            String[] ssImgs_2 = sImgs2.split("\\|");//获取已有图片
+                            int imgs_length2 = 10;
+                            if (ssImgs_2.length > 0) {
+                                imgs_length2 = ssImgs_2.length;
+                            }
+                        %>
+                        <jsp:include page="<%=upFile1%>">
+                            <jsp:param name="img_MarginImgSrc" value=""/>
+                            <jsp:param name="img_MarginImgClass" value=""/>
+                            <jsp:param name="img_Total" value="<%=imgs_length2%>"/>
+                            <jsp:param name="img_NamePre" value="<%=imgstep14_2%>"/>
+                            <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
+                            <jsp:param name="l1div_Style"
+                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                            <jsp:param name="img_Style" value="width: 100%;height:100px;border-radius:10px;"/>
+                            <jsp:param name="img_FileStyle"
+                                       value="position: absolute;left: 0;top: 0;height: 100%;width: 100%;background: transparent;border: 0;margin: 0;padding: 0;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>
+                            <jsp:param name="img_Class" value="imgclass"/>
+                            <jsp:param name="img_FileClass" value="uploadfileclass"/>
+                            <jsp:param name="img_SmallWidth" value="100"/>
+                            <jsp:param name="img_SmallHeight" value="100"/>
+                            <jsp:param name="sImgs" value="<%=sImgs2%>"/>
+                        </jsp:include>
+                        <input id="<%=imgstep14_2%>_num" name="<%=imgstep14_2%>_num" type="hidden"
+                               value="<%=imgs_length1%>"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">车辆备用钥匙</label>
+                <div class="col-sm-10">
+                    <div class="row inline-from">
+                        <%
+                            String imgstep14_3 = "imgstep14_3";
+                            String[] ssImgs3 = { //设置已有值
+                                    !Tools.myIsNull(infodb.get(imgstep14_3)) ? infodb.get(imgstep14_3) : ""
+                            };
+                            ssImgs3 = ssImgs3[0].split("\u0005");
+                            String sImgs3 = "";
+                            for (int i = 0; i < ssImgs3.length; i++) {
+                                if (ssImgs3[i] != null && !ssImgs3[i].equals("")) {
+                                    sImgs3 = sImgs3 + ssImgs3[i] + "|";
+                                }
+                            }
+                            String[] ssImgs_3 = sImgs3.split("\\|");//获取已有图片
+                            int imgs_length3 = 10;
+                            if (ssImgs_3.length > 0) {
+                                imgs_length3 = ssImgs_3.length;
+                            }
+                        %>
+                        <jsp:include page="<%=upFile1%>">
+                            <jsp:param name="img_MarginImgSrc" value=""/>
+                            <jsp:param name="img_MarginImgClass" value=""/>
+                            <jsp:param name="img_Total" value="<%=imgs_length3%>"/>
+                            <jsp:param name="img_NamePre" value="<%=imgstep14_3%>"/>
+                            <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
+                            <jsp:param name="l1div_Style"
+                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                            <jsp:param name="img_Style" value="width: 100%;height:100px;border-radius:10px;"/>
+                            <jsp:param name="img_FileStyle"
+                                       value="position: absolute;left: 0;top: 0;height: 100%;width: 100%;background: transparent;border: 0;margin: 0;padding: 0;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>
+                            <jsp:param name="img_Class" value="imgclass"/>
+                            <jsp:param name="img_FileClass" value="uploadfileclass"/>
+                            <jsp:param name="img_SmallWidth" value="100"/>
+                            <jsp:param name="img_SmallHeight" value="100"/>
+                            <jsp:param name="sImgs" value="<%=sImgs3%>"/>
+                        </jsp:include>
+                        <input id="<%=imgstep14_3%>_num" name="<%=imgstep14_3%>_num" type="hidden"
+                               value="<%=imgs_length3%>"/>
+                    </div>
+                </div>
+            </div>
+            <%--<%
                 //dicopt功能演示，指定表里面的name和id，并用name组成<option></option>
                 String azcs = Tools.dicopt("comm_states", 0);//省会，
             %>
@@ -144,7 +283,7 @@
                                 imgs_length1 = ssImgs_1.length;
                             }
                         %>
-                        <%-- 可能这里用<%@include file %>模式更适合--%>
+                        &lt;%&ndash; 可能这里用<%@include file %>模式更适合&ndash;%&gt;
                         <jsp:include page="<%=upFile1%>">
                             <jsp:param name="img_MarginImgSrc" value=""/>
                             <jsp:param name="img_MarginImgClass" value=""/>
@@ -216,7 +355,7 @@
                                 imgs_length3 = ssImgs_3.length;
                             }
                         %>
-                        <%-- 可能这里用<%@include file %>模式更适合--%>
+                        &lt;%&ndash; 可能这里用<%@include file %>模式更适合&ndash;%&gt;
                         <jsp:include page="<%=upFile3%>">
                             <jsp:param name="img_MarginImgSrc" value=""/>
                             <jsp:param name="img_MarginImgClass" value=""/>
@@ -262,7 +401,7 @@
                                 imgs_length4 = ssImgs_4.length;
                             }
                         %>
-                        <%-- 可能这里用<%@include file %>模式更适合--%>
+                        &lt;%&ndash; 可能这里用<%@include file %>模式更适合&ndash;%&gt;
                         <jsp:include page="<%=upFile4%>">
                             <jsp:param name="img_MarginImgSrc" value=""/>
                             <jsp:param name="img_MarginImgClass" value=""/>
@@ -284,7 +423,7 @@
                                value="<%=imgs_length4%>"/>
                     </div>
                 </div>
-            </div>
+            </div>--%>
             <div class="form-group">
                 <label class="col-sm-2 control-label">审核和数据填充处理</label>
                 <div class="col-sm-10">
