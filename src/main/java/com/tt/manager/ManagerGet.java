@@ -73,24 +73,30 @@ public class ManagerGet {
                     String orderString = ""; // 排序
                     String lsitTitleString = ""; // list的jsp页面左上角的标题
                     String kw = "";
+                    String leftsql = "";
                     int pageInt = Integer.valueOf(Tools.myIsNull(post.get("p")) == false ? post.get("p") : "1"); // 当前页
                     int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
                     boolean candel = false;
                     boolean canAdd = true;
                     switch (cn) {// list生成前处理
                         case "sys_modal_hbyh":
+                            fieldsString = "t.*,t1.name as stair_name,t1.id as up_id";
                             lsitTitleString = "模块管理";
-                            orderString = "ORDER BY level,id_uplevel,sort";
+                            orderString = "ORDER BY t.level,t.id_uplevel,t.sort";
                             candel = false;
                             kw = post.get("kw");
                             String id_uplevel = post.get("id_uplevel");
                             if (Tools.myIsNull(kw) == false) {
-                                whereString += " AND showmmenuname like '%" + kw + "%'";
+                                whereString += " AND t.showmmenuname like '%" + kw + "%'";
                             }
+                            leftsql="LEFT JOIN sys_modal_hbyh t1 ON t1.id=t.id_uplevel";
                             if (Tools.myIsNull(id_uplevel) == false && !id_uplevel.equals("0")) {
-                                whereString += " AND level=" + id_uplevel;
+                                whereString += " AND t.level=" + id_uplevel;
                             }
-                            break;
+                            if (Tools.myIsNull(post.get("up_id")) == false && !post.get("up_id").equals("0")) {
+                                whereString += " AND t.id_uplevel=" + post.get("up_id");
+                            }
+                        break;
                         case "sys_error": // 演示单独的类来处理数据
                             lsitTitleString = "错误日志管理";
                             orderString = "ORDER BY dt_add DESC";
@@ -110,6 +116,7 @@ public class ManagerGet {
                         dbCtrl.orders = orderString;
                         dbCtrl.p = pageInt;
                         dbCtrl.limit = limtInt;
+                        dbCtrl.leftsql=leftsql;
                         TtList list = null;
                         list = dbCtrl.lists(whereString, fieldsString);
                         request.setAttribute("list", list);

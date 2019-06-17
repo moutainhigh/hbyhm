@@ -1,0 +1,16 @@
+2019-05-18 15:43:10  [ http-nio-8098-exec-1:0 ] - [ INFO ]  权限检查成功！
+2019-05-18 15:43:12  [ http-nio-8098-exec-4:1418 ] - [ INFO ]  权限检查成功！
+2019-05-18 15:55:31  [ http-nio-8098-exec-5:741052 ] - [ INFO ]  权限检查成功！
+2019-05-18 15:55:34  [ http-nio-8098-exec-9:743343 ] - [ INFO ]  权限检查成功！
+2019-05-18 15:58:46  [ http-nio-8098-exec-8:935695 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
+2019-05-18 15:58:47  [ http-nio-8098-exec-1:936798 ] - [ INFO ]  权限检查成功！
+2019-05-18 15:58:56  [ http-nio-8098-exec-3:945669 ] - [ INFO ]  权限检查成功！
+2019-05-18 15:59:00  [ http-nio-8098-exec-8:949343 ] - [ INFO ]  权限检查成功！
+2019-05-18 15:59:03  [ http-nio-8098-exec-10:953210 ] - [ INFO ]  权限检查成功！
+2019-05-18 15:59:33  [ http-nio-8098-exec-7:983173 ] - [ INFO ]  权限检查成功！
+2019-05-18 16:02:38  [ http-nio-8098-exec-6:1167664 ] - [ ERROR ]  Tools.logError:Cannot run program "chmod": CreateProcess error=2, 系统找不到指定的文件。
+2019-05-18 16:02:38  [ http-nio-8098-exec-6:1167676 ] - [ ERROR ]  Tools.logError:Cannot run program "chmod": CreateProcess error=2, 系统找不到指定的文件。
+2019-05-18 17:07:55  [ http-nio-8098-exec-10:5085104 ] - [ INFO ]  权限检查成功！
+2019-05-18 17:28:29  [ http-nio-8098-exec-2:6318621 ] - [ INFO ]  权限检查成功！
+2019-05-18 17:28:29  [ http-nio-8098-exec-8:6319306 ] - [ INFO ]  权限检查成功！
+2019-05-18 17:28:36  [ http-nio-8098-exec-1:6326212 ] - [ INFO ]  权限检查成功！

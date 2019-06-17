@@ -14,8 +14,8 @@ import java.io.IOException;
 public class hxyh_zxlr extends DbCtrl {
     private final String title = "征信录入";
     private String orderString = "ORDER BY t.dt_edit DESC"; // 默认排序
-    private boolean canDel = true;
-    private boolean canAdd = true;
+    private boolean canDel = false;
+    private boolean canAdd = false;
     private final String classAgpId = "58"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
 
@@ -59,6 +59,9 @@ public class hxyh_zxlr extends DbCtrl {
                 ",f.name as fsname" +
                 ",aa.name as aa_name" +
                 ",a.name as adminname" +
+                ",f.id as fsid" +
+                ",cs.name as state_name" +
+                ",cc.name as city_name" +
                 ",dy.id as dy_id" +
                 ",dy.bc_status as dy_bc_status" +
                 ",qy.bc_status as qy_bc_status" +
@@ -66,29 +69,37 @@ public class hxyh_zxlr extends DbCtrl {
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
 
-        //超级管理员
-        if(Tools.isSuperAdmin(minfo)){
+        //根据权限获取公司id
+        String fsids = "";
+        TtList fslist = new TtList();
+        switch (minfo.get("superadmin")) {
+            case "0":
+                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id=" + minfo.get("icbc_erp_fsid"));
+                break;
+            case "1":
+                fslist = Tools.reclist("select * from assess_fs where deltag=0 and showtag=1 and name!=''");
+                break;
+            case "2":
+                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
+                break;
+            case "3":
+                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in (" + Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
+                break;
+            default:
 
-        } else if(Tools.isAdmin(minfo)){//管理员
-
-        } else if (Tools.isCcAdmin(minfo)) {
-            TtList fslist = Tools.reclist("select id,up_id from assess_fs where id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"));
-            String sql = "";
-//            whereString += " AND ("; // 显示自己和下级公司的
-            if (fslist.size() > 0) {
-                for (int l = 0; l < fslist.size(); l++) {
-                    TtMap fs = fslist.get(l);
-                    if (l == fslist.size() - 1) {
-                        sql = sql + fs.get("id");
-                    } else {
-                        sql = sql + fs.get("id") + ",";
-                    }
+                break;
+        }
+        if (fslist.size() > 0) {
+            for (int l = 0; l < fslist.size(); l++) {
+                TtMap fs = fslist.get(l);
+                if (l == fslist.size() - 1) {
+                    fsids = fsids + fs.get("id");
+                } else {
+                    fsids = fsids + fs.get("id") + ",";
                 }
             }
-            whereString += " and t.gems_fs_id in (" + sql + ")";
-        } else {
-            whereString += " AND t.gems_fs_id=" + minfo.get("icbc_erp_fsid"); // 只显示自己公司的
         }
+        whereString += " AND t.gems_fs_id in (" + fsids + ")";
 
         /* 开始处理搜索过来的字段 */
         kw = post.get("kw");
@@ -104,6 +115,15 @@ public class hxyh_zxlr extends DbCtrl {
             System.out.println("DTBE开始日期:" + dtArr[0] + "结束日期:" + dtArr[1]);
             // todo处理选择时间段
         }
+        if(!Tools.myIsNull(post.get("stateid"))){
+            whereString += " AND aa.stateid="+post.get("stateid");
+        }
+        if(!Tools.myIsNull(post.get("cityid"))){
+            whereString += " AND aa.cityid="+post.get("cityid");
+        }
+        if(!Tools.myIsNull(post.get("fsid"))){
+            whereString += " AND f.id="+post.get("fsid");
+        }
         /* 搜索过来的字段处理完成 */
 
 
@@ -115,6 +135,9 @@ public class hxyh_zxlr extends DbCtrl {
         leftsql = " LEFT JOIN assess_fs f ON f.id=t.gems_fs_id " +
                 " LEFT JOIN assess_gems a ON a.id=t.gems_id" +
                 " LEFT JOIN assess_admin aa ON aa.id=t.current_editor_id" +
+                " LEFT JOIN assess_admin admin ON admin.gemsid=a.id " +
+                " LEFT JOIN comm_states cs ON cs.id=admin.stateid " +
+                " LEFT JOIN comm_citys cc ON cc.id=admin.cityid " +
                 " LEFT JOIN hxyh_dygd dy ON dy.icbc_id=t.id" +
                 " LEFT JOIN tlzf_qy qy ON qy.icbc_id=t.id";
         list = lists(whereString, fieldsString);
@@ -176,7 +199,7 @@ public class hxyh_zxlr extends DbCtrl {
             imginfo.putAll(imginfo3);
             imginfo.putAll(imginfo4);
             try {
-                if (!Zip.imgsToZipDown(imginfo, title + ".zip", null)) {
+                if (!Zip.imgsToZipDown(imginfo, info.get("c_name")+title + ".zip", null,"jpg")) {
                     errorMsg = "导出ZIP失败!";
                     request.setAttribute("errorMsg", errorMsg);
                 }

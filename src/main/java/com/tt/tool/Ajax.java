@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.tools.Tool;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +47,160 @@ public class Ajax {
             System.err.println(E.getMessage());
         }
         switch (post.get("do")) {
+            case "list":
+                switch (post.get("cn")) {
+                    case "assess_querythjl":
+                        String sql="select aq.id,aq.c_name,aq.c_tel,aq.c_cardno,aq.dt_add,fs.name as fs_name from assess_querythjl aq" +
+                                " LEFT JOIN assess_fs fs on fs.id=aq.gems_fs_id" +
+                                " where aq.query_type=0 and aq.bc_status=5";
+                        if(!Tools.myIsNull(post.get("c_name"))){
+                            sql+=" and aq.c_name='"+post.get("c_name")+"'";
+                        }
+                        if(!Tools.myIsNull(post.get("c_tel"))){
+                            sql+=" and aq.c_tel='"+post.get("c_tel")+"'";
+                        }
+                        if(!Tools.myIsNull(post.get("c_cardno"))){
+                            sql+=" and aq.c_cardno='"+post.get("c_cardno")+"'";
+                        }
+                        TtList ttList=Tools.reclist(sql);
+                        if(ttList.size()>0) {
+                            result = Tools.jsonEncode(ttList);
+                        }
+                        break;
+                    default:
+
+                        break;
+                }
+                return result;
+            case "count":
+                String fsids=Tools.getfsidsbyminfo(Tools.minfo());
+                String sql1="";
+                //String sql2="";
+                switch (cn) {
+                    case "hxyh_zxlr":
+                        sql1="select count(*) as num from kj_icbc where app=4 and bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "hxyh_xxzl":
+                        sql1="select count(*) as num from hxyh_xxzl where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "hxyh_yhht":
+                        sql1="select count(*) as num from hxyh_yhht where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "hxyh_gsht":
+                        sql1="select count(*) as num from hxyh_gsht where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "hxyh_gpsgd":
+                        sql1="select count(*) as num from hxyh_gpsgd where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "hxyh_dygd":
+                        sql1="select count(*) as num from hxyh_dygd where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "hxyh_yhclhs":
+                        sql1="select count(*) as num from hxyh_yhclhs where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "hxyh_gsclhs":
+                        sql1="select count(*) as num from hxyh_gsclhs where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "hxyh_dyclhs":
+                        sql1="select count(*) as num from hxyh_dyclhs where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "zxlr":
+                        sql1="select count(*) as num from kj_icbc where app=2 and bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "xxzl":
+                        sql1="select count(*) as num from hbyh_xxzl where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "hbyh_yhht":
+                        sql1="select count(*) as num from hbyh_yhht where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "hbyh_gsht":
+                        sql1="select count(*) as num from hbyh_gsht where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "gps":
+                        sql1="select count(*) as num from hbyh_gpsgd where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "dy":
+                        sql1="select count(*) as num from hbyh_dygd where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "hbyh_yhclhs":
+                        sql1="select count(*) as num from hbyh_yhclhs where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "hbyh_gsclhs":
+                        sql1="select count(*) as num from hbyh_gsclhs where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "hbyh_dyclhs":
+                        sql1="select count(*) as num from hbyh_dyclhs where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "xmgj_zxlr":
+                        sql1="select count(*) as num from kj_icbc where app=3 and bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "xmgj_xxzl":
+                        sql1="select count(*) as num from xmgj_xxzl where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "xmgj_yhht":
+                        sql1="select count(*) as num from xmgj_yhht where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "xmgj_gsht":
+                        sql1="select count(*) as num from xmgj_gsht where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "xmgj_gpsgd":
+                        sql1="select count(*) as num from xmgj_gpsgd where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "xmgj_dygd":
+                        sql1="select count(*) as num from xmgj_dygd where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "xmgj_yhclhs":
+                        sql1="select count(*) as num from xmgj_yhclhs where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "xmgj_gsclhs":
+                        sql1="select count(*) as num from xmgj_gsclhs where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    case "xmgj_dyclhs":
+                        sql1="select count(*) as num from xmgj_dyclhs where bc_status=2 and gems_fs_id in ("+fsids+")";
+                        //sql2="select count(*) as num from kj_icbc where app=4 and bc_status=3 and gems_fs_id in ("+fsids+")";
+                        break;
+                    default:
+                        break;
+                }
+                TtMap ttMap1=Tools.recinfo(sql1);
+                //TtMap ttMap2=Tools.recinfo(sql2);
+                int num1=0,num2=0;
+                if(!ttMap1.isEmpty()){
+                    num1=Integer.parseInt(ttMap1.get("num"));
+                }
+//                                if(!ttMap2.isEmpty()){
+//                                    num2=Integer.parseInt(ttMap2.get("num"));
+//                                }
+                TtMap counts=new TtMap();
+                counts.put("num1", String.valueOf(num1));
+                result=Tools.jsonEncode(counts);
+                break;
             case "opt":
                 /**
                  * opt为操作类型中的获取某表里面的id和name的所有记录，条件由url参数决定，比如&state_id=23代表某表里面的state_id=23的所有记录

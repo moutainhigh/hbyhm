@@ -78,7 +78,7 @@
                                 <td class="hidden-xs text-center"><%
                                     String cn = request.getParameter("cn");
                                 %>
-                                    <select id="showtag_${u.id}" onchange="ajax_edit(${u.id},'showtag',this.value,'<%=cn%>');" class="form-control">
+                                    <select id="showtag_${u.id}" onchange="ajax_edit(${u.id},'showtag',this.value,'assess_admin');" class="form-control">
                                             ${u.choice}
                                     </select>
                                 </td>

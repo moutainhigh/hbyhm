@@ -40,7 +40,7 @@
         <div class="box-body" id="tab-content">
             <div class="form-group">
                 <div class="col-sm-1">
-                    <a href="<%=Tools.urlKill("toZip")+"&toZip=1"%>" class="btn btn-primary">一键下载(相关文件)</a>
+                    <a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=0"%>" class="btn btn-primary">一键下载(相关文件)</a>
                 </div>
             </div>
             <div class="form-group">
@@ -131,6 +131,112 @@
                                 <span class="input-group-addon">手机号</span>
                                 <input type="text" class="form-control" id="c_buycar_tel" name="c_buycar_tel"
                                        placeholder="">
+                                <span class="input-group-addon"><a href="javascript:modal_show('${infodb.c_buycar_name}','${infodb.c_buycar_tel}','${infodb.c_buycar_id_cardno}')">通讯录</a></span>
+                            </div>
+                        </div>
+                        <script>
+                            function modal_show(c_name,c_tel,c_cardno) {
+                                //姓名命中
+                                $.post("/ttAjax?cn=assess_querythjl&do=list",
+                                    {
+                                        c_name:c_name
+                                    },
+                                    function (data) {
+                                        if(data.length>0){
+                                            $("#c_name_ul").empty();
+                                            for(var i in data){
+                                                $("#c_name_ul").append("<li>" +
+                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id="+data[i].id+"\">" +
+                                                    "<i class=\"fa fa-circle-o\" style=\"color:#00a65a\"></i>" +
+                                                    data[i].c_name+"-"+data[i].c_cardno+"-"+data[i].fs_name+"-"+data[i].dt_add+
+                                                    "<span class=\"pull-right\" style=\"color:#00a65a\">查询完成</span></a>\n" +
+                                                    "</li>");
+                                            }
+                                        }
+                                    },"json")
+                                //手机号命中
+                                $.post("/ttAjax?cn=assess_querythjl&do=list",
+                                    {
+                                        c_tel:c_tel
+                                    },
+                                    function (data) {
+                                        if(data.length>0){
+                                            $("#c_tel_ul").empty();
+                                            for(var i in data){
+                                                $("#c_tel_ul").append("<li>" +
+                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id="+data[i].id+"\">" +
+                                                    "<i class=\"fa fa-circle-o\" style=\"color:#00a65a\"></i>" +
+                                                    data[i].c_name+"-"+data[i].c_cardno+"-"+data[i].fs_name+"-"+data[i].dt_add+
+                                                    "<span class=\"pull-right\" style=\"color:#00a65a\">查询完成</span></a>\n" +
+                                                    "</li>");
+                                            }
+                                        }
+                                    },"json")
+                                //身份证命中
+                                $.post("/ttAjax?cn=assess_querythjl&do=list",
+                                    {
+                                        c_cardno:c_cardno
+                                    },
+                                    function (data) {
+                                        if(data.length>0){
+                                            $("#c_cardno_ul").empty();
+                                            for(var i in data){
+                                                $("#c_cardno_ul").append("<li>" +
+                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id="+data[i].id+"\">" +
+                                                    "<i class=\"fa fa-circle-o\" style=\"color:#00a65a\"></i>" +
+                                                    data[i].c_name+"-"+data[i].c_cardno+"-"+data[i].fs_name+"-"+data[i].dt_add+
+                                                    "<span class=\"pull-right\" style=\"color:#00a65a\">查询完成</span></a>\n" +
+                                                    "</li>");
+                                            }
+                                        }
+                                    },"json")
+                                $("#txlmodal").modal('show');
+                            }
+                        </script>
+                        <div class="modal fade" id="txlmodal" role="dialog" data-backdrop="static" aria-hidden="true"
+                             style="display: none;">
+                            <div class="modal-dialog" role="document">
+                                <div id="txlcontent" class="modal-content">
+                                    <div id="float_page_div">
+                                        <div class="box-body">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">姓名命中</h4>
+                                            </div>
+                                            <div class="modal-body form-horizontal">
+                                                <ul id="c_name_ul" class="nav nav-pills nav-stacked">
+
+                                                </ul>
+                                            </div>
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                <h4 class="modal-title" id="myModalLabe2">手机号命中</h4>
+                                            </div>
+                                            <div class="modal-body form-horizontal">
+                                                <ul id="c_tel_ul" class="nav nav-pills nav-stacked">
+
+                                                </ul>
+                                            </div>
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                <h4 class="modal-title" id="myModalLabe3">身份证命中</h4>
+                                            </div>
+                                            <div class="modal-body form-horizontal">
+                                                <ul id="c_cardno_ul" class="nav nav-pills nav-stacked">
+
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default pull-center"
+                                                        data-dismiss="modal" aria-label="Close">返回
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -689,9 +795,9 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">与借款人关系</span>
-                                <input type="text" class="form-control" id="c_ec<%=i%>_rsforloan"
-                                       name="c_ec<%=i%>_rsforloan"
-                                       placeholder="">
+                                <select id="c_ec<%=i%>_rsforloan" name="c_ec<%=i%>_rsforloan" class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, infodb.get("c_ec"+i+"_rsforloan"))%>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -868,7 +974,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">车辆信息材料</label>
+                <label class="col-sm-2 control-label">车辆信息材料
+                    <a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=1"%>" class="btn btn-primary">一键下载(相关文件)</a>
+                </label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
                         <%
@@ -910,7 +1018,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">车身照片</label>
+                <label class="col-sm-2 control-label">车身照片<a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=2"%>" class="btn btn-primary">一键下载(相关文件)</a></label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
 
@@ -1056,7 +1164,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">家访材料</label>
+                <label class="col-sm-2 control-label">家访材料<a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=3"%>" class="btn btn-primary">一键下载(相关文件)</a></label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
                         <%
@@ -1097,7 +1205,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">证明材料</label>
+                <label class="col-sm-2 control-label">证明材料<a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=4"%>" class="btn btn-primary">一键下载(相关文件)</a></label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
                         <%
@@ -1157,6 +1265,12 @@
                                 <input type="text" class="form-control" readonly="" value="贷款材料">
                             </div>
                         </div>
+												<div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">审批金额（元）</span>
+                                <input type="number" class="form-control" name="fk_spje" id="fk_spje" value="审批金额">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1193,7 +1307,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">历史记录</label>
                 <div class="col-sm-10">
-                    <textarea style="width: 80%; height: 200px" class="form-control" disabled><%
+                    <textarea style="width: 100%; height: 200px" class="form-control" disabled><%
                         TtList lslist = (TtList) request.getAttribute("lslist");
                         if (lslist != null && lslist.size() > 0) {
                             for (TtMap l : lslist) {

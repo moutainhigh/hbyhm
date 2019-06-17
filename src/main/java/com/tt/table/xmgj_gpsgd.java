@@ -63,18 +63,21 @@ public class xmgj_gpsgd extends DbCtrl {
         if(!Tools.myIsNull(post.get("toZip"))&& post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
             //征信录入资料
-            TtMap imgstep14_1ss=tozip(info.get("imgstep14_1ss"),"车身照片车身照片（定位水印）");
+            /*TtMap imgstep14_1ss=tozip(info.get("imgstep14_1ss"),"车身照片车身照片（定位水印）");
             TtMap imgstep14_2ss=tozip(info.get("imgstep14_2ss"),"车身照片车身（影像上传）");
             TtMap imgstep14_3ss=tozip(info.get("imgstep14_3ss"),"设备与VIN码合影照片（定位水印）");
             TtMap imgstep14_4ss=tozip(info.get("imgstep14_4ss"),"设备与VIN码合影（影像上传）");
             imginfo.putAll(imgstep14_1ss);
             imginfo.putAll(imgstep14_2ss);
             imginfo.putAll(imgstep14_3ss);
-            imginfo.putAll(imgstep14_4ss);
+            imginfo.putAll(imgstep14_4ss);*/
+            imginfo.put("安装员和车头合影",info.get("imgstep14_1"));
+            imginfo.put("GPS设备号照",info.get("imgstep14_2"));
+            imginfo.put("车辆备用钥匙",info.get("imgstep14_3"));
             if(!imginfo.isEmpty()) {
                 try {
                     closeConn();
-                    if (!Zip.imgsToZipDown(imginfo, title + ".zip", null)) {
+                    if (!Zip.imgsToZipDown(imginfo, info.get("c_name")+title + ".zip", null,"jpg")) {
                         errorMsg = "导出ZIP失败!";
                         request.setAttribute("errorMsg", errorMsg);
                     }
@@ -173,6 +176,11 @@ public class xmgj_gpsgd extends DbCtrl {
         Tools.formatResult(result2, bSuccess, errorCode, bSuccess ? "编辑成功！" : errorMsg, bSuccess ? nextUrl : "");// 失败时停留在当前页面,nextUrl为空
     }
 
+    @Override
+    public void succ(TtMap array, long id, int sqltp) {
+        super.succ(array, id, sqltp);
+    }
+
     /**
      * @param {type} {type}
      * @说明: 给继承的子类重载用的
@@ -191,32 +199,44 @@ public class xmgj_gpsgd extends DbCtrl {
 
         String whereString = "true";;
         String tmpWhere = "";
-        String fieldsString = "t.*,f.name as fsname,a.name as adminname,i.c_name as c_name";
+        String fieldsString = "t.*,f.name as fsname" +
+                ",f.id as fsid" +
+                ",cs.name as state_name" +
+                ",cc.name as city_name" +
+                ",a.name as adminname,i.c_name as c_name";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
-        //超级管理员
-        if(Tools.isSuperAdmin(minfo)){
+        //根据权限获取公司id
+        String fsids = "";
+        TtList fslist = new TtList();
+        switch (minfo.get("superadmin")) {
+            case "0":
+                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id=" + minfo.get("icbc_erp_fsid"));
+                break;
+            case "1":
+                fslist = Tools.reclist("select * from assess_fs where deltag=0 and showtag=1 and name!=''");
+                break;
+            case "2":
+                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
+                break;
+            case "3":
+                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in (" + Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
+                break;
+            default:
 
-        } else if(Tools.isAdmin(minfo)){//管理员
-
-        } else if (Tools.isCcAdmin(minfo)) {
-            TtList fslist = Tools.reclist("select id,up_id from assess_fs where id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid"));
-            String sql = "";
-//            whereString += " AND ("; // 显示自己和下级公司的
-            if (fslist.size() > 0) {
-                for (int l = 0; l < fslist.size(); l++) {
-                    TtMap fs = fslist.get(l);
-                    if (l == fslist.size() - 1) {
-                        sql = sql + fs.get("id");
-                    } else {
-                        sql = sql + fs.get("id") + ",";
-                    }
+                break;
+        }
+        if (fslist.size() > 0) {
+            for (int l = 0; l < fslist.size(); l++) {
+                TtMap fs = fslist.get(l);
+                if (l == fslist.size() - 1) {
+                    fsids = fsids + fs.get("id");
+                } else {
+                    fsids = fsids + fs.get("id") + ",";
                 }
             }
-            whereString += " and t.gems_fs_id in (" + sql + ")";
-        } else {
-            whereString += " AND t.gems_fs_id=" + minfo.get("icbc_erp_fsid"); // 只显示自己公司的
         }
+        whereString += " AND t.gems_fs_id in (" + fsids + ")";
         /* 开始处理搜索过来的字段 */
         kw = post.get("kw");
         dtbe = post.get("dtbe");
@@ -231,6 +251,9 @@ public class xmgj_gpsgd extends DbCtrl {
             System.out.println("DTBE开始日期:" + dtArr[0] + "结束日期:" + dtArr[1]);
             // todo处理选择时间段
         }
+        if(!Tools.myIsNull(post.get("fsid"))){
+            whereString += " AND f.id="+post.get("fsid");
+        }
         /* 搜索过来的字段处理完成 */
 
 
@@ -241,7 +264,10 @@ public class xmgj_gpsgd extends DbCtrl {
         showall = true; // 忽略deltag和showtag
         leftsql = "LEFT JOIN assess_fs f ON f.id=t.gems_fs_id " +
                 "LEFT JOIN assess_gems a ON a.id=t.gems_id " +
-                "LEFT JOIN kj_icbc i ON i.id=t.icbc_id";
+                " LEFT JOIN assess_admin admin ON admin.gemsid=a.id" +
+                " LEFT JOIN comm_states cs ON cs.id=admin.stateid" +
+                " LEFT JOIN comm_citys cc ON cc.id=admin.cityid" +
+                " LEFT JOIN kj_icbc i ON i.id=t.icbc_id";
         list = lists(whereString, fieldsString);
 
         if (!Tools.myIsNull(kw)) { // 搜索关键字高亮

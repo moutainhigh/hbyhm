@@ -239,7 +239,7 @@
                         <div class="col-sm-2">
                             <div class="input-group">
                                 <span class="input-group-addon">类型</span>
-                                <select name="fctype" id="fctype" class="form-control">
+                                <select name="fctype" id="fctype" class="form-control" onchange="getfctype()">
                                     <option selected="selected" value="0">正常充值</option>
                                     <option value="1">现金打折</option>
                                     <option value="2">充值折扣</option>
@@ -248,10 +248,16 @@
                                 </select>
                             </div>
                         </div>
+                        <script>
+                             function getfctype() {
+                                var  fctypename=$("#fctype option:selected").text();
+                                 document.getElementById("czremark").value=fctypename;
+                             }
+                        </script>
                         <div class="col-sm-6">
                             <div class="input-group">
                                 <span class="input-group-addon">备注</span>
-                                <input name="czremark" id="czremark" type="text" class="form-control">
+                                <input name="czremark" id="czremark" type="text"  value="正常充值" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-3">

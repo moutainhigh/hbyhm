@@ -35,6 +35,9 @@
                                 业务员
                             </th>
                             <th class="hidden-xs text-center">
+                                所属城市
+                            </th>
+                            <th class="hidden-xs text-center">
                                 所属公司
                             </th>
                             <th class="text-center">
@@ -63,7 +66,10 @@
                                 <%=m.get("adminname")%>
                             </td>
                             <td class="hidden-xs text-center">
-                                <%=m.get("fsname")%>
+                                <%=m.get("state_name")%>-<%=m.get("city_name")%>
+                            </td>
+                            <td class="hidden-xs text-center">
+                                <a href="/manager/index?cn=xxzl&type=tyjj&sdo=list&fsid=<%=m.get("fsid")%>"><%=m.get("fsname")%></a>
                             </td>
                             <td class="text-center">
                                 <%=m.get("dt_add")%><br><%=m.get("dt_edit")%>
@@ -74,7 +80,7 @@
                             <td class="text-center">
                                 <div class="table-button">
                                     <%
-                                        if (!(m.get("current_editor_id").length() == 0 || "-1".equals(m.get("current_editor_id")) || minfo.get("id").equals(m.get("current_editor_id")))) {
+                                        if (m!=null && m.get("current_editor_id")!=null && !(m.get("current_editor_id").length() == 0 || "-1".equals(m.get("current_editor_id")) || minfo.get("id").equals(m.get("current_editor_id")))) {
                                     %>
                                     <span class="label label-success">用户<%=m.get("aa_name")%>正在操作</span>
                                     <%

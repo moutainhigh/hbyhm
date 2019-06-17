@@ -67,7 +67,7 @@ public class Modal {
             for (TtMap model : list) {
                 String whString = "level=2 AND id_uplevel='" + model.get("id") + "'" + sqlMustShowMenuTag; // 查询二级菜单
                 TtList listsub = dbCtrl.lists(whString,
-                        "t.name,t.id,t.showmmenuname,t.cn,t.type,t.icohtml,t.sdo,t.urlotherstr");
+                        "t.name,t.id,t.showmmenuname,t.cn,t.type,t.icohtml,t.sdo,t.urlotherstr,t.ismark");
                 //System.out.println(model.get("showmmenuname"));
                 Map<String, Object> data = new HashMap<>();
                 data.put("submenu", listsub);

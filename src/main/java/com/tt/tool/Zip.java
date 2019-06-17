@@ -32,7 +32,7 @@ public class Zip {
                 Map<String, String> info = dbCtrl.info(45);
                 Map<String, String> imgs = new HashMap<>();
                 imgs.put("个人头像1", info.get("avatarurl"));
-                imgsToZipDown(imgs, info.get("name") + ".zip", "");
+                imgsToZipDown(imgs, info.get("name") + ".zip", "","");
             } catch (Exception e) {
                 Tools.logError(e.getMessage());
                 e.printStackTrace();
@@ -48,7 +48,7 @@ public class Zip {
      * @description: 把info里指定的所有文件复制到临时文件夹下，重命名为info.key，后缀名跟源文件后缀一样，然后把文件夹打包成zip并输出到浏览器下载
      * @return:
      */
-    public static boolean imgsToZipDown(Map<String, String> info, String fileName, String baseSavePath)
+    public static boolean imgsToZipDown(Map<String, String> info, String fileName, String baseSavePath,String ext)
             throws IOException {
         if (Tools.myIsNull(baseSavePath)) {
             baseSavePath = Config.FILEUP_SAVEPATH;
@@ -61,7 +61,10 @@ public class Zip {
                 String srcFilePath = baseSavePath + info.get(key);
                 srcFilePath = srcFilePath.replaceFirst(Config.FILEUP_URLPRE, "/");
                 srcFilePath = Tools.formatFilePath(srcFilePath);
-                String dstFilePath = tmpZipPath + key + "." + Tools.extractFileExt(srcFilePath);
+                if(Tools.myIsNull(ext)){
+                    ext=Tools.extractFileExt(srcFilePath);
+                }
+                String dstFilePath = tmpZipPath + key + "." + ext;
                 dstFilePath = Tools.formatFilePath(dstFilePath);
                 System.out.println("zip复制文件src:" + srcFilePath + ",dst:" + dstFilePath);
                 if (Tools.ttCopyFile(srcFilePath, dstFilePath)) {

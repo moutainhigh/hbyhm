@@ -2,7 +2,7 @@
  * @Description: TT总配置文件。
  * @Author: tt
  * @Date: 2018-12-26 17:42:40
- * @LastEditTime: 2019-04-01 11:13:26
+ * @LastEditTime: 2019-06-17 17:03:08
  * @LastEditors: tt
  */
 package com.tt.tool;
@@ -23,7 +23,7 @@ public class Config {
      * NOTE:
      * 文件上传相关配置开始
      */
-    public final static String[] FILEUP_OKEXT = new String[]{"JPG", "PNG", "GIF", "BMP", "MP4", "ZIP", "RAR"};/* 允许的上传文件类型 */
+    public final static String[] FILEUP_OKEXT = new String[]{"JPG", "PNG", "GIF", "BMP", "MP4", "ZIP", "RAR","PDF"};/* 允许的上传文件类型 */
     public final static long FILEUP_MAXSIZE = 1024 * 1024 * 5;/* 最大支持文件大小 */
     /* 后台管理员支持上传最大文件大小 */
     public final static long FILEUP_MAXSIZE_ISADMIN = 1024 * 1024 * 50;

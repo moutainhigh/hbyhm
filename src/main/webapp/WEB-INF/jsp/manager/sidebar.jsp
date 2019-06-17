@@ -16,6 +16,7 @@
         <ul class="sidebar-menu">
             <li class="header">管理菜单</li>
             <%
+                //TtMap minfo = (TtMap) request.getAttribute("minfo");
                 String urlHome = "index";
                 String nowcn = "";
                 String nowsdo = "";
@@ -25,10 +26,12 @@
                 <a href="<%=urlHome%>"> <i class="fa fa-home"></i> <span>华夏管理首页</span></a>
             </li>
             <li <% if (cn.equals("homeXm") && type.equals("demo")) { %> class="active" <%}%>>
-                <a href="/manager/index?cn=homeXm&sdo=form&type=demo"> <i class="fa fa-home"></i> <span>厦门管理首页</span></a>
+                <a href="/manager/index?cn=homeXm&sdo=form&type=demo"> <i class="fa fa-home"></i>
+                    <span>厦门管理首页</span></a>
             </li>
             <li <% if (cn.equals("homeHb") && type.equals("demo")) { %> class="active" <%}%>>
-                <a href="/manager/index?cn=homeHb&sdo=form&type=demo"> <i class="fa fa-home"></i> <span>河北管理首页</span></a>
+                <a href="/manager/index?cn=homeHb&sdo=form&type=demo"> <i class="fa fa-home"></i>
+                    <span>河北管理首页</span></a>
             </li>
             <%
                 Map<String, Object> menus = (Map<String, Object>) request.getAttribute("menus");
@@ -43,10 +46,12 @@
                 <a href="#"><%=iconHtmlMain%> <span><%=key%></span></a>
                 <ul class="treeview-menu">
                     <%
+
                         for (TtMap keysub : submenus) {//二级级菜单循环开始
                             String icohtml = keysub.get("icohtml");
                             String subMenuName = keysub.get("showmmenuname");
                             String urlotherstr = keysub.get("urlotherstr");
+                            String ismark = keysub.get("ismark");
                             nowcn = keysub.get("cn");
                             nowsdo = keysub.get("sdo");
                             nowtype = keysub.get("type");
@@ -55,10 +60,24 @@
                     <li <% if (active) { %> class="active" <%}%> >
                         <a href="index?cn=<%=nowcn%>&sdo=<%=nowsdo%>&type=<%=nowtype%><%=urlotherstr%>"><%=icohtml%>
                             <span><%=subMenuName%></span>
-                            <%--显示小图标 <span class="pull-right-container">
-                                <small class="label pull-right bg-green">16</small>
-                                <small class="label pull-right bg-red">5</small>
-                            </span> --%>
+                            <%--显示小图标--%>
+                            <%if (ismark.equals("1")) {%>
+                            <span class="pull-right-container">
+                                <%--<small id="<%=nowcn%>1" name="<%=nowcn%>" class="label pull-right bg-green">0</small>--%>
+                                 (<font id="<%=nowcn%>2" color="Lime">0</font>)
+                            </span>
+                            <script>
+                                $(document).ready(function () {
+                                    $.post("/ttAjax?do=count&cn=<%=nowcn%>",function (data) {
+                                        var obj = eval('(' + data + ')');
+                                        document.getElementById("<%=nowcn%>2").innerText = obj.num1;
+                                        }
+                                    )
+                                    //document.getElementById("<%=nowcn%>1").innerText = "";
+
+                                })
+                            </script>
+                            <%}%>
                         </a>
                     </li>
                     <%

@@ -25,12 +25,19 @@
                            aria-describedby="example2_info">
                         <thead>
                         <tr role="row">
-                            <th class="text-center" style="width:120px;">
+                            <th class="text-center" style="width:180px;">
                                 名称
                             </th>
                             <th class="hidden-xs text-center">
                                 <!-- hidden-xs为手机模式时自动隐藏， text-center为居中-->
                                 账户总数
+                            </th>
+                            <th class="hidden-xs text-center">
+                                <!-- hidden-xs为手机模式时自动隐藏， text-center为居中-->
+                                账户余额
+                            </th>
+                            <th class="text-center" style="width:120px;">
+                                上级公司
                             </th>
                             <th class="hidden-xs text-center">
                                 更新时间
@@ -39,6 +46,7 @@
                                 创建时间
                             </th>
                             <th class="hidden-xs text-center">状态</th>
+                            <th class="hidden-xs text-center">显示/隐藏</th>
                             <th class="text-center">操作</th>
                         </tr>
                         </thead>
@@ -86,6 +94,14 @@
                                         ${u.usercount}
                                 </td>
                                 <td class="hidden-xs text-center">
+                                    <a href="javascript:void(0)">
+                                        现金：${u.money}
+                                    </a>
+                                </td>
+                                <td class="text-center" style="width:120px;">
+                                        ${u.up_name}
+                                </td>
+                                <td class="hidden-xs text-center">
                                         ${u.dt_edit}
                                 </td>
                                 <td class="hidden-xs text-center">
@@ -93,6 +109,11 @@
                                 </td>
                                 <td class="hidden-xs text-center">
                                         ${u.showtag eq '1'?"<span class='label label-success'>正常</span>":"<span class='label label-danger'>屏蔽</span>"}
+                                </td>
+                                <td class="hidden-xs text-center">
+                                    <select id="showtag_${u.id}" onchange="ajax_edit('${u.id}','showtag',this.value,'assess_fs');" class="form-control" style="font-size: 14px;">
+                                       ${u.choice}
+                                    </select>
                                 </td>
                                 <td class="text-center">
                                     <div class="table-button">

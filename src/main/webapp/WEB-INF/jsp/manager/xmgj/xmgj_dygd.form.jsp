@@ -39,7 +39,7 @@
         <div class="box-body" id="tab-content">
             <div class="form-group">
                 <div class="col-sm-1">
-                    <a href="<%=Tools.urlKill("toZip")+"&toZip=1"%>" class="btn btn-primary" >一键下载(相关文件)</a>
+                    <a href="<%=Tools.urlKill("toZip")+"&toZip=1"%>" class="btn btn-primary">一键下载(相关文件)</a>
                 </div>
             </div>
             <div class="form-group">
@@ -50,41 +50,59 @@
                             <div class="input-group">
                                 <span class="input-group-addon">关联客户</span>
                                 <select id="icbc_id" name="icbc_id" title="请选择关联客户" class="selectpicker  form-control"
-                                         multiple data-live-search="true" data-max-options="1">
+                                        multiple data-live-search="true" data-max-options="1">
                                     <c:forEach items="${icbclist}" var="i">
                                         <option value="${i.id}">${i.c_name}</option>
                                     </c:forEach>
                                 </select>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
-            </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">抵押相关归档视频</label>
+                <label class="col-sm-2 control-label">抵押相关材料</label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
                         <%
-                            String[] imgs={};
-                            if(infodb.get("imgstep16_1ss")!=null&&!infodb.get("imgstep16_1ss").equals("")){
-                                imgs=infodb.get("imgstep16_1ss").split("\u0005");
+                            String[] imgs = {};
+                            if (infodb.get("imgstep16_1ss") != null && !infodb.get("imgstep16_1ss").equals("")) {
+                                imgs = infodb.get("imgstep16_1ss").split("\u0005");
                             }
-                            for(int i=0;i<imgs.length;i++){
-                                if(imgs[i]!=null&&!imgs[i].equals("")){
+                            for (int i = 0; i < imgs.length; i++) {
+                                if (imgs[i] != null && !imgs[i].equals("")) {
+                                    String ref = imgs[i].substring(imgs[i].lastIndexOf(".")+1, imgs[i].length());
+                                    if (ref.equals("mp4")) {
                         %>
                         <div class="col-sm-4">
-                        <video class="video-js vjs-default-skin"
-                               controls  width="420" height="200"
-                               poster="/manager/images/logo.png">
-                            <source src="http://hbyhm.kcway.net/<%=imgs[i]%>" type="video/mp4">
-                        </video>
+                            <video class="video-js vjs-default-skin"
+                                   controls width="420" height="200"
+                                   poster="/manager/images/logo.png">
+                                <source src="http://hbyhm.kcway.net/<%=imgs[i]%>" type="video/mp4">
+                            </video>
                         </div>
                         <%
-                                }  }
+                        } else {%>
+                        <div id="div_<%=i%>"
+                             style="position: relative;width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"
+                             class="gallerys">
+                            <img id="imgstep16_1ss_<%=i%>" name="imgstep16_1ss_<%=i%>" src="<%=imgs[i]%>"
+                                 class="imgclass gallery-pic" style="width: 100%;height:100px;border-radius:10px;">
+                            <div style="padding-top:20px;">
+                                <a onclick="$.openPhotoGallery($('#imgstep16_1ss_<%=i%>'));"
+                                   style="font-size: 14px;">查看大图</a>
+                            </div>
+                        </div>
+                        <%
+
+                                    }
+                                }
+                            }
                         %>
                     </div>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="col-sm-2 control-label">审核和数据填充处理</label>
                 <div class="col-sm-10">
@@ -171,11 +189,11 @@
     }
 </script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         // 中文重写select 查询为空提示信息
         $('.selectpicker').selectpicker('refresh');
     });
-   /* var imgs='${infodb.imgstep9_1ss}';
+    /* var imgs='${infodb.imgstep9_1ss}';
     String imgss="[{type: \"office\", size: 102400, caption: \"123.docx\", url: \"/amp/project/delFile.do\", key: '1519788281200pwxfx87'}]";
     $("#myFile").fileinput({
         language: 'zh', //设置语言

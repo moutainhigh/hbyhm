@@ -77,7 +77,7 @@
 
         <p>异常访问异常访问异常访问异常访问异常访问</p>
     </div>
-    <a type="button" href="javascript:history.go(-1);" class="btn btn-block btn-danger btn-lg">返回上一页</a>
-    <a type="button" href="/manager/index?&cn=home&sdo=form&type=demo" class="btn btn-block btn-primary btn-lg">返回首页</a>
+    <a type="button" href="javascript:history.go(-2);" class="btn btn-block btn-danger btn-lg">返回上一页</a>
+    <a type="button" href="/manager/index?cn=homeHx&sdo=form&type=demo" class="btn btn-block btn-primary btn-lg">返回首页</a>
 </div>
 </body>

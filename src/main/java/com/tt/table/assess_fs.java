@@ -8,6 +8,7 @@ import com.tt.tool.DbCtrl;
 import com.tt.tool.Tools;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class assess_fs extends DbCtrl {
@@ -18,6 +19,7 @@ public class assess_fs extends DbCtrl {
     private boolean canAdd = true;
     private final String classAgpId = "45"; // 随便填的，正式使用时应该跟model里此模块的ID相对应
     public boolean agpOK = false;// 默认无权限
+
 
     public assess_fs() {
         super("assess_fs");
@@ -98,17 +100,47 @@ public class assess_fs extends DbCtrl {
             return null;
         }
         TtMap minfo = Tools.minfo();
+        String superwheres = "";
+        switch (minfo.get("superadmin")) {
+            case "0":
+                superwheres = " ti.id=" + minfo.get("icbc_erp_fsid");
+                break;
+            case "1":
+                //superwheres =" ti.id="+minfo.get("icbc_erp_fsid");
+                break;
+            case "2":
+                superwheres = " (t.id=" + minfo.get("icbc_erp_fsid") + " or t.up_id=" + minfo.get("icbc_erp_fsid") + ")";
+                break;
+            case "3":
+                String ids = Tools.getfsids(Tools.myIsNull(minfo.get("icbc_erp_fsid")) ? 0 : Integer.parseInt(minfo.get("icbc_erp_fsid")));
+                superwheres = " t.id in (" + ids + ")";
+                break;
+            default:
+
+                break;
+        }
         if (Tools.myIsNull(wheres)) {
-            wheres = Tools.isSuperAdmin(minfo) ? "" : " (t.id=" + minfo.get("icbc_erp_fsid") + " or t.up_id=" + minfo.get("icbc_erp_fsid") + ")"; // 只显示自己公司的
+            wheres = Tools.isSuperAdmin(minfo) ? "" : superwheres;
         } else {
-            wheres += Tools.isSuperAdmin(minfo) ? "" : " AND (t.id=" + minfo.get("icbc_erp_fsid") + " or t.up_id=" + minfo.get("icbc_erp_fsid") + ")"; // 只显示自己公司的
+            wheres += Tools.isSuperAdmin(minfo) ? "" : " AND " + superwheres; // 只显示自己公司的
         }
         TtList lmss = super.lists(wheres, f);
-
         for (TtMap tmpInfo : lmss) {
             tmpInfo.put("choice", Tools.dicopt("sys_dic_tag", Tools.strToLong(tmpInfo.get("showtag")))); // 显示/隐藏
             TtMap uermap = Tools.recinfo("select count(*) as usercount from assess_admin where icbc_erp_fsid=" + tmpInfo.get("id"));
             tmpInfo.put("usercount", uermap.get("usercount")); // 显示/隐藏
+            TtMap upmap = Tools.recinfo("select name from assess_fs where id=" + tmpInfo.get("up_id"));
+            tmpInfo.put("up_name", upmap.get("name"));
+            TtMap money = Tools.recinfo("SELECT SUM(amount) as money FROM moneyfs where bintype=0 and fsid=" + tmpInfo.get("id"));
+            if(money.isEmpty()){
+                tmpInfo.put("money", String.valueOf(new BigDecimal("0.00")));
+            }else{
+                if(Tools.myIsNull(money.get("money"))){
+                    tmpInfo.put("money", String.valueOf(new BigDecimal("0.00")));
+                }else {
+                    tmpInfo.put("money", String.valueOf(new BigDecimal(money.get("money"))));
+                }
+            }
         }
         return lmss;
     }
@@ -151,6 +183,7 @@ public class assess_fs extends DbCtrl {
             edit(post, id);
         } else {
             add(post);
+
         }
         String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
         boolean bSuccess = errorCode == 0;
@@ -159,15 +192,66 @@ public class assess_fs extends DbCtrl {
 
     @Override
     public void succ(TtMap array, long id, int sqltp) {
-        TtList apglist = Tools.reclist("select * from icbc_admin_agp where showtag=1 and fsid=0 and systag=1");
-        for (TtMap apg : apglist) {
-            TtMap apgmap = new TtMap();
-            apgmap.put("name", apg.get("name"));
-            apgmap.put("purview_map", apg.get("purview_map"));
-            apgmap.put("showtag", "1");
-            apgmap.put("fsid", String.valueOf(id));
-            apgmap.put("systag", "0");
-            Tools.recAdd(apgmap, "icbc_admin_agp");
+        TtList ttMaps = Tools.reclist("select * from icbc_admin_agp where fsid=" + id);
+        if (ttMaps.size() > 0) {
+
+        } else {
+            TtList apglist = Tools.reclist("select * from icbc_admin_agp where showtag=1 and fsid=0 and systag=1");
+            for (TtMap apg : apglist) {
+                TtMap apgmap = new TtMap();
+                apgmap.put("name", apg.get("name"));
+                apgmap.put("purview_map", apg.get("purview_map"));
+                apgmap.put("showtag", "1");
+                apgmap.put("fsid", String.valueOf(id));
+                apgmap.put("systag", "0");
+                Tools.recAdd(apgmap, "icbc_admin_agp");
+            }
+        }
+        //充值扣款
+        TtMap minfo = Tools.minfo();//获取当前登录用户信息
+        if (array.get("addmoney") != null
+                && !array.get("addmoney").equals("")) {
+            TtMap moneyfs = new TtMap();
+            moneyfs.put("type", "1");
+            moneyfs.put("status", "1");
+            moneyfs.put("otherid", "0");
+            moneyfs.put("orderid", "0");
+            moneyfs.put("mid", minfo.get("id"));
+            moneyfs.put("fsid", String.valueOf(id));
+            moneyfs.put("gemsid", "0");
+            moneyfs.put("amount",array.get("addmoney"));
+            moneyfs.put("remark","人保后台-"+array.get("czremark"));
+            moneyfs.put("bintype", array.get("bintype"));
+            moneyfs.put("fctype", array.get("fctype"));
+            long moneyfsid= Tools.recAdd(moneyfs,"moneyfs");
+            TtMap moneyfs1 = new TtMap();
+            moneyfs1.put("mid", minfo.get("id"));
+            moneyfs1.put("fsid", String.valueOf(id));
+            moneyfs1.put("gemsid", "0");
+            moneyfs1.put("amount", array.get("addmoney"));
+            moneyfs1.put("remark","人保后台-"+array.get("czremark"));
+            moneyfs1.put("moneyid", String.valueOf(moneyfsid));
+            moneyfs1.put("status","1");
+            moneyfs1.put("bintype",array.get("bintype"));
+            moneyfs1.put("fctype", array.get("fctype"));
+            long moneyfs1id= Tools.recAdd(moneyfs1,"moneyfs_1");
+            //退款 扣费
+            if(array.get("fctype").equals("3")
+                    || array.get("fctype").equals("4")){
+                TtMap moneyfs2 = new TtMap();
+                moneyfs2.put("mid", minfo.get("id"));
+                moneyfs2.put("fsid", String.valueOf(id));
+                moneyfs2.put("gemsid", "0");
+                moneyfs2.put("amount", array.get("addmoney"));
+                moneyfs2.put("remark","人保后台-"+array.get("czremark"));
+                moneyfs2.put("moneyid", String.valueOf(moneyfsid));
+                moneyfs2.put("status","1");
+                moneyfs2.put("bc_type","0");
+                moneyfs2.put("orderid", "0");
+                moneyfs2.put("type","0");
+                moneyfs2.put("bintype",array.get("bintype"));
+                Tools.recAdd(moneyfs2,"moneyfs_2");
+            }
         }
     }
 
@@ -186,7 +270,7 @@ public class assess_fs extends DbCtrl {
         String dtbe = ""; // 搜索日期选择
         int pageInt = Integer.valueOf(Tools.myIsNull(post.get("p")) == false ? post.get("p") : "1"); // 当前页
         int limtInt = Integer.valueOf(Tools.myIsNull(post.get("l")) == false ? post.get("l") : "10"); // 每页显示多少数据量
-        String whereString = "t.fs_type=2 and name!=''";
+        String whereString = "t.fs_type=2 and t.name!='' and t.deltag=0";
         String tmpWhere = "";
         String fieldsString = "t.*";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
@@ -206,8 +290,6 @@ public class assess_fs extends DbCtrl {
             // todo处理选择时间段
         }
         /* 搜索过来的字段处理完成 */
-
-
         whereString += tmpWhere; // 过滤
         orders = orderString;// 排序
         p = pageInt; // 显示页

@@ -34,6 +34,9 @@
                                 业务员
                             </th>
                             <th class="hidden-xs text-center">
+                                所属城市
+                            </th>
+                            <th class="hidden-xs text-center">
                                 所属公司
                             </th>
                             <th class="text-center">
@@ -62,7 +65,10 @@
                                 <%=m.get("adminname")%>
                             </td>
                             <td class="hidden-xs text-center">
-                                <%=m.get("fsname")%>
+                                <%=m.get("state_name")%>-<%=m.get("city_name")%>
+                            </td>
+                            <td class="hidden-xs text-center">
+                                <a href="/manager/index?cn=xmgj_yhht&sdo=list&type=xmgj&fsid=<%=m.get("fsid")%>"><%=m.get("fsname")%></a>
                             </td>
                             <td class="text-center">
                                 <%=m.get("dt_add")%><br><%=m.get("dt_edit")%>

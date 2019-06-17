@@ -67,6 +67,41 @@
                 </div>
             </div>
             <%}%>
+            <%
+                //dicopt功能演示，指定表里面的name和id，并用name组成<option></option>
+                String sp = Tools.dicopt("comm_states", 0);//省会，
+            %>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">城市选择</label>
+                <div class="col-sm-10">
+                    <div class="row inline-from">
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">省</span>
+                                <select name="stateid" id="stateid"  class="selectpicker  form-control" multiple data-live-search="true" data-max-options="1">
+                                    <option value="0">请选择</option>
+                                    <%=sp%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">市</span>
+                                <select name="cityid" id="cityid" class="form-control">
+                                    <option value="0">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                /*选择省后，动态获取省下面的市，并默认选中你指定的id的市，/ttAjax在Ajax.java中处理
+                                                        /ttAjax也可以单独使用，比如
+                                                        /ttAjax?do=opt&cn=kjb_user&id=3&mid_add=100000 //显示创建人id为100000的所有用户，默认选择id为3的记录
+                                                        * */
+                objacl('#stateid', '#cityid', '/ttAjax?do=opt&cn=comm_citys&state_id=', '${infodb.stateid}', '${infodb.cityid}');
+            </script>
             <div class="form-group">
                 <label class="col-sm-2 control-label">所属公司</label>
                 <div class="col-sm-10">
@@ -224,7 +259,7 @@
                     var upac_id = '${infodb.upac_id}';
                     if (cp == 2) {
                         $.ajax({
-                            url: "/ttAjax?do=opt&re=json&cn=assess_admin&id=0&icbc_erp_fsid=" + fsid + "&cp=1",
+                            url: "/ttAjax?do=opt&re=json&cn=assess_admin&id=0&icbc_erp_fsid=" + fsid + "&cp=1&deltag=0&showtag=1",
                             success: function (result) {
                                 var jsonObj = eval('(' + result + ')');
                                 for (var r in jsonObj) {
@@ -239,7 +274,7 @@
                     }
                     if (cp == 0) {
                         $.ajax({
-                            url: "/ttAjax?do=opt&re=json&cn=assess_admin&id=0&icbc_erp_fsid=" + fsid + "&cp=2",
+                            url: "/ttAjax?do=opt&re=json&cn=assess_admin&id=0&icbc_erp_fsid=" + fsid + "&cp=2&deltag=0&showtag=1",
                             success: function (result) {
                                 var jsonObj = eval('(' + result + ')');
                                 for (var r in jsonObj) {
@@ -263,7 +298,7 @@
                     upac_id.append("<option value='0'>请选择</option>");
                     if (cp == 2) {
                         $.ajax({
-                            url: "/ttAjax?do=opt&re=json&cn=assess_admin&id=0&icbc_erp_fsid=" + fsid + "&cp=1",
+                            url: "/ttAjax?do=opt&re=json&cn=assess_admin&id=0&icbc_erp_fsid=" + fsid + "&cp=1&deltag=0&showtag=1",
                             success: function (result) {
                                 var jsonObj = eval('(' + result + ')');
                                 for (var r in jsonObj) {
@@ -274,7 +309,7 @@
                     }
                     if (cp == 0) {
                         $.ajax({
-                            url: "/ttAjax?do=opt&re=json&cn=assess_admin&id=0&icbc_erp_fsid=" + fsid + "&cp=2",
+                            url: "/ttAjax?do=opt&re=json&cn=assess_admin&id=0&icbc_erp_fsid=" + fsid + "&cp=2&deltag=0&showtag=1",
                             success: function (result) {
                                 var jsonObj = eval('(' + result + ')');
                                 for (var r in jsonObj) {
