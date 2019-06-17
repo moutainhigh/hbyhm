@@ -199,7 +199,7 @@ public class hxyh_zxlr extends DbCtrl {
             imginfo.putAll(imginfo3);
             imginfo.putAll(imginfo4);
             try {
-                if (!Zip.imgsToZipDown(imginfo, title + ".zip", null,"jpg")) {
+                if (!Zip.imgsToZipDown(imginfo, info.get("c_name")+title + ".zip", null,"jpg")) {
                     errorMsg = "导出ZIP失败!";
                     request.setAttribute("errorMsg", errorMsg);
                 }

@@ -105,7 +105,7 @@ public class hxyh_xxzl extends DbCtrl {
             if(!imginfo.isEmpty()) {
                 try {
                     closeConn();
-                    if (!Zip.imgsToZipDown(imginfo, title + ".zip", null,"jpg")) {
+                    if (!Zip.imgsToZipDown(imginfo, info.get("c_name")+title + ".zip", null,"jpg")) {
                         errorMsg = "导出ZIP失败!";
                         request.setAttribute("errorMsg", errorMsg);
                     }
