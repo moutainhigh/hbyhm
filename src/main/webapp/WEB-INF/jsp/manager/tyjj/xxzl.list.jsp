@@ -80,7 +80,7 @@
                             <td class="text-center">
                                 <div class="table-button">
                                     <%
-                                        if (!(m.get("current_editor_id").length() == 0 || "-1".equals(m.get("current_editor_id")) || minfo.get("id").equals(m.get("current_editor_id")))) {
+                                        if (m!=null && m.get("current_editor_id")!=null && !(m.get("current_editor_id").length() == 0 || "-1".equals(m.get("current_editor_id")) || minfo.get("id").equals(m.get("current_editor_id")))) {
                                     %>
                                     <span class="label label-success">用户<%=m.get("aa_name")%>正在操作</span>
                                     <%

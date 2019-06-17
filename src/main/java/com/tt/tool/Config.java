@@ -2,7 +2,7 @@
  * @Description: TT总配置文件。
  * @Author: tt
  * @Date: 2018-12-26 17:42:40
- * @LastEditTime: 2019-04-01 11:13:26
+ * @LastEditTime: 2019-06-17 17:03:08
  * @LastEditors: tt
  */
 package com.tt.tool;
@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
  * TT总配置文件。
  */
 public class Config {
-    public final static boolean TESTMODE = true;/* 测试/生产环境开关 */
+    public final static boolean TESTMODE = false;/* 测试/生产环境开关 */
     public final static boolean DEBUGMODE = true;/* 调试模式开关，调试模式下会打印异常到浏览器 */
     public final static String TTVER = "2.0 build 20190401"; /* 版本号 */
     public final static String APP_TITLE = "人保进件"; //项目名称：类似大地保险
@@ -23,7 +23,7 @@ public class Config {
      * NOTE:
      * 文件上传相关配置开始
      */
-    public final static String[] FILEUP_OKEXT = new String[]{"JPG", "PNG", "GIF", "BMP", "MP4", "ZIP", "RAR"};/* 允许的上传文件类型 */
+    public final static String[] FILEUP_OKEXT = new String[]{"JPG", "PNG", "GIF", "BMP", "MP4", "ZIP", "RAR","PDF"};/* 允许的上传文件类型 */
     public final static long FILEUP_MAXSIZE = 1024 * 1024 * 5;/* 最大支持文件大小 */
     /* 后台管理员支持上传最大文件大小 */
     public final static long FILEUP_MAXSIZE_ISADMIN = 1024 * 1024 * 50;

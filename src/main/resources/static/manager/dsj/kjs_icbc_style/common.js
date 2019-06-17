@@ -1,3 +1,11 @@
+/*
+ * @说明: 这里写说明哈
+ * @Description: file content
+ * @Author: tt
+ * @Date: 2019-06-17 11:24:56
+ * @LastEditTime: 2019-06-17 16:40:37
+ * @LastEditors: tt
+ */
 
 var my_loaded=function (obj_area){
 	$(':input[maxlength]',obj_area).each(function (){
@@ -239,7 +247,7 @@ function fileup(id,succfun){
 	else errfun=false;
 	
 	jQuery.ajaxFileUpload({
-		url:'ajax.php?do=fileup&cn=',
+		url:'/ttAjaxPost?do=fileup',
 		secureuri:false,
 		fileElementId:id,
 		dataType: 'json',

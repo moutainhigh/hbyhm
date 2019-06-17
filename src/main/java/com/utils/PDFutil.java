@@ -1,20 +1,27 @@
+/*
+ * @说明: 这里写说明哈
+ * @Description: file content
+ * @Author: tt
+ * @Date: 2019-06-17 11:24:55
+ * @LastEditTime: 2019-06-17 11:38:52
+ * @LastEditors: tt
+ */
 package com.utils;
+
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.itextpdf.text.pdf.BaseFont;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
+
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.ByteArrayOutputStream;
-import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.xhtmlrenderer.pdf.ITextFontResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.Document;
-import java.io.*;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
 public class PDFutil {
 

@@ -25,7 +25,7 @@
                     System.out.println("fdas" + infodb.get("current_editor_id"));
                     System.out.println(minfo.get("id"));
                 %>
-                <% if (!infodb.get("current_editor_id").equals(minfo.get("id"))) { %>
+                <% if (infodb.get("current_editor_id")!=null && !infodb.get("current_editor_id").equals(minfo.get("id"))) { %>
 
                 <h4 class="box-title" style="color:#FF0000">
                     提示：用户${assess_admin.name}正在操作
@@ -1232,6 +1232,12 @@
                                 <input type="text" class="form-control" readonly="" value="贷款材料">
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">审批金额（元）</span>
+                                <input type="number" class="form-control" name="fk_spje" id="fk_spje" value="审批金额">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1268,7 +1274,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">历史记录</label>
                 <div class="col-sm-10">
-                    <textarea style="width: 80%; height: 200px" class="form-control" disabled><%
+                    <textarea style="width: 100%; height: 200px" class="form-control" disabled><%
                         TtList lslist = (TtList) request.getAttribute("lslist");
                         if (lslist != null && lslist.size() > 0) {
                             for (TtMap l : lslist) {
