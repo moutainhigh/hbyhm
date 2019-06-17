@@ -1,8 +1,15 @@
+/*
+ * @说明: 这里写说明哈
+ * @Description: file content
+ * @Author: tt
+ * @Date: 2019-06-17 11:24:55
+ * @LastEditTime: 2019-06-17 18:00:09
+ * @LastEditors: tt
+ */
 package com.example.wx;
 
 import com.tt.data.TtList;
 import com.tt.data.TtMap;
-import com.tt.tlzf.util.XmlExercise;
 import com.tt.tool.Tools;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
