@@ -59,6 +59,9 @@ public class Zxlr extends DbCtrl {
                 ",aa.name as aa_name" +
                 ",a.name as adminname" +
                 ",dy.id as dy_id" +
+                ",f.id as fsid" +
+                ",cs.name as state_name" +
+                ",cc.name as city_name" +
                 ",dy.bc_status as dy_bc_status" +
                 ",qy.bc_status as qy_bc_status" +
                 ",qy.qy_status as qy_qy_status";
@@ -115,6 +118,9 @@ public class Zxlr extends DbCtrl {
         if(!Tools.myIsNull(post.get("cityid"))){
             whereString += " AND aa.cityid="+post.get("cityid");
         }
+        if(!Tools.myIsNull(post.get("fsid"))){
+            whereString += " AND f.id="+post.get("fsid");
+        }
         /* 搜索过来的字段处理完成 */
         whereString += tmpWhere; // 过滤
         orders = orderString;// 排序
@@ -124,6 +130,9 @@ public class Zxlr extends DbCtrl {
         leftsql = " LEFT JOIN assess_fs f ON f.id=t.gems_fs_id " +
                 " LEFT JOIN assess_gems a ON a.id=t.gems_id" +
                 " LEFT JOIN assess_admin aa ON aa.id=t.current_editor_id" +
+                " LEFT JOIN assess_admin admin ON admin.gemsid=a.id" +
+                " LEFT JOIN comm_states cs ON cs.id=admin.stateid" +
+                " LEFT JOIN comm_citys cc ON cc.id=admin.cityid" +
                 " LEFT JOIN hbyh_dygd dy ON dy.icbc_id=t.id" +
                 " LEFT JOIN tlzf_qy qy ON qy.icbc_id=t.id";
         list = lists(whereString, fieldsString);

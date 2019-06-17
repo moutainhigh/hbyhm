@@ -189,7 +189,14 @@ public class Yhht extends DbCtrl {
         String whereString = "true";
         ;
         String tmpWhere = "";
-        String fieldsString = "t.*,f.name as fsname,a.name as adminname,i.c_name as c_name,aa.name as aa_name";
+        String fieldsString = "t.*" +
+                ",f.name as fsname" +
+                ",a.name as adminname" +
+                ",i.c_name as c_name" +
+                ",f.id as fsid" +
+                ",cs.name as state_name" +
+                ",cc.name as city_name" +
+                ",aa.name as aa_name";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
 
@@ -224,7 +231,30 @@ public class Yhht extends DbCtrl {
             }
         }
         whereString += " AND t.gems_fs_id in (" + fsids + ")";
-
+        /* 开始处理搜索过来的字段 */
+        kw = post.get("kw");
+        dtbe = post.get("dtbe");
+        if (Tools.myIsNull(kw) == false) {
+            whereString += " AND t.c_name like '%" + kw + "%'";
+        }
+        if (Tools.myIsNull(dtbe) == false) {
+            dtbe = dtbe.replace("%2f", "-").replace("+", "");
+            String[] dtArr = dtbe.split("-");
+            dtArr[0] = dtArr[0].trim();
+            dtArr[1] = dtArr[1].trim();
+            System.out.println("DTBE开始日期:" + dtArr[0] + "结束日期:" + dtArr[1]);
+            // todo处理选择时间段
+        }
+        if(!Tools.myIsNull(post.get("stateid"))){
+            whereString += " AND aa.stateid="+post.get("stateid");
+        }
+        if(!Tools.myIsNull(post.get("cityid"))){
+            whereString += " AND aa.cityid="+post.get("cityid");
+        }
+        if(!Tools.myIsNull(post.get("fsid"))){
+            whereString += " AND f.id="+post.get("fsid");
+        }
+        /* 搜索过来的字段处理完成 */
         whereString += tmpWhere; // 过滤
         orders = orderString;// 排序
         p = pageInt; // 显示页
@@ -233,7 +263,10 @@ public class Yhht extends DbCtrl {
         leftsql = "LEFT JOIN assess_fs f ON f.id=t.gems_fs_id " +
                 "LEFT JOIN assess_gems a ON a.id=t.gems_id " +
                 "LEFT JOIN kj_icbc i ON i.id=t.icbc_id " +
-                "LEFT JOIN assess_admin aa ON aa.id=t.current_editor_id";
+                " LEFT JOIN assess_admin admin ON admin.gemsid=a.id" +
+                " LEFT JOIN comm_states cs ON cs.id=admin.stateid" +
+                " LEFT JOIN comm_citys cc ON cc.id=admin.cityid" +
+                " LEFT JOIN assess_admin aa ON aa.id=t.current_editor_id";
         list = lists(whereString, fieldsString);
 
         request.setAttribute("list", list);// 列表list数据

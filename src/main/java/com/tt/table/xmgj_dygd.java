@@ -182,7 +182,11 @@ public class xmgj_dygd extends DbCtrl {
 
         String whereString = "true";;
         String tmpWhere = "";
-        String fieldsString = "t.*,f.name as fsname,a.name as adminname,i.c_name as c_name,i.fk_status,i.id as icbc_id";
+        String fieldsString = "t.*,f.name as fsname" +
+                ",f.id as fsid" +
+                ",cs.name as state_name" +
+                ",cc.name as city_name" +
+                ",a.name as adminname,i.c_name as c_name,i.fk_status,i.id as icbc_id";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
         //根据权限获取公司id
@@ -230,6 +234,9 @@ public class xmgj_dygd extends DbCtrl {
             System.out.println("DTBE开始日期:" + dtArr[0] + "结束日期:" + dtArr[1]);
             // todo处理选择时间段
         }
+        if(!Tools.myIsNull(post.get("fsid"))){
+            whereString += " AND f.id="+post.get("fsid");
+        }
         /* 搜索过来的字段处理完成 */
 
 
@@ -240,7 +247,10 @@ public class xmgj_dygd extends DbCtrl {
         showall = true; // 忽略deltag和showtag
         leftsql = "LEFT JOIN assess_fs f ON f.id=t.gems_fs_id " +
                 "LEFT JOIN assess_gems a ON a.id=t.gems_id " +
-                "LEFT JOIN kj_icbc i ON i.id=t.icbc_id";
+                " LEFT JOIN assess_admin admin ON admin.gemsid=a.id" +
+                " LEFT JOIN comm_states cs ON cs.id=admin.stateid" +
+                " LEFT JOIN comm_citys cc ON cc.id=admin.cityid" +
+                " LEFT JOIN kj_icbc i ON i.id=t.icbc_id";
         list = lists(whereString, fieldsString);
 
         if (!Tools.myIsNull(kw)) { // 搜索关键字高亮
