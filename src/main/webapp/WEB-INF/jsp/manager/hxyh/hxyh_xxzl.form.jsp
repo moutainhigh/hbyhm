@@ -22,7 +22,6 @@
                 <h3 class="box-title">订单来自：${infodb.fs_name}-${infodb.admin_name}</h3>
                 <h3 class="box-title">提交时间：${infodb.dt_add}</h3>
                 <% if (!infodb.get("current_editor_id").equals(minfo.get("id"))) { %>
-
                 <h4 class="box-title" style="color:#FF0000">
                     提示：用户${assess_admin.name}正在操作
                 </h4>

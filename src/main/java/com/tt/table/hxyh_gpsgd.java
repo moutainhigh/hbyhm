@@ -52,7 +52,7 @@ public class hxyh_gpsgd extends DbCtrl {
      * @return: 返回
      */
     public void doGetForm(HttpServletRequest request, TtMap post) {
-        String f = "t.*,a.name as admin_name,fs.name as fs_name,i.c_name as c_name,xx.vincode as vincode";
+        String f = "t.*,a.name as admin_name,fs.name as fs_name,i.c_name as c_name,xx.vincode as vincode,i.id as icbc_id";
         leftsql = " LEFT JOIN assess_gems a ON a.id=t.gems_id" +
                 " LEFT JOIN assess_fs fs ON fs.id=t.gems_fs_id" +
                 " LEFT JOIN hxyh_xxzl xx ON xx.icbc_id=t.icbc_id" +
@@ -60,6 +60,9 @@ public class hxyh_gpsgd extends DbCtrl {
         long nid = Tools.myIsNull(post.get("id")) ? 0 : Tools.strToLong(post.get("id"));
         TtMap info = info(nid, f);
         String jsonInfo = Tools.jsonEncode(info);
+        TtMap minfo = Tools.minfo();
+        TtMap assess_admin = Tools.recinfo("select * from assess_admin where id =" + info.get("current_editor_id"));
+        System.out.println("当前操作人信息：" + assess_admin);
         if(!Tools.myIsNull(post.get("toZip"))&& post.get("toZip").equals("1")) {
             TtMap imginfo = new TtMap();
             //征信录入资料
@@ -111,10 +114,14 @@ public class hxyh_gpsgd extends DbCtrl {
             TtList icbclist = Tools.reclist("select * from kj_icbc where app=" + app);
             request.setAttribute("icbclist", icbclist);
 
+            TtMap map = new TtMap();
+            map.put("current_editor_id", minfo.get("id"));
+            Tools.recEdit(map, "hxyh_gpsgd", nid);
 
             request.setAttribute("info", jsonInfo);//info为json后的info
             request.setAttribute("infodb", info);//infodb为TtMap的info
             request.setAttribute("id", nid);
+            request.setAttribute("assess_admin", assess_admin);
         }
     }
 
@@ -197,7 +204,7 @@ public class hxyh_gpsgd extends DbCtrl {
                 ",cs.name as state_name" +
                 ",cc.name as city_name" +
 
-                ",a.name as adminname,i.c_name as c_name";
+                ",a.name as adminname,i.c_name as c_name,aa.name as aa_name";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
         //根据权限获取公司id
@@ -262,7 +269,8 @@ public class hxyh_gpsgd extends DbCtrl {
                 " LEFT JOIN comm_states cs ON cs.id=admin.stateid" +
                 " LEFT JOIN comm_citys cc ON cc.id=admin.cityid" +
 
-                " LEFT JOIN kj_icbc i ON i.id=t.icbc_id";
+                " LEFT JOIN kj_icbc i ON i.id=t.icbc_id " +
+                "LEFT JOIN assess_admin aa ON aa.id=t.current_editor_id";
         list = lists(whereString, fieldsString);
 
         if (!Tools.myIsNull(kw)) { // 搜索关键字高亮
