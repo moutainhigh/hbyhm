@@ -2,7 +2,7 @@
  * @Description: 后台常用command修改数据库用
  * @Author: tt
  * @Date: 2019-01-29 11:08:47
- * @LastEditTime: 2019-03-25 09:38:31
+ * @LastEditTime: 2019-06-18 11:37:29
  * @LastEditors: tt
  */
 package com.tt.manager;
@@ -329,7 +329,7 @@ public class ManagerCmd {
                 System.err.println("*********手动代收时间: " + time + " 开始*********");
                 TtList dklist = Tools.reclist("select * from  tlzf_dk_details where ds_date='" + time + "' and bc_status!=3 and bc_status!=4  and api_type=0");
                 int num = 0;
-                Tools.myLog("通联支付-代收定时任务开始," + time + "---数量:" + dklist.size());
+                Tools.mylog("通联支付-代收定时任务开始," + time + "---数量:" + dklist.size());
                 if (dklist.size() > 0) {
                     int totalprice1 = 0;
                     int totalprice2 = 0;
@@ -418,7 +418,7 @@ public class ManagerCmd {
                                 , "");
                     }
                 }
-                Tools.myLog("通联支付-代收定时任务结束," + time + "---数量:" + dklist.size() + "--处理完成数量:" + num);
+                Tools.mylog("通联支付-代收定时任务结束," + time + "---数量:" + dklist.size() + "--处理完成数量:" + num);
                 System.err.println("*********手动代收时间: " + time + " 结束*********");
                 boolean success4 = errorCode4 == 0 && Tools.myIsNull(errorMsg4);
                 Tools.formatResult(result2, success4, errorCode4, errorMsg4, "");

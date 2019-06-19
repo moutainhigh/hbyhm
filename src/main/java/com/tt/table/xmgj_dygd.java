@@ -1,13 +1,26 @@
+/*
+ * @说明: 这里写说明哈
+ * @Description: file content
+ * @Author: tt
+ * @Date: 2019-06-17 14:41:33
+ * @LastEditTime: 2019-06-18 15:33:21
+ * @LastEditors: tt
+ */
 package com.tt.table;
 
-import com.tt.api.Jdpush;
-import com.tt.data.TtList;
-import com.tt.data.TtMap;
-import com.tt.tool.*;
-import org.apache.commons.lang.StringUtils;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+
+import com.tt.data.TtList;
+import com.tt.data.TtMap;
+import com.tt.tool.Addadmin_msg;
+import com.tt.tool.Config;
+import com.tt.tool.DbCtrl;
+import com.tt.tool.Tools;
+import com.tt.tool.Zip;
+
+import org.apache.commons.lang.StringUtils;
 
 public class xmgj_dygd extends DbCtrl {
     private final String title = "抵押归档";
