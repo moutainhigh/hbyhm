@@ -2,7 +2,7 @@
  * @Description: 常用功能方法汇总。包括字符串类，数据库类，日期操作类，文件类
  * @Author: tt
  * @Date: 2018-12-12 17:55:41
- * @LastEditTime: 2019-06-19 09:30:12
+ * @LastEditTime: 2019-06-19 09:37:06
  * @LastEditors: tt
  */
 package com.tt.tool;
@@ -1673,11 +1673,7 @@ public class Tools {
 				+ "                   select * from assess_fs fs where fs.fs_type=2 and fs.deltag=0 order by fs.up_id,fs.id\n"
 				+ "                  ) t1,\n" + "              (select @pids :=" + fsid + " ) t2\n"
 				+ ") t3 where t3.ischild!=0 order by t3.ischild DESC LIMIT 1");
-		String s = ttMap.get("ischild");
-		if (Tools.myIsNull(s)==false){
-			s = Tools.trimRight(s, 1);
-		}
-		return s;
+		return ttMap.get("ischild");
 	}
 
 	public static String getfsidsbyminfo(TtMap minfo) {

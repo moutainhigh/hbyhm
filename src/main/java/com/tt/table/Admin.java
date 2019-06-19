@@ -2,7 +2,7 @@
  * @Description: 单独的管理员管理类演示，继承自DbCtrl类
  * @Author: tt
  * @Date: 2019-01-26 11:35:00
- * @LastEditTime: 2019-03-21 11:40:20
+ * @LastEditTime: 2019-06-19 09:53:46
  * @LastEditors: tt
  */
 package com.tt.table;
@@ -147,32 +147,32 @@ public class Admin extends DbCtrl {
 		String fssql = "";
 		int fsid = 0;
 		int up_id = 0;
-		if (nid > 0) {
-			fsid = Integer.parseInt(info.get("icbc_erp_fsid"));
-			up_id = Integer.parseInt(info.get("icbc_erp_fsid"));
-		} else {
-			fsid = Integer.parseInt(minfo.get("icbc_erp_fsid"));
-			up_id = Integer.parseInt(minfo.get("icbc_erp_fsid"));
-		}
+		/*
+		 * if (nid > 0) { fsid = Integer.parseInt(info.get("icbc_erp_fsid")); up_id =
+		 * Integer.parseInt(info.get("icbc_erp_fsid")); } else {
+		 */
+		fsid = Integer.parseInt(minfo.get("icbc_erp_fsid"));
+		up_id = Integer.parseInt(minfo.get("icbc_erp_fsid"));
+		// }
 		switch (minfo.get("superadmin")) {
-		case "0": //普通管理员
+		case "0": // 普通管理员
 			fssql = "select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' where id=" + fsid;
 			break;
-		case "1": //超级管理员
+		case "1": // 超级管理员
 			fssql = "select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!=''";
 			break;
-		case "2": //内部员工?
+		case "2": // 内部员工?
 			fssql = "select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + fsid
 					+ " or up_id=" + up_id + ")";
 			break;
-		case "3": //管理员
+		case "3": // 管理员
 			fssql = "select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in ("
 					+ Tools.getfsids(fsid) + ")";
 			break;
 		default:
-
 			break;
 		}
+		Tools.mylog("fslist_sql:" + fssql);
 		TtList fslist = Tools.reclist(fssql);
 		request.setAttribute("fslist", fslist);
 		String jsonInfo = Tools.jsonEncode(info);
