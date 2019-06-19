@@ -2,7 +2,7 @@
  * @Description: 常用功能方法汇总。包括字符串类，数据库类，日期操作类，文件类
  * @Author: tt
  * @Date: 2018-12-12 17:55:41
- * @LastEditTime: 2019-04-01 15:34:25
+ * @LastEditTime: 2019-06-19 09:30:12
  * @LastEditors: tt
  */
 package com.tt.tool;
@@ -42,13 +42,31 @@ import java.util.regex.Pattern;
 public class Tools {
 	static final public char sp = 5;// 分割符号
 
-	public static void myLog(String mString) {
+	public static void mylog(String mString) {
+		if (!Config.DEBUGMODE) { // 如果不是调试模式，不输出日志
+			return;
+		}
 		if (Config.GLOBAL_SHOWLOG) {
 			Log log = LogFactory.getLog(Tools.class); //
 			log.info(mString);
 			if (!Config.TESTMODE) { // 不是测试模式，log4j也打印
 				Tools.logInfo(mString, Tools.class.toString());
 			}
+		}
+	}
+
+	/**
+	 * 写入error级别的log,使用log4j,log4j的配置文件为log4j.properties
+	 * 
+	 * @param msg
+	 * @throws Exception
+	 */
+	public static void logInfo(String msg, String pre) {
+		if (!Config.DEBUGMODE) { // 如果不是调试模式，不输出日志
+			return;
+		}
+		if (Config.GLOBAL_SHOWLOG) {
+			Config.log.debug(pre + ":" + msg);
 		}
 	}
 
@@ -139,8 +157,8 @@ public class Tools {
 		TtMap mp = new TtMap();
 		Map<Object, Object> maps = (Map<Object, Object>) JSON.parse(mpStr);
 		for (Object map : maps.entrySet()) {
-			mp.put(((Entry<Object, Object>) map).getKey().toString(),
-					((Entry<Object, Object>) map).getValue().toString());
+			mp.put(((Map.Entry<Object, Object>) map).getKey().toString(),
+					((Map.Entry<Object, Object>) map).getValue().toString());
 		}
 		return mp;
 	}
@@ -167,7 +185,7 @@ public class Tools {
 		try {
 			md5 = MessageDigest.getInstance("MD5");
 		} catch (Exception e) {
-			myLog(e.toString());
+			mylog(e.toString());
 			e.printStackTrace();
 			return "";
 		}
@@ -226,17 +244,6 @@ public class Tools {
 	}
 
 	/**
-	 * 将长时间格式字符串转换为时间 yyyyMMddHHmmss
-	 *
-	 * @param strDate
-	 * @return
-	 */
-	public static String getDatetoaa() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-		String dateString = formatter.format(new Date());
-		return dateString;
-	}
-	/**
 	 * 将长时间格式字符串转换为时间 yyyy-MM-dd HH:mm:ss
 	 *
 	 * @param strDate
@@ -248,6 +255,7 @@ public class Tools {
 		Date strtodate = formatter.parse(strDate, pos);
 		return strtodate;
 	}
+
 	/**
 	 * @description 计算时间戳
 	 * @param 无
@@ -324,8 +332,20 @@ public class Tools {
 	}
 
 	/**
-	 * 获取当前登陆用户的id，从session中获取id
+	 * 将长时间格式字符串转换为时间 yyyyMMddHHmmss
 	 *
+	 * @param strDate
+	 * @return
+	 */
+	public static String getDatetoaa() {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		String dateString = formatter.format(new Date());
+		return dateString;
+	}
+
+	/**
+	 * 获取当前登陆用户的id，从session中获取id
+	 * 
 	 * @return 返回示例 168
 	 */
 	public static long mid() {
@@ -336,7 +356,11 @@ public class Tools {
 					.getSession();
 			String idmd5 = (String) session.getAttribute("idmd5");
 			if (!myIsNull(idmd5)) {
-				id = strToLong(recinfo("select mid from sys_session where idmd5='" + idmd5 + "' and outdt=0").get("mid"));//id = (long) session.getAttribute("tt_mid");
+				id = strToLong(recinfo("select mid from sys_session where idmd5='" + idmd5 + "' and outdt=0").get("mid"));
+				// id
+				// =
+				// (long)
+				// session.getAttribute("tt_mid");
 			}
 		} catch (Exception e) {
 			if (Config.DEBUGMODE) {
@@ -414,7 +438,7 @@ public class Tools {
 		for (int i = 0; i < Config.SQLINJ_INJ_STR.length; i++) {
 			if (str.indexOf(Config.SQLINJ_INJ_STR[i]) >= 0) {
 				String msg = str + "_注入__，匹配过滤关键字：" + Config.SQLINJ_INJ_STR[i];
-				myLog(msg);
+				mylog(msg);
 				return true;
 			}
 		}
@@ -427,13 +451,13 @@ public class Tools {
 	 * @return:
 	 */
 	public static String jsInjReplace(String str) {
-		str = Pattern.compile("<[^><]*script[^><]*>", Pattern.CASE_INSENSITIVE).matcher(str).replaceAll("");
+		str = java.util.regex.Pattern.compile("<[^><]*script[^><]*>", Pattern.CASE_INSENSITIVE).matcher(str).replaceAll("");
 		return str;
 	}
 
 	/**
 	 * 获取request的所有参数名和值安全过滤后保存到map，包括url和post表单提交的数据
-	 *
+	 * 
 	 * @param {type}
 	 * @return 完整的map型的参数值，key为参数名，value为对应的值。统一转换为String
 	 */
@@ -459,7 +483,7 @@ public class Tools {
 		while (ennum.hasMoreElements()) {
 			String paramName = (String) ennum.nextElement();
 			if (sqlInj(paramName) == true) {// 过滤参数名
-				myLog("mysql参数名注入：" + paramName);
+				mylog("mysql参数名注入：" + paramName);
 				continue;
 			} else {
 
@@ -483,7 +507,7 @@ public class Tools {
 				value = value.substring(0, value.length() - 1);// 去掉char(5);
 			}
 			if (sqlInj(value) == true) {// 过滤参数值
-				myLog("mysql参数值注入：" + value);
+				mylog("mysql参数值注入：" + value);
 			} else {
 				result.put(jsInjReplace(paramName), jsInjReplace(value));
 			}
@@ -499,14 +523,14 @@ public class Tools {
 	public static TtMap getUrlParam() {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		String urlQuerysString = request.getQueryString();
-		myLog("getQueryString:" + urlQuerysString);
+		mylog("getQueryString:" + urlQuerysString);
 		TtMap mpUrl = URLRequest(urlQuerysString);
 		return mpUrl;
 	}
 
 	/**
 	 * 解析出url参数中的键值对 如 "cn=admin&type=demo&sdo=form&id=21"cn:admin,type:demo等存入map中
-	 *
+	 * 
 	 * @return mapRequest
 	 */
 	public static TtMap URLRequest(String strUrlParam) {
@@ -549,8 +573,8 @@ public class Tools {
 			TtMap mpUrl = URLRequest(urlQuerysString);
 			s = s.toLowerCase();
 			String[] ss = s.split("\\|");
-			for (Iterator<Entry<String, String>> it = mpUrl.entrySet().iterator(); it.hasNext();) {
-				Entry<String, String> item = it.next();
+			for (Iterator<Map.Entry<String, String>> it = mpUrl.entrySet().iterator(); it.hasNext();) {
+				Map.Entry<String, String> item = it.next();
 				if (arrayIndexOf(ss, item.getKey().toLowerCase())) {
 					it.remove();
 				}
@@ -590,28 +614,28 @@ public class Tools {
 			if (Config.DEBUGMODE) {
 				E.printStackTrace();
 			}
-			myLog(E.getMessage());
+			mylog(E.getMessage());
 			return "";
 		}
 	}
 
 	// =================================数据库相关处理方法=================================
 	/**
-	 * undic获取id为nid的值
+	 * undic获取id为nid的name值,TtMap模式
 	 */
 	public static String unDic(TtMap tbName, String nid) {
 		return tbName.get(nid);
 	}
 
 	/**
-	 * undic获取id为nid的值
+	 * undic获取id为nid的name值,TtMap模式
 	 */
 	public static String unDic(TtMap tbName, long nid) {
 		return tbName.get(longToStr(nid));
 	}
 
 	/**
-	 * undic("kjb_user",3);获取id为3的name值
+	 * undic获取id为nid的name值,mysql表模式
 	 */
 	public static String unDic(String tbName, long nid) {
 		DbTools dbt = new DbTools();
@@ -624,6 +648,9 @@ public class Tools {
 		return result;
 	}
 
+	/**
+	 * undic获取id为nid的name值,mysql表模式
+	 */
 	public static String unDic(String tbName, String nid) {
 		DbTools dbt = new DbTools();
 		String result = null;
@@ -853,7 +880,7 @@ public class Tools {
 		dbt.nopage = true;
 		String result = "";
 		try {
-			myLog(wheres);
+			mylog(wheres);
 			TtList lttmp = dbt.lists(wheres, "t.name,t.id");
 			// TtMap mpTmp = new TtMap();
 			if (myIsNull(re) == true) {
@@ -876,6 +903,7 @@ public class Tools {
 		}
 		return result;
 	}
+
 	/**
 	 * dicOpt，根据post里传送的条件来定位 post.put("state_id","104");就是where state_id='104'
 	 * post.put("mid_add","59");就是where state_id='104' AND mid_add='59' id是默认的选择项
@@ -892,13 +920,13 @@ public class Tools {
 			if (post != null) {
 				for (String key : post.keySet()) {
 					wheres = wheres + key + "='" + post.get(key) + "' AND ";
-					myLog(key);
+					mylog(key);
 				}
 			}
 			if (myIsNull(wheres) == false) {
 				wheres = wheres.substring(0, wheres.length() - 5);
 			}
-			myLog(wheres);
+			mylog(wheres);
 			TtList lttmp = dbt.lists(wheres, "t.name,t.id");
 			// TtMap mpTmp = new TtMap();
 			if (myIsNull(re) == true) {
@@ -1013,7 +1041,8 @@ public class Tools {
 		strFilePath = strFilePath.replace("//", "/");
 		strFilePath = strFilePath.replace("http:/", "http://"); // 原来http://被变成http:/了，所以恢复http的//
 		strFilePath = strFilePath.replace("https:/", "https://");
-		return strFilePath.replace('/', File.separatorChar).replace('\\', File.separatorChar);
+		return strFilePath.replace('/', File.separatorChar).replace('\\', File.separatorChar)
+				.replace("//", File.separatorChar + "").replace("\\\\", File.separatorChar + "");
 	}
 
 	/**
@@ -1196,7 +1225,15 @@ public class Tools {
 	}
 
 	/**
-	 * 生成文件名，根据当前毫秒时间MD5后
+	 * 生成文件名，根据当前毫秒时间+随机10位字符串然后MD5后的文件名
+	 */
+	public static String getTimeAndRandMd5FileName() {
+		String result = String.valueOf(System.currentTimeMillis());
+		return md5(getRandomStringByLength(10) + result);
+	}
+
+	/**
+	 * 生成文件名，根据当前毫秒时间+随机10位字符串然后MD5后的文件名
 	 */
 	public static String getTimeMd5FileName() {
 		String result = String.valueOf(System.currentTimeMillis());
@@ -1239,23 +1276,11 @@ public class Tools {
 	/**
 	 * 写入error级别的log,使用log4j,log4j的配置文件为log4j.properties
 	 * 
-	 * @param msg
-	 * @throws Exception
-	 */
-	public static void logInfo(String msg, String pre) {
-		if (Config.GLOBAL_SHOWLOG) {
-			Config.log.debug(pre + ":" + msg);
-		}
-	}
-
-	/**
-	 * 写入error级别的log,使用log4j,log4j的配置文件为log4j.properties
-	 * 
 	 * @param arg
 	 * @throws Exception
 	 */
 	public static void logError(String arg, boolean writeDbLog, boolean go404) {
-		if (Config.GLOBAL_SHOWLOG) {
+		if (Config.GLOBAL_SHOWLOG && Config.DEBUGMODE) {
 			Config.log.error("Tools.logError:" + arg);
 		}
 		if (Config.DEBUGMODE) { // 调试模式下，终止当前页面，跳转到404页面，显示错误日志
@@ -1311,16 +1336,17 @@ public class Tools {
 	public static void setNowUser(long id, boolean isadmin) {
 		HttpSession session = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest()
 				.getSession();
-		String[] arrDebugs = new String[] { "4193", "217" };
+		String[] arrDebugs = Config.DEBUG_MIDS;
 		String idmd5 = md5(String.valueOf(time("", true)));
-		session.setAttribute("idmd5", idmd5);	//session.setAttribute("tt_mid", id);
+		session.setAttribute("idmd5", idmd5); // session.setAttribute("tt_mid", id);
 		session.setAttribute("tt_isadmin", isadmin);
 		String sip = HttpTools
 				.getIpAddress(((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest());
 		if (!inArray(arrDebugs, id + "")) {// 不是演示账号，清除上次登陆信息
 			recexec("update sys_session set outdt='" + time() + "',outip='" + sip + "' where mid='" + id + "' and outdt=0");
 		}
-		recexec("insert into sys_session set idmd5='" + idmd5 + "', mid='" + id + "',logdt='" + time() + "',logip='" + sip+ "'");
+		recexec("insert into sys_session set idmd5='" + idmd5 + "', mid='" + id + "',logdt='" + time() + "',logip='" + sip
+				+ "'");
 	}
 
 	/**
@@ -1440,15 +1466,6 @@ public class Tools {
 	 */
 	public static boolean isCcAdmin(TtMap minfo) { // 内部员工
 		return minfo.get("superadmin").equals("2");
-	}
-
-	/**
-	 * @description: 当前登陆用户是否管理员 用户信息表里的superadmin字段值为3
-	 * @param {type}
-	 * @return:
-	 */
-	public static boolean isAdmin(TtMap minfo) {// 内置管理员
-		return minfo.get("superadmin").equals("3");
 	}
 
 	/**
@@ -1583,77 +1600,120 @@ public class Tools {
 				+ fieldName + "\" name=\"" + fieldName + "\" value=\"\" /><br/>";
 		return result;
 	}
-	/*
-        获取精确到秒的时间戳
-        @param date
-         @return
-              */
-	public static int getSecondTimestampTwo(Date date){
+
+	public static String urlImg(String imgPath, int smallWidth, int smallHeight) {
+		return "/ttAjax?do=show_img&img=" + imgPath + "&w=" + smallWidth + "&h=" + smallHeight;
+	}
+
+	public static String urlImgStatic(String imgPath, int w, int h) {
+		return urlImgStatic(imgPath, w, h, "images/none.png", false);
+	}
+
+	public static String urlImgStatic(String imgPath, int w, int h, String noneImg, boolean noIfEx) {
+		String srcFile = imgPath;
+		String srcFileFullPath = null;
+		srcFileFullPath = Config.FILEUP_SAVEPATH + srcFile;
+		srcFileFullPath = srcFileFullPath.replaceFirst(Config.FILEUP_URLPRE, "/");
+		srcFileFullPath = Tools.formatFilePath(srcFileFullPath);
+		w = w == 0 ? h : w;
+		h = h == 0 ? w : h;
+
+		String smallImgPath = noneImg;
+		if (!myIsNull(imgPath)) {
+			if (w == 0 && h == 0) { // 直接显示原图
+				if (noIfEx || Tools.fileExists(srcFileFullPath)) {
+					smallImgPath = imgPath;
+				}
+			} else {
+				if (noIfEx || Tools.fileExists(srcFileFullPath)) {
+					smallImgPath = ImgTools.small(srcFileFullPath, w, h, srcFile, "");
+				}
+			}
+		}
+		return smallImgPath;
+	}
+
+	/**
+	 * /* 获取精确到秒的时间戳
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static int getSecondTimestampTwo(Date date) {
 		if (null == date) {
 			return 0;
 		}
-		String timestamp = String.valueOf(date.getTime()/1000);
+		String timestamp = String.valueOf(date.getTime() / 1000);
 		return Integer.valueOf(timestamp);
 	}
 
 	/**
 	 * 金额转换
+	 * 
 	 * @return
 	 */
-	public static BigDecimal getprice(int price,int num){
+	public static BigDecimal getprice(int price, int num) {
 		BigDecimal bigDecimal1 = new BigDecimal(price);
 		BigDecimal bigDecimal2 = new BigDecimal(num);
 		BigDecimal bigDecimalDivide = bigDecimal1.divide(bigDecimal2, 2, BigDecimal.ROUND_HALF_UP);
 		return bigDecimalDivide;
 	}
 
-	public static String getnow(){
-		LocalDateTime now = LocalDateTime.now();    //获取当前系统时间
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");//定义时间格式
+	public static String getnow() {
+		LocalDateTime now = LocalDateTime.now(); // 获取当前系统时间
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");// 定义时间格式
 		return now.format(dateTimeFormatter);
 	}
 
-
-	//根据id递归获取下级公司
-	public static String getfsids(int fsid){
-		TtMap ttMap=Tools.recinfo("select * from(\n" +
-				"select t1.id,t1.up_id,\n" +
-				"              if(find_in_set(up_id, @pids) > 0, @pids := concat(@pids, ',', id), 0) as ischild\n" +
-				"              from (\n" +
-				"                   select * from assess_fs fs where fs.fs_type=2 and fs.deltag=0 order by fs.up_id,fs.id\n" +
-				"                  ) t1,\n" +
-				"              (select @pids :="+fsid+" ) t2\n" +
-				") t3 where t3.ischild!=0 order by t3.ischild DESC LIMIT 1");
-		return ttMap.get("ischild");
+	// 根据id递归获取下级公司
+	public static String getfsids(int fsid) {
+		TtMap ttMap = Tools.recinfo("select * from(\n" + "select t1.id,t1.up_id,\n"
+				+ "              if(find_in_set(up_id, @pids) > 0, @pids := concat(@pids, ',', id), 0) as ischild\n"
+				+ "              from (\n"
+				+ "                   select * from assess_fs fs where fs.fs_type=2 and fs.deltag=0 order by fs.up_id,fs.id\n"
+				+ "                  ) t1,\n" + "              (select @pids :=" + fsid + " ) t2\n"
+				+ ") t3 where t3.ischild!=0 order by t3.ischild DESC LIMIT 1");
+		String s = ttMap.get("ischild");
+		if (Tools.myIsNull(s)==false){
+			s = Tools.trimRight(s, 1);
+		}
+		return s;
 	}
 
-	public static String getfsidsbyminfo(TtMap minfo){
-		String fsids="";
-		TtList fslist=new TtList();
-		switch (minfo.get("superadmin")) {
+	public static String getfsidsbyminfo(TtMap minfo) {
+		String fsids = "";
+		TtList fslist = new TtList();
+		if (myIsNull(minfo.get("superadmin")) == false) {
+			switch (minfo.get("superadmin")) {
 			case "0":
-				fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id="+minfo.get("icbc_erp_fsid"));
+				fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id="
+						+ minfo.get("icbc_erp_fsid"));
 				break;
 			case "1":
 				fslist = Tools.reclist("select * from assess_fs where deltag=0 and showtag=1 and name!=''");
 				break;
 			case "2":
-				fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
+				fslist = Tools
+						.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id="
+								+ minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
 				break;
 			case "3":
-				fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in (" + Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
+				fslist = Tools
+						.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in ("
+								+ Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
 				break;
 			default:
 
 				break;
-		}
-		if (fslist.size() > 0) {
-			for (int l = 0; l < fslist.size(); l++) {
-				TtMap fs = fslist.get(l);
-				if (l == fslist.size() - 1) {
-					fsids = fsids + fs.get("id");
-				} else {
-					fsids = fsids + fs.get("id") + ",";
+			}
+			if (fslist.size() > 0) {
+				for (int l = 0; l < fslist.size(); l++) {
+					TtMap fs = fslist.get(l);
+					if (l == fslist.size() - 1) {
+						fsids = fsids + fs.get("id");
+					} else {
+						fsids = fsids + fs.get("id") + ",";
+					}
 				}
 			}
 		}

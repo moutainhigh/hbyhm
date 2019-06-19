@@ -27,4 +27,5 @@ HELP.md
 
 ### VS Code ###
 .vscode/
-upload/log/*.log
+src/main/webapp/upload/*
+src/main/webapp/upload/log/*

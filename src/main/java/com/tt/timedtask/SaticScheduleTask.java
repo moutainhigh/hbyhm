@@ -1,3 +1,11 @@
+/*
+ * @说明: 这里写说明哈
+ * @Description: file content
+ * @Author: tt
+ * @Date: 2019-06-17 11:24:55
+ * @LastEditTime: 2019-06-18 11:38:59
+ * @LastEditors: tt
+ */
 package com.tt.timedtask;
 
 import com.tt.api.ApiSms;
@@ -77,7 +85,7 @@ public class SaticScheduleTask {
         System.err.println("*********执行静态定时任务时间: " + time + " 开始*********");
         TtList dklist = Tools.reclist("select * from  tlzf_dk_details where ds_date='" + time + "' and bc_status!=3 and bc_status!=4  and api_type=0");
         int num = 0;
-        Tools.myLog("通联支付-代收定时任务开始," + time + "---数量:" + dklist.size());
+        Tools.mylog("通联支付-代收定时任务开始," + time + "---数量:" + dklist.size());
         if (dklist.size() > 0) {
             int totalprice1 = 0;
             int totalprice2 = 0;
@@ -166,7 +174,7 @@ public class SaticScheduleTask {
                         , "");
             }
         }
-        Tools.myLog("通联支付-代收定时任务结束," + time + "---数量:" + dklist.size() + "--处理完成数量:" + num);
+        Tools.mylog("通联支付-代收定时任务结束," + time + "---数量:" + dklist.size() + "--处理完成数量:" + num);
         System.err.println("*********执行静态定时任务时间: " + time + " 结束*********");
     }
 /*

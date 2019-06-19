@@ -4,7 +4,7 @@
  * @Author: tt
  * @LastEditors: tt
  * @Date: 2016-03-11 21:59:52
- * @LastEditTime: 2019-03-07 17:44:08
+ * @LastEditTime: 2019-05-14 11:08:46
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +26,23 @@
         <div class="gallery"></div>
     </div>
     <script>
-        $.initGallery();
+				$.initGallery();
+				$(document).keyup(function (event) {
+					switch (event.keyCode) {
+						case 27:
+							var parentD = window.parent.document;
+							//console.log($(parentD.body));
+							$(parentD.body).removeClass('ovfHiden');
+							$(parentD.html).removeClass('ovfHiden');
+							var _parent = window.parent || window.top,
+								_jg = _parent.document.getElementById("J_pg");
+							_tid = _parent.document.getElementById("tid_ttjpgd");
+							$(_jg).remove();
+							$(_tid).remove();
+							$('.closeWin').trigger("click");
+							break;
+					}
+				});
     </script>
 </body>
 
