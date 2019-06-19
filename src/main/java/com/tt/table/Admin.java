@@ -325,6 +325,7 @@ public class Admin extends DbCtrl {
             post.put("imgurl", "");
         }
         if (id > 0) { // id为0时，新增
+            System.out.println("更新："+post);
             edit(post, id);
         } else {
             post.put("icbc_erp_tag", "1");
