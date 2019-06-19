@@ -1,15 +1,23 @@
+/*
+ * @说明: 这里写说明哈
+ * @Description: file content
+ * @Author: tt
+ * @Date: 2019-06-19 13:11:58
+ * @LastEditTime: 2019-06-19 14:12:30
+ * @LastEditors: tt
+ */
 package com.tt.table;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.tt.data.TtList;
 import com.tt.data.TtMap;
 import com.tt.manager.Modal;
-import com.tt.tool.Config;
 import com.tt.tool.DbCtrl;
 import com.tt.tool.Tools;
-
-import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
-import java.util.Date;
 
 public class assess_fs extends DbCtrl {
     private String purview_map = "";
@@ -26,7 +34,7 @@ public class assess_fs extends DbCtrl {
         AdminAgp adminAgp = new AdminAgp();
         try {
             if (adminAgp.checkAgp(classAgpId)) { // 如果有权限
-                Config.log.info("权限检查成功！");
+                Tools.mylog("权限检查成功！");
                 agpOK = true;
             } else {
                 errorCode = 444;

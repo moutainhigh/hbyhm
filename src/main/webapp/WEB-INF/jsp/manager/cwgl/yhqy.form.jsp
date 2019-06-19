@@ -226,7 +226,7 @@
                             <jsp:param name="img_NamePre" value="<%=imgPreName2%>"/>
                             <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
                             <jsp:param name="l1div_Style"
-                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                                       value="width: 120px;height:120px;display: inline-block;text-align: center;margin: auto;"/>
                             <jsp:param name="img_Style"
                                        value="width: 100%;height:100px;border-radius:10px;"/>
                             <jsp:param name="img_FileStyle"

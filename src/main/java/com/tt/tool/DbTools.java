@@ -2,7 +2,7 @@
  * @Description: 数据库工具,执行mysql语句底层类
  * @Author: tt
  * @Date: 2018-12-18 18:00:00
- * @LastEditTime: 2019-06-18 11:46:57
+ * @LastEditTime: 2019-06-19 14:33:48
  * @LastEditors: tt
  */
 package com.tt.tool;
@@ -85,7 +85,7 @@ public class DbTools {
   /* 显示列表 */
   public TtList reclist(String sql) {
     TtList result = new TtList();
-    mylog(sql);
+    mylog("执行list查询:"+sql);
     try {
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(sql);
@@ -107,7 +107,8 @@ public class DbTools {
         result.add(rowData);
       }
       rs.close();
-      stmt.close();
+			stmt.close();
+			mylog("得到list查询结果记录数:"+result.size());
     } catch (SQLException e) {
 
       Tools.logError(e.getMessage());

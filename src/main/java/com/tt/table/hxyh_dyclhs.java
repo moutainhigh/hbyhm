@@ -24,7 +24,7 @@ public class hxyh_dyclhs extends DbCtrl {
         AdminAgp adminAgp = new AdminAgp();
         try {
             if (adminAgp.checkAgp(classAgpId)) { // 如果有权限
-                Config.log.info("权限检查成功！");
+                Tools.mylog("权限检查成功！");
                 agpOK = true;
             } else {
                 errorCode = 444;
@@ -164,16 +164,16 @@ public class hxyh_dyclhs extends DbCtrl {
         TtList fslist = new TtList();
         switch (minfo.get("superadmin")) {
             case "0":
-                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id=" + minfo.get("icbc_erp_fsid"));
+                fslist = Tools.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id=" + minfo.get("icbc_erp_fsid"));
                 break;
             case "1":
-                fslist = Tools.reclist("select * from assess_fs where deltag=0 and showtag=1 and name!=''");
+                fslist = Tools.reclist("select id from assess_fs where deltag=0 and showtag=1 and name!=''");
                 break;
             case "2":
-                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
+                fslist = Tools.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
                 break;
             case "3":
-                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in (" + Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
+                fslist = Tools.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in (" + Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
                 break;
             default:
 

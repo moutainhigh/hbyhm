@@ -3,7 +3,7 @@
  * @Description: file content
  * @Author: tt
  * @Date: 2019-06-17 11:24:55
- * @LastEditTime: 2019-06-18 14:33:40
+ * @LastEditTime: 2019-06-19 14:44:31
  * @LastEditors: tt
  */
 package com.tt.table;
@@ -32,7 +32,7 @@ public class dyclhs extends DbCtrl {
 		AdminAgp adminAgp = new AdminAgp();
 		try {
 			if (adminAgp.checkAgp(classAgpId)) { // 如果有权限
-				Config.log.info("权限检查成功！");
+				Tools.mylog("权限检查成功！");
 				agpOK = true;
 			} else {
 				errorCode = 444;
@@ -170,19 +170,19 @@ public class dyclhs extends DbCtrl {
 		TtList fslist = new TtList();
 		switch (minfo.get("superadmin")) {
 		case "0":
-			fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id="
+			fslist = Tools.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id="
 					+ minfo.get("icbc_erp_fsid"));
 			break;
 		case "1":
-			fslist = Tools.reclist("select * from assess_fs where deltag=0 and showtag=1 and name!=''");
+			fslist = Tools.reclist("select id from assess_fs where deltag=0 and showtag=1 and name!=''");
 			break;
 		case "2":
-			fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id="
+			fslist = Tools.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id="
 					+ minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
 			break;
 		case "3":
 			fslist = Tools
-					.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in ("
+					.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in ("
 							+ Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
 			break;
 		default:
