@@ -2,7 +2,7 @@
  * @Description: TT总配置文件。
  * @Author: tt
  * @Date: 2018-12-26 17:42:40
- * @LastEditTime: 2019-06-18 15:47:09
+ * @LastEditTime: 2019-06-19 10:00:01
  * @LastEditors: tt
  */
 package com.tt.tool;
