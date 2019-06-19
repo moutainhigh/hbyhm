@@ -90,8 +90,7 @@
                     //一级菜单循环结束
                 }
             %>
-            <li class="header"><%=Config.APP_TITLE + " " + Config.APP_VER%><br>程序内核：<%=Config.TTVER%>
-            </li>
+						<li class="header"><%=Config.APP_TITLE+" "+Config.APP_VER%><br>程序内核：<%=Config.TTVER%><br>当前调试模式：<%=Config.DEBUGMODE?"是":"否"%></li>
         </ul> <!-- /.sidebar-menu -->
     </section> <!-- /.sidebar -->
 </aside>

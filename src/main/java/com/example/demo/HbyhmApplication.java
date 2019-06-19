@@ -1,7 +1,15 @@
+/*
+ * @说明: 这里写说明哈
+ * @Description: file content
+ * @Author: tt
+ * @Date: 2019-06-17 11:24:55
+ * @LastEditTime: 2019-06-19 09:17:43
+ * @LastEditors: tt
+ */
 package com.example.demo;
 
 import com.tt.tool.Config;
-import com.tt.tool.DataDic;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -24,14 +32,12 @@ import org.springframework.web.WebApplicationInitializer;
 public class HbyhmApplication extends SpringBootServletInitializer implements WebApplicationInitializer {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        DataDic.initDic();
-        System.setProperty("LOG4JDIR", Config.FILEUP_SAVEPATH + "log/"); // 配置log4j保存路径，使用http://xxx.com/upload/log/tt_debug.log可以下载
+        Config.initTT();
         return application.sources(HbyhmApplication.class);
     }
 
     public static void main(String[] args) {
-        DataDic.initDic();
-        System.setProperty("LOG4JDIR", Config.FILEUP_SAVEPATH + "log/");// 配置log4j保存路径，使用http://xxx.com/upload/log/tt_debug.log可以下载
+        Config.initTT();
         SpringApplication.run(HbyhmApplication.class, args);
     }
 }

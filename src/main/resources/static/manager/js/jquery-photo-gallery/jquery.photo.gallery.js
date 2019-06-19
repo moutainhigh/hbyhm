@@ -7,7 +7,7 @@
  * Author       : lufeng@bingosoft.net
  * Version      : 1.0.6
  * @Date        : 2016-03-11 21: 59: 52
- * @LastEditTime: 2019-03-25 16:58:19
+ * @LastEditTime: 2019-05-14 11:35:02
  */
 (function ($) {
 
@@ -591,16 +591,34 @@
 	$.extend({
 		//打开图片查看器
 		openPhotoGallery: function (obj) {
-
+			$(document).keyup(function (event) {
+				switch (event.keyCode) {
+					case 27:
+						var parentD = document;
+						//console.log($(parentD.body));
+						$(parentD.body).removeClass('ovfHiden');
+						$(parentD.html).removeClass('ovfHiden');
+						var _parent = window.parent || window.top,
+							_jg = _parent.document.getElementById("J_pg");
+						_tid = _parent.document.getElementById("tid_ttjpgd");
+						$(_jg).remove();
+						$(_tid).remove();
+						break;
+				}
+			});
 			var $img = $(obj),
 				imgUrl = $img[0].src;
+			if ($img.eq(0).attr("gal-src") != undefined && $img.eq(0).attr("gal-src").length > 0) {
+				imgUrl = $img.eq(0).attr("gal-src");
+			}
 			//console.log($img);
 			if (!imgUrl) return;
-
+			var gxw = $img.eq(0).attr("gal-width");
+			var gxh = $img.eq(0).attr("gal-height");
 			//HTML5提供了一个新属性naturalWidth/naturalHeight可以直接获取图片的原始宽高
 			var img = $img[0],
-				imgHeight = img.naturalHeight,
-				imgWidth = img.naturalWidth,
+				imgWidth = gxw != undefined ? gxw : img.naturalWidth,
+				imgHeight = gxh != undefined ? gxh : img.naturalHeight,
 				ratio = imgWidth / imgHeight,
 				wH = 415,
 				wW = 615,
@@ -608,7 +626,6 @@
 				winWidth,
 				maxHeight = document.documentElement.clientHeight - windowMargin * 2 - 20,
 				maxWidth = document.documentElement.clientWidth - windowMargin;
-
 			winWidth = Math.max(wW, imgWidth);
 			winHeight = Math.max(wH, imgHeight);
 			var nRa = 1.0;
@@ -654,15 +671,20 @@
 				activeIndex = 0,
 				imgs = [];
 			$gallerys.find(".gallery-pic").each(function (i, elem) {
+				var gxw = jQuery(this).attr("gal-width");
+				var gxh = jQuery(this).attr("gal-height");
 				var url = this.src,
 					img = $(this)[0],
-					nH = img.naturalHeight,
-					nW = img.naturalWidth, //原始分辨率？？
-					nHn = img.naturalHeight,
-					nWn = img.naturalWidth, //原始分辨率？？
+					nH = gxh != undefined ? gxh : img.naturalHeight,
+					nW = gxw != undefined ? gxw : img.naturalWidth, //原始分辨率？？
+					nHn = gxh != undefined ? gxh : img.naturalHeight,
+					nWn = gxw != undefined ? gxw : img.naturalWidth, //原始分辨率？？
 					ratio = nW / nH,
 					w = nW,
 					h = nH;
+				if (jQuery(this).attr("gal-src") != undefined && jQuery(this).attr("gal-src").length > 0) {
+					url = jQuery(this).attr("gal-src");
+				}
 				if (url == imgUrl) {
 					activeIndex = i;
 					w = imgWidth;
@@ -713,7 +735,7 @@
 			//console.log(getClientHeight());
 			var ntop = (getClientHeight() - winHeight) / 2;
 			var nleft = (document.documentElement.clientWidth - winWidth) / 2;
-			var zoom = 1/$("body").css("zoom");
+			var zoom = 1 / $("body").css("zoom");
 			//开始添加  
 			$("<div id='tid_ttjpgd'></div>").appendTo("body").css({
 				'position': pos,
@@ -722,7 +744,7 @@
 				width: winWidth,
 				'text-align': 'center',
 				'z-index': '2001',
-				'zoom':zoom,
+				'zoom': zoom,
 			});
 			$("<label id='xmove_ttjpgj'>~拖拽我移动~</label>").appendTo("#tid_ttjpgd").css({
 				'color': 'white',
@@ -801,7 +823,7 @@
 					if (isMove) {
 						var obj = $(_stidup);
 						var newTop = e.clientY - div_y + $(_stidup).offset().top <= 2 ? 2 : e.clientY - div_y + $(_stidup).offset().top + $(_parents).scrollTop();
-						var newLeft = e.clientX - div_x + $(_stidup).offset().left < 2 ? 2 : e.clientX -div_x + $(_stidup).offset().left;
+						var newLeft = e.clientX - div_x + $(_stidup).offset().left < 2 ? 2 : e.clientX - div_x + $(_stidup).offset().left;
 						obj.css({
 							"left": newLeft,
 							"top": newTop

@@ -1,3 +1,11 @@
+/*
+ * @说明: 这里写说明哈
+ * @Description: file content
+ * @Author: tt
+ * @Date: 2019-06-17 11:24:55
+ * @LastEditTime: 2019-06-17 21:29:25
+ * @LastEditors: tt
+ */
 package com.tt.tlzf.xstruct.ver;
 
 public class RNP {
