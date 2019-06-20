@@ -2,7 +2,7 @@
  * @Description: 常用功能方法汇总。包括字符串类，数据库类，日期操作类，文件类
  * @Author: tt
  * @Date: 2018-12-12 17:55:41
- * @LastEditTime: 2019-06-19 15:04:31
+ * @LastEditTime: 2019-06-19 16:19:38
  * @LastEditors: tt
  */
 package com.tt.tool;

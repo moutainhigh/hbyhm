@@ -5,7 +5,7 @@
  * 创建日期：2018-11-16
  * @Author: tt
  * @Date: 2018-12-18 16:01:52
- * @LastEditTime: 2019-06-18 14:59:50
+ * @LastEditTime: 2019-06-19 16:49:01
  * @LastEditors: tt
  */
 package com.tt.tool;
@@ -224,8 +224,9 @@ public class Ajax {
 				break;
 			}
 			TtMap ttMap1 = Tools.recinfo(sql1);
+			//System.out.println(sql1);
 			// TtMap ttMap2=Tools.recinfo(sql2);
-			int num1 = 0, num2 = 0;
+			int num1 = 0;//, num2 = 0;
 			if (!ttMap1.isEmpty()) {
 				num1 = Integer.parseInt(ttMap1.get("num"));
 			}

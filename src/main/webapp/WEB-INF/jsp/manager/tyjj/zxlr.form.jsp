@@ -78,18 +78,12 @@
                                        placeholder="">
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">电话</span>
-                                <input type="text" class="form-control" id="c_tel" name="c_tel" placeholder="">
-                            </div>
-                        </div>
-                        <%--<div class="col-sm-4">
+                                                <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">银行卡号</span>
                                 <input type="text" class="form-control" id="c_bank_id" name="c_bank_id" placeholder="">
                             </div>
-                        </div>--%>
+                        </div>
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">客户性别</span>
@@ -101,12 +95,17 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">婚姻状况</span>
-                                <select class="form-control" id="c_marriage" name="c_marriage">
+                                <select class="form-control" id="c_marriage" name="c_marriage" >
                                     <%=Tools.dicopt(DataDic.dic_hyzk2, infodb.get("c_marriage"))%>
                                 </select>
                             </div>
                         </div>
-
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">客户经理手机号</span>
+                                <input type="text" class="form-control" id="c_am_tel" name="c_am_tel" placeholder="">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@
  * @Description: TT总配置文件。
  * @Author: tt
  * @Date: 2018-12-26 17:42:40
- * @LastEditTime: 2019-06-19 15:19:01
+ * @LastEditTime: 2019-06-20 15:38:08
  * @LastEditors: tt
  */
 package com.tt.tool;
@@ -18,11 +18,11 @@ public class Config {
 	/* 调试模式开关，调试模式下会打印日志。部分异常输出到浏览器 ，非调试模式，不打印日志 */
 	public static boolean DEBUGMODE = false;
 	/* 版本号 */
-	public final static String TTVER = "2.0 build 20190518"; 
+	public final static String TTVER = "2.0 build 20190620"; 
 	// 项目名称：类似大地保险
 	public final static String APP_TITLE = "人保进件"; 
 	// 项目版本
-	public final static String APP_VER = " 1.0 build 20190518"; 
+	public final static String APP_VER = " 1.0 build 20190620"; 
 	// 皮肤主题{skin-navy,skin-tyjj,skin-kcd，skin-black,skin-purple,skin-yellow,skin-red,skin-green}
 	public static String MANAGER_SKINCSS = "skin-kcd";
 	/**
