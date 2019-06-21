@@ -50,6 +50,9 @@
                             <th class="text-center">
                                 操作
                             </th>
+                            <th class="hidden-xs text-center">
+                                所属审核员
+                            </th>
                             <th class="hidden-xs text-center" style="width: 200px">
                                 通联签约代收
                             </th>
@@ -100,6 +103,9 @@
                                         <i class="fa fa-search"></i>
                                     </a>
                                 </div>
+                            </td>
+                            <td class="hidden-xs text-center">
+                                <%=m.get("checkname")%>
                             </td>
                             <td class="hidden-xs text-center" style="width: 200px">
                                 <%if (m.get("dy_bc_status").equals("3")) {%>

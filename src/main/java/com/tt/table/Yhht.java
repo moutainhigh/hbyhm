@@ -196,6 +196,7 @@ public class Yhht extends DbCtrl {
                 ",f.id as fsid" +
                 ",cs.name as state_name" +
                 ",cc.name as city_name" +
+                ",i.checkname as checkname"+
                 ",aa.name as aa_name";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;

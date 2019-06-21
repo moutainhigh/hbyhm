@@ -206,7 +206,7 @@ public class xmgj_dygd extends DbCtrl {
                 ",f.id as fsid" +
                 ",cs.name as state_name" +
                 ",cc.name as city_name" +
-                ",a.name as adminname,i.c_name as c_name,i.fk_status,i.id as icbc_id,aa.name as aa_name";
+                ",a.name as adminname,i.c_name as c_name,i.fk_status,i.id as icbc_id,aa.name as aa_name"+",i.checkname as checkname";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
         //根据权限获取公司id

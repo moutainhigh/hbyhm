@@ -263,6 +263,11 @@ public class hxyh_zxlr extends DbCtrl {
         //addicbc_erp_zx(post);
         long icbc_id=0;
         if (id > 0) { // id为0时，新增
+            //首次审核人绑定
+            TtMap check=Tools.recinfo("select checkname from kj_icbc where id="+id);
+            if(post.get("bc_status").equals("3")&&Tools.myIsNull(check.get("checkname"))){
+                post.put("checkname",minfo.get("name"));
+            }
             edit(post, id);
             icbc_id=id;
         } else {

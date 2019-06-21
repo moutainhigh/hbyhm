@@ -53,7 +53,7 @@ public class Ajax {
 		try {
 			id = Long.parseLong(post.get("id"));
 		} catch (Exception E) {
-			System.err.println(E.getMessage());
+			Tools.mylog("***:"+E.getMessage());
 		}
 		switch (post.get("do")) {
 		case "list":

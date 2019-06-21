@@ -250,19 +250,21 @@ public class Zxlr extends DbCtrl {
 		TtMap newpost = new TtMap();
 		newpost.putAll(post);
 		TtMap minfo = Tools.minfo();
-		Long icbc_id = 0L;
 		// addicbc_erp_zx(post);
 		if (id > 0) { // id为0时，新增
+			//首次审核人绑定
+			TtMap check=Tools.recinfo("select checkname from kj_icbc where id="+id);
+			if(post.get("bc_status").equals("3")&&Tools.myIsNull(check.get("checkname"))){
+				post.put("checkname",minfo.get("name"));
+			}
 			edit(post, id);
-			icbc_id = id;
 		} else {
 			post.put("app", "2");
 			post.put("gems_id", minfo.get("id"));
 			post.put("gems_fs_id", minfo.get("icbc_erp_fsid"));
 			post.put("gems_code", "0");
 			post.put("query_type", "0");
-			icbc_id = add(post);
-
+			add(post);
 		}
 		String nextUrl = Tools.urlKill("sdo") + "&sdo=list";
 		boolean bSuccess = errorCode == 0;
@@ -276,7 +278,6 @@ public class Zxlr extends DbCtrl {
 		map.put("current_editor_id", "-1");
 		int kj_icbc = Tools.recEdit(map, "kj_icbc", id);
 		System.out.println("issucc::" + kj_icbc);
-
 		return super.edit(ary, id);
 	}
 
@@ -295,7 +296,7 @@ public class Zxlr extends DbCtrl {
 		res.put("status", array.get("bc_status"));
 		res.put("remark", array.get("remark"));
 		Tools.recAdd(res, "kj_icbc_result");
-		// 推送
+  	    // 推送
 		String sql = "select c_name from kj_icbc where id=" + id;
 		TtMap recinfo = Tools.recinfo(sql);
 		Tools.mylog("征信编辑成功后处理,icbcinfo:"+recinfo.toString());

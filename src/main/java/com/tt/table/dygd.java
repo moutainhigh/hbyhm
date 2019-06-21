@@ -204,6 +204,7 @@ public class dygd extends DbCtrl {
                 ",i.c_name as c_name" +
                 ",i.fk_status" +
                 ",i.id as icbc_id" +
+                ",i.checkname as checkname"+
                 ",aa.name as aa_name";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
