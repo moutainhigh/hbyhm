@@ -797,12 +797,42 @@
                                        placeholder="">
                             </div>
                         </div>
+                        <%
+                            if (i == 1) {
+                        %>
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">与借款人关系</span>
                                 <select id="c_ec<%=i%>_rsforloan" name="c_ec<%=i%>_rsforloan" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, infodb.get("c_ec"+i+"_rsforloan"))%>
+                                    <%
+                                if (!Tools.myIsNull(infodb.get("c_ec1_name"))
+                                        ||infodb.get("c_buycar_marriage").equals("1")
+                                        ||infodb.get("c_buycar_marriage").equals("3")) {
+                                    %>
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, "2")%>
+                                    <%} else {%>
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, infodb.get("c_ec" + i + "_rsforloan"))%>
+                                    <%}%>
                                 </select>
+                            </div>
+                        </div>
+                        <%}else{%>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">与借款人关系</span>
+                                <select id="c_ec<%=i%>_rsforloan" name="c_ec<%=i%>_rsforloan" class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, infodb.get("c_ec" + i + "_rsforloan"))%>
+                                </select>
+                            </div>
+                        </div>
+                        <%
+                            }
+                        %>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">身份证号</span>
+                                <input type="text" class="form-control" id="c_ec<%=i%>_idcard" name="c_ec<%=i%>_mobile"
+                                       placeholder="">
                             </div>
                         </div>
                         <div class="col-sm-4">
