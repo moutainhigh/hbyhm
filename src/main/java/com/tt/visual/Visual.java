@@ -67,6 +67,7 @@ public class Visual {
         fs_id=minfo.get("icbc_erp_fsid");
         String sql;
 
+
         sql= "select count(*) amount from kj_icbc di " +
         " where month(dt_add)=MONTH(SYSDATE())  " +
                 " and YEAR(dt_add)=year(SYSDATE())  " +
@@ -80,14 +81,24 @@ public class Visual {
         request.setAttribute("billlistXm",billlistXm);//每月报单总量     0厦门
 
 
-        sql= "select count(*) amount from hbyh_dygd where bc_status=3 and icbc_id in (select id amount from kj_icbc di " +
+        sql= "select count(*) amount from hxyh_dygd where bc_status=3 and icbc_id in (select id amount from kj_icbc di " +
                 "    where month(dt_add)=MONTH(SYSDATE())  " +
                 "    and YEAR(dt_add)=year(SYSDATE())  " +
                 "    and gems_fs_id in(select id from assess_fs where up_id="+ fs_id +" or id ="+ fs_id +") ";
         TtList fklistHx=selectSQL(sql+hx+" )");
         request.setAttribute("fklistHx",fklistHx);//每月抵押归档完成总量     0华夏
+
+        sql= "select count(*) amount from hbyh_dygd where bc_status=3 and icbc_id in (select id amount from kj_icbc di " +
+                "    where month(dt_add)=MONTH(SYSDATE())  " +
+                "    and YEAR(dt_add)=year(SYSDATE())  " +
+                "    and gems_fs_id in(select id from assess_fs where up_id="+ fs_id +" or id ="+ fs_id +") ";
         TtList fklistHb=selectSQL(sql+hb+" )");
         request.setAttribute("fklistHb",fklistHb);//每月抵押归档完成总量     0河北
+
+        sql= "select count(*) amount from xmgj_dygd where bc_status=3 and icbc_id in (select id amount from kj_icbc di " +
+                "    where month(dt_add)=MONTH(SYSDATE())  " +
+                "    and YEAR(dt_add)=year(SYSDATE())  " +
+                "    and gems_fs_id in(select id from assess_fs where up_id="+ fs_id +" or id ="+ fs_id +") ";
         TtList fklistXm=selectSQL(sql+xm+" )");
         request.setAttribute("fklistXm",fklistXm);//每月抵押归档完成总量     0厦门
 
@@ -104,6 +115,21 @@ public class Visual {
                 "   where lol.type_id!=6   " +
                 "     and di.id=lol.icbc_id ";
 
+        String sqlEdit1= " and di.gems_fs_id in(select id from assess_fs where up_id="+ fs_id +" or id ="+ fs_id +" )" +
+                "     GROUP BY di.gems_fs_id) m1,  " +
+                "  (select count(lol.gems_fs_id) loan,f.id gid,f.name gname   " +
+                "   from hbloan_overdue_list lol,assess_fs f,kj_icbc di    " +
+                "   where lol.type_id!=6   " +
+                "     and di.id=lol.icbc_id ";
+
+        String sqlEdit2= " and di.gems_fs_id in(select id from assess_fs where up_id="+ fs_id +" or id ="+ fs_id +" )" +
+                "     GROUP BY di.gems_fs_id) m1,  " +
+                "  (select count(lol.gems_fs_id) loan,f.id gid,f.name gname   " +
+                "   from xmloan_overdue_list lol,assess_fs f,kj_icbc di    " +
+                "   where lol.type_id!=6   " +
+                "     and di.id=lol.icbc_id ";
+
+
         String sqlEnd= " and f.id=lol.gems_fs_id   " +
                 "     and lol.gems_fs_id in(select id from assess_fs where up_id="+ fs_id +" or id ="+ fs_id +" )" +
                 "     GROUP BY lol.gems_fs_id) m2   " +
@@ -111,9 +137,11 @@ public class Visual {
 
         TtList yuqilvHx=selectSQL(sql+hx+sqlEdit+hx+sqlEnd);
         request.setAttribute("yuqilvHx",yuqilvHx );//逾期率代理商排名      华夏
-        TtList yuqilvHb=selectSQL(sql+hb+sqlEdit+hb+sqlEnd);
+
+        TtList yuqilvHb=selectSQL(sql+hb+sqlEdit1+hb+sqlEnd);
         request.setAttribute("yuqilvHb",yuqilvHb );//逾期率代理商排名      河北
-        TtList yuqilvXm=selectSQL(sql+xm+sqlEdit+xm+sqlEnd);
+
+        TtList yuqilvXm=selectSQL(sql+xm+sqlEdit2+xm+sqlEnd);
         request.setAttribute("yuqilvXm",yuqilvXm );//逾期率代理商排名      厦门
 
         sql="select id,name from comm_states";
@@ -183,6 +211,18 @@ public class Visual {
     public String[] getPawnPathMap(String diyaname,String diyatime,String bank) {
         minfo =Tools.minfo();
         fs_id=minfo.get("icbc_erp_fsid");
+        String table="";
+        switch (bank){
+            case "2":
+                table = "hbyh";
+                break;
+            case "3":
+                table = "xmgj";
+                break;
+            case "4":
+                table = "hxyh";
+                break;
+        }
         //拼接sql语句
         String sql ="select sum(case when  to_days(pawn.d1) - to_days(pawn.d) < 15 then 1 end) paw1, " +
                 "       sum(case when to_days(pawn.d1) - to_days(pawn.d) >= 15 and to_days(pawn.d1) - to_days(pawn.d) < 30 then 1 end) paw2,  " +
@@ -191,12 +231,12 @@ public class Visual {
                 "       sum(case when to_days(pawn.d1) - to_days(pawn.d) >= 60 then 1 end) paw5  " +
                 "       from (select iekir1.qryid,iekir1.status s,iekir1.dt_add d,iekir2.status s1,iekir2.dt_add d1  " +
                 "              from (select dier.qryid,dier.status,dier.dt_add  " +
-                "                   from hxyh_dygd_result dier,kj_icbc di,hxyh_dygd hd  " +
+                "                   from "+table+"_dygd_result dier,kj_icbc di,"+table+"_dygd hd  " +
                 "                   where dier.status=2   " +
                 "                   and hd.id=dier.qryid " +
                 "                   and di.id=hd.icbc_id) iekir1, " +
                 "                  (select dier.qryid,dier.status,dier.dt_add  " +
-                "                   from hxyh_dygd_result dier,kj_icbc di,hxyh_dygd hd  " +
+                "                   from "+table+"_dygd_result dier,kj_icbc di,"+table+"_dygd hd  " +
                 "                   where dier.status=3  " +
                 "                   and hd.id=dier.qryid" +
                 "                   and di.gems_fs_id in(select id from assess_fs where up_id="+ fs_id +" or id ="+ fs_id +")  " +
@@ -345,10 +385,22 @@ public class Visual {
     public Object[][] getRecyclePathMap(String cailiaoname,String cailiaotime,String bank) {
         minfo =Tools.minfo();
         fs_id=minfo.get("icbc_erp_fsid");
+        String table="";
+        switch (bank){
+            case "2":
+                table = "hbyh";
+                break;
+            case "3":
+                table = "xmgj";
+                break;
+            case "4":
+                table = "hxyh";
+                break;
+        }
         //拼接sql语句
         String sql="select year(hd.dt_add) year, " +
                 " month(hd.dt_add) month,  " +
-                " count(*) total from kj_icbc di,hxyh_dyclhs hd  " +
+                " count(*) total from kj_icbc di,"+table+"_dyclhs hd  " +
                 " where hd.bc_status=1  " +
                 " and di.id=hd.icbc_id" +
                 " and di.gems_fs_id in(select id from assess_fs where up_id="+ fs_id +" or id ="+ fs_id +")  " +
@@ -388,19 +440,32 @@ public class Visual {
     public Object[][] getOverdueMap(String yuqiname,String bank){
         minfo =Tools.minfo();
         fs_id=minfo.get("icbc_erp_fsid");
+        String table="";
+        String tab="";
+        switch (bank){
+            case "2":
+                table = "hbyh";
+                break;
+            case "3":
+                table = "xmgj";
+                break;
+            case "4":
+                table = "hxyh";
+                break;
+        }
         String sqlNew="          and dic.cars_type=1  ";
         String sqlOld="          and dic.cars_type=2  ";
         String gemsId="in(select id from assess_fs where up_id="+ fs_id +" or id ="+ fs_id +")";
         String sql= "select m1.amount m1a,m1.money/10000 m1m, m2.amount m2a,m2.money/10000 m2m, m3.amount m3a,m3.money/10000 m3m  " +
                 "from (select count(*) amount,sum(lol.overdue_amount) money   " +
-                "      from loan_overdue_list lol,kj_icbc di,hxyh_qccl dic  " +
+                "      from "+tab+"loan_overdue_list lol,kj_icbc di,"+table+"_qccl dic  " +
                 "        where lol.overdue_days<30   " +
                 "          and lol.type_id!=6 " +
                 "          and lol.icbc_id=di.id  " +
                 "          and dic.icbc_id=lol.icbc_id  ";
         String sqlEdit= "  and di.gems_fs_id " + gemsId +
                 "        ) m1,(select count(*) amount,sum(lol.overdue_amount) money   " +
-                "      from loan_overdue_list lol,kj_icbc di,hxyh_qccl dic  " +
+                "      from "+tab+"loan_overdue_list lol,kj_icbc di,"+table+"_qccl dic  " +
                 "        where lol.overdue_days<60   " +
                 "          and lol.overdue_days>=30   " +
                 "          and lol.type_id!=6  " +
@@ -408,7 +473,7 @@ public class Visual {
                 "          and dic.icbc_id=lol.icbc_id  ";
         String sqlEnd= "   and di.gems_fs_id " + gemsId +
                 "           ) m2,(select count(*) amount,sum(lol.overdue_amount) money   " +
-                "      from loan_overdue_list lol,kj_icbc di,hxyh_qccl dic  " +
+                "      from "+tab+"loan_overdue_list lol,kj_icbc di,"+table+"_qccl dic  " +
                 "        where lol.overdue_days>=60   " +
                 "          and lol.type_id!=6" +
                 "          and lol.icbc_id=di.id  " +
@@ -473,9 +538,25 @@ public class Visual {
     public Object[][] getStateMap(String bank){
         minfo =Tools.minfo();
         fs_id=minfo.get("icbc_erp_fsid");
+        String table="";
+        String tab="";
+        switch (bank){
+            case "2":
+                table = "hbyh";
+                tab = "hb";
+                break;
+            case "3":
+                table = "xmgj";
+                tab = "xm";
+                break;
+            case "4":
+                table = "hxyh";
+                tab = "hx";
+                break;
+        }
         //排名前五逾期省份
         String sql= "select count(cs.name) amount,sum(lol.overdue_amount) money,cs.name cname  " +
-                "  from hxloan_overdue_list lol,kj_icbc di,comm_states cs,hxyh_xxzl hx  " +
+                "  from "+tab+"loan_overdue_list lol,kj_icbc di,comm_states cs,"+table+"_xxzl hx  " +
                 "  where di.id=lol.icbc_id   " +
                 "    and hx.loan_state_id=cs.id " +
                 "    and hx.icbc_id=di.id " +
@@ -487,7 +568,7 @@ public class Visual {
         //其他逾期省份
         String sqlOth="select sum(other.amount) Oamount,sum(other.money) Omoney " +
                 "from (select count(cs.name) amount,sum(lol.overdue_amount) money,cs.name cname  " +
-                "      from loan_overdue_list lol,kj_icbc di,comm_states cs,hxyh_xxzl hx   " +
+                "      from "+tab+"loan_overdue_list lol,kj_icbc di,comm_states cs,"+table+"_xxzl hx   " +
                 "      where di.id=lol.icbc_id   " +
                 "        and hx.loan_state_id=cs.id " +
                 "        and hx.icbc_id=di.id " +
@@ -550,6 +631,18 @@ public class Visual {
     public Object[] getAgencyMap(String dailiname,String dailitime,String bank){
         minfo =Tools.minfo();
         fs_id=minfo.get("icbc_erp_fsid");
+        String tab="";
+        switch (bank){
+            case "2":
+                tab = "hb";
+                break;
+            case "3":
+                tab = "xm";
+                break;
+            case "4":
+                tab = "hx";
+                break;
+        }
         String GemsId="in(select id from assess_fs where up_id="+ fs_id +" or id ="+ fs_id +")";
         //业务能力
         String sqlBd= "select year(SYSDATE()) years,count(*) amount from kj_icbc di " +
@@ -562,7 +655,7 @@ public class Visual {
                 " and di.gems_fs_id " + GemsId;
         //风控能力
         String sqlFk= "select count(*) amount " +
-                "  from loan_overdue_list lol,kj_icbc di" +
+                "  from "+tab+"loan_overdue_list lol,kj_icbc di" +
                 "  where lol.overdue_days<30 " +
                 "    and lol.type_id!=6 " +
                 "    and lol.icbc_id=di.id " +
@@ -575,7 +668,7 @@ public class Visual {
                 " and di.gems_fs_id " + GemsId;
         //贷后能力
         String sqlDh= "select count(*) amount  " +
-                "  from loan_overdue_list lol,kj_icbc di" +
+                "  from "+tab+"loan_overdue_list lol,kj_icbc di" +
                 "  where lol.overdue_days>=60 " +
                 "    and lol.type_id!=6 " +
                 "    and lol.icbc_id=di.id " +
