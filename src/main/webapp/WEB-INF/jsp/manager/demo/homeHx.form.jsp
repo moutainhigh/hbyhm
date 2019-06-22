@@ -184,7 +184,7 @@
                                     <th>代理商</th>
                                     <th>逾期率</th>
                                 </tr>
-                                <tr>
+                                <%--<tr>
                                     <td>${yuqilvHx[0].gname == null?"暂无":yuqilvHx[0].gname}</td>
                                     <td>${yuqilvHx[0].yuqilv == null?0:yuqilvHx[0].yuqilv}%</td>
                                 </tr>
@@ -203,6 +203,26 @@
                                 <tr>
                                     <td>${yuqilvHx[4].gname == null?"暂无":yuqilvHx[4].gname}</td>
                                     <td>${yuqilvHx[4].yuqilv == null?0:yuqilvHx[4].yuqilv}%</td>
+                                </tr>--%>
+                                <tr>
+                                    <td>国安金融</td>
+                                    <td>0.37%</td>
+                                </tr>
+                                <tr>
+                                    <td>东汇征信</td>
+                                    <td>0.36%</td>
+                                </tr>
+                                <tr>
+                                    <td>河南环球科技</td>
+                                    <td>0.35%</td>
+                                </tr>
+                                <tr>
+                                    <td>上海苏易征信</td>
+                                    <td>0.22%</td>
+                                </tr>
+                                <tr>
+                                    <td>合创汇中</td>
+                                    <td>0.15%</td>
                                 </tr>
                             </table>
                             <div style="width: 100%; height: 10%;margin-top: 2%;">
@@ -317,12 +337,52 @@
                             <th>代理商</th>
                             <th>逾期率</th>
                         </tr>
-                        <c:forEach items="${ count }" var="rank" varStatus="lists">
+                        <%--<c:forEach items="${ count }" var="rank" varStatus="lists">
                             <tr>
                                 <td>${yuqilvHx[lists.count-1].gname == null?"暂无":yuqilvHx[lists.count-1].gname}</td>
                                 <td>${yuqilvHx[lists.count-1].yuqilv == null?0:yuqilvHx[lists.count-1].yuqilv}%</td>
                             </tr>
-                        </c:forEach>
+                        </c:forEach>--%>
+                        <tr>
+                            <td>国安金融</td>
+                            <td>0.37%</td>
+                        </tr>
+                        <tr>
+                            <td>东汇征信</td>
+                            <td>0.36%</td>
+                        </tr>
+                        <tr>
+                            <td>河南环球科技</td>
+                            <td>0.35%</td>
+                        </tr>
+                        <tr>
+                            <td>上海苏易征信</td>
+                            <td>0.22%</td>
+                        </tr>
+                        <tr>
+                            <td>合创汇中</td>
+                            <td>0.15%</td>
+                        </tr>
+                        <tr>
+                            <td>深圳后河</td>
+                            <td>0.15%</td>
+                        </tr>
+                        <tr>
+                            <td>快加西南区</td>
+                            <td>0.11%</td>
+                        </tr>
+                        <tr>
+                            <td>爱轩堡汽车</td>
+                            <td>0.10%</td>
+                        </tr>
+                        <tr>
+                            <td>上海聚胜金服</td>
+                            <td>0.08%</td>
+                        </tr>
+                        <tr>
+                            <td>秒融</td>
+                            <td>0.05%</td>
+                        </tr>
                     </table>
                 </div>
             </div>
