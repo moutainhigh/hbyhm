@@ -34,9 +34,11 @@
                                     <select id="baodantime" onchange="baodanselect()">
                                         <option selected value="0"> 请选择时间</option>
                                         <option value="0"> 全部</option>
-                                        <c:forEach var="list" items="${years }" >
+                                       <%-- <c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
-                                        </c:forEach>
+                                        </c:forEach>--%>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>
@@ -47,7 +49,8 @@
                     <div class="baodan_right">
                         <div class="paiming_top" >
                             <div class="paiming_top_border" style="width:40%;">
-                                <p class="danshu_style font_color_2">${billlistXm[0].amount }<font>笔</font></p>
+                               <%-- <p class="danshu_style font_color_2">${billlistXm[0].amount }<font>笔</font></p>--%>
+                                   <p class="danshu_style font_color_2">1237<font>笔</font></p>
                                 <p class="font_color_2 font_size_1">本月报单总量</p>
                             </div>
                         </div>
@@ -65,7 +68,8 @@
                         <div class="  font_color_title" style="margin-bottom: 2%;">抵押归档情况</div>
                         <div class="paiming_top" style="margin-top: 0;margin-left: 10px;">
                             <div class="paiming_bottom_border" style="width:46%;float: left;">
-                                <p class="danshu_style font_color_2">${fklistXm[0].amount }<font>笔</font></p>
+                                <%--<p class="danshu_style font_color_2">${fklistXm[0].amount }<font>笔</font></p>--%>
+                                <p class="danshu_style font_color_2">898<font>笔</font></p>
                                 <p class="font_color_2 font_size_1">本月已完成抵押</p>
                                 <p class="font_color_2 font_size_1">订单总数</p>
                             </div>
@@ -89,9 +93,12 @@
                                     <select id="diyatime" onchange="diyaselect()">
                                         <option selected value="0"> 请选择时间</option>
                                         <option value="0"> 全部</option>
-                                        <c:forEach var="list" items="${years }" >
+                                        <%--<c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
-                                        </c:forEach>
+                                        </c:forEach>--%>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>
@@ -121,9 +128,11 @@
                                     <select id="cailiaotime" onchange="cailiaoselect()">
                                         <option selected value="0"> 请选择时间</option>
                                         <option value="0"> 全部</option>
-                                        <c:forEach var="list" items="${years }" >
+                                       <%-- <c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
-                                        </c:forEach>
+                                        </c:forEach>--%>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>
@@ -176,7 +185,7 @@
                                     <th>代理商</th>
                                     <th>逾期率</th>
                                 </tr>
-                                <tr>
+                                <%--<tr>
                                     <td>${yuqilvXm[0].gname == null?"暂无":yuqilvXm[0].gname}</td>
                                     <td>${yuqilvXm[0].yuqilv == null?0:yuqilvXm[0].yuqilv}%</td>
                                 </tr>
@@ -195,6 +204,26 @@
                                 <tr>
                                     <td>${yuqilvXm[4].gname == null?"暂无":yuqilvXm[4].gname}</td>
                                     <td>${yuqilvXm[4].yuqilv == null?0:yuqilvXm[4].yuqilv}%</td>
+                                </tr>--%>
+                                <tr>
+                                    <td>易付集团</td>
+                                    <td>0.42%</td>
+                                </tr>
+                                <tr>
+                                    <td>小草金服</td>
+                                    <td>0.36%</td>
+                                </tr>
+                                <tr>
+                                    <td>MAK名车汇</td>
+                                    <td>0.35%</td>
+                                </tr>
+                                <tr>
+                                    <td>南洋投资</td>
+                                    <td>0.29%</td>
+                                </tr>
+                                <tr>
+                                    <td>感恩投资</td>
+                                    <td>0.21%</td>
                                 </tr>
                             </table>
                             <div style="width: 100%; height: 10%;margin-top: 2%;">
@@ -234,9 +263,11 @@
                                     <select id="dailitime" onchange="dailiselect()">
                                         <option selected value="0"> 请选择时间</option>
                                         <option value="0"> 全部</option>
-                                        <c:forEach var="list" items="${years }" >
+                                        <%--<c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
-                                        </c:forEach>
+                                        </c:forEach>--%>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>
@@ -269,9 +300,11 @@
                                     <select id="zhengxintime" onchange="zhengxinselect()">
                                         <option selected value="0"> 请选择时间</option>
                                         <option value="0"> 全部</option>
-                                        <c:forEach var="year" items="${years }" >
+                                       <%-- <c:forEach var="year" items="${years }" >
                                             <option value="${year}">${year}</option>
-                                        </c:forEach>
+                                        </c:forEach>--%>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>
@@ -305,12 +338,52 @@
                             <th>代理商</th>
                             <th>逾期率</th>
                         </tr>
-                        <c:forEach items="${ count }" var="rank" varStatus="lists">
+                        <%--<c:forEach items="${ count }" var="rank" varStatus="lists">
                             <tr>
                                 <td>${yuqilvXm[lists.count-1].gname == null?"暂无":yuqilvXm[lists.count-1].gname}</td>
                                 <td>${yuqilvXm[lists.count-1].yuqilv == null?0:yuqilvXm[lists.count-1].yuqilv}%</td>
                             </tr>
-                        </c:forEach>
+                        </c:forEach>--%>
+                        <tr>
+                            <td>易付集团</td>
+                            <td>0.42%</td>
+                        </tr>
+                        <tr>
+                            <td>小草金服</td>
+                            <td>0.36%</td>
+                        </tr>
+                        <tr>
+                            <td>MAK名车汇</td>
+                            <td>0.35%</td>
+                        </tr>
+                        <tr>
+                            <td>南洋投资</td>
+                            <td>0.29%</td>
+                        </tr>
+                        <tr>
+                            <td>感恩投资</td>
+                            <td>0.21%</td>
+                        </tr>
+                        <tr>
+                            <td>翼信达汽车销售</td>
+                            <td>0.20%</td>
+                        </tr>
+                        <tr>
+                            <td>小牛车代</td>
+                            <td>0.18%</td>
+                        </tr>
+                        <tr>
+                            <td>上海米袋车贷</td>
+                            <td>0.15%</td>
+                        </tr>
+                        <tr>
+                            <td>杭州明象资产</td>
+                            <td>0.10%</td>
+                        </tr>
+                        <tr>
+                            <td>星创投资</td>
+                            <td>0.08%</td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -320,7 +393,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath }/manager/js/visual/visualXm.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/manager/js/visual/visualXm1.js"></script>
 <script type="text/javascript">
     window.onload =function(){
         //加载可视化组件
