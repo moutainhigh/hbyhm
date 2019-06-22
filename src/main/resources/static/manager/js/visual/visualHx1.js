@@ -613,7 +613,7 @@ function yuqiselect() {
                 type: 'value',
                 name: '逾期订单数量',
                 min: 0,
-                max: 10,
+                max: 20,
                 interval: 50,
                 axisLabel: {
                     formatter: '{value}'
