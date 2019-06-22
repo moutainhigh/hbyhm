@@ -34,9 +34,11 @@
                                     <select id="baodantime" onchange="baodanselect()">
                                         <option selected value="0"> 请选择时间</option>
                                         <option value="0"> 全部</option>
-                                        <c:forEach var="list" items="${years }" >
+                                       <%-- <c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
-                                        </c:forEach>
+                                        </c:forEach>--%>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>
@@ -47,7 +49,8 @@
                     <div class="baodan_right">
                         <div class="paiming_top" >
                             <div class="paiming_top_border" style="width:40%;">
-                                <p class="danshu_style font_color_2">${billlistXm[0].amount }<font>笔</font></p>
+                               <%-- <p class="danshu_style font_color_2">${billlistXm[0].amount }<font>笔</font></p>--%>
+                                   <p class="danshu_style font_color_2">1237<font>笔</font></p>
                                 <p class="font_color_2 font_size_1">本月报单总量</p>
                             </div>
                         </div>
@@ -65,7 +68,8 @@
                         <div class="  font_color_title" style="margin-bottom: 2%;">抵押归档情况</div>
                         <div class="paiming_top" style="margin-top: 0;margin-left: 10px;">
                             <div class="paiming_bottom_border" style="width:46%;float: left;">
-                                <p class="danshu_style font_color_2">${fklistXm[0].amount }<font>笔</font></p>
+                                <%--<p class="danshu_style font_color_2">${fklistXm[0].amount }<font>笔</font></p>--%>
+                                <p class="danshu_style font_color_2">898<font>笔</font></p>
                                 <p class="font_color_2 font_size_1">本月已完成抵押</p>
                                 <p class="font_color_2 font_size_1">订单总数</p>
                             </div>
@@ -89,9 +93,12 @@
                                     <select id="diyatime" onchange="diyaselect()">
                                         <option selected value="0"> 请选择时间</option>
                                         <option value="0"> 全部</option>
-                                        <c:forEach var="list" items="${years }" >
+                                        <%--<c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
-                                        </c:forEach>
+                                        </c:forEach>--%>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>
@@ -121,9 +128,11 @@
                                     <select id="cailiaotime" onchange="cailiaoselect()">
                                         <option selected value="0"> 请选择时间</option>
                                         <option value="0"> 全部</option>
-                                        <c:forEach var="list" items="${years }" >
+                                       <%-- <c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
-                                        </c:forEach>
+                                        </c:forEach>--%>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>
@@ -234,9 +243,11 @@
                                     <select id="dailitime" onchange="dailiselect()">
                                         <option selected value="0"> 请选择时间</option>
                                         <option value="0"> 全部</option>
-                                        <c:forEach var="list" items="${years }" >
+                                        <%--<c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
-                                        </c:forEach>
+                                        </c:forEach>--%>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>
@@ -269,9 +280,11 @@
                                     <select id="zhengxintime" onchange="zhengxinselect()">
                                         <option selected value="0"> 请选择时间</option>
                                         <option value="0"> 全部</option>
-                                        <c:forEach var="year" items="${years }" >
+                                       <%-- <c:forEach var="year" items="${years }" >
                                             <option value="${year}">${year}</option>
-                                        </c:forEach>
+                                        </c:forEach>--%>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>
@@ -320,7 +333,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath }/manager/js/visual/visualXm.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/manager/js/visual/visualXm1.js"></script>
 <script type="text/javascript">
     window.onload =function(){
         //加载可视化组件
