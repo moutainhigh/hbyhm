@@ -18,7 +18,7 @@ public class ddjd extends DbCtrl {
         AdminAgp adminAgp = new AdminAgp();
         try {
             if (adminAgp.checkAgp(classAgpId)) { // 如果有权限
-                Config.log.info("权限检查成功！");
+                Tools.mylog("权限检查成功！");
                 agpOK = true;
             } else {
                 errorCode = 444;

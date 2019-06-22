@@ -2,7 +2,7 @@
  * @Description: TT总配置文件。
  * @Author: tt
  * @Date: 2018-12-26 17:42:40
- * @LastEditTime: 2019-06-19 10:00:01
+ * @LastEditTime: 2019-06-20 15:38:08
  * @LastEditors: tt
  */
 package com.tt.tool;
@@ -18,11 +18,11 @@ public class Config {
 	/* 调试模式开关，调试模式下会打印日志。部分异常输出到浏览器 ，非调试模式，不打印日志 */
 	public static boolean DEBUGMODE = false;
 	/* 版本号 */
-	public final static String TTVER = "2.0 build 20190518"; 
+	public final static String TTVER = "2.0 build 20190620"; 
 	// 项目名称：类似大地保险
 	public final static String APP_TITLE = "人保进件"; 
 	// 项目版本
-	public final static String APP_VER = " 1.0 build 20190518"; 
+	public final static String APP_VER = " 1.0 build 20190620"; 
 	// 皮肤主题{skin-navy,skin-tyjj,skin-kcd，skin-black,skin-purple,skin-yellow,skin-red,skin-green}
 	public static String MANAGER_SKINCSS = "skin-kcd";
 	/**
@@ -45,7 +45,7 @@ public class Config {
 	 * NOTE: 数据库配置
 	 * 数据库连接前缀，指定服务器和端口
 	 */
-	public final static String DB_PRECONNSTR = "jdbc:mysql://localhost:3306/";
+	public final static String DB_PRECONNSTR = !TESTMODE?"jdbc:mysql://localhost:3306/":"jdbc:mysql://125.77.23.30:3306/";
 	// 6.0以下用 "com.mysql.jdbc.Driver"
 	public final static String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
 	/* 连接池最大连接数.连接池里面最大的连接数，超过这个数时，再获取连接需要等待 */
@@ -55,8 +55,7 @@ public class Config {
 	/* 数据源配置，格式：数据库名/用户名/密码，每三个一组为一个数据源 */
 	public final static String[] DB_CONFIG = TESTMODE/* 数据源配置，格式：数据库名/用户名/密码，每三个一组为一个数据源 */
 	? new String[]{ //测试环境
-	/*"ttdemo", "root", "root", */
-	"kcway2", "root", "root"
+		"kcway2", "rootkcd", "4015d76a77f97180", 
 	}
 	: new String[]{ //生产环境
 	"kcway2", "kcway", "NDXppG2qUNB6pXcA",

@@ -3,12 +3,10 @@
  * @Description: file content
  * @Author: tt
  * @Date: 2019-06-17 11:24:55
- * @LastEditTime: 2019-06-18 15:16:54
+ * @LastEditTime: 2019-06-19 13:58:24
  * @LastEditors: tt
  */
 package com.tt.tool;
-
-import javax.tools.Tool;
 
 import com.tt.api.Jdpush;
 import com.tt.data.TtMap;

@@ -2,10 +2,18 @@
  * @Description: 后台常用command修改数据库用
  * @Author: tt
  * @Date: 2019-01-29 11:08:47
- * @LastEditTime: 2019-06-18 11:37:29
+ * @LastEditTime: 2019-06-19 11:35:08
  * @LastEditors: tt
  */
 package com.tt.manager;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.Date;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.tt.api.ApiSms;
 import com.tt.data.TtList;
@@ -13,31 +21,19 @@ import com.tt.data.TtMap;
 import com.tt.table.Admin;
 import com.tt.tlzf.DemoConfig;
 import com.tt.tlzf.Httpmodal.insideHttp;
-import com.tt.tlzf.Httpmodal.tlzfhttp_v1;
 import com.tt.tlzf.util.DemoUtil;
 import com.tt.tlzf.xstruct.common.AipgReq;
 import com.tt.tlzf.xstruct.common.InfoReq;
 import com.tt.tlzf.xstruct.quickpay.FASTTRX;
-import com.tt.tlzf.xstruct.trans.LedgerDtl;
-import com.tt.tlzf.xstruct.trans.Ledgers;
 import com.tt.tlzf.xstruct.trans.TransExt;
-import com.tt.tlzf.xstruct.trans.qry.TransQueryReq;
 import com.tt.tool.CookieTools;
 import com.tt.tool.Tools;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.tools.Tool;
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.util.Date;
-
-import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 

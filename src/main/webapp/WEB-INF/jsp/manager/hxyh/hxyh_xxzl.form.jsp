@@ -136,65 +136,66 @@
                                 <span class="input-group-addon">手机号</span>
                                 <input type="text" class="form-control" id="c_buycar_tel" name="c_buycar_tel"
                                        placeholder="">
-                                <span class="input-group-addon"><a href="javascript:modal_show('${infodb.c_buycar_name}','${infodb.c_buycar_tel}','${infodb.c_buycar_id_cardno}')">通讯录</a></span>
+                                <span class="input-group-addon"><a
+                                        href="javascript:modal_show('${infodb.c_buycar_name}','${infodb.c_buycar_tel}','${infodb.c_buycar_id_cardno}')">通讯录</a></span>
                             </div>
                         </div>
                         <script>
-                            function modal_show(c_name,c_tel,c_cardno) {
+                            function modal_show(c_name, c_tel, c_cardno) {
                                 //姓名命中
                                 $.post("/ttAjax?cn=assess_querythjl&do=list",
                                     {
-                                        c_name:c_name
+                                        c_name: c_name
                                     },
                                     function (data) {
-                                        if(data.length>0){
+                                        if (data.length > 0) {
                                             $("#c_name_ul").empty();
-                                            for(var i in data){
+                                            for (var i in data) {
                                                 $("#c_name_ul").append("<li>" +
-                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id="+data[i].id+"\">" +
+                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id=" + data[i].id + "\">" +
                                                     "<i class=\"fa fa-circle-o\" style=\"color:#00a65a\"></i>" +
-                                                    data[i].c_name+"-"+data[i].c_cardno+"-"+data[i].fs_name+"-"+data[i].dt_add+
+                                                    data[i].c_name + "-" + data[i].c_cardno + "-" + data[i].fs_name + "-" + data[i].dt_add +
                                                     "<span class=\"pull-right\" style=\"color:#00a65a\">查询完成</span></a>\n" +
                                                     "</li>");
                                             }
                                         }
-                                    },"json")
+                                    }, "json")
                                 //手机号命中
                                 $.post("/ttAjax?cn=assess_querythjl&do=list",
                                     {
-                                        c_tel:c_tel
+                                        c_tel: c_tel
                                     },
                                     function (data) {
-                                        if(data.length>0){
+                                        if (data.length > 0) {
                                             $("#c_tel_ul").empty();
-                                            for(var i in data){
+                                            for (var i in data) {
                                                 $("#c_tel_ul").append("<li>" +
-                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id="+data[i].id+"\">" +
+                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id=" + data[i].id + "\">" +
                                                     "<i class=\"fa fa-circle-o\" style=\"color:#00a65a\"></i>" +
-                                                    data[i].c_name+"-"+data[i].c_cardno+"-"+data[i].fs_name+"-"+data[i].dt_add+
+                                                    data[i].c_name + "-" + data[i].c_cardno + "-" + data[i].fs_name + "-" + data[i].dt_add +
                                                     "<span class=\"pull-right\" style=\"color:#00a65a\">查询完成</span></a>\n" +
                                                     "</li>");
                                             }
                                         }
-                                    },"json")
+                                    }, "json")
                                 //身份证命中
                                 $.post("/ttAjax?cn=assess_querythjl&do=list",
                                     {
-                                        c_cardno:c_cardno
+                                        c_cardno: c_cardno
                                     },
                                     function (data) {
-                                        if(data.length>0){
+                                        if (data.length > 0) {
                                             $("#c_cardno_ul").empty();
-                                            for(var i in data){
+                                            for (var i in data) {
                                                 $("#c_cardno_ul").append("<li>" +
-                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id="+data[i].id+"\">" +
+                                                    "<a target='_blank' href=\"http://a.kcway.net/assess/manager/index.php?type=bclient&nav=1&showtype=1&do=order_detail_querythjl&id=" + data[i].id + "\">" +
                                                     "<i class=\"fa fa-circle-o\" style=\"color:#00a65a\"></i>" +
-                                                    data[i].c_name+"-"+data[i].c_cardno+"-"+data[i].fs_name+"-"+data[i].dt_add+
+                                                    data[i].c_name + "-" + data[i].c_cardno + "-" + data[i].fs_name + "-" + data[i].dt_add +
                                                     "<span class=\"pull-right\" style=\"color:#00a65a\">查询完成</span></a>\n" +
                                                     "</li>");
                                             }
                                         }
-                                    },"json")
+                                    }, "json")
                                 $("#txlmodal").modal('show');
                             }
                         </script>
@@ -543,7 +544,8 @@
                             <div class="col-sm-4">
                                 <div class="input-group">
                                     <span class="input-group-addon">居住地址</span>
-                                    <input type="text" class="form-control" id="c_po_live_address" name="c_po_live_address"
+                                    <input type="text" class="form-control" id="c_po_live_address"
+                                           name="c_po_live_address"
                                            placeholder="">
                                 </div>
                             </div>
@@ -565,7 +567,8 @@
                             <div class="col-sm-4">
                                 <div class="input-group">
                                     <span class="input-group-addon">单位具体地址</span>
-                                    <input type="text" class="form-control" id="c_workpo_address" name="c_workpo_address"
+                                    <input type="text" class="form-control" id="c_workpo_address"
+                                           name="c_workpo_address"
                                            placeholder="">
                                 </div>
                             </div>
@@ -701,7 +704,8 @@
                             <div class="col-sm-4">
                                 <div class="input-group">
                                     <span class="input-group-addon">单位具体地址</span>
-                                    <input type="text" class="form-control" id="c_workghr_address" name="c_workghr_address"
+                                    <input type="text" class="form-control" id="c_workghr_address"
+                                           name="c_workghr_address"
                                            placeholder="">
                                 </div>
                             </div>
@@ -797,12 +801,40 @@
                                        placeholder="">
                             </div>
                         </div>
+                        <%
+                            if (i == 1) {
+                        %>
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">与借款人关系</span>
                                 <select id="c_ec<%=i%>_rsforloan" name="c_ec<%=i%>_rsforloan" class="form-control">
-                                    <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, infodb.get("c_ec"+i+"_rsforloan"))%>
+                                    <%
+                                        if (!Tools.myIsNull(infodb.get("c_ec1_name"))||infodb.get("c_buycar_marriage").equals("1")||infodb.get("c_buycar_marriage").equals("3")) {
+                                    %>
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, "2")%>
+                                    <%} else {%>
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, infodb.get("c_ec" + i + "_rsforloan"))%>
+                                    <%}%>
                                 </select>
+                            </div>
+                        </div>
+                        <%}else{%>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">与借款人关系</span>
+                                <select id="c_ec<%=i%>_rsforloan" name="c_ec<%=i%>_rsforloan" class="form-control">
+                                    <%=Tools.dicopt(DataDic.dic_zzcl_zdrgx, infodb.get("c_ec" + i + "_rsforloan"))%>
+                                </select>
+                            </div>
+                        </div>
+                        <%
+                            }
+                        %>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">身份证号</span>
+                                <input type="text" class="form-control" id="c_ec<%=i%>_idcard" name="c_ec<%=i%>_mobile"
+                                       placeholder="">
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -936,7 +968,8 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">登记日期</span>
-                                <input id="carindate" name="carindate" class="form-control" value="<%=infodb.get("carindate")%>"
+                                <input id="carindate" name="carindate" class="form-control"
+                                       value="<%=infodb.get("carindate")%>"
                                        placeholder=""/>
                             </div>
                         </div>
@@ -979,7 +1012,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">车辆信息材料<a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=1"%>" class="btn btn-primary">一键下载(相关文件)</a></label>
+                <label class="col-sm-2 control-label">车辆信息材料<a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=1"%>"
+                                                               class="btn btn-primary">一键下载(相关文件)</a></label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
                         <%
@@ -1005,7 +1039,7 @@
                             <jsp:param name="img_NamePre" value="<%=imgPreName1%>"/>
                             <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
                             <jsp:param name="l1div_Style"
-                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                                       value="width: 120px;height:120px;display: inline-block;text-align: center;margin: auto;"/>
                             <jsp:param name="img_Style" value="width: 100%;height:100px;border-radius:10px;"/>
                             <jsp:param name="img_FileStyle"
                                        value="position: absolute;left: 0;top: 0;height: 100%;width: 100%;background: transparent;border: 0;margin: 0;padding: 0;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>
@@ -1021,7 +1055,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">车身照片<a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=2"%>" class="btn btn-primary">一键下载(相关文件)</a></label>
+                <label class="col-sm-2 control-label">车身照片<a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=2"%>"
+                                                             class="btn btn-primary">一键下载(相关文件)</a></label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
 
@@ -1048,7 +1083,7 @@
                             <jsp:param name="img_NamePre" value="<%=imgPreName2%>"/>
                             <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
                             <jsp:param name="l1div_Style"
-                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                                       value="width: 120px;height:120px;display: inline-block;text-align: center;margin: auto;"/>
                             <jsp:param name="img_Style" value="width: 100%;height:100px;border-radius:10px;"/>
                             <jsp:param name="img_FileStyle"
                                        value="position: absolute;left: 0;top: 0;height: 100%;width: 100%;background: transparent;border: 0;margin: 0;padding: 0;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>
@@ -1167,7 +1202,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">家访材料<a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=3"%>" class="btn btn-primary">一键下载(相关文件)</a></label>
+                <label class="col-sm-2 control-label">家访材料<a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=3"%>"
+                                                             class="btn btn-primary">一键下载(相关文件)</a></label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
                         <%
@@ -1192,7 +1228,7 @@
                             <jsp:param name="img_NamePre" value="<%=imgPreName3%>"/>
                             <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
                             <jsp:param name="l1div_Style"
-                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                                       value="width: 120px;height:120px;display: inline-block;text-align: center;margin: auto;"/>
                             <jsp:param name="img_Style" value="width: 100%;height:100px;border-radius:10px;"/>
                             <jsp:param name="img_FileStyle"
                                        value="position: absolute;left: 0;top: 0;height: 100%;width: 100%;background: transparent;border: 0;margin: 0;padding: 0;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>
@@ -1208,7 +1244,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">证明材料<a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=4"%>" class="btn btn-primary">一键下载(相关文件)</a></label>
+                <label class="col-sm-2 control-label">证明材料<a href="<%=Tools.urlKill("toZip")+"&toZip=1&uptype=4"%>"
+                                                             class="btn btn-primary">一键下载(相关文件)</a></label>
                 <div class="col-sm-10">
                     <div class="row inline-from">
                         <%
@@ -1233,7 +1270,7 @@
                             <jsp:param name="img_NamePre" value="<%=imgPreName4%>"/>
                             <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
                             <jsp:param name="l1div_Style"
-                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                                       value="width: 120px;height:120px;display: inline-block;text-align: center;margin: auto;"/>
                             <jsp:param name="img_Style" value="width: 100%;height:100px;border-radius:10px;"/>
                             <jsp:param name="img_FileStyle"
                                        value="position: absolute;left: 0;top: 0;height: 100%;width: 100%;background: transparent;border: 0;margin: 0;padding: 0;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>
@@ -1268,7 +1305,7 @@
                                 <input type="text" class="form-control" readonly="" value="贷款材料">
                             </div>
                         </div>
-												<div class="col-sm-4">
+                        <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">审批金额（元）</span>
                                 <input type="number" class="form-control" name="fk_spje" id="fk_spje" value="审批金额">

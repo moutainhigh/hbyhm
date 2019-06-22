@@ -2,7 +2,7 @@
  * @Description: 常用功能方法汇总。包括字符串类，数据库类，日期操作类，文件类
  * @Author: tt
  * @Date: 2018-12-12 17:55:41
- * @LastEditTime: 2019-06-19 09:37:06
+ * @LastEditTime: 2019-06-19 16:19:38
  * @LastEditors: tt
  */
 package com.tt.tool;
@@ -1670,9 +1670,10 @@ public class Tools {
 		TtMap ttMap = Tools.recinfo("select * from(\n" + "select t1.id,t1.up_id,\n"
 				+ "              if(find_in_set(up_id, @pids) > 0, @pids := concat(@pids, ',', id), 0) as ischild\n"
 				+ "              from (\n"
-				+ "                   select * from assess_fs fs where fs.fs_type=2 and fs.deltag=0 order by fs.up_id,fs.id\n"
+				+ "                   select id,up_id from assess_fs fs where fs.fs_type=2 and fs.deltag=0 order by fs.up_id,fs.id\n"
 				+ "                  ) t1,\n" + "              (select @pids :=" + fsid + " ) t2\n"
 				+ ") t3 where t3.ischild!=0 order by t3.ischild DESC LIMIT 1");
+		mylog("ischild:" + ttMap.get("ischild"));
 		return ttMap.get("ischild");
 	}
 
@@ -1682,20 +1683,21 @@ public class Tools {
 		if (myIsNull(minfo.get("superadmin")) == false) {
 			switch (minfo.get("superadmin")) {
 			case "0":
-				fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id="
-						+ minfo.get("icbc_erp_fsid"));
+				fslist = Tools
+						.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id="
+								+ minfo.get("icbc_erp_fsid"));
 				break;
 			case "1":
-				fslist = Tools.reclist("select * from assess_fs where deltag=0 and showtag=1 and name!=''");
+				fslist = Tools.reclist("select id from assess_fs where deltag=0 and showtag=1 and name!=''");
 				break;
 			case "2":
 				fslist = Tools
-						.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id="
+						.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id="
 								+ minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
 				break;
 			case "3":
 				fslist = Tools
-						.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in ("
+						.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in ("
 								+ Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
 				break;
 			default:
@@ -1713,6 +1715,7 @@ public class Tools {
 				}
 			}
 		}
+		mylog("fsids:" + fsids);
 		return fsids;
 	}
 }

@@ -23,7 +23,7 @@ public class xmgj_yhclhs extends DbCtrl {
         AdminAgp adminAgp = new AdminAgp();
         try {
             if (adminAgp.checkAgp(classAgpId)) { // 如果有权限
-                Config.log.info("权限检查成功！");
+                Tools.mylog("权限检查成功！");
                 agpOK = true;
             } else {
                 errorCode = 444;
@@ -155,7 +155,8 @@ public class xmgj_yhclhs extends DbCtrl {
                 ",f.id as fsid" +
                 ",cs.name as state_name" +
                 ",cc.name as city_name" +
-                ",a.name as adminname,i.c_name as c_name,aa.name as aa_name";
+                ",a.name as adminname," +
+                "i.c_name as c_name,aa.name as aa_name"+",i.checkname as checkname";
         // 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
         TtList list = null;
         //根据权限获取公司id
@@ -163,16 +164,16 @@ public class xmgj_yhclhs extends DbCtrl {
         TtList fslist = new TtList();
         switch (minfo.get("superadmin")) {
             case "0":
-                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id=" + minfo.get("icbc_erp_fsid"));
+                fslist = Tools.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id=" + minfo.get("icbc_erp_fsid"));
                 break;
             case "1":
-                fslist = Tools.reclist("select * from assess_fs where deltag=0 and showtag=1 and name!=''");
+                fslist = Tools.reclist("select id from assess_fs where deltag=0 and showtag=1 and name!=''");
                 break;
             case "2":
-                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
+                fslist = Tools.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
                 break;
             case "3":
-                fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in (" + Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
+                fslist = Tools.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in (" + Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
                 break;
             default:
 

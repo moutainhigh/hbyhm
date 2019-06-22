@@ -78,18 +78,12 @@
                                        placeholder="">
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">电话</span>
-                                <input type="text" class="form-control" id="c_tel" name="c_tel" placeholder="">
-                            </div>
-                        </div>
-                        <%--<div class="col-sm-4">
+                                                <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">银行卡号</span>
                                 <input type="text" class="form-control" id="c_bank_id" name="c_bank_id" placeholder="">
                             </div>
-                        </div>--%>
+                        </div>
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">客户性别</span>
@@ -101,12 +95,17 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">婚姻状况</span>
-                                <select class="form-control" id="c_marriage" name="c_marriage">
+                                <select class="form-control" id="c_marriage" name="c_marriage" >
                                     <%=Tools.dicopt(DataDic.dic_hyzk2, infodb.get("c_marriage"))%>
                                 </select>
                             </div>
                         </div>
-
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">客户经理手机号</span>
+                                <input type="text" class="form-control" id="c_am_tel" name="c_am_tel" placeholder="">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -310,7 +309,7 @@
                                             <jsp:param name="img_NamePre" value="<%=imgPreName1%>"/>
                                             <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
                                             <jsp:param name="l1div_Style"
-                                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                                                       value="width: 120px;height:120px;display: inline-block;text-align: center;margin: auto;"/>
                                             <jsp:param name="img_Style"
                                                        value="width: 100%;height:100px;border-radius:10px;"/>
                                             <jsp:param name="img_FileStyle"
@@ -353,7 +352,7 @@
                                             <jsp:param name="img_NamePre" value="<%=imgPreName2%>"/>
                                             <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
                                             <jsp:param name="l1div_Style"
-                                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                                                       value="width: 120px;height:120px;display: inline-block;text-align: center;margin: auto;"/>
                                             <jsp:param name="img_Style"
                                                        value="width: 100%;height:100px;border-radius:10px;"/>
                                             <jsp:param name="img_FileStyle"
@@ -396,7 +395,7 @@
                                             <jsp:param name="img_NamePre" value="<%=imgPreName3%>"/>
                                             <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
                                             <jsp:param name="l1div_Style"
-                                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                                                       value="width: 120px;height:120px;display: inline-block;text-align: center;margin: auto;"/>
                                             <jsp:param name="img_Style"
                                                        value="width: 100%;height:100px;border-radius:10px;"/>
                                             <jsp:param name="img_FileStyle"
@@ -439,7 +438,7 @@
                                             <jsp:param name="img_NamePre" value="<%=imgPreName4%>"/>
                                             <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
                                             <jsp:param name="l1div_Style"
-                                                       value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                                                       value="width: 120px;height:120px;display: inline-block;text-align: center;margin: auto;"/>
                                             <jsp:param name="img_Style"
                                                        value="width: 100%;height:100px;border-radius:10px;"/>
                                             <jsp:param name="img_FileStyle"
@@ -660,7 +659,7 @@
                               <jsp:param name="img_NamePre" value="imgstep1_5ss"/>
                               <jsp:param name="img_DefaultImgSrc" value="images/mgcaraddimg.jpg"/>
                               <jsp:param name="l1div_Style"
-                                         value="width: 100px;height:140px;display: inline-block;text-align: center;margin: auto;"/>
+                                         value="width: 120px;height:120px;display: inline-block;text-align: center;margin: auto;"/>
                               <jsp:param name="img_Style" value="width: 100%;height:100px;border-radius:10px;"/>
                               <jsp:param name="img_FileStyle"
                                          value="position: absolute;left: 0;top: 0;height: 100%;width: 100%;background: transparent;border: 0;margin: 0;padding: 0;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>

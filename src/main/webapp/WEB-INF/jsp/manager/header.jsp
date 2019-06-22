@@ -16,13 +16,11 @@
     <!-- Logo --> <a href="/manager/index" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini">
-            <img src="/manager/images/logo.png" width="20" height="20" class="logoimg">
+            <img src="/manager/images/banner.png" class="logoimg">
         </span> <!-- logo for regular state and mobile devices -->
     <span class="logo-lg">
-            <img src="/manager/images/logo.png" width="20" height="20" class="logoimg hidden-xs">
-            <span class="logotxt" style="font-size:20px !important">
-                <b id="logo_title"><%=Config.APP_TITLE%></b>
-            </span>
+            <img src="/manager/images/banner.png" style="width:170px;height:30px;margin-top:12px;" class="logoimg hidden-xs">
+
         </span>
 </a> <!-- Header Navbar -->
     <!-- Header Navbar: style can be found in header.less -->

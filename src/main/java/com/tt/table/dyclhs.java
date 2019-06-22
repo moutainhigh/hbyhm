@@ -3,21 +3,20 @@
  * @Description: file content
  * @Author: tt
  * @Date: 2019-06-17 11:24:55
- * @LastEditTime: 2019-06-18 14:33:40
+ * @LastEditTime: 2019-06-19 15:39:38
  * @LastEditors: tt
  */
 package com.tt.table;
 
-import com.tt.api.Jdpush;
+import javax.servlet.http.HttpServletRequest;
+
 import com.tt.data.TtList;
 import com.tt.data.TtMap;
 import com.tt.tool.Addadmin_msg;
-import com.tt.tool.Config;
 import com.tt.tool.DbCtrl;
 import com.tt.tool.Tools;
-import org.apache.commons.lang.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.lang.StringUtils;
 
 public class dyclhs extends DbCtrl {
 	private final String title = "补给材料回收";
@@ -32,7 +31,7 @@ public class dyclhs extends DbCtrl {
 		AdminAgp adminAgp = new AdminAgp();
 		try {
 			if (adminAgp.checkAgp(classAgpId)) { // 如果有权限
-				Config.log.info("权限检查成功！");
+				Tools.mylog("权限检查成功！");
 				agpOK = true;
 			} else {
 				errorCode = 444;
@@ -161,7 +160,7 @@ public class dyclhs extends DbCtrl {
 		String whereString = "true";
 		;
 		String tmpWhere = "";
-		String fieldsString = "t.*" + ",f.name as fsname" + ",a.name as adminname" + ",f.id as fsid"
+		String fieldsString = "t.*" + ",f.name as fsname" + ",a.name as adminname" + ",i.checkname as checkname"+",f.id as fsid"
 				+ ",cs.name as state_name" + ",cc.name as city_name" + ",i.c_name as c_name" + ",aa.name as aa_name";
 		// 显示字段列表如t.id,t.name,t.dt_edit,字段数显示越少加载速度越快，为空显示所有
 		TtList list = null;
@@ -170,19 +169,19 @@ public class dyclhs extends DbCtrl {
 		TtList fslist = new TtList();
 		switch (minfo.get("superadmin")) {
 		case "0":
-			fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id="
+			fslist = Tools.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id="
 					+ minfo.get("icbc_erp_fsid"));
 			break;
 		case "1":
-			fslist = Tools.reclist("select * from assess_fs where deltag=0 and showtag=1 and name!=''");
+			fslist = Tools.reclist("select id from assess_fs where deltag=0 and showtag=1 and name!=''");
 			break;
 		case "2":
-			fslist = Tools.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id="
+			fslist = Tools.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id="
 					+ minfo.get("icbc_erp_fsid") + " or up_id=" + minfo.get("icbc_erp_fsid") + ")");
 			break;
 		case "3":
 			fslist = Tools
-					.reclist("select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in ("
+					.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in ("
 							+ Tools.getfsids(Integer.parseInt(minfo.get("icbc_erp_fsid"))) + ")");
 			break;
 		default:

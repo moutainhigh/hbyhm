@@ -46,6 +46,9 @@
                             <th class="text-center">
                                 状态
                             </th>
+                            <th class="hidden-xs text-center">
+                                所属审核员
+                            </th>
                             <th class="text-center">操作</th>
                         </tr>
                         </thead>
@@ -76,6 +79,9 @@
                             </td>
                             <td class="text-center">
                                 <span class="label label-success"><%=DataDic.dic_zx_status.get(m.get("bc_status"))%></span>
+                            </td>
+                            <td class="hidden-xs text-center">
+                                <%=m.get("checkname")%>
                             </td>
                             <td class="text-center">
                                 <%

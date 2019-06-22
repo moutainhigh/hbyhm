@@ -2,7 +2,7 @@
  * @Description:TT后台管理
  * @Author: tt
  * @Date: 2019-01-03 16:30:50
- * @LastEditTime: 2019-06-18 13:25:58
+ * @LastEditTime: 2019-06-19 15:07:06
  * @LastEditors: tt
  */
 package com.tt.manager;
@@ -92,7 +92,7 @@ public class Manager {
 		TtMap post = Tools.getPostMap(request);// 过滤参数，过滤mysql的注入，url参数注入
 		String refer = post.get("refer");
 		String loginTb = Config.DB_USERTABLENAME;
-		System.out.println(Tools.jsonEncode(post));
+		//System.out.println(Tools.jsonEncode(post));
 		TtMap result2 = new TtMap();
 		Tools.formatResult(result2, false, 999, "异常，请重试！", "");// 初始化返回
 		if (ManagerTools.checkSdo(post.get("sdo"))) {// 过滤掉sdo
@@ -102,7 +102,7 @@ public class Manager {
 				String pass = Tools.md5(Tools.md5(post.get("password")));
 				String sql = "select id,isadmin from " + loginTb + " where username='" + post.get("username")
 						+ "' AND userpass='" + pass + "'" + wherestring;
-				System.out.println("SQL:" + sql);
+				//System.out.println("SQL:" + sql);
 				TtMap info = Tools.recinfo(sql);
 				if (info.size() > 0) {
 					Tools.formatResult(result2, true, 0, "登陆成功！",

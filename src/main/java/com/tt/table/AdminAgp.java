@@ -2,7 +2,7 @@
  * @Description: 权限类
  * @Author: tt
  * @Date: 2019-01-24 09:38:15
- * @LastEditTime: 2019-02-22 14:09:56
+ * @LastEditTime: 2019-06-19 13:57:31
  * @LastEditors: tt
  */
 package com.tt.table;
@@ -65,7 +65,7 @@ public class AdminAgp extends DbCtrl {
      */
     @Override
     public TtMap param(TtMap ary, long id) {
-        System.out.println(ary.toString());
+        //System.out.println(ary.toString());
         for (String key : ary.keySet()) {
             if (ary.get(key).equals("1")) {
                 String[] ss = key.split("/");
@@ -75,7 +75,7 @@ public class AdminAgp extends DbCtrl {
             }
         }
         ary.put("purview_map", purview_map);
-        System.out.println(ary.toString());
+        //System.out.println(ary.toString());
         return ary;
     }
 
@@ -324,9 +324,9 @@ public class AdminAgp extends DbCtrl {
         }
         showall = true;
         TtMap info = info(nid);
-        System.out.println(info);
+        //System.out.println(info);
         String jsonInfo = Tools.jsonEncode(info);
-        System.out.println(jsonInfo);
+        //System.out.println(jsonInfo);
         request.setAttribute("info", jsonInfo);
         request.setAttribute("infodb", info);
         request.setAttribute("id", nid > 0 ? nid : 0);

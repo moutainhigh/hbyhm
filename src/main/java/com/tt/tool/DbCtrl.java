@@ -2,7 +2,7 @@
  * @Description:  * 数据库操作基类
  * @Author: tt
  * @Date: 2018-12-07 10:47:04
- * @LastEditTime: 2019-06-18 11:21:40
+ * @LastEditTime: 2019-06-20 10:11:21
  * @LastEditors: tt
  */
 package com.tt.tool;
@@ -560,7 +560,7 @@ public class DbCtrl {
 				return 0;
 			} else {
 				int re = editData(tmpAry, id);
-				succ(tmpAry, id, 1);
+				succ(ary, id, 1); // 2019-6-20修改,返回原样的post数据
 				tmpAry.clear();
 				tmpAry = null;
 				/*
@@ -627,7 +627,7 @@ public class DbCtrl {
 			}
 			tmpArray = param(tmpArray, 0);
 			id = addData(tmpArray);
-			succ(tmpArray, id, 0);
+			succ(ary, id, 0);// 2019-6-20修改,返回原样的post数据
 			/*
 			 * todo 写数据库日志
 			 */

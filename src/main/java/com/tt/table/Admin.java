@@ -2,7 +2,7 @@
  * @Description: 单独的管理员管理类演示，继承自DbCtrl类
  * @Author: tt
  * @Date: 2019-01-26 11:35:00
- * @LastEditTime: 2019-06-19 09:53:46
+ * @LastEditTime: 2019-06-19 15:07:31
  * @LastEditors: tt
  */
 package com.tt.table;
@@ -156,17 +156,17 @@ public class Admin extends DbCtrl {
 		// }
 		switch (minfo.get("superadmin")) {
 		case "0": // 普通管理员
-			fssql = "select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' where id=" + fsid;
+			fssql = "select name,id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' where id=" + fsid;
 			break;
 		case "1": // 超级管理员
-			fssql = "select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!=''";
+			fssql = "select name,id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!=''";
 			break;
 		case "2": // 内部员工?
-			fssql = "select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + fsid
+			fssql = "select name,id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + fsid
 					+ " or up_id=" + up_id + ")";
 			break;
 		case "3": // 管理员
-			fssql = "select * from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in ("
+			fssql = "select name,id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in ("
 					+ Tools.getfsids(fsid) + ")";
 			break;
 		default:
@@ -434,7 +434,7 @@ public class Admin extends DbCtrl {
 			if (Tools.myIsNull(array.get("name"))) {
 				myErroMsg += "您忘记输入用户姓名啦！\n";
 			}
-			System.out.println(array);
+			//System.out.println(array);
 			if (Tools.myIsNull(array.get("icbc_erp_fsid")) || array.get("icbc_erp_fsid").equals("0")) {
 				myErroMsg += "您忘记选择给哪个公司开户啦！\n";
 			}
