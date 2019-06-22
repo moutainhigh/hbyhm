@@ -1673,7 +1673,7 @@ public class Tools {
 				+ "                   select id,up_id from assess_fs fs where fs.fs_type=2 and fs.deltag=0 order by fs.up_id,fs.id\n"
 				+ "                  ) t1,\n" + "              (select @pids :=" + fsid + " ) t2\n"
 				+ ") t3 where t3.ischild!=0 order by t3.ischild DESC LIMIT 1");
-		mylog("ischild:"+ttMap.get("ischild"));
+		mylog("ischild:" + ttMap.get("ischild"));
 		return ttMap.get("ischild");
 	}
 
@@ -1683,8 +1683,9 @@ public class Tools {
 		if (myIsNull(minfo.get("superadmin")) == false) {
 			switch (minfo.get("superadmin")) {
 			case "0":
-				fslist = Tools.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id="
-						+ minfo.get("icbc_erp_fsid"));
+				fslist = Tools
+						.reclist("select id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id="
+								+ minfo.get("icbc_erp_fsid"));
 				break;
 			case "1":
 				fslist = Tools.reclist("select id from assess_fs where deltag=0 and showtag=1 and name!=''");
@@ -1714,7 +1715,7 @@ public class Tools {
 				}
 			}
 		}
-		mylog("fsids:"+fsids);
+		mylog("fsids:" + fsids);
 		return fsids;
 	}
 }

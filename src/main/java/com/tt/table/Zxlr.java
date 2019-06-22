@@ -3,19 +3,24 @@
  * @Description: file content
  * @Author: tt
  * @Date: 2019-06-19 13:11:58
- * @LastEditTime: 2019-06-20 10:04:46
+ * @LastEditTime: 2019-06-22 11:02:16
  * @LastEditors: tt
  */
 package com.tt.table;
 
-import com.tt.api.Jdpush;
-import com.tt.data.TtList;
-import com.tt.data.TtMap;
-import com.tt.tool.*;
-import org.apache.commons.lang.StringUtils;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+
+import com.tt.data.TtList;
+import com.tt.data.TtMap;
+import com.tt.tool.Addadmin_msg;
+import com.tt.tool.Config;
+import com.tt.tool.DbCtrl;
+import com.tt.tool.Tools;
+import com.tt.tool.Zip;
+
+import org.apache.commons.lang.StringUtils;
 
 public class Zxlr extends DbCtrl {
 	private final String title = "征信录入";
@@ -103,9 +108,19 @@ public class Zxlr extends DbCtrl {
 		whereString += " AND t.gems_fs_id in (" + fsids + ")";
 		/* 开始处理搜索过来的字段 */
 		kw = post.get("kw");
+		int search_status = Tools.strToInt(post.get("search_status"));
 		dtbe = post.get("dtbe");
 		if (Tools.myIsNull(kw) == false) {
-			whereString += " AND t.c_name like '%" + kw + "%'";
+			/* 模糊搜索开始 */
+			String [] ssKewords =new String []{"t.c_name","t.c_tel","t.c_cardno","t.c_name_mt","t.c_tel_mt","t.c_cardno_mt",};
+			whereString += " AND ("+ssKewords[0]+" like '%" + kw + "%'";
+			for (String tmpstr :ssKewords){
+				whereString +=" || "+tmpstr+" like '%" + kw + "%'";
+			}
+			whereString +=")";
+		}
+		if (search_status>0){
+			whereString += " AND t.bc_status="+search_status;
 		}
 		if (Tools.myIsNull(dtbe) == false) {
 			dtbe = dtbe.replace("%2f", "-").replace("+", "");
@@ -136,6 +151,7 @@ public class Zxlr extends DbCtrl {
 				+ " LEFT JOIN comm_citys cc ON cc.id=admin.cityid" + " LEFT JOIN hbyh_dygd dy ON dy.icbc_id=t.id"
 				+ " LEFT JOIN tlzf_qy qy ON qy.icbc_id=t.id";
 		list = lists(whereString, fieldsString);
+		Tools.mylog("get list ,whereString:"+whereString);
 		if (!Tools.myIsNull(kw)) { // 搜索关键字高亮
 			for (TtMap info : list) {
 				info.put("c_name",
