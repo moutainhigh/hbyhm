@@ -446,12 +446,15 @@ public class Visual {
         switch (bank){
             case "2":
                 table = "hbyh";
+                tab = "hb";
                 break;
             case "3":
                 table = "xmgj";
+                tab = "xm";
                 break;
             case "4":
                 table = "hxyh";
+                tab = "hx";
                 break;
         }
         String sqlNew="          and dic.cars_type=1  ";
@@ -513,17 +516,17 @@ public class Visual {
         object=new Object[3][6];
 
         for(int i=0;i<6;i++){
-            if(chart.get(0).get(s[i]) == "" && chart.get(0).get(s[i]).equals("")){
+            if(chart.size()  < 1){
                 object[0][i]="0";
             }else{
                 object[0][i]=chart.get(0).get(s[i]);
             }
-            if(chart1.get(0).get(s[i]) == "" && chart1.get(0).get(s[i]).equals("")){
+            if(chart.size()  < 1){
                 object[1][i]="0";
             }else {
                 object[1][i] = chart1.get(0).get(s[i]);
             }
-            if(chart2.get(0).get(s[i]) == "" && chart2.get(0).get(s[i]).equals("")){
+            if(chart.size()  < 1){
                 object[2][i]="0";
             }else{
                 object[2][i]=chart2.get(0).get(s[i]);
@@ -679,15 +682,6 @@ public class Visual {
         String gems_id=selectGemsId(dailiname);
         if(!dailiname.equals("请输入代理商") && !dailiname.equals("")){
             String sqlEdit = " and di.gems_fs_id=  " + gems_id;
-            sqlBd += sqlEdit;
-            sqlJj += sqlEdit;
-            sqlFk += sqlEdit;
-            sqlYy += sqlEdit;
-            sqlDh += sqlEdit;
-        }
-        //判断是否选择时间
-        if(!dailitime.equals("0")){
-            String sqlEdit = " and year(di.dt_add)="+ dailitime;
             sqlBd += sqlEdit;
             sqlJj += sqlEdit;
             sqlFk += sqlEdit;
