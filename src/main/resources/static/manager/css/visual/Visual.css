@@ -129,7 +129,6 @@ select::-ms-expand { display: none; }
 	border: 1px solid #D48265;
 	text-align: center;
 	border-radius:4px;
-	margin: auto;
     margin-top:5px;
 }
 .paiming_button{

@@ -182,7 +182,7 @@
                                                onfocus="javascript:if(this.value=='请输入代理商')this.value='';" id="yuqival"/>
                                     </li>
                                     <li>
-                                        <select id="yiqitime" onchange="yuqiselect()">
+                                        <select id="yuqitime" onchange="yuqiselect()">
                                             <option selected value="0"> 请选择时间</option>
                                             <option value="0"> 全部</option>
                                             <option value="2019-5">19年5月</option>

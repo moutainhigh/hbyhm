@@ -161,6 +161,7 @@ public class Visual {
         for(int i=0;i<10;i++){
             count[i]=i+"";
         }
+
         request.setAttribute("count",count );
     }
 

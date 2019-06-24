@@ -35,9 +35,9 @@
                                 <span class="input-group-addon">所属城市</span>
                                 <select id="search_cityid" name="search_cityid" title="所属城市" class="selectpicker  form-control"
                                          multiple data-live-search="true" data-max-options="1">
-                                    <c:forEach items="${citylist}" var="i">
+                                   <%-- <c:forEach items="${citylist}" var="i">
                                         <option value="${i.id}">${i.name}</option>
-                                    </c:forEach>
+                                    </c:forEach>--%>
                                 </select>
                             </div>
                         </div>
@@ -90,4 +90,17 @@ function searchkeypress(e){
 function docleansearch(){
 	window.location.href='<%=Tools.urlKill("kw|search_cityid|saerch_fsid|dtbe|search_status|kw")%>';
 }
+$(document).ready(function () {
+    $.post("/ttAjax?do=list&cn=comm_citys",function (data) {
+       // alert("222222222");
+            var obj = eval('(' + data + ')');
+            $("#search_cityid").empty();
+            for(var i=0;i<obj.length;i++){
+                $("#search_cityid").append("<option value='"+obj[i].id+"'>"+obj[i].name+"</option>");
+            }
+        $('.selectpicker').selectpicker('val', '');
+        $('.selectpicker').selectpicker('refresh');
+        }
+    )
+})
 </script>

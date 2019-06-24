@@ -359,9 +359,6 @@ function kehuselect() {
 var dalifenxi = echarts.init(document.getElementById('dalifenxi'));
 function dailiselect() {
     var sel = document.getElementById("dailival").value
-    var obj = document.getElementById('dailitime'); //定位id
-    var index = obj.selectedIndex; // 选中索引
-    var value = obj.options[index].value; // 选中值
     var amount = [];
     var max1;
     var max2;
@@ -372,7 +369,7 @@ function dailiselect() {
         dataType: "json",
         type: "POST",
         url: "",
-        data: {dailiname: sel,dailitime:value,bank:"2"},
+        data: {dailiname: sel,bank:"2"},
         success: function (data) {
             var year = "2019年";
             data[1] = 2810;
@@ -380,14 +377,7 @@ function dailiselect() {
             data[3] = 2027;
             data[4] = 2;
             data[5] = 4;
-            if(value == "2018"){
-                year = "2018年"
-                data[1] = 140;
-                data[2] = 3;
-                data[3] = 98;
-                data[4] = 0;
-                data[5] = 0;
-            }
+
             for(var i=1;i<6;i++){
                 amount[i-1]=data[i];
             }
