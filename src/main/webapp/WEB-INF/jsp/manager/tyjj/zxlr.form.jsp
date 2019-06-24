@@ -68,6 +68,12 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
+                                <span class="input-group-addon">手机号</span>
+                                <input type="text" class="form-control" id="c_tel" name="c_tel" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
                                 <span class="input-group-addon">身份证号</span>
                                 <input type="text" class="form-control" id="c_cardno" name="c_cardno" placeholder="">
                             </div>
