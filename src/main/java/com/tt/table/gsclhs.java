@@ -201,20 +201,44 @@ public class gsclhs extends DbCtrl {
         whereString += " AND t.gems_fs_id in (" + fsids + ")";
         /* 开始处理搜索过来的字段 */
         kw = post.get("kw");
+        int search_status = Tools.strToInt(post.get("search_status"));
         dtbe = post.get("dtbe");
         if (Tools.myIsNull(kw) == false) {
-            whereString += "AND c_name like '%" + kw + "%'";
+            /* 模糊搜索开始 */
+            String [] ssKewords =new String []{"i.c_name","i.c_tel","i.c_cardno","i.c_name_mt","i.c_tel_mt","i.c_cardno_mt",};
+            whereString += " AND ("+ssKewords[0]+" like '%" + kw + "%'";
+            for (String tmpstr :ssKewords){
+                whereString +=" || "+tmpstr+" like '%" + kw + "%'";
+            }
+            whereString +=")";
+        }
+        if (search_status>0){
+            whereString += " AND t.bc_status="+search_status;
         }
         if (Tools.myIsNull(dtbe) == false) {
             dtbe = dtbe.replace("%2f", "-").replace("+", "");
-            String[] dtArr = dtbe.split("-");
-            dtArr[0] = dtArr[0].trim();
-            dtArr[1] = dtArr[1].trim();
+            //System.out.println("dtbe:"+dtbe);
+            String[] dtArr = dtbe.split(" - ");
+            //dtArr[0] = dtArr[0].trim();
+            //dtArr[1] = dtArr[1].trim();
             System.out.println("DTBE开始日期:" + dtArr[0] + "结束日期:" + dtArr[1]);
             // todo处理选择时间段
+            whereString += " AND t.dt_add >='" + dtArr[0] +"' and t.dt_add <='"+dtArr[1]+"'";
         }
-        if(!Tools.myIsNull(post.get("fsid"))){
-            whereString += " AND f.id="+post.get("fsid");
+        if (!Tools.myIsNull(post.get("stateid"))) {
+            whereString += " AND admin.stateid=" + post.get("stateid");
+        }
+        if (!Tools.myIsNull(post.get("cityid"))) {
+            whereString += " AND admin.cityid=" + post.get("cityid");
+        }
+        if (!Tools.myIsNull(post.get("fsid"))) {
+            whereString += " AND f.id=" + post.get("fsid");
+        }
+        if (!Tools.myIsNull(post.get("search_cityid"))) {
+            whereString += " AND admin.cityid=" + post.get("search_cityid");
+        }
+        if (!Tools.myIsNull(post.get("saerch_fsid"))) {
+            whereString += " AND f.id=" + post.get("saerch_fsid");
         }
         /* 搜索过来的字段处理完成 */
 

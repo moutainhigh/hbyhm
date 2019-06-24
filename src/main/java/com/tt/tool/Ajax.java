@@ -79,7 +79,37 @@ public class Ajax {
                         result=Tools.jsonEncode(Tools.reclist("select id,name from comm_citys order by chrkey"));
                         break;
                     case "assess_fs":
-                        result=Tools.jsonEncode(Tools.reclist("select id,name from assess_fs where fs_type=2 and showtag=1 and deltag=0 order by dt_add desc"));
+                        String fssql = "";
+                        int fsid = 0;
+                        int up_id = 0;
+                        /*
+                         * if (nid > 0) { fsid = Integer.parseInt(info.get("icbc_erp_fsid")); up_id =
+                         * Integer.parseInt(info.get("icbc_erp_fsid")); } else {
+                         */
+                        TtMap minfo = Tools.minfo();
+                        fsid = Integer.parseInt(minfo.get("icbc_erp_fsid"));
+                        up_id = Integer.parseInt(minfo.get("icbc_erp_fsid"));
+                        // }
+                        switch (minfo.get("superadmin")) {
+                            case "0": // 普通管理员
+                                fssql = "select name,id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' where id=" + fsid;
+                                break;
+                            case "1": // 超级管理员
+                                fssql = "select name,id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!=''";
+                                break;
+                            case "2": // 内部员工?
+                                fssql = "select name,id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and (id=" + fsid
+                                        + " or up_id=" + up_id + ")";
+                                break;
+                            case "3": // 管理员
+                                fssql = "select name,id from assess_fs where fs_type=2 and deltag=0 and showtag=1 and name!='' and id in ("
+                                        + Tools.getfsids(fsid) + ")";
+                                break;
+                            default:
+                                break;
+                        }
+                        TtList fslist = Tools.reclist(fssql+" order by dt_add desc");
+                        result=Tools.jsonEncode(fslist);
                         break;
                     default:
 

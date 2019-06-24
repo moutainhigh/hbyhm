@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
  */
 public class Config {
 	/* 测试/生产环境开关 */
-	public final static boolean TESTMODE = true;
+	public final static boolean TESTMODE = false;
 	/* 调试模式开关，调试模式下会打印日志。部分异常输出到浏览器 ，非调试模式，不打印日志 */
 	public static boolean DEBUGMODE = false;
 	/* 版本号 */
