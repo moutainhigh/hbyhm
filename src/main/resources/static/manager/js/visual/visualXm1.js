@@ -95,6 +95,7 @@ function diyaselect() {
     var obj1 = document.getElementById('diyatime'); //定位id
     var index1 = obj1.selectedIndex; // 选中索引
     var time = obj1.options[index1].value; // 选中值
+
     $.ajax({
         dataType: "json",
         type: "POST",
@@ -107,7 +108,6 @@ function diyaselect() {
             var paw3=paw[time][2];
             var paw4=paw[time][3];
             var paw5=paw[time][4];
-
             var option_diyawancheng = {
                 tooltip: {
                     trigger: 'item',
@@ -296,6 +296,7 @@ function kehuselect() {
     var obj1 = document.getElementById('kehutime'); //定位id
     var index1 = obj1.selectedIndex; // 选中索引
     var time = obj1.options[index1].value; // 选中值
+
     $.ajax({
         dataType : "json",
         type : "POST",
@@ -307,7 +308,6 @@ function kehuselect() {
             var age2=age[time][1];
             var age3=age[time][2];
             var age4=age[time][3];
-
             var option_kehunianling = {
                 tooltip : {
                     trigger: 'item',
