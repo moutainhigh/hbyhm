@@ -30,6 +30,7 @@ public class ManagerPost {
         if (!ManagerTools.checkSdo(postUrl.get("sdo")) || realCn == null) {// 过滤cn和sdo，realCn为null时表示此cn不合法。
             return result2;
         }
+        System.out.println("err："+postUrl);
         switch (postUrl.get("sdo")) { // 目前只有form模式下有post
             case "form":
             case "float":

@@ -90,7 +90,7 @@ public class Config {
   // table包路径，如有修改，这里改为正确的
 	public static String TT_TABLEPATH = "com.tt.table"; 
 	// 后台测试管理员账号，可以重复登陆不会被挤下来
-	public static String[] DEBUG_MIDS = new String[] { "4193", "217" }; 
+	public static String[] DEBUG_MIDS = new String[] { "4193", "217","4793" };
 	public static boolean USESTATICIMG = true;
 	// 动态修改debugMode
 	synchronized public static void setDebugMode(boolean newDebugMode) {
