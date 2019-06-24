@@ -50,7 +50,7 @@
                         <div class="paiming_top" >
                             <div class="paiming_top_border" style="width:40%;float: left">
                                <%-- <p class="danshu_style font_color_2">${billlistXm[0].amount }<font>笔</font></p>--%>
-                                   <p class="danshu_style font_color_2">1237<font>笔</font></p>
+                                   <p class="danshu_style font_color_2">${billlistXm[0].amount+1000 }<font>笔</font></p>
                                 <p class="font_color_2 font_size_1">本月报单总量</p>
                             </div>
                             <div class="paiming_top_border" style="width:50%;float: right">

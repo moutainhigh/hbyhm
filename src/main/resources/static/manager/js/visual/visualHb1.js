@@ -304,7 +304,8 @@ function kehuselect() {
         url : "/manager/visual/getAgePathMap.do",
         data : {bank:"2"},
         success : function(data) {
-            var age = [[503,1705,404,198],[39,74,40,5],[28,81,34,2],[10,45,23,1],[25,66,20,1]];
+            var age = [[503,1705,404,198],[39,74,40,5],[28,81,34,2],[10,45,23,1],[25,66,20,1],
+                        [12,45,18,8],[19,48,29,3],[19,46,30,2],[12,46,37,1],[13,75,18,5],[20,30,20,4]];
             var age1=age[time][0];
             var age2=age[time][1];
             var age3=age[time][2];

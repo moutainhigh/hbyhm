@@ -345,10 +345,17 @@ public class Visual {
     //客户年龄分布扇形图ajax前台获取      null,null,null,null
     @RequestMapping("/manager/visual/getAgePathMap.do")
     @ResponseBody
-    public String[] getAgePathMap(String bank) {
+    public String[] getAgePathMap(String bank,HttpServletRequest request) {
 
         minfo =Tools.minfo();
         fs_id=minfo.get("icbc_erp_fsid");
+
+        String sql1= "select count(*) amount from kj_icbc di " +
+                " where month(dt_add)=MONTH(SYSDATE())  " +
+                " and YEAR(dt_add)=year(SYSDATE())  " +
+                " and gems_fs_id in(select id from assess_fs where up_id="+ fs_id +" or id ="+ fs_id +") " ;
+
+
         String sql="    select sum(case when cardage.card >= 18 and cardage.card < 30 then 1 end) age1, " +
                 "      sum(case when cardage.card >= 30 and cardage.card < 40 then 1 end) age2, " +
                 "      sum(case when cardage.card >= 40 and cardage.card < 50 then 1 end) age3, " +
@@ -358,12 +365,15 @@ public class Visual {
         switch (bank){
             case "2":
                 sql += hb + " ) cardage";
+
                 break;
             case "3":
                 sql += xm + " ) cardage";
+
                 break;
             case "4":
                 sql += hx + " ) cardage";
+
                 break;
         }
         TtList chart=selectSQL(sql);
