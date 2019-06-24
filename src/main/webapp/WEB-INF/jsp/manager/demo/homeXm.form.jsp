@@ -8,7 +8,7 @@
 <div class="content_visual">
     <div class="form_visual" >
         <!-- <%--  数据图一  --%> -->
-        <div class="form_visual_form1" id="form_visual_form1" style="width: 1690px; height: 840px;">
+        <div class="form_visual_form1" id="form_visual_form1" style="width: 100%; height: 840px;">
             <div class="visual_form_top_box">
                 <!-- 报单统计开始 -->
                 <div class="visual_form_box">
@@ -68,11 +68,23 @@
                                         <%--<c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
                                         </c:forEach>--%>
-                                        <option value="2019-5">19年5月</option>
-                                        <option value="2019-4">19年4月</option>
-                                        <option value="2019-3">19年3月</option>
-                                        <option value="2019-2">19年2月</option>
-                                        <option value="2019-1">19年1月</option>
+                                        <option value="0">19年5月</option>
+                                        <option value="1">19年4月</option>
+                                        <option value="2">19年3月</option>
+                                        <option value="3">19年2月</option>
+                                        <option value="4">19年1月</option>
+                                        <option value="2018-12">18年12月</option>
+                                        <option value="2018-11">18年11月</option>
+                                        <option value="2018-10">18年10月</option>
+                                        <option value="2018-9">18年9月</option>
+                                        <option value="2018-8">18年8月</option>
+                                        <option value="2018-7">18年7月</option>
+                                        <option value="2018-6">18年6月</option>
+                                        <option value="2018-5">18年5月</option>
+                                        <option value="2018-4">18年4月</option>
+                                        <option value="2018-3">18年3月</option>
+                                        <option value="2018-2">18年2月</option>
+                                        <option value="2018-1">18年1月</option>
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>
@@ -119,11 +131,23 @@
                                         <%--<c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
                                         </c:forEach>--%>
-                                        <option value="2019-5">19年5月</option>
-                                        <option value="2019-4">19年4月</option>
-                                        <option value="2019-3">19年3月</option>
-                                        <option value="2019-2">19年2月</option>
-                                        <option value="2019-1">19年1月</option>
+                                        <option value="0">19年5月</option>
+                                        <option value="1">19年4月</option>
+                                        <option value="2">19年3月</option>
+                                        <option value="3">19年2月</option>
+                                        <option value="4">19年1月</option>
+                                        <option value="2018-12">18年12月</option>
+                                        <option value="2018-11">18年11月</option>
+                                        <option value="2018-10">18年10月</option>
+                                        <option value="2018-9">18年9月</option>
+                                        <option value="2018-8">18年8月</option>
+                                        <option value="2018-7">18年7月</option>
+                                        <option value="2018-6">18年6月</option>
+                                        <option value="2018-5">18年5月</option>
+                                        <option value="2018-4">18年4月</option>
+                                        <option value="2018-3">18年3月</option>
+                                        <option value="2018-2">18年2月</option>
+                                        <option value="2018-1">18年1月</option>
 
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
@@ -186,11 +210,23 @@
                                         <select id="yuqitime" onchange="yuqiselect()">
                                             <option selected value="0"> 请选择时间</option>
                                             <option value="0"> 全部</option>
-                                            <option value="2019-5">19年5月</option>
-                                            <option value="2019-4">19年4月</option>
-                                            <option value="2019-3">19年3月</option>
-                                            <option value="2019-2">19年2月</option>
-                                            <option value="2019-1">19年1月</option>
+                                            <option value="0">19年5月</option>
+                                            <option value="1">19年4月</option>
+                                            <option value="2">19年3月</option>
+                                            <option value="3">19年2月</option>
+                                            <option value="4">19年1月</option>
+                                            <option value="2018-12">18年12月</option>
+                                            <option value="2018-11">18年11月</option>
+                                            <option value="2018-10">18年10月</option>
+                                            <option value="2018-9">18年9月</option>
+                                            <option value="2018-8">18年8月</option>
+                                            <option value="2018-7">18年7月</option>
+                                            <option value="2018-6">18年6月</option>
+                                            <option value="2018-5">18年5月</option>
+                                            <option value="2018-4">18年4月</option>
+                                            <option value="2018-3">18年3月</option>
+                                            <option value="2018-2">18年2月</option>
+                                            <option value="2018-1">18年1月</option>
                                         </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                     </li>
 
@@ -331,11 +367,23 @@
                                        <%-- <c:forEach var="year" items="${years }" >
                                             <option value="${year}">${year}</option>
                                         </c:forEach>--%>
-                                        <option value="2019-5">19年5月</option>
-                                        <option value="2019-4">19年4月</option>
-                                        <option value="2019-3">19年3月</option>
-                                        <option value="2019-2">19年2月</option>
-                                        <option value="2019-1">19年1月</option>
+                                        <option value="0">19年5月</option>
+                                        <option value="1">19年4月</option>
+                                        <option value="2">19年3月</option>
+                                        <option value="3">19年2月</option>
+                                        <option value="4">19年1月</option>
+                                        <option value="2018-12">18年12月</option>
+                                        <option value="2018-11">18年11月</option>
+                                        <option value="2018-10">18年10月</option>
+                                        <option value="2018-9">18年9月</option>
+                                        <option value="2018-8">18年8月</option>
+                                        <option value="2018-7">18年7月</option>
+                                        <option value="2018-6">18年6月</option>
+                                        <option value="2018-5">18年5月</option>
+                                        <option value="2018-4">18年4月</option>
+                                        <option value="2018-3">18年3月</option>
+                                        <option value="2018-2">18年2月</option>
+                                        <option value="2018-1">18年1月</option>
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>

@@ -101,16 +101,12 @@ function diyaselect() {
         url: "/manager/visual/getPawnPathMap.do",
         data: {diyaname: sel,diyatime:time,bank:"4"},
         success: function (data) {
-            var paw5=230;
-            var paw2=865;
-            var paw3=1989;
-            var paw4=876;
-            var paw1=320;
-            if(time == "2019-4"){ paw5 = 64; paw2 = 813; paw3 = 1688; paw4 = 913; paw1 = 148;}
-            if(time == "2019-3"){ paw5 = 23; paw2 = 280; paw3 = 1128; paw4 = 401; paw1 = 59;}
-            if(time == "2019-2"){ paw5 = 0; paw2 = 14; paw3 = 66; paw4 = 29; paw1 = 3;}
-            if(time == "2019-1"){ paw5 = 1; paw2 = 32; paw3 = 78; paw4 = 51; paw1 = 4;}
-
+            var paw = [[230,869,1989,876,320],[64,813,1688,913,148],[23,280,1128,401,59],[0,14,66,29,3],[1,32,78,51,4]];
+            var paw5=paw[time][0];
+            var paw2=paw[time][1];
+            var paw3=paw[time][2];
+            var paw4=paw[time][3];
+            var paw1=paw[time][4];
 
             var option_diyawancheng = {
                 tooltip: {
@@ -249,13 +245,9 @@ function zhengxinselect() {
         url: "/manager/visual/getCreditPathMap.do",
         data: {zhengxinname: sel,zhengxintime:time,bank:"4"},
         success: function (data) {
-            var credit1= 4064;
-            var credit2= 1534;
-            if(time == "2019-4"){credit1= 3653;credit2= 1495;}
-            if(time == "2019-3"){credit1= 1901;credit2= 570;}
-            if(time == "2019-2"){credit1= 114;credit2= 42;}
-            if(time == "2019-1"){credit1= 166;credit2= 47;}
-
+             var zhengxin = [[4064,1534],[3653,1495],[1901,570],[114,42],[166,47]];
+            var credit1= zhengxin[time][0];
+            var credit2= zhengxin[time][1];
 
             var option_zhengxinchaxun = {
                 tooltip: {
@@ -309,14 +301,11 @@ function kehuselect() {
         url : "/manager/visual/getAgePathMap.do",
         data : {bank:"4"},
         success : function(data) {
-            var age1=785;
-            var age2=1986;
-            var age3=862;
-            var age4=498;
-            if(time == "2019-4"){age1=813;age2=1752;age3=913;age4=148;}
-            if(time == "2019-3"){age1=280;age2=1151;age3=401;age4=59;}
-            if(time == "2019-2"){age1=14;age2=66;age3=29;age4=3;}
-            if(time == "2019-1"){age1=32;age2=79;age3=51;age4=4;}
+            var age = [[785,1986,862,498],[813,1752,913,148],[280,1151,401,59],[14,66,29,3],[32,79,51,4]];
+            var age1=age[time][0];
+            var age2=age[time][1];
+            var age3=age[time][2];
+            var age4=age[time][3];
 
             var option_kehunianling = {
                 tooltip : {
@@ -372,7 +361,7 @@ function dailiselect() {
     $.ajax({
         dataType: "json",
         type: "POST",
-        url: "",
+        url: "/manager/visual/getAgencyMap.do",
         data: {dailiname: sel,bank:"4"},
         success: function (data) {
             var year = "2019年";
@@ -554,47 +543,23 @@ function yuqiselect() {
     $.ajax({
         dataType: "json",
         type: "POST",
-        url: "",
+        url: "/manager/visual/getOverdueMap.do",
         data: {yuqiname: sel,bank:"4"},
         success: function (data) {
-            var amount = [8.12,6.09,4.06];
-            var newcars = [1,1.09,0];
-            var oldcars = [7.12,5,4.06];
-            var amountmoney = [61.62,46.21,30.81];
-            var newcarsmoney = [2.12,1.01,0];
-            var oldcarsmoney = [59.50,45.20,30.81];
-            if(time == "2019-4"){
-                amount = [7.30,3.65,3.65];
-                newcars = [0,0,0];
-                oldcars = [7.30,3.65,3.65];
-                amountmoney = [54.78,27.39,27.39];
-                newcarsmoney = [0,0,0];
-                oldcarsmoney = [54.78,27.39,27.39];
-            }
-            if(time == "2019-3"){
-                amount = [4.75,3.80,1.90];
-                newcars = [0,0,0];
-                oldcars = [5,4,2];
-                amountmoney = [38.46,30.77,15.38];
-                newcarsmoney = [0,0,0];
-                oldcarsmoney = [38.46,30.77,15.38];
-            }
-            if(time == "2019-2"){
-                amount = [0.34,0.22,0.17];
-                newcars = [0,0,0];
-                oldcars = [0.34,0.22,0.17];
-                amountmoney = [2.55,1.70,1.28];
-                newcarsmoney = [0,0,0];
-                oldcarsmoney = [2.55,1.70,1.28];
-            }
-            if(time == "2019-1"){
-                amount = [0.33,0.16,0.33];
-                newcars = [0,0,0];
-                oldcars = [0.33,0.16,0.33];
-                amountmoney = [2.59,1.30,2.59];
-                newcarsmoney = [0,0,0];
-                oldcarsmoney = [2.59,1.30,2.59];
-            }
+            var amountVar = [ [8.12,6.09,4.06], [7.30,3.65,3.65], [4.75,3.80,1.90], [0.34,0.22,0.17], [0.33,0.16,0.33]];
+            var newcarsVar = [[1,1.09,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0] ];
+            var oldcarsVar = [[7.12,5,4.06], [7.30,3.65,3.65],  [5,4,2], [0.34,0.22,0.17], [0.33,0.16,0.33]];
+            var amountmoneyVar = [[61.62,46.21,30.81], [54.78,27.39,27.39], [38.46,30.77,15.38], [2.55,1.70,1.28], [2.59,1.30,2.59]];
+            var newcarsmoneyVar = [[2.12,1.01,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0]];
+            var oldcarsmoneyVar = [[59.50,45.20,30.81], [54.78,27.39,27.39], [38.46,30.77,15.38], [2.55,1.70,1.28], [2.59,1.30,2.59]];
+
+            var amount = amountVar[time];
+            var newcars = newcarsVar[time];
+            var oldcars = oldcarsVar[time];
+            var amountmoney = amountmoneyVar[time];
+            var newcarsmoney = newcarsmoneyVar[time];
+            var oldcarsmoney = oldcarsmoneyVar[time];
+
             var option_yuqilv_1 = {
                 tooltip: { //提示框组件。
                     trigger: 'axis',//触发类型:'axis'坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。
@@ -721,7 +686,7 @@ var yuqilv_2 = echarts.init(document.getElementById('yuqilv_2'));
 $.ajax({
     dataType : "json",
     type : "POST",
-    url : "",
+    url : "/manager/visual/getStateMap.do",
     data : {bank:"4"},
     success : function(data) {
         var option_yuqilv_2= {

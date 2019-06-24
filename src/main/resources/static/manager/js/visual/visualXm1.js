@@ -101,15 +101,12 @@ function diyaselect() {
         url: "/manager/visual/getPawnPathMap.do",
         data: {diyaname: sel,diyatime:time,bank:"3"},
         success: function (data) {
-            var paw5=23;
-            var paw2=230;
-            var paw3=449;
-            var paw4=105;
-            var paw1=56;
-            if(time == "2019-4"){ paw5 = 23; paw2 = 200; paw3 = 456; paw4 = 230; paw1 = 50;}
-            if(time == "2019-3"){ paw5 = 20; paw2 = 277; paw3 = 475; paw4 = 277; paw1 = 59;}
-            if(time == "2019-2"){ paw5 = 0; paw2 = 26; paw3 = 115; paw4 = 47; paw1 = 3;}
-            if(time == "2019-1"){ paw5 = 1; paw2 = 37; paw3 = 157; paw4 = 73; paw1 = 9;}
+            var paw = [[56,230,449,105,23],[50,200,456,230,23],[59,277,475,277,20],[3,26,115,47,0],[9,37,157,73,1]];
+            var paw1=paw[time][0];
+            var paw2=paw[time][1];
+            var paw3=paw[time][2];
+            var paw4=paw[time][3];
+            var paw5=paw[time][4];
 
             var option_diyawancheng = {
                 tooltip: {
@@ -248,12 +245,9 @@ function zhengxinselect() {
         url: "/manager/visual/getCreditPathMap.do",
         data: {zhengxinname: sel,zhengxintime:time,bank:"3"},
         success: function (data) {
-            var credit1= 898;
-            var credit2= 339;
-            if(time == "2019-4"){credit1= 959;credit2= 392;}
-            if(time == "2019-3"){credit1= 1108;credit2= 332;}
-            if(time == "2019-2"){credit1= 191;credit2= 70;}
-            if(time == "2019-1"){credit1= 277;credit2= 79;}
+            var zhengxin = [[898,339],[959,392],[1108,332],[191,70],[277,79]];
+            var credit1= zhengxin[time][0];
+            var credit2= zhengxin[time][1];
 
             var option_zhengxinchaxun = {
                 tooltip: {
@@ -308,14 +302,12 @@ function kehuselect() {
         url : "/manager/visual/getAgePathMap.do",
         data : {bank:"3"},
         success : function(data) {
-            var age1=103;
-            var age2=456;
-            var age3=204;
-            var age4=56;
-            if(time == "2019-4"){age1=200;age2=479;age3=230;age4=50;}
-            if(time == "2019-3"){age1=277;age2=495;age3=277;age4=59;}
-            if(time == "2019-2"){age1=26;age2=115;age3=47;age4=3;}
-            if(time == "2019-1"){age1=37;age2=158;age3=73;age4=9;}
+            var age = [[103,456,204,56],[200,479,230,50],[277,495,277,59],[26,115,47,3],[37,158,73,9]];
+            var age1=age[time][0];
+            var age2=age[time][1];
+            var age3=age[time][2];
+            var age4=age[time][3];
+
             var option_kehunianling = {
                 tooltip : {
                     trigger: 'item',
@@ -370,7 +362,7 @@ function dailiselect() {
     $.ajax({
         dataType: "json",
         type: "POST",
-        url: "",
+        url: "/manager/visual/getAgencyMap.do",
         data: {dailiname: sel,bank:"3"},
         success: function (data) {
             var year = "2019年";
@@ -555,44 +547,20 @@ function yuqiselect() {
         url: "/manager/visual/getOverdueMap.do",
         data: {yuqiname: sel,bank:"3"},
         success: function (data) {
-            var amount = [1.79, 1.34, 0.89];
-            var newcars = [0,0,0];
-            var oldcars = [1.79, 1.34, 0.89];
-            var amountmoney = [13.62, 10.21, 6.81];
-            var newcarsmoney = [0,0,0];
-            var oldcarsmoney = [13.62, 10.21, 6.81];
-            if(time == "2019-4"){
-                amount = [1.91,0.95,0.95];
-                newcars = [0,0,0];
-                oldcars = [1.91,0.95,0.95];
-                amountmoney = [14.39,7.19,7.19];
-                newcarsmoney = [0,0,0];
-                oldcarsmoney = [14.39,7.19,7.19];
-            }
-            if(time == "2019-3"){
-                amount = [2.77,2.21,1.10];
-                newcars = [0,0,0];
-                oldcars = [2.77,2.21,1.10];
-                amountmoney = [22.41,17.93,8.96];
-                newcarsmoney = [0,0,0];
-                oldcarsmoney = [22.41,17.93,8.96];
-            }
-            if(time == "2019-2"){
-                amount = [0.57,0.38,0.19];
-                newcars = [0,0,0];
-                oldcars = [0.57,0.38,0.19];
-                amountmoney = [4.25,2.83,1.41];
-                newcarsmoney = [0,0,0];
-                oldcarsmoney = [4.25,2.83,1.41];
-            }
-            if(time == "2019-1"){
-                amount = [0.55,0.27,0.55];
-                newcars = [0,0,0];
-                oldcars = [0.55,0.27,0.55];
-                amountmoney = [4.32,2.16,4.32];
-                newcarsmoney = [0,0,0];
-                oldcarsmoney = [4.32,2.16,4.32];
-            }
+            var amountVar = [[1.79, 1.34, 0.89], [1.91,0.95,0.95], [2.77,2.21,1.10], [0.57,0.38,0.19], [0.55,0.27,0.55]];
+            var newcarsVar = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]];
+            var oldcarsVar = [[1.79, 1.34, 0.89], [1.91,0.95,0.95], [2.77,2.21,1.10], [0.57,0.38,0.19], [0.55,0.27,0.55]];
+            var amountmoneyVar = [[13.62, 10.21, 6.81], [14.39,7.19,7.19], [22.41,17.93,8.96], [4.25,2.83,1.41], [4.32,2.16,4.32]];
+            var newcarsmoneyVar = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]];
+            var oldcarsmoneyVar = [[13.62, 10.21, 6.81], [14.39,7.19,7.19], [22.41,17.93,8.96], [4.25,2.83,1.41], [4.32,2.16,4.32]];
+
+            var amount = amountVar[time];
+            var newcars = newcarsVar[time];
+            var oldcars = oldcarsVar[time];
+            var amountmoney = amountmoneyVar[time];
+            var newcarsmoney = newcarsmoneyVar[time];
+            var oldcarsmoney = oldcarsmoneyVar[time];
+
             var option_yuqilv_1 = {
                 tooltip: { //提示框组件。
                     trigger: 'axis',//触发类型:'axis'坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。
