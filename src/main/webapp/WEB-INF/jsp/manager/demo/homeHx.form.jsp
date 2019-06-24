@@ -37,9 +37,9 @@
                                         <%--<c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
                                         </c:forEach>--%>
-                                        <option value="2019">2019</option>
-                                        <option value="2018">2018</option>
-                                    </select><i style="padding-left: 5px; font-weight:bold;">></i>
+                                        <option value="2019">18年9月-19年5月</option>
+                                        <option value="2018">18年1月-18年9月</option>
+                                    </select>
                                 </li>
                             </ul>
                         </div>
@@ -48,14 +48,37 @@
                     </div>
                     <div class="baodan_right">
                         <div class="paiming_top" >
-                            <div class="paiming_top_border" style="width:40%;">
+                            <div class="paiming_top_border" style="width:40%;float: left">
                                <%-- <p class="danshu_style font_color_2">${billlistHx[0].amount }<font>笔</font></p>--%>
                                    <p class="danshu_style font_color_2">5598<font>笔</font></p>
                                 <p class="font_color_2 font_size_1">本月报单总量</p>
                             </div>
+                            <div class="paiming_top_border" style="width:50%;float: right">
+                                <%-- <p class="danshu_style font_color_2">${billlistHx[0].amount }<font>笔</font></p>--%>
+                                <p class="danshu_style font_color_2">15466.19<font>万元</font></p>
+                                <p class="font_color_2 font_size_1">本月放款金额</p>
+                            </div>
                         </div>
-                        <div style="height: 85%; width: 100%;">
-                            <div id="kehunianling" style="height: 90%;width: 100%;position: relative; top: -10px; ">
+                        <div style="width: 100%;height: 7%;">
+                            <ul class="font_color_1 condition1" >
+                                <li style="padding-top: 5px;">
+                                    <select id="kehutime" onchange="kehuselect()">
+                                        <option selected value="0"> 请选择时间</option>
+                                        <option value="0"> 全部</option>
+                                        <%--<c:forEach var="list" items="${years }" >
+                                            <option value="${list}">${list}</option>
+                                        </c:forEach>--%>
+                                        <option value="2019-5">19年5月</option>
+                                        <option value="2019-4">19年4月</option>
+                                        <option value="2019-3">19年3月</option>
+                                        <option value="2019-2">19年2月</option>
+                                        <option value="2019-1">19年1月</option>
+                                    </select><i style="padding-left: 5px; font-weight:bold;">></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <div style="height: 70%; width: 100%;">
+                            <div id="kehunianling" style="height: 90%;width: 100%;position: relative; ">
                             </div>
                         </div>
                     </div>
@@ -96,8 +119,11 @@
                                         <%--<c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
                                         </c:forEach>--%>
-                                        <option value="2019">2019</option>
-                                        <option value="2018">2018</option>
+                                        <option value="2019-5">19年5月</option>
+                                        <option value="2019-4">19年4月</option>
+                                        <option value="2019-3">19年3月</option>
+                                        <option value="2019-2">19年2月</option>
+                                        <option value="2019-1">19年1月</option>
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>
@@ -130,9 +156,9 @@
                                         <%--<c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
                                         </c:forEach>--%>
-                                        <option value="2019">2019</option>
-                                        <option value="2018">2018</option>
-                                    </select><i style="padding-left: 5px; font-weight:bold;">></i>
+                                        <option value="2019">18年9月-19年5月</option>
+                                        <option value="2018">18年1月-18年9月</option>
+                                    </select>
                                 </li>
                             </ul>
                         </div>
@@ -155,15 +181,17 @@
                                         <input type="text"  value="请输入代理商" onblur="yuqiselect()"
                                                onfocus="javascript:if(this.value=='请输入代理商')this.value='';" id="yuqival"/>
                                     </li>
-                                    <%--<li>
-                                        <select id="yuqisel" onchange="yuqiselect()">
-                                            <option selected value="0"> 请选择省份</option>
+                                    <li>
+                                        <select id="yiqitime" onchange="yuqiselect()">
+                                            <option selected value="0"> 请选择时间</option>
                                             <option value="0"> 全部</option>
-                                            <c:forEach var="list" items="${comm_city}">
-                                                <option value="${list.id}">${list.name}</option>
-                                            </c:forEach>
+                                            <option value="2019-5">19年5月</option>
+                                            <option value="2019-4">19年4月</option>
+                                            <option value="2019-3">19年3月</option>
+                                            <option value="2019-2">19年2月</option>
+                                            <option value="2019-1">19年1月</option>
                                         </select><i style="padding-left: 5px; font-weight:bold;">></i>
-                                    </li>--%>
+                                    </li>
 
                                 </ul>
 
@@ -205,23 +233,23 @@
                                     <td>${yuqilvHx[4].yuqilv == null?0:yuqilvHx[4].yuqilv}%</td>
                                 </tr>--%>
                                 <tr>
-                                    <td>国安金融</td>
+                                    <td>锐动汽车销售</td>
                                     <td>0.37%</td>
                                 </tr>
                                 <tr>
-                                    <td>东汇征信</td>
+                                    <td>东营鲁润汽车销售</td>
                                     <td>0.36%</td>
                                 </tr>
                                 <tr>
-                                    <td>河南环球科技</td>
+                                    <td>佳佳汽车贸易</td>
                                     <td>0.35%</td>
                                 </tr>
                                 <tr>
-                                    <td>上海苏易征信</td>
+                                    <td>车王二手车经营</td>
                                     <td>0.22%</td>
                                 </tr>
                                 <tr>
-                                    <td>合创汇中</td>
+                                    <td>贵州瑞孜航汽车服务</td>
                                     <td>0.15%</td>
                                 </tr>
                             </table>
@@ -258,17 +286,17 @@
                                            onfocus="javascript:if(this.value=='请输入代理商')this.value='';" id="dailival"/>
                                 </li>
 
-                                <li>
+                                <%--<li>
                                     <select id="dailitime" onchange="dailiselect()">
                                         <option selected value="0"> 请选择时间</option>
                                         <option value="0"> 全部</option>
-                                       <%-- <c:forEach var="list" items="${years }" >
+                                       &lt;%&ndash; <c:forEach var="list" items="${years }" >
                                             <option value="${list}">${list}</option>
-                                        </c:forEach>--%>
+                                        </c:forEach>&ndash;%&gt;
                                         <option value="2019">2019</option>
                                         <option value="2018">2018</option>
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
-                                </li>
+                                </li>--%>
                             </ul>
                         </div>
                         <div style="height: 90%;width: 100%;" id="dalifenxi">
@@ -302,8 +330,11 @@
                                         <%--<c:forEach var="year" items="${years }" >
                                             <option value="${year}">${year}</option>
                                         </c:forEach>--%>
-                                        <option value="2019">2019</option>
-                                        <option value="2018">2018</option>
+                                        <option value="2019-5">19年5月</option>
+                                        <option value="2019-4">19年4月</option>
+                                        <option value="2019-3">19年3月</option>
+                                        <option value="2019-2">19年2月</option>
+                                        <option value="2019-1">19年1月</option>
                                     </select><i style="padding-left: 5px; font-weight:bold;">></i>
                                 </li>
                             </ul>
@@ -344,43 +375,43 @@
                             </tr>
                         </c:forEach>--%>
                         <tr>
-                            <td>国安金融</td>
+                            <td>锐动汽车销售</td>
                             <td>0.37%</td>
                         </tr>
                         <tr>
-                            <td>东汇征信</td>
+                            <td>东营鲁润汽车销售</td>
                             <td>0.36%</td>
                         </tr>
                         <tr>
-                            <td>河南环球科技</td>
+                            <td>佳佳汽车贸易</td>
                             <td>0.35%</td>
                         </tr>
                         <tr>
-                            <td>上海苏易征信</td>
+                            <td>车王二手车经营</td>
                             <td>0.22%</td>
                         </tr>
                         <tr>
-                            <td>合创汇中</td>
+                            <td>贵州瑞孜航汽车服务</td>
                             <td>0.15%</td>
                         </tr>
                         <tr>
-                            <td>深圳后河</td>
+                            <td>瑞孜航汽车服务</td>
                             <td>0.15%</td>
                         </tr>
                         <tr>
-                            <td>快加西南区</td>
+                            <td>永鑫源汽车销售服务</td>
                             <td>0.11%</td>
                         </tr>
                         <tr>
-                            <td>爱轩堡汽车</td>
+                            <td>车厘子汽车服务</td>
                             <td>0.10%</td>
                         </tr>
                         <tr>
-                            <td>上海聚胜金服</td>
+                            <td>爵跃汽车服务</td>
                             <td>0.08%</td>
                         </tr>
                         <tr>
-                            <td>秒融</td>
+                            <td>鑫远永能汽车贸易</td>
                             <td>0.05%</td>
                         </tr>
                     </table>
@@ -402,6 +433,7 @@
         zhengxinselect();
         dailiselect();
         yuqiselect();
+        kehuselect();
     };
 
     function show_bjls1() {

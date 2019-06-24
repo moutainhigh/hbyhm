@@ -36,7 +36,7 @@
                                 <select id="search_cityid" name="search_cityid" title="所属城市" class="selectpicker  form-control"
                                          multiple data-live-search="true" data-max-options="1">
                                     <c:forEach items="${citylist}" var="i">
-                                        <option value="${i.id}">${i.c_name}</option>
+                                        <option value="${i.id}">${i.name}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -47,7 +47,7 @@
                                 <select id="saerch_fsid" name="saerch_fsid" title="公司" class="selectpicker  form-control"
                                          multiple data-live-search="true" data-max-options="1">
                                     <c:forEach items="${compylist}" var="i">
-                                        <option value="${i.id}">${i.c_name}</option>
+                                        <option value="${i.id}">${i.name}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -73,7 +73,7 @@
 																<span class="input-group-addon"><a onclick="dosearch();">搜索</a></span>
 																<span class="input-group-addon"><a onclick="docleansearch();">清除搜索</a></span>
                             </div>
-                        </div>												
+                        </div>
                     </div>
                 </div>
 				</div>

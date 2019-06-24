@@ -17,9 +17,11 @@ function baodanselect(){
         data : {baodanname:sel,baodantime:time,bank:"2"},
         success : function(data) {
             var summarydata = [135,136,136,140,144,108,191,223,2810];
+            var fangkuandata = [634.49,784.87,775.45,854.47,865.29,567.37,1172.18,1171.63,15466.19];
             var timeline = ["2018-09","2018-10","2018-11","2018-12","2019-01","2019-02","2019-03","2019-04","2019-05"];
             if(time == "2018"){
                 summarydata = [55,42,92,77,74,91,89,129,135];
+                fangkuandata = [373.05,235.79,511.37,422.48,451.47,597.44,575.53,827.66,634.49];
                 timeline = ["2018-01","2018-02","2018-03","2018-04","2018-05","2018-06","2018-07","2018-08","2018-09"];
             }
 
@@ -28,7 +30,6 @@ function baodanselect(){
             var option_baodan = {
                 tooltip : {
                     trigger: 'axis',
-                    formatter: "{a} <br/>{b} : {c} "
                 },
                 xAxis : [
                     {
@@ -51,6 +52,13 @@ function baodanselect(){
                         axisTick:axistick,
                         axisLine :{symbol:['none', 'arrow'],symbolSize:['10', '13'],lineStyle:{color:'#6A5046'}},//轴线
                         splitLine:{show: false},//去除网格线
+                    },
+                    {
+                        type : 'value',
+                        name:'放款金额(万)',
+                        axisTick:axistick,
+                        axisLine :{symbol:['none', 'arrow'],symbolSize:['10', '13'],lineStyle:{color:'#6A5046'}},//轴线
+                        splitLine:{show: false},//去除网格线
                     }
                 ],
                 series : [
@@ -58,29 +66,16 @@ function baodanselect(){
                         name:'报单统计',
                         type:'line',
                         smooth:true,
-                        lineStyle:{
-                            /* color:"#F7A043", */  //颜色，'rgb(128, 128, 128)'，'rgba(128, 128, 128, 0.5)'，支持线性渐变，径向渐变，纹理填充
-                            type:"solid",     //坐标轴线线的类型，solid，dashed，dotted
-                            width:2          //坐标轴线线宽
-                        },
-                        areaStyle: {
-                            // 线性渐变，前四个参数分别是 x0, y0, x2, y2, 范围从 0 - 1，相当于在图形包围盒中的百分比，如果 globalCoord 为 `true`，则该四个值是绝对的像素位置
-                            /* color: {
-                                type: 'linear',
-                                x: 0,
-                                y: 0,
-                                x2: 0,
-                                y2: 1,
-                                colorStops: [{
-                                    offset: 0, color: '#F7CB86' // 0% 处的颜色
-                                }, {
-                                    offset: 1, color: '#F7A043' // 100% 处的颜色
-                                }],
-                                globalCoord: false // 缺省为 false
-                            } */
-                        },
-                        /* itemStyle: {normal: {areaStyle: {type: 'default',color:'rgb(242,162,42)'}}}, */
+                        itemStyle: {normal: {areaStyle: {type: 'default'}}},
                         data:summarydata
+                    },
+                    {
+                        name:'放款金额',
+                        type:'line',
+                        smooth:true,
+                        yAxisIndex: 1,
+                        itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                        data:fangkuandata
                     }
                 ]
             };
@@ -107,18 +102,15 @@ function diyaselect() {
         url: "/manager/visual/getPawnPathMap.do",
         data: {diyaname: sel,diyatime:time,bank:"2"},
         success: function (data) {
-            var paw1=73;
+            var paw5=73;
             var paw2=530;
             var paw3=680;
             var paw4=400;
-            var paw5=100;
-            if(time == "2018"){
-                 paw1=8;
-                 paw2=20;
-                 paw3=40;
-                 paw4=30;
-                 paw5=10;
-            }
+            var paw1=100;
+            if(time == "2019-4"){ paw1 = 5; paw2 = 38; paw3 = 74; paw4 = 40; paw5 = 1;}
+            if(time == "2019-3"){ paw1 = 2; paw2 = 27; paw3 = 81; paw4 = 34; paw5 = 1;}
+            if(time == "2019-2"){ paw1 = 1; paw2 = 10; paw3 = 45; paw4 = 23; paw5 = 0;}
+            if(time == "2019-1"){ paw1 = 1; paw2 = 25; paw3 = 66; paw4 = 20; paw5 = 0;}
             var option_diyawancheng = {
                 tooltip: {
                     trigger: 'item',
@@ -257,10 +249,10 @@ function zhengxinselect() {
         success: function (data) {
             var credit1= 2040;
             var credit2= 770;
-            if(time == "2018"){
-                credit1= 108;
-                credit2= 32;
-            }
+            if(time == "2019-4"){credit1= 158;credit2= 65;}
+            if(time == "2019-3"){credit1= 147;credit2= 44;}
+            if(time == "2019-2"){credit1= 79;credit2= 29;}
+            if(time == "2019-1"){credit1= 112;credit2= 32;}
             var option_zhengxinchaxun = {
                 tooltip: {
                     trigger: 'item',
@@ -303,54 +295,64 @@ function zhengxinselect() {
 
 /* -------------------------------------------客户年龄开始--------------------------------------- */
 var kehunianling = echarts.init(document.getElementById('kehunianling'));
-$.ajax({
-    dataType : "json",
-    type : "POST",
-    url : "",
-    data : {bank:"2"},
-    success : function(data) {
-        var age1=603;
-        var age2=1705;
-        var age3=304;
-        var age4=198;
+function kehuselect() {
+    var obj1 = document.getElementById('kehutime'); //定位id
+    var index1 = obj1.selectedIndex; // 选中索引
+    var time = obj1.options[index1].value; // 选中值
+    $.ajax({
+        dataType : "json",
+        type : "POST",
+        url : "",
+        data : {bank:"2"},
+        success : function(data) {
+            var age1=503;
+            var age2=1705;
+            var age3=404;
+            var age4=198;
+            if(time == "2019-4"){age1=39;age2=74;age3=40;age4=5;}
+            if(time == "2019-3"){age1=28;age2=81;age3=34;age4=2;}
+            if(time == "2019-2"){age1=10;age2=45;age3=23;age4=1;}
+            if(time == "2019-1"){age1=25;age2=66;age3=20;age4=1;}
 
-        var option_kehunianling = {
-            tooltip : {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
-            title : {
-                text: '客户年龄分布',
-                x:'18px',
-                y:'60px',
-                textStyle :	{
-                    fontSize: 16,
-                }
-            },
-            series : [
-                {
-                    name:'客户年龄分布',
-                    type:'pie',
-                    minAngle: 2,
-                    radius : '55%',
-                    center: ['52%', '65%'],//圆心位置[width，height]
-                    data:[
-                        {value:age1, name:'18-30岁'},
-                        {value:age2, name:'30-40岁'},
-                        {value:age3, name:'40-50岁'},
-                        {value:age4, name:'50岁以上'}
-                    ]
-                }
-            ]
-        };
+            var option_kehunianling = {
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                title : {
+                    text: '年龄分布',
+                    x:'7px',
+                    y:'6px',
+                    textStyle :	{
+                        fontSize: 16,
+                    }
+                },
+                series : [
+                    {
+                        name:'客户年龄分布',
+                        type:'pie',
+                        minAngle: 2,
+                        radius : '55%',
+                        center: ['52%', '55%'],//圆心位置[width，height]
+                        data:[
+                            {value:age1, name:'18-30岁'},
+                            {value:age2, name:'30-40岁'},
+                            {value:age3, name:'40-50岁'},
+                            {value:age4, name:'50岁以上'}
+                        ]
+                    }
+                ]
+            };
 
-        kehunianling.setOption(option_kehunianling);
+            kehunianling.setOption(option_kehunianling);
 //ajax结尾
-    },
-    error : function(e, type, msg) {
-        console.log(type + "=客户年龄=" + msg);
-    }
-})
+        },
+        error : function(e, type, msg) {
+            console.log(type + "=客户年龄=" + msg);
+        }
+    })
+}
+
 /* -------------------------------------------客户年龄结束--------------------------------------- */
 
 /* -------------------------------------------代理商综合能力分析开始--------------------------------------- */
@@ -552,18 +554,53 @@ function dailiselect() {
 var yuqilv_1 = echarts.init(document.getElementById('yuqilv_1'));
 function yuqiselect() {
     var sel = document.getElementById("yuqival").value
+    var obj1 = document.getElementById('yuqitime'); //定位id
+    var index1 = obj1.selectedIndex; // 选中索引
+    var time = obj1.options[index1].value; // 选中值
     $.ajax({
         dataType: "json",
         type: "POST",
         url: "",
         data: {yuqiname: sel,bank:"2"},
         success: function (data) {
-            var amount = [4,3,2];
-            var newcars = [0,1,0];
-            var oldcars = [4,2,2];
+            var amount = [4.08,3.09,2.04];
+            var newcars = [0,0,0];
+            var oldcars = [4.08,3.09,2.04];
             var amountmoney = [30.93,23.20,15.46];
-            var newcarsmoney = [0,3.02,0];
-            var oldcarsmoney = [30.93,20.18,15.46];
+            var newcarsmoney = [0,0,0];
+            var oldcarsmoney = [30.93,23.20,15.46];
+            if(time == "2019-4"){
+                amount = [0.31,0.12,0.16];
+                newcars = [0,0,0];
+                oldcars = [0.31,0.12,0.16];
+                amountmoney = [2.34,1.17,1.17];
+                newcarsmoney = [0,0,0];
+                oldcarsmoney = [2.34,1.17,1.17];
+            }
+            if(time == "2019-3"){
+                amount = [0.36,0.16,0.14];
+                newcars = [0,0,0];
+                oldcars = [0.36,0.16,0.14];
+                amountmoney = [2.93,2.34,1.17];
+                newcarsmoney = [0,0,0];
+                oldcarsmoney = [2.93,2.34,1.17];
+            }
+            if(time == "2019-2"){
+                amount = [0.23,0.21,0.07];
+                newcars = [0,0,0];
+                oldcars = [0.23,0.21,0.07];
+                amountmoney = [1.70,1.13,0.56];
+                newcarsmoney = [0,0,0];
+                oldcarsmoney = [1.70,1.13,0.56];
+            }
+            if(time == "2019-1"){
+                amount = [0.22,0.11,0.22];
+                newcars = [0,0,0];
+                oldcars = [0.22,0.11,0.22];
+                amountmoney = [1.73,0.86,1.73];
+                newcarsmoney = [0,0,0];
+                oldcarsmoney = [1.73,0.86,1.73];
+            }
             var option_yuqilv_1 = {
                 tooltip: { //提示框组件。
                     trigger: 'axis',//触发类型:'axis'坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。

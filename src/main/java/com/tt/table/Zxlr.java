@@ -125,10 +125,11 @@ public class Zxlr extends DbCtrl {
 		if (Tools.myIsNull(dtbe) == false) {
 			dtbe = dtbe.replace("%2f", "-").replace("+", "");
 			String[] dtArr = dtbe.split("-");
-			dtArr[0] = dtArr[0].trim();
-			dtArr[1] = dtArr[1].trim();
+			//dtArr[0] = dtArr[0].trim();
+			//dtArr[1] = dtArr[1].trim();
 			System.out.println("DTBE开始日期:" + dtArr[0] + "结束日期:" + dtArr[1]);
 			// todo处理选择时间段
+			whereString += " AND t.dt_add >=" + dtArr[0] +" and t.dt_add <="+dtArr[1];
 		}
 		if (!Tools.myIsNull(post.get("stateid"))) {
 			whereString += " AND aa.stateid=" + post.get("stateid");

@@ -1,17 +1,6 @@
-2019-06-22 10:28:53  [ http-nio-8098-exec-8:0 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:30:39  [ http-nio-8098-exec-1:105872 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:31:06  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
-2019-06-22 10:31:12  [ http-nio-8098-exec-9:6235 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:34:20  [ http-nio-8098-exec-5:194124 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:36:36  [ http-nio-8098-exec-6:330042 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:36:53  [ http-nio-8098-exec-4:346866 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:37:58  [ http-nio-8098-exec-8:411907 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:41:31  [ http-nio-8098-exec-8:624823 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:42:02  [ http-nio-8098-exec-7:655996 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:42:11  [ http-nio-8098-exec-2:665760 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:42:43  [ http-nio-8098-exec-3:697228 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:44:41  [ http-nio-8098-exec-8:815231 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:44:48  [ http-nio-8098-exec-1:822370 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:45:06  [ http-nio-8098-exec-3:840466 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:45:11  [ http-nio-8098-exec-2:845533 ] - [ ERROR ]  Tools.logError:null
-2019-06-22 10:45:33  [ http-nio-8098-exec-5:867492 ] - [ ERROR ]  Tools.logError:null
+2019-06-23 22:57:40  [ http-nio-8098-exec-1:0 ] - [ DEBUG ]  ManagerTools:没有登陆哈..
+2019-06-23 22:57:46  [ http-nio-8098-exec-7:5827 ] - [ ERROR ]  Tools.logError:null
+2019-06-23 22:57:46  [ http-nio-8098-exec-7:5835 ] - [ ERROR ]  Tools.logError:com.tt.table.
+2019-06-23 22:57:46  [ http-nio-8098-exec-7:5840 ] - [ ERROR ]  Tools.logError:sql injection violation, syntax error: error pos 18, line 1, column 18, token EOF : SHOW COLUMNS FROM 
+2019-06-23 22:57:46  [ http-nio-8098-exec-7:5842 ] - [ ERROR ]  Tools.logError:DbCtrl:TT异常：获取数据表所有字段名失败！
+2019-06-23 22:57:46  [ http-nio-8098-exec-7:5844 ] - [ ERROR ]  Tools.logError:DbCtrl:<----------------ERROR,获取字段出错---------------->

@@ -831,7 +831,7 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">身份证号</span>
-                                <input type="text" class="form-control" id="c_ec<%=i%>_idcard" name="c_ec<%=i%>_mobile"
+                                <input type="text" class="form-control" id="c_ec<%=i%>_idcard" name="c_ec<%=i%>_idcard"
                                        placeholder="">
                             </div>
                         </div>
