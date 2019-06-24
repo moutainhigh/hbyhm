@@ -73,11 +73,15 @@ public class DataDic {
     public static TtMap dic_app = new TtMap();
     public static TtMap dic_zzcl_zvzk = new TtMap();
     public static TtMap dic_tlzf_currency = new TtMap();
-
+    public static TtMap dic_xxzl_16w = new TtMap();
     public static synchronized void initDic() {
         if (dicYesOrNo.size() > 0) { // 已经初始化过了
             return;
         }
+        /* 业务等级16 */
+        dic_xxzl_16w.put("0", "请选择业务等级");
+        dic_xxzl_16w.put("1", "预期贷款额16万以下（含16万）");
+        dic_xxzl_16w.put("2", "预期贷款额16万以上");
         /*通联支付货币类型*/
         dic_tlzf_currency.put("CNY", "人民币");
         dic_tlzf_currency.put("HKD", "港元");

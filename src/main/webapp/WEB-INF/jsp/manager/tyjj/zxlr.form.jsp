@@ -5,6 +5,7 @@
 <%@ page import="com.tt.tool.Tools" %>
 <%@ page import="com.tt.tool.DataDic" %>
 <%@ page import="com.tt.data.TtList" %>
+<%@ page import="javax.tools.Tool" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     TtMap infodb = (TtMap) request.getAttribute("infodb");
@@ -220,9 +221,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon">业务等级</span>
                                 <select class="form-control" id="loan_level" name="loan_level">
-                                    <option value="0">请选择业务等级</option>
-                                    <option value="1">预期贷款额度8万以下(含8万)</option>
-                                    <option value="2">预期贷款额度8万以上</option>
+                                    <%=Tools.dicopt(DataDic.dic_xxzl_16w,infodb.get("loan_level"))%>
                                 </select>
                             </div>
                         </div>

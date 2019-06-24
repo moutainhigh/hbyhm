@@ -275,6 +275,20 @@
                                        placeholder="">
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">居住状况</span>
+                                <select id="c_buycar_jzzk" name="c_buycar_jzzk" class="form-control">
+                                    <option value="0">请选择居住状况</option>
+                                    <option value="1">自有无贷款住房</option>
+                                    <option value="2">自有贷款购房</option>
+                                    <option value="3">租房</option>
+                                    <option value="4">与亲属合住</option>
+                                    <option value="5">集体宿舍</option>
+                                    <option value="6">其他</option>
+                                </select>
+                            </div>
+                        </div>
                         <%
                             //dicopt功能演示，指定表里面的name和id，并用name组成<option></option>
                             String jzs = Tools.dicopt("comm_states", 0);//省会，
