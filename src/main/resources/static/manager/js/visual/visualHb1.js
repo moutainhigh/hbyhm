@@ -102,15 +102,12 @@ function diyaselect() {
         url: "/manager/visual/getPawnPathMap.do",
         data: {diyaname: sel,diyatime:time,bank:"2"},
         success: function (data) {
-            var paw5=73;
-            var paw2=530;
-            var paw3=680;
-            var paw4=400;
-            var paw1=100;
-            if(time == "2019-4"){ paw1 = 5; paw2 = 38; paw3 = 74; paw4 = 40; paw5 = 1;}
-            if(time == "2019-3"){ paw1 = 2; paw2 = 27; paw3 = 81; paw4 = 34; paw5 = 1;}
-            if(time == "2019-2"){ paw1 = 1; paw2 = 10; paw3 = 45; paw4 = 23; paw5 = 0;}
-            if(time == "2019-1"){ paw1 = 1; paw2 = 25; paw3 = 66; paw4 = 20; paw5 = 0;}
+            var paw = [[100,530,680,400,73],[5,38,74,40,1],[2,27,81,34,1],[1,10,45,23,0],[1,25,66,20,0]];
+            var paw1=paw[time][0];
+            var paw2=paw[time][1];
+            var paw3=paw[time][2];
+            var paw4=paw[time][3];
+            var paw5=paw[time][4];
             var option_diyawancheng = {
                 tooltip: {
                     trigger: 'item',
@@ -247,12 +244,14 @@ function zhengxinselect() {
         url: "/manager/visual/getCreditPathMap.do",
         data: {zhengxinname: sel,zhengxintime:time,bank:"2"},
         success: function (data) {
-            var credit1= 2040;
-            var credit2= 770;
-            if(time == "2019-4"){credit1= 158;credit2= 65;}
-            if(time == "2019-3"){credit1= 147;credit2= 44;}
-            if(time == "2019-2"){credit1= 79;credit2= 29;}
-            if(time == "2019-1"){credit1= 112;credit2= 32;}
+            var credit1;
+            var credit2;
+            var zhengxin =[[2040,770],[158,65],[147,44],[79,29],[112,32],
+                           [108,32],[99,37],[97,39],[86,49],[111,18],[74,15],
+                           [79,12],[60,14],[55,22],[67,25],[30,12],[37,18]];
+            credit1 = zhengxin[time][0];
+            credit2 = zhengxin[time][1];
+
             var option_zhengxinchaxun = {
                 tooltip: {
                     trigger: 'item',
@@ -302,17 +301,15 @@ function kehuselect() {
     $.ajax({
         dataType : "json",
         type : "POST",
-        url : "",
+        url : "/manager/visual/getAgePathMap.do",
         data : {bank:"2"},
         success : function(data) {
-            var age1=503;
-            var age2=1705;
-            var age3=404;
-            var age4=198;
-            if(time == "2019-4"){age1=39;age2=74;age3=40;age4=5;}
-            if(time == "2019-3"){age1=28;age2=81;age3=34;age4=2;}
-            if(time == "2019-2"){age1=10;age2=45;age3=23;age4=1;}
-            if(time == "2019-1"){age1=25;age2=66;age3=20;age4=1;}
+            var age = [[503,1705,404,198],[39,74,40,5],[28,81,34,2],[10,45,23,1],[25,66,20,1]];
+            var age1=age[time][0];
+            var age2=age[time][1];
+            var age3=age[time][2];
+            var age4=age[time][3];
+
 
             var option_kehunianling = {
                 tooltip : {
@@ -368,7 +365,7 @@ function dailiselect() {
     $.ajax({
         dataType: "json",
         type: "POST",
-        url: "",
+        url: "/manager/visual/getAgencyMap.do",
         data: {dailiname: sel,bank:"2"},
         success: function (data) {
             var year = "2019年";
@@ -550,47 +547,22 @@ function yuqiselect() {
     $.ajax({
         dataType: "json",
         type: "POST",
-        url: "",
+        url: "/manager/visual/getOverdueMap.do",
         data: {yuqiname: sel,bank:"2"},
         success: function (data) {
-            var amount = [4.08,3.09,2.04];
-            var newcars = [0,0,0];
-            var oldcars = [4.08,3.09,2.04];
-            var amountmoney = [30.93,23.20,15.46];
-            var newcarsmoney = [0,0,0];
-            var oldcarsmoney = [30.93,23.20,15.46];
-            if(time == "2019-4"){
-                amount = [0.31,0.12,0.16];
-                newcars = [0,0,0];
-                oldcars = [0.31,0.12,0.16];
-                amountmoney = [2.34,1.17,1.17];
-                newcarsmoney = [0,0,0];
-                oldcarsmoney = [2.34,1.17,1.17];
-            }
-            if(time == "2019-3"){
-                amount = [0.36,0.16,0.14];
-                newcars = [0,0,0];
-                oldcars = [0.36,0.16,0.14];
-                amountmoney = [2.93,2.34,1.17];
-                newcarsmoney = [0,0,0];
-                oldcarsmoney = [2.93,2.34,1.17];
-            }
-            if(time == "2019-2"){
-                amount = [0.23,0.21,0.07];
-                newcars = [0,0,0];
-                oldcars = [0.23,0.21,0.07];
-                amountmoney = [1.70,1.13,0.56];
-                newcarsmoney = [0,0,0];
-                oldcarsmoney = [1.70,1.13,0.56];
-            }
-            if(time == "2019-1"){
-                amount = [0.22,0.11,0.22];
-                newcars = [0,0,0];
-                oldcars = [0.22,0.11,0.22];
-                amountmoney = [1.73,0.86,1.73];
-                newcarsmoney = [0,0,0];
-                oldcarsmoney = [1.73,0.86,1.73];
-            }
+            var amountVar = [[4.08,3.09,2.04] , [0.31,0.12,0.16] , [0.36,0.16,0.14] , [0.23,0.21,0.07] , [0.22,0.11,0.22]];
+            var newcarsVar = [[0,0,0] , [0,0,0] , [0,0,0] , [0,0,0] , [0,0,0]];
+            var oldcarsVar = [[4.08,3.09,2.04] , [0.31,0.12,0.16] , [0.36,0.16,0.14] , [0.23,0.21,0.07] , [0.22,0.11,0.22]];
+            var amountmoneyVar = [[30.93,23.20,15.46] , [2.34,1.17,1.17] , [2.93,2.34,1.17] , [1.70,1.13,0.56] , [1.73,0.86,1.73]];
+            var newcarsmoneyVar = [[0,0,0] , [0,0,0] , [0,0,0] , [0,0,0] , [0,0,0]];
+            var oldcarsmoneyVar = [[30.93,23.20,15.46] , [2.34,1.17,1.17] , [2.93,2.34,1.17] , [1.70,1.13,0.56] , [1.73,0.86,1.73]];
+
+            var amount = amountVar[time];
+            var newcars = newcarsVar[time];
+            var oldcars = oldcarsVar[time];
+            var amountmoney = amountmoneyVar[time];
+            var newcarsmoney = newcarsmoneyVar[time];
+            var oldcarsmoney = oldcarsmoneyVar[time];
             var option_yuqilv_1 = {
                 tooltip: { //提示框组件。
                     trigger: 'axis',//触发类型:'axis'坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。
@@ -717,7 +689,7 @@ var yuqilv_2 = echarts.init(document.getElementById('yuqilv_2'));
 $.ajax({
     dataType : "json",
     type : "POST",
-    url : "",
+    url : "/manager/visual/getStateMap.do",
     data : {bank:"2"},
     success : function(data) {
         var option_yuqilv_2= {
