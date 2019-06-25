@@ -69,9 +69,9 @@ public class Visual {
 
 
         sql= "select count(*) amount from kj_icbc di " +
-        " where month(dt_add)=MONTH(SYSDATE())  " +
-                " and YEAR(dt_add)=year(SYSDATE())  " +
-                " and gems_fs_id in(select id from assess_fs where up_id="+ fs_id +" or id ="+ fs_id +") " ;
+                " where month(dt_add)=MONTH(SYSDATE())  " +
+                " and YEAR(dt_add)=year(SYSDATE())  ";
+        /*" and gems_fs_id in(select id from assess_fs where up_id="+ fs_id +" or id ="+ fs_id +") " ;*/
 
         TtList billlistHx=selectSQL(sql+hx);
         request.setAttribute("billlistHx",billlistHx);//每月报单总量     0华夏
